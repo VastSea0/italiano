@@ -1,0 +1,375 @@
+{
+  "mostCommonItalianVerbsA1": [
+    {
+      "infinitive": "essere",
+      "english": "to be",
+      "present": ["io sono", "tu sei", "lui/lei è", "noi siamo", "voi siete", "loro sono"],
+      "past": ["io sono stato/a", "tu sei stato/a", "lui è stato", "lei è stata", "noi siamo stati/e", "voi siete stati/e", "loro sono stati/e"],
+      "presentContinuous": ["io sto essendo", "tu stai essendo", "lui/lei sta essendo", "noi stiamo essendo", "voi state essendo", "loro stanno essendo"]
+    },
+    {
+      "infinitive": "avere",
+      "english": "to have",
+      "present": ["io ho", "tu hai", "lui/lei ha", "noi abbiamo", "voi avete", "loro hanno"],
+      "past": ["io ho avuto", "tu hai avuto", "lui/lei ha avuto", "noi abbiamo avuto", "voi avete avuto", "loro hanno avuto"],
+      "presentContinuous": ["io sto avendo", "tu stai avendo", "lui/lei sta avendo", "noi stiamo avendo", "voi state avendo", "loro stanno avendo"]
+    },
+    {
+      "infinitive": "fare",
+      "english": "to do, to make",
+      "present": ["io faccio", "tu fai", "lui/lei fa", "noi facciamo", "voi fate", "loro fanno"],
+      "past": ["io ho fatto", "tu hai fatto", "lui/lei ha fatto", "noi abbiamo fatto", "voi avete fatto", "loro hanno fatto"],
+      "presentContinuous": ["io sto facendo", "tu stai facendo", "lui/lei sta facendo", "noi stiamo facendo", "voi state facendo", "loro stanno facendo"]
+    },
+    {
+      "infinitive": "dire",
+      "english": "to say, to tell",
+      "present": ["io dico", "tu dici", "lui/lei dice", "noi diciamo", "voi dite", "loro dicono"],
+      "past": ["io ho detto", "tu hai detto", "lui/lei ha detto", "noi abbiamo detto", "voi avete detto", "loro hanno detto"],
+      "presentContinuous": ["io sto dicendo", "tu stai dicendo", "lui/lei sta dicendo", "noi stiamo dicendo", "voi state dicendo", "loro stanno dicendo"]
+    },
+    {
+      "infinitive": "potere",
+      "english": "can, to be able to",
+      "present": ["io posso", "tu puoi", "lui/lei può", "noi possiamo", "voi potete", "loro possono"],
+      "past": ["io ho potuto", "tu hai potuto", "lui/lei ha potuto", "noi abbiamo potuto", "voi avete potuto", "loro hanno potuto"],
+      "presentContinuous": ["io sto potendo", "tu stai potendo", "lui/lei sta potendo", "noi stiamo potendo", "voi state potendo", "loro stanno potendo"]
+    },
+    {
+      "infinitive": "volere",
+      "english": "to want",
+      "present": ["io voglio", "tu vuoi", "lui/lei vuole", "noi vogliamo", "voi volete", "loro vogliono"],
+      "past": ["io ho voluto", "tu hai voluto", "lui/lei ha voluto", "noi abbiamo voluto", "voi avete voluto", "loro hanno voluto"],
+      "presentContinuous": ["io sto volendo", "tu stai volendo", "lui/lei sta volendo", "noi stiamo volendo", "voi state volendo", "loro stanno volendo"]
+    },
+    {
+      "infinitive": "dovere",
+      "english": "must, to have to",
+      "present": ["io devo", "tu devi", "lui/lei deve", "noi dobbiamo", "voi dovete", "loro devono"],
+      "past": ["io ho dovuto", "tu hai dovuto", "lui/lei ha dovuto", "noi abbiamo dovuto", "voi avete dovuto", "loro hanno dovuto"],
+      "presentContinuous": ["io sto dovendo", "tu stai dovendo", "lui/lei sta dovendo", "noi stiamo dovendo", "voi state dovendo", "loro stanno dovendo"]
+    },
+    {
+      "infinitive": "andare (ESSERE)",
+      "english": "to go",
+      "present": ["io vado", "tu vai", "lui/lei va", "noi andiamo", "voi andate", "loro vanno"],
+      "past": ["io sono andato/a", "tu sei andato/a", "lui è andato", "lei è andata", "noi siamo andati/e", "voi siete andati/e", "loro sono andati/e"],
+      "presentContinuous": ["io sto andando", "tu stai andando", "lui/lei sta andando", "noi stiamo andando", "voi state andando", "loro stanno andando"]
+    },
+    {
+      "infinitive": "venire (ESSERE)",
+      "english": "to come",
+      "present": ["io vengo", "tu vieni", "lui/lei viene", "noi veniamo", "voi venite", "loro vengono"],
+      "past": ["io sono venuto/a", "tu sei venuto/a", "lui è venuto", "lei è venuta", "noi siamo venuti/e", "voi siete venuti/e", "loro sono venuti/e"],
+      "presentContinuous": ["io sto venendo", "tu stai venendo", "lui/lei sta venendo", "noi stiamo venendo", "voi state venendo", "loro stanno venendo"]
+    },
+    {
+      "infinitive": "vedere",
+      "english": "to see",
+      "present": ["io vedo", "tu vedi", "lui/lei vede", "noi vediamo", "voi vedete", "loro vedono"],
+      "past": ["io ho visto", "tu hai visto", "lui/lei ha visto", "noi abbiamo visto", "voi avete visto", "loro hanno visto"],
+      "presentContinuous": ["io sto vedendo", "tu stai vedendo", "lui/lei sta vedendo", "noi stiamo vedendo", "voi state vedendo", "loro stanno vedendo"]
+    },
+    {
+      "infinitive": "sentire",
+      "english": "to hear, to feel",
+      "present": ["io sento", "tu senti", "lui/lei sente", "noi sentiamo", "voi sentite", "loro sentono"],
+      "past": ["io ho sentito", "tu hai sentito", "lui/lei ha sentito", "noi abbiamo sentito", "voi avete sentito", "loro hanno sentito"],
+      "presentContinuous": ["io sto sentendo", "tu stai sentendo", "lui/lei sta sentendo", "noi stiamo sentendo", "voi state sentendo", "loro stanno sentendo"]
+    },
+    {
+      "infinitive": "ascoltare",
+      "english": "to listen (to)",
+      "present": ["io ascolto", "tu ascolti", "lui/lei ascolta", "noi ascoltiamo", "voi ascoltate", "loro ascoltano"],
+      "past": ["io ho ascoltato", "tu hai ascoltato", "lui/lei ha ascoltato", "noi abbiamo ascoltato", "voi avete ascoltato", "loro hanno ascoltato"],
+      "presentContinuous": ["io sto ascoltando", "tu stai ascoltando", "lui/lei sta ascoltando", "noi stiamo ascoltando", "voi state ascoltando", "loro stanno ascoltando"]
+    },
+    {
+      "infinitive": "parlare",
+      "english": "to speak, to talk",
+      "present": ["io parlo", "tu parli", "lui/lei parla", "noi parliamo", "voi parlate", "loro parlano"],
+      "past": ["io ho parlato", "tu hai parlato", "lui/lei ha parlato", "noi abbiamo parlato", "voi avete parlato", "loro hanno parlato"],
+      "presentContinuous": ["io sto parlando", "tu stai parlando", "lui/lei sta parlando", "noi stiamo parlando", "voi state parlando", "loro stanno parlando"]
+    },
+    {
+      "infinitive": "capire",
+      "english": "to understand",
+      "present": ["io capisco", "tu capisci", "lui/lei capisce", "noi capiamo", "voi capite", "loro capiscono"],
+      "past": ["io ho capito", "tu hai capito", "lui/lei ha capito", "noi abbiamo capito", "voi avete capito", "loro hanno capito"],
+      "presentContinuous": ["io sto capendo", "tu stai capendo", "lui/lei sta capendo", "noi stiamo capendo", "voi state capendo", "loro stanno capendo"]
+    },
+    {
+      "infinitive": "sapere",
+      "english": "to know (a fact, how to)",
+      "present": ["io so", "tu sai", "lui/lei sa", "noi sappiamo", "voi sapete", "loro sanno"],
+      "past": ["io ho saputo", "tu hai saputo", "lui/lei ha saputo", "noi abbiamo saputo", "voi avete saputo", "loro hanno saputo"],
+      "presentContinuous": ["io sto sapendo", "tu stai sapendo", "lui/lei sta sapendo", "noi stiamo sapendo", "voi state sapendo", "loro stanno sapendo"]
+    },
+    {
+      "infinitive": "conoscere",
+      "english": "to know (a person, a place)",
+      "present": ["io conosco", "tu conosci", "lui/lei conosce", "noi conosciamo", "voi conoscete", "loro conoscono"],
+      "past": ["io ho conosciuto", "tu hai conosciuto", "lui/lei ha conosciuto", "noi abbiamo conosciuto", "voi avete conosciuto", "loro hanno conosciuto"],
+      "presentContinuous": ["io sto conoscendo", "tu stai conoscendo", "lui/lei sta conoscendo", "noi stiamo conoscendo", "voi state conoscendo", "loro stanno conoscendo"]
+    },
+    {
+      "infinitive": "pensare",
+      "english": "to think",
+      "present": ["io penso", "tu pensi", "lui/lei pensa", "noi pensiamo", "voi pensate", "loro pensano"],
+      "past": ["io ho pensato", "tu hai pensato", "lui/lei ha pensato", "noi abbiamo pensato", "voi avete pensato", "loro hanno pensato"],
+      "presentContinuous": ["io sto pensando", "tu stai pensando", "lui/lei sta pensando", "noi stiamo pensando", "voi state pensando", "loro stanno pensando"]
+    },
+    {
+      "infinitive": "credere",
+      "english": "to believe",
+      "present": ["io credo", "tu credi", "lui/lei crede", "noi crediamo", "voi credete", "loro credono"],
+      "past": ["io ho creduto", "tu hai creduto", "lui/lei ha creduto", "noi abbiamo creduto", "voi avete creduto", "loro hanno creduto"],
+      "presentContinuous": ["io sto credendo", "tu stai credendo", "lui/lei sta credendo", "noi stiamo credendo", "voi state credendo", "loro stanno credendo"]
+    },
+    {
+      "infinitive": "trovare",
+      "english": "to find",
+      "present": ["io trovo", "tu trovi", "lui/lei trova", "noi troviamo", "voi trovate", "loro trovano"],
+      "past": ["io ho trovato", "tu hai trovato", "lui/lei ha trovato", "noi abbiamo trovato", "voi avete trovato", "loro hanno trovato"],
+      "presentContinuous": ["io sto trovando", "tu stai trovando", "lui/lei sta trovando", "noi stiamo trovando", "voi state trovando", "loro stanno trovando"]
+    },
+    {
+      "infinitive": "dare",
+      "english": "to give",
+      "present": ["io do", "tu dai", "lui/lei dà", "noi diamo", "voi date", "loro danno"],
+      "past": ["io ho dato", "tu hai dato", "lui/lei ha dato", "noi abbiamo dato", "voi avete dato", "loro hanno dato"],
+      "presentContinuous": ["io sto dando", "tu stai dando", "lui/lei sta dando", "noi stiamo dando", "voi state dando", "loro stanno dando"]
+    },
+    {
+      "infinitive": "prendere",
+      "english": "to take, to have (a drink/food)",
+      "present": ["io prendo", "tu prendi", "lui/lei prende", "noi prendiamo", "voi prendete", "loro prendono"],
+      "past": ["io ho preso", "tu hai preso", "lui/lei ha preso", "noi abbiamo preso", "voi avete preso", "loro hanno preso"],
+      "presentContinuous": ["io sto prendendo", "tu stai prendendo", "lui/lei sta prendendo", "noi stiamo prendendo", "voi state prendendo", "loro stanno prendendo"]
+    },
+    {
+      "infinitive": "mettere",
+      "english": "to put, to place",
+      "present": ["io metto", "tu metti", "lui/lei mette", "noi mettiamo", "voi mettete", "loro mettono"],
+      "past": ["io ho messo", "tu hai messo", "lui/lei ha messo", "noi abbiamo messo", "voi avete messo", "loro hanno messo"],
+      "presentContinuous": ["io sto mettendo", "tu stai mettendo", "lui/lei sta mettendo", "noi stiamo mettendo", "voi state mettendo", "loro stanno mettendo"]
+    },
+    {
+      "infinitive": "leggere",
+      "english": "to read",
+      "present": ["io leggo", "tu leggi", "lui/lei legge", "noi leggiamo", "voi leggete", "loro leggono"],
+      "past": ["io ho letto", "tu hai letto", "lui/lei ha letto", "noi abbiamo letto", "voi avete letto", "loro hanno letto"],
+      "presentContinuous": ["io sto leggendo", "tu stai leggendo", "lui/lei sta leggendo", "noi stiamo leggendo", "voi state leggendo", "loro stanno leggendo"]
+    },
+    {
+      "infinitive": "scrivere",
+      "english": "to write",
+      "present": ["io scrivo", "tu scrivi", "lui/lei scrive", "noi scriviamo", "voi scrivete", "loro scrivono"],
+      "past": ["io ho scritto", "tu hai scritto", "lui/lei ha scritto", "noi abbiamo scritto", "voi avete scritto", "loro hanno scritto"],
+      "presentContinuous": ["io sto scrivendo", "tu stai scrivendo", "lui/lei sta scrivendo", "noi stiamo scrivendo", "voi state scrivendo", "loro stanno scrivendo"]
+    },
+    {
+      "infinitive": "studiare",
+      "english": "to study",
+      "present": ["io studio", "tu studi", "lui/lei studia", "noi studiamo", "voi studiate", "loro studiano"],
+      "past": ["io ho studiato", "tu hai studiato", "lui/lei ha studiato", "noi abbiamo studiato", "voi avete studiato", "loro hanno studiato"],
+      "presentContinuous": ["io sto studiando", "tu stai studiando", "lui/lei sta studiando", "noi stiamo studiando", "voi state studiando", "loro stanno studiando"]
+    },
+    {
+      "infinitive": "imparare",
+      "english": "to learn",
+      "present": ["io imparo", "tu impari", "lui/lei impara", "noi impariamo", "voi imparate", "loro imparano"],
+      "past": ["io ho imparato", "tu hai imparato", "lui/lei ha imparato", "noi abbiamo imparato", "voi avete imparato", "loro hanno imparato"],
+      "presentContinuous": ["io sto imparando", "tu stai imparando", "lui/lei sta imparando", "noi stiamo imparando", "voi state imparando", "loro stanno imparando"]
+    },
+    {
+      "infinitive": "mangiare",
+      "english": "to eat",
+      "present": ["io mangio", "tu mangi", "lui/lei mangia", "noi mangiamo", "voi mangiate", "loro mangiano"],
+      "past": ["io ho mangiato", "tu hai mangiato", "lui/lei ha mangiato", "noi abbiamo mangiato", "voi avete mangiato", "loro hanno mangiato"],
+      "presentContinuous": ["io sto mangiando", "tu stai mangiando", "lui/lei sta mangiando", "noi stiamo mangiando", "voi state mangiando", "loro stanno mangiando"]
+    },
+    {
+      "infinitive": "bere",
+      "english": "to drink",
+      "present": ["io bevo", "tu bevi", "lui/lei beve", "noi beviamo", "voi bevete", "loro bevono"],
+      "past": ["io ho bevuto", "tu hai bevuto", "lui/lei ha bevuto", "noi abbiamo bevuto", "voi avete bevuto", "loro hanno bevuto"],
+      "presentContinuous": ["io sto bevendo", "tu stai bevendo", "lui/lei sta bevendo", "noi stiamo bevendo", "voi state bevendo", "loro stanno bevendo"]
+    },
+    {
+      "infinitive": "piacere",
+      "english": "to like (is pleasing to)",
+      "present": ["a me piace/piacciono", "a te piace/piacciono", "a lui/lei piace/piacciono", "a noi piace/piacciono", "a voi piace/piacciono", "a loro piace/piacciono"],
+      "past": ["a me è piaciuto/a/i/e", "a te è piaciuto/a/i/e", "a lui è piaciuto/i", "a lei è piaciuta/e", "a noi è piaciuto/a/i/e", "a voi è piaciuto/a/i/e", "a loro è piaciuto/a/i/e"],
+      "presentContinuous": ["io sto piacendo", "tu stai piacendo", "lui/lei sta piacendo", "noi stiamo piacendo", "voi state piacendo", "loro stanno piacendo"]
+    },
+    {
+      "infinitive": "amare",
+      "english": "to love",
+      "present": ["io amo", "tu ami", "lui/lei ama", "noi amiamo", "voi amate", "loro amano"],
+      "past": ["io ho amato", "tu hai amato", "lui/lei ha amato", "noi abbiamo amato", "voi avete amato", "loro hanno amato"],
+      "presentContinuous": ["io sto amando", "tu stai amando", "lui/lei sta amando", "noi stiamo amando", "voi state amando", "loro stanno amando"]
+    },
+    {
+      "infinitive": "odiare",
+      "english": "to hate",
+      "present": ["io odio", "tu odi", "lui/lei odia", "noi odiamo", "voi odiate", "loro odiano"],
+      "past": ["io ho odiato", "tu hai odiato", "lui/lei ha odiato", "noi abbiamo odiato", "voi avete odiato", "loro hanno odiato"],
+      "presentContinuous": ["io sto odiando", "tu stai odiando", "lui/lei sta odiando", "noi stiamo odiando", "voi state odiando", "loro stanno odiando"]
+    },
+    {
+      "infinitive": "guardare",
+      "english": "to watch, to look at",
+      "present": ["io guardo", "tu guardi", "lui/lei guarda", "noi guardiamo", "voi guardate", "loro guardano"],
+      "past": ["io ho guardato", "tu hai guardato", "lui/lei ha guardato", "noi abbiamo guardato", "voi avete guardato", "loro hanno guardato"],
+      "presentContinuous": ["io sto guardando", "tu stai guardando", "lui/lei sta guardando", "noi stiamo guardando", "voi state guardando", "loro stanno guardando"]
+    },
+    {
+      "infinitive": "aspettare",
+      "english": "to wait (for)",
+      "present": ["io aspetto", "tu aspetti", "lui/lei aspetta", "noi aspettiamo", "voi aspettate", "loro aspettano"],
+      "past": ["io ho aspettato", "tu hai aspettato", "lui/lei ha aspettato", "noi abbiamo aspettato", "voi avete aspettato", "loro hanno aspettato"],
+      "presentContinuous": ["io sto aspettando", "tu stai aspettando", "lui/lei sta aspettando", "noi stiamo aspettando", "voi state aspettando", "loro stanno aspettando"]
+    },
+    {
+      "infinitive": "lavorare",
+      "english": "to work",
+      "present": ["io lavoro", "tu lavori", "lui/lei lavora", "noi lavoriamo", "voi lavorate", "loro lavorano"],
+      "past": ["io ho lavorato", "tu hai lavorato", "lui/lei ha lavorato", "noi abbiamo lavorato", "voi avete lavorato", "loro hanno lavorato"],
+      "presentContinuous": ["io sto lavorando", "tu stai lavorando", "lui/lei sta lavorando", "noi stiamo lavorando", "voi state lavorando", "loro stanno lavorando"]
+    },
+    {
+      "infinitive": "giocare",
+      "english": "to play (a game/sport)",
+      "present": ["io gioco", "tu giochi", "lui/lei gioca", "noi giochiamo", "voi giocate", "loro giocano"],
+      "past": ["io ho giocato", "tu hai giocato", "lui/lei ha giocato", "noi abbiamo giocato", "voi avete giocato", "loro hanno giocato"],
+      "presentContinuous": ["io sto giocando", "tu stai giocando", "lui/lei sta giocando", "noi stiamo giocando", "voi state giocando", "loro stanno giocando"]
+    },
+    {
+      "infinitive": "suonare",
+      "english": "to play (an instrument)",
+      "present": ["io suono", "tu suoni", "lui/lei suona", "noi suoniamo", "voi suonate", "loro suonano"],
+      "past": ["io ho suonato", "tu hai suonato", "lui/lei ha suonato", "noi abbiamo suonato", "voi avete suonato", "loro hanno suonato"],
+      "presentContinuous": ["io sto suonando", "tu stai suonando", "lui/lei sta suonando", "noi stiamo suonando", "voi state suonando", "loro stanno suonando"]
+    },
+    {
+      "infinitive": "cantare",
+      "english": "to sing",
+      "present": ["io canto", "tu canti", "lui/lei canta", "noi cantiamo", "voi cantate", "loro cantano"],
+      "past": ["io ho cantato", "tu hai cantato", "lui/lei ha cantato", "noi abbiamo cantato", "voi avete cantato", "loro hanno cantato"],
+      "presentContinuous": ["io sto cantando", "tu stai cantando", "lui/lei sta cantando", "noi stiamo cantando", "voi state cantando", "loro stanno cantando"]
+    },
+    {
+      "infinitive": "ballare",
+      "english": "to dance",
+      "present": ["io ballo", "tu balli", "lui/lei balla", "noi balliamo", "voi ballate", "loro ballano"],
+      "past": ["io ho ballato", "tu hai ballato", "lui/lei ha ballato", "noi abbiamo ballato", "voi avete ballato", "loro hanno ballato"],
+      "presentContinuous": ["io sto ballando", "tu stai ballando", "lui/lei sta ballando", "noi stiamo ballando", "voi state ballando", "loro stanno ballando"]
+    },
+    {
+      "infinitive": "abitare",
+      "english": "to live (reside)",
+      "present": ["io abito", "tu abiti", "lui/lei abita", "noi abitiamo", "voi abitate", "loro abitano"],
+      "past": ["io ho abitato", "tu hai abitato", "lui/lei ha abitato", "noi abbiamo abitato", "voi avete abitato", "loro hanno abitato"],
+      "presentContinuous": ["io sto abitando", "tu stai abitando", "lui/lei sta abitando", "noi stiamo abitando", "voi state abitando", "loro stanno abitando"]
+    },
+    {
+      "infinitive": "aprire",
+      "english": "to open",
+      "present": ["io apro", "tu apri", "lui/lei apre", "noi apriamo", "voi aprite", "loro aprono"],
+      "past": ["io ho aperto", "tu hai aperto", "lui/lei ha aperto", "noi abbiamo aperto", "voi avete aperto", "loro hanno aperto"],
+      "presentContinuous": ["io sto aprendo", "tu stai aprendo", "lui/lei sta aprendo", "noi stiamo aprendo", "voi state aprendo", "loro stanno aprendo"]
+    },
+    {
+      "infinitive": "chiudere",
+      "english": "to close",
+      "present": ["io chiudo", "tu chiudi", "lui/lei chiude", "noi chiudiamo", "voi chiudete", "loro chiudono"],
+      "past": ["io ho chiuso", "tu hai chiuso", "lui/lei ha chiuso", "noi abbiamo chiuso", "voi avete chiuso", "loro hanno chiuso"],
+      "presentContinuous": ["io sto chiudendo", "tu stai chiudendo", "lui/lei sta chiudendo", "noi stiamo chiudendo", "voi state chiudendo", "loro stanno chiudendo"]
+    },
+    {
+      "infinitive": "cominciare",
+      "english": "to begin, to start",
+      "present": ["io comincio", "tu cominci", "lui/lei comincia", "noi cominciamo", "voi cominciate", "loro cominciano"],
+      "past": ["io ho cominciato", "tu hai cominciato", "lui/lei ha cominciato", "noi abbiamo cominciato", "voi avete cominciato", "loro hanno cominciato"],
+      "presentContinuous": ["io sto cominciando", "tu stai cominciando", "lui/lei sta cominciando", "noi stiamo cominciando", "voi state cominciando", "loro stanno cominciando"]
+    },
+    {
+      "infinitive": "finire",
+      "english": "to finish",
+      "present": ["io finisco", "tu finisci", "lui/lei finisce", "noi finiamo", "voi finite", "loro finiscono"],
+      "past": ["io ho finito", "tu hai finito", "lui/lei ha finito", "noi abbiamo finito", "voi avete finito", "loro hanno finito"],
+      "presentContinuous": ["io sto finendo", "tu stai finendo", "lui/lei sta finendo", "noi stiamo finendo", "voi state finendo", "loro stanno finendo"]
+    },
+    {
+      "infinitive": "comprare",
+      "english": "to buy",
+      "present": ["io compro", "tu compri", "lui/lei compra", "noi compriamo", "voi comprate", "loro comprano"],
+      "past": ["io ho comprato", "tu hai comprato", "lui/lei ha comprato", "noi abbiamo comprato", "voi avete comprato", "loro hanno comprato"],
+      "presentContinuous": ["io sto comprando", "tu stai comprando", "lui/lei sta comprando", "noi stiamo comprando", "voi state comprando", "loro stanno comprando"]
+    },
+    {
+      "infinitive": "usare",
+      "english": "to use",
+      "present": ["io uso", "tu usi", "lui/lei usa", "noi usiamo", "voi usate", "loro usano"],
+      "past": ["io ho usato", "tu hai usato", "lui/lei ha usato", "noi abbiamo usato", "voi avete usato", "loro hanno usato"],
+      "presentContinuous": ["io sto usando", "tu stai usando", "lui/lei sta usando", "noi stiamo usando", "voi state usando", "loro stanno usando"]
+    },
+    {
+      "infinitive": "chiamare",
+      "english": "to call",
+      "present": ["io chiamo", "tu chiami", "lui/lei chiama", "noi chiamiamo", "voi chiamate", "loro chiamano"],
+      "past": ["io ho chiamato", "tu hai chiamato", "lui/lei ha chiamato", "noi abbiamo chiamato", "voi avete chiamato", "loro hanno chiamato"],
+      "presentContinuous": ["io sto chiamando", "tu stai chiamando", "lui/lei sta chiamando", "noi stiamo chiamando", "voi state chiamando", "loro stanno chiamando"]
+    },
+    {
+      "infinitive": "telefonare",
+      "english": "to telephone, to call",
+      "present": ["io telefono", "tu telefoni", "lui/lei telefona", "noi telefoniamo", "voi telefonate", "loro telefonano"],
+      "past": ["io ho telefonato", "tu hai telefonato", "lui/lei ha telefonato", "noi abbiamo telefonato", "voi avete telefonato", "loro hanno telefonato"],
+      "presentContinuous": ["io sto telefonando", "tu stai telefonando", "lui/lei sta telefonando", "noi stiamo telefonando", "voi state telefonando", "loro stanno telefonando"]
+    },
+    {
+      "infinitive": "ripetere",
+      "english": "to repeat",
+      "present": ["io ripeto", "tu ripeti", "lui/lei ripete", "noi ripetiamo", "voi ripetete", "loro ripetono"],
+      "past": ["io ho ripetuto", "tu hai ripetuto", "lui/lei ha ripetuto", "noi abbiamo ripetuto", "voi avete ripetuto", "loro hanno ripetuto"],
+      "presentContinuous": ["io sto ripetendo", "tu stai ripetendo", "lui/lei sta ripetendo", "noi stiamo ripetendo", "voi state ripetendo", "loro stanno ripetendo"]
+    },
+    {
+      "infinitive": "domandare",
+      "english": "to ask (a question)",
+      "present": ["io domando", "tu domandi", "lui/lei domanda", "noi domandiamo", "voi domandate", "loro domandano"],
+      "past": ["io ho domandato", "tu hai domandato", "lui/lei ha domandato", "noi abbiamo domandato", "voi avete domandato", "loro hanno domandato"],
+      "presentContinuous": ["io sto domandando", "tu stai domandando", "lui/lei sta domandando", "noi stiamo domandando", "voi state domandando", "loro stanno domandando"]
+    },
+    {
+      "infinitive": "rispondere",
+      "english": "to answer",
+      "present": ["io rispondo", "tu rispondi", "lui/lei risponde", "noi rispondiamo", "voi rispondete", "loro rispondono"],
+      "past": ["io ho risposto", "tu hai risposto", "lui/lei ha risposto", "noi abbiamo risposto", "voi avete risposto", "loro hanno risposto"],
+      "presentContinuous": ["io sto rispondendo", "tu stai rispondendo", "lui/lei sta rispondendo", "noi stiamo rispondendo", "voi state rispondendo", "loro stanno rispondendo"]
+    },
+    {
+      "infinitive": "scusare",
+      "english": "to excuse, to apologize",
+      "present": ["io scuso", "tu scusi", "lui/lei scusa", "noi scusiamo", "voi scusate", "loro scusano"],
+      "past": ["io ho scusato", "tu hai scusato", "lui/lei ha scusato", "noi abbiamo scusato", "voi avete scusato", "loro hanno scusato"],
+      "presentContinuous": ["io sto scusando", "tu stai scusando", "lui/lei sta scusando", "noi stiamo scusando", "voi state scusando", "loro stanno scusando"]
+    },
+    {
+      "infinitive": "cercare",
+      "english": "to look for, to search",
+      "present": ["io cerco", "tu cerchi", "lui/lei cerca", "noi cerchiamo", "voi cercate", "loro cercano"],
+      "past": ["io ho cercato", "tu hai cercato", "lui/lei ha cercato", "noi abbiamo cercato", "voi avete cercato", "loro hanno cercato"],
+      "presentContinuous": ["io sto cercando", "tu stai cercando", "lui/lei sta cercando", "noi stiamo cercando", "voi state cercando", "loro stanno cercando"]
+    },
+    {
+      "infinitive": "tornare (ESSERE)",
+      "english": "to return, to come back",
+      "present": ["io torno", "tu torni", "lui/lei torna", "noi torniamo", "voi tornate", "loro tornano"],
+      "past": ["io sono tornato/a", "tu sei tornato/a", "lui è tornato", "lei è tornata", "noi siamo tornati/e", "voi siete tornati/e", "loro sono tornati/e"],
+      "presentContinuous": ["io sto tornando", "tu stai tornando", "lui/lei sta tornando", "noi stiamo tornando", "voi state tornando", "loro stanno tornando"]
+    }
+  ]
+}
