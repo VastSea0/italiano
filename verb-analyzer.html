@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Italian Verbs Analyzer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .filters {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 2px solid #e9ecef;
+        }
+
+        .filter-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        input, select, button {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+
+        button {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        .verb-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .verb-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .verb-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .verb-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .verb-infinitive {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .verb-english {
+            font-size: 1.1em;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .conjugation-section {
+            margin-bottom: 10px;
+        }
+
+        .conjugation-title {
+            font-weight: bold;
+            color: #34495e;
+            margin-bottom: 5px;
+        }
+
+        .conjugation-forms {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .conjugation-form {
+            background: #ecf0f1;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            color: #2c3e50;
+        }
+
+        .essere-verb {
+            border-left: 4px solid #e74c3c;
+        }
+
+        .avere-verb {
+            border-left: 4px solid #3498db;
+        }
+
+        .no-results {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin: 40px 0;
+        }
+
+        .summary-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .ending-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .ending-stat {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🇮🇹 Italian Verbs Analyzer</h1>
+        
+        <div class="stats-grid" id="statsGrid">
+            <!-- Stats will be populated by JavaScript -->
+        </div>
+
+        <div class="summary-section">
+            <h3>Verb Endings Distribution</h3>
+            <div class="ending-stats" id="endingStats">
+                <!-- Ending stats will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="filters">
+            <h3>🔍 Filter Verbs</h3>
+            <div class="filter-group">
+                <input type="text" id="englishFilter" placeholder="Search English translation...">
+                <input type="text" id="italianFilter" placeholder="Search Italian infinitive...">
+                <select id="auxiliaryFilter">
+                    <option value="">All auxiliary verbs</option>
+                    <option value="essere">ESSERE verbs</option>
+                    <option value="avere">AVERE verbs</option>
+                </select>
+                <select id="endingFilter">
+                    <option value="">All endings</option>
+                    <option value="are">-ARE verbs</option>
+                    <option value="ere">-ERE verbs</option>
+                    <option value="ire">-IRE verbs</option>
+                </select>
+            </div>
+            <button onclick="applyFilters()">Apply Filters</button>
+            <button onclick="clearFilters()">Clear All</button>
+        </div>
+
+        <div id="results">
+            <div class="verb-list" id="verbList">
+                <!-- Verb cards will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let verbsData = [];
+
+        // Load the JSON data
+        async function loadVerbs() {
+            try {
+                const response = await fetch('words.json');
+                const data = await response.json();
+                verbsData = data.mostCommonItalianVerbsA1 || [];
+                initializeApp();
+            } catch (error) {
+                console.error('Error loading verbs:', error);
+                document.getElementById('verbList').innerHTML = 
+                    '<div class="no-results">Error loading verb data. Make sure words.json is in the same directory.</div>';
+            }
+        }
+
+        function initializeApp() {
+            updateStats();
+            displayVerbs(verbsData);
+            setupEventListeners();
+        }
+
+        function updateStats() {
+            const totalVerbs = verbsData.length;
+            let totalWords = 0;
+            let presentCount = 0;
+            let pastCount = 0;
+            let continuousCount = 0;
+
+            verbsData.forEach(verb => {
+                totalWords += 1; // infinitive
+                if (verb.present) {
+                    presentCount += verb.present.length;
+                    totalWords += verb.present.length;
+                }
+                if (verb.past) {
+                    pastCount += verb.past.length;
+                    totalWords += verb.past.length;
+                }
+                if (verb.presentContinuous) {
+                    continuousCount += verb.presentContinuous.length;
+                    totalWords += verb.presentContinuous.length;
+                }
+            });
+
+            const statsHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">${totalVerbs}</div>
+                    <div class="stat-label">Total Verbs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${totalWords}</div>
+                    <div class="stat-label">Total Word Forms</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${presentCount}</div>
+                    <div class="stat-label">Present Forms</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${pastCount}</div>
+                    <div class="stat-label">Past Forms</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${continuousCount}</div>
+                    <div class="stat-label">Continuous Forms</div>
+                </div>
+            `;
+
+            document.getElementById('statsGrid').innerHTML = statsHTML;
+
+            // Update ending stats
+            const endings = {};
+            verbsData.forEach(verb => {
+                const infinitive = verb.infinitive.replace(' (ESSERE)', '');
+                const ending = infinitive.slice(-3);
+                endings[ending] = (endings[ending] || 0) + 1;
+            });
+
+            const endingStatsHTML = Object.entries(endings)
+                .sort(([,a], [,b]) => b - a)
+                .map(([ending, count]) => `
+                    <div class="ending-stat">
+                        <strong>-${ending}</strong><br>
+                        ${count} verbs
+                    </div>
+                `).join('');
+
+            document.getElementById('endingStats').innerHTML = endingStatsHTML;
+        }
+
+        function displayVerbs(verbs) {
+            const verbListHTML = verbs.map(verb => {
+                const isEssere = verb.infinitive.includes('(ESSERE)');
+                const verbClass = isEssere ? 'essere-verb' : 'avere-verb';
+                
+                return `
+                    <div class="verb-card ${verbClass}">
+                        <div class="verb-header">
+                            <span class="verb-infinitive">${verb.infinitive}</span>
+                            <span class="verb-english">${verb.english}</span>
+                        </div>
+                        
+                        ${verb.present ? `
+                            <div class="conjugation-section">
+                                <div class="conjugation-title">Present:</div>
+                                <div class="conjugation-forms">
+                                    ${verb.present.map(form => `<span class="conjugation-form">${form}</span>`).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        ${verb.past ? `
+                            <div class="conjugation-section">
+                                <div class="conjugation-title">Past:</div>
+                                <div class="conjugation-forms">
+                                    ${verb.past.map(form => `<span class="conjugation-form">${form}</span>`).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        ${verb.presentContinuous ? `
+                            <div class="conjugation-section">
+                                <div class="conjugation-title">Present Continuous:</div>
+                                <div class="conjugation-forms">
+                                    ${verb.presentContinuous.map(form => `<span class="conjugation-form">${form}</span>`).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+
+            if (verbListHTML) {
+                document.getElementById('verbList').innerHTML = verbListHTML;
+            } else {
+                document.getElementById('verbList').innerHTML = 
+                    '<div class="no-results">No verbs match your current filters.</div>';
+            }
+        }
+
+        function filterVerbs() {
+            const englishFilter = document.getElementById('englishFilter').value.toLowerCase();
+            const italianFilter = document.getElementById('italianFilter').value.toLowerCase();
+            const auxiliaryFilter = document.getElementById('auxiliaryFilter').value;
+            const endingFilter = document.getElementById('endingFilter').value;
+
+            let filtered = verbsData.filter(verb => {
+                // English filter
+                if (englishFilter && !verb.english.toLowerCase().includes(englishFilter)) {
+                    return false;
+                }
+
+                // Italian filter
+                if (italianFilter && !verb.infinitive.toLowerCase().includes(italianFilter)) {
+                    return false;
+                }
+
+                // Auxiliary filter
+                if (auxiliaryFilter === 'essere' && !verb.infinitive.includes('(ESSERE)')) {
+                    return false;
+                }
+                if (auxiliaryFilter === 'avere' && verb.infinitive.includes('(ESSERE)')) {
+                    return false;
+                }
+
+                // Ending filter
+                if (endingFilter) {
+                    const infinitive = verb.infinitive.replace(' (ESSERE)', '');
+                    if (!infinitive.endsWith(endingFilter)) {
+                        return false;
+                    }
+                }
+
+                return true;
+            });
+
+            return filtered;
+        }
+
+        function applyFilters() {
+            const filtered = filterVerbs();
+            displayVerbs(filtered);
+        }
+
+        function clearFilters() {
+            document.getElementById('englishFilter').value = '';
+            document.getElementById('italianFilter').value = '';
+            document.getElementById('auxiliaryFilter').value = '';
+            document.getElementById('endingFilter').value = '';
+            displayVerbs(verbsData);
+        }
+
+        function setupEventListeners() {
+            // Real-time filtering
+            document.getElementById('englishFilter').addEventListener('input', applyFilters);
+            document.getElementById('italianFilter').addEventListener('input', applyFilters);
+            document.getElementById('auxiliaryFilter').addEventListener('change', applyFilters);
+            document.getElementById('endingFilter').addEventListener('change', applyFilters);
+        }
+
+        // Load verbs when page loads
+        loadVerbs();
+    </script>
+</body>
+</html>

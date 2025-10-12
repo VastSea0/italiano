@@ -1,0 +1,25 @@
+{
+  "name": "italiano",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/VastSea0/italiano#readme",
+  "bugs": {
+    "url": "https://github.com/VastSea0/italiano/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VastSea0/italiano.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "verb-analyzer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "node serve.js",
+    "start": "node serve.js",
+    "analyze": "node verb-analyzer.js",
+    "analyze-interactive": "node verb-analyzer.js --interactive",
+    "dev": "node serve.js"
+  }
+}
