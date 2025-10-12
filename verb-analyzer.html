@@ -599,6 +599,64 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
         }
+
+        .story-selector {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .story-selector label {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .story-selector select {
+            padding: 8px 15px;
+            border: 2px solid #3498db;
+            border-radius: 20px;
+            background: white;
+            color: #2c3e50;
+            font-weight: bold;
+            cursor: pointer;
+            min-width: 200px;
+        }
+
+        .story-selector select:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .story-navigation {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .nav-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
     </style>
 </head>
 <body>
@@ -624,6 +682,16 @@
             <h3>📖 Interactive Story Reader</h3>
             <p>Click on any word in the story to see its vocabulary information</p>
             <div class="story-container" id="storyContainer">
+                <div class="story-selector">
+                    <label for="storySelect">Choose a story:</label>
+                    <select id="storySelect" onchange="changeStory()">
+                        <!-- Story options will be populated by JavaScript -->
+                    </select>
+                    <div class="story-navigation">
+                        <button class="nav-btn" onclick="previousStory()" id="prevBtn">← Previous</button>
+                        <button class="nav-btn" onclick="nextStory()" id="nextBtn">Next →</button>
+                    </div>
+                </div>
                 <div class="story-controls">
                     <div class="story-info">
                         <span id="storyLevel">Level: A1</span> | 
@@ -762,6 +830,7 @@
         let vocabularyData = {};
         let currentCategory = 'all';
         let storyData = {};
+        let currentStoryIndex = 0;
         let showHints = false;
 
         // Load the JSON data
@@ -792,15 +861,16 @@
         async function loadStory() {
             try {
                 const response = await fetch('story.json');
-                storyData = await response.json();
+                const data = await response.json();
+                storyData = data.stories || [data]; // Support both single story and multiple stories format
             } catch (error) {
                 console.error('Error loading story:', error);
-                storyData = {
+                storyData = [{
                     story_title: "Story not available",
                     story_level: "A1",
                     total_sentences: 0,
                     story_data: []
-                };
+                }];
             }
         }
 
@@ -1064,17 +1134,42 @@
 
         // Story functionality
         function displayStory() {
-            if (!storyData || !storyData.story_data) {
+            if (!storyData || !Array.isArray(storyData) || storyData.length === 0) {
+                document.getElementById('storyContent').innerHTML = '<div class="no-results">No stories available</div>';
+                return;
+            }
+
+            // Populate story selector
+            const storySelect = document.getElementById('storySelect');
+            storySelect.innerHTML = '';
+            storyData.forEach((story, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = `${index + 1}. ${story.story_title}`;
+                if (index === currentStoryIndex) option.selected = true;
+                storySelect.appendChild(option);
+            });
+
+            // Update navigation buttons
+            updateNavigationButtons();
+
+            // Display current story
+            displayCurrentStory();
+        }
+
+        function displayCurrentStory() {
+            const currentStory = storyData[currentStoryIndex];
+            if (!currentStory || !currentStory.story_data) {
                 document.getElementById('storyContent').innerHTML = '<div class="no-results">Story not available</div>';
                 return;
             }
 
-            document.getElementById('storyTitle').textContent = storyData.story_title;
-            document.getElementById('storyLevel').textContent = `Level: ${storyData.story_level}`;
-            document.getElementById('storyProgress').textContent = `${storyData.story_data.length}/${storyData.total_sentences} sentences`;
+            document.getElementById('storyTitle').textContent = currentStory.story_title;
+            document.getElementById('storyLevel').textContent = `Level: ${currentStory.story_level}`;
+            document.getElementById('storyProgress').textContent = `${currentStory.story_data.length}/${currentStory.total_sentences} sentences`;
 
             let storyHTML = '';
-            storyData.story_data.forEach((sentence, index) => {
+            currentStory.story_data.forEach((sentence, index) => {
                 const words = sentence.sentence_text.split(/(\s+|[.,!?;:])/);
                 let sentenceHTML = '';
 
@@ -1093,6 +1188,38 @@
             });
 
             document.getElementById('storyContent').innerHTML = storyHTML;
+        }
+
+        function changeStory() {
+            currentStoryIndex = parseInt(document.getElementById('storySelect').value);
+            displayCurrentStory();
+            updateNavigationButtons();
+        }
+
+        function previousStory() {
+            if (currentStoryIndex > 0) {
+                currentStoryIndex--;
+                document.getElementById('storySelect').value = currentStoryIndex;
+                displayCurrentStory();
+                updateNavigationButtons();
+            }
+        }
+
+        function nextStory() {
+            if (currentStoryIndex < storyData.length - 1) {
+                currentStoryIndex++;
+                document.getElementById('storySelect').value = currentStoryIndex;
+                displayCurrentStory();
+                updateNavigationButtons();
+            }
+        }
+
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.disabled = currentStoryIndex === 0;
+            nextBtn.disabled = currentStoryIndex === storyData.length - 1;
         }
 
         function findWordInVocabulary(word) {
