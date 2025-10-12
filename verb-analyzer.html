@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Italian Verbs Analyzer</title>
+    <title>Italian Vocabulary Analyzer</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -163,12 +163,103 @@
             color: #2c3e50;
         }
 
-        .essere-verb {
-            border-left: 4px solid #e74c3c;
+        .category-section {
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
         }
 
-        .avere-verb {
-            border-left: 4px solid #3498db;
+        .category-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .word-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .word-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .word-italian {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        .word-english {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .word-details {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 8px;
+        }
+
+        .word-examples {
+            margin-top: 8px;
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .category-filter {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #3498db;
+            background: white;
+            color: #3498db;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .stats-summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
 
         .no-results {
@@ -203,250 +294,333 @@
 </head>
 <body>
     <div class="container">
-        <h1>🇮🇹 Italian Verbs Analyzer</h1>
+        <h1>🇮🇹 Italian Vocabulary Analyzer</h1>
         
-        <div class="stats-grid" id="statsGrid">
-            <!-- Stats will be populated by JavaScript -->
+        <div class="stats-summary">
+            <h3>📊 Vocabulary Coverage for A2-B1 Italian</h3>
+            <div class="stats-grid" id="statsGrid">
+                <!-- Stats will be populated by JavaScript -->
+            </div>
         </div>
 
-        <div class="summary-section">
-            <h3>Verb Endings Distribution</h3>
-            <div class="ending-stats" id="endingStats">
-                <!-- Ending stats will be populated by JavaScript -->
+        <div class="category-filter">
+            <h3>🎯 Browse by Category</h3>
+            <div class="filter-buttons" id="categoryButtons">
+                <button class="filter-btn active" onclick="showCategory('all')">All Vocabulary</button>
+                <button class="filter-btn" onclick="showCategory('verbs')">🔸 Verbs</button>
+                <button class="filter-btn" onclick="showCategory('nouns')">📦 Nouns</button>
+                <button class="filter-btn" onclick="showCategory('adjectives')">🎨 Adjectives</button>
+                <button class="filter-btn" onclick="showCategory('adverbs')">⚡ Adverbs</button>
+                <button class="filter-btn" onclick="showCategory('pronouns')">👤 Pronouns</button>
+                <button class="filter-btn" onclick="showCategory('prepositions')">🔗 Prepositions</button>
+                <button class="filter-btn" onclick="showCategory('conjunctions')">🌉 Conjunctions</button>
+                <button class="filter-btn" onclick="showCategory('time')">⏰ Time</button>
             </div>
         </div>
 
         <div class="filters">
-            <h3>🔍 Filter Verbs</h3>
+            <h3>🔍 Search Vocabulary</h3>
             <div class="filter-group">
                 <input type="text" id="englishFilter" placeholder="Search English translation...">
-                <input type="text" id="italianFilter" placeholder="Search Italian infinitive...">
-                <select id="auxiliaryFilter">
-                    <option value="">All auxiliary verbs</option>
-                    <option value="essere">ESSERE verbs</option>
-                    <option value="avere">AVERE verbs</option>
-                </select>
-                <select id="endingFilter">
-                    <option value="">All endings</option>
-                    <option value="are">-ARE verbs</option>
-                    <option value="ere">-ERE verbs</option>
-                    <option value="ire">-IRE verbs</option>
-                </select>
+                <input type="text" id="italianFilter" placeholder="Search Italian word...">
             </div>
-            <button onclick="applyFilters()">Apply Filters</button>
-            <button onclick="clearFilters()">Clear All</button>
+            <button onclick="applyFilters()">Search</button>
+            <button onclick="clearFilters()">Clear Search</button>
         </div>
 
         <div id="results">
-            <div class="verb-list" id="verbList">
-                <!-- Verb cards will be populated by JavaScript -->
+            <div id="vocabularyContent">
+                <!-- Vocabulary content will be populated by JavaScript -->
             </div>
         </div>
     </div>
 
     <script>
-        let verbsData = [];
+        let vocabularyData = {};
+        let currentCategory = 'all';
 
         // Load the JSON data
-        async function loadVerbs() {
+        async function loadVocabulary() {
             try {
                 const response = await fetch('words.json');
                 const data = await response.json();
-                verbsData = data.mostCommonItalianVerbsA1 || [];
+                vocabularyData = {
+                    verbs: data.mostCommonItalianVerbsA1 || [],
+                    conjunctions: data.conjunctions || [],
+                    adjectives: data.adjectives || [],
+                    adverbs: data.adverbs || [],
+                    prepositions: data.prepositions || [],
+                    timeExpressions: data.timeExpressions || [],
+                    pronouns: data.pronouns || [],
+                    commonNouns: data.commonNouns || []
+                };
                 initializeApp();
             } catch (error) {
-                console.error('Error loading verbs:', error);
-                document.getElementById('verbList').innerHTML = 
-                    '<div class="no-results">Error loading verb data. Make sure words.json is in the same directory.</div>';
+                console.error('Error loading vocabulary:', error);
+                document.getElementById('vocabularyContent').innerHTML = 
+                    '<div class="no-results">Error loading vocabulary data. Make sure words.json is in the same directory.</div>';
             }
         }
 
         function initializeApp() {
             updateStats();
-            displayVerbs(verbsData);
+            showCategory('all');
             setupEventListeners();
         }
 
         function updateStats() {
-            const totalVerbs = verbsData.length;
-            let totalWords = 0;
-            let presentCount = 0;
-            let pastCount = 0;
-            let continuousCount = 0;
-
-            verbsData.forEach(verb => {
-                totalWords += 1; // infinitive
-                if (verb.present) {
-                    presentCount += verb.present.length;
-                    totalWords += verb.present.length;
-                }
-                if (verb.past) {
-                    pastCount += verb.past.length;
-                    totalWords += verb.past.length;
-                }
-                if (verb.presentContinuous) {
-                    continuousCount += verb.presentContinuous.length;
-                    totalWords += verb.presentContinuous.length;
-                }
-            });
-
+            const stats = calculateStats();
+            
             const statsHTML = `
                 <div class="stat-card">
-                    <div class="stat-number">${totalVerbs}</div>
-                    <div class="stat-label">Total Verbs</div>
+                    <div class="stat-number">${stats.totalWords}</div>
+                    <div class="stat-label">Total Words</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">${totalWords}</div>
-                    <div class="stat-label">Total Word Forms</div>
+                    <div class="stat-number">${stats.totalWordForms}</div>
+                    <div class="stat-label">Word Forms</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">${presentCount}</div>
-                    <div class="stat-label">Present Forms</div>
+                    <div class="stat-number">${stats.verbs}</div>
+                    <div class="stat-label">Verbs</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">${pastCount}</div>
-                    <div class="stat-label">Past Forms</div>
+                    <div class="stat-number">${stats.nouns}</div>
+                    <div class="stat-label">Nouns</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">${continuousCount}</div>
-                    <div class="stat-label">Continuous Forms</div>
+                    <div class="stat-number">${stats.adjectives}</div>
+                    <div class="stat-label">Adjectives</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${((stats.verbs / stats.totalWords) * 100).toFixed(1)}%</div>
+                    <div class="stat-label">Verbs Ratio</div>
                 </div>
             `;
 
             document.getElementById('statsGrid').innerHTML = statsHTML;
+        }
 
-            // Update ending stats
-            const endings = {};
-            verbsData.forEach(verb => {
-                const infinitive = verb.infinitive.replace(' (ESSERE)', '');
-                const ending = infinitive.slice(-3);
-                endings[ending] = (endings[ending] || 0) + 1;
+        function calculateStats() {
+            const stats = {
+                verbs: vocabularyData.verbs.length,
+                nouns: vocabularyData.commonNouns.length,
+                adjectives: vocabularyData.adjectives.length,
+                adverbs: vocabularyData.adverbs.length,
+                pronouns: vocabularyData.pronouns.length,
+                prepositions: vocabularyData.prepositions.length,
+                conjunctions: vocabularyData.conjunctions.length,
+                timeExpressions: vocabularyData.timeExpressions.length,
+                totalWords: 0,
+                totalWordForms: 0
+            };
+
+            stats.totalWords = stats.verbs + stats.nouns + stats.adjectives + stats.adverbs + 
+                              stats.pronouns + stats.prepositions + stats.conjunctions + stats.timeExpressions;
+
+            // Calculate word forms
+            let forms = 0;
+            vocabularyData.verbs.forEach(verb => {
+                forms += 1; // infinitive
+                forms += verb.present ? verb.present.length : 0;
+                forms += verb.past ? verb.past.length : 0;
+                forms += verb.presentContinuous ? verb.presentContinuous.length : 0;
             });
-
-            const endingStatsHTML = Object.entries(endings)
-                .sort(([,a], [,b]) => b - a)
-                .map(([ending, count]) => `
-                    <div class="ending-stat">
-                        <strong>-${ending}</strong><br>
-                        ${count} verbs
-                    </div>
-                `).join('');
-
-            document.getElementById('endingStats').innerHTML = endingStatsHTML;
+            forms += stats.nouns * 2; // singular + plural
+            forms += stats.adjectives * 2; // masculine/feminine average
+            forms += stats.adverbs + stats.pronouns + stats.prepositions + stats.conjunctions + stats.timeExpressions;
+            
+            stats.totalWordForms = forms;
+            return stats;
         }
 
-        function displayVerbs(verbs) {
-            const verbListHTML = verbs.map(verb => {
-                const isEssere = verb.infinitive.includes('(ESSERE)');
-                const verbClass = isEssere ? 'essere-verb' : 'avere-verb';
-                
-                return `
-                    <div class="verb-card ${verbClass}">
-                        <div class="verb-header">
-                            <span class="verb-infinitive">${verb.infinitive}</span>
-                            <span class="verb-english">${verb.english}</span>
-                        </div>
-                        
-                        ${verb.present ? `
-                            <div class="conjugation-section">
-                                <div class="conjugation-title">Present:</div>
-                                <div class="conjugation-forms">
-                                    ${verb.present.map(form => `<span class="conjugation-form">${form}</span>`).join('')}
-                                </div>
-                            </div>
-                        ` : ''}
-                        
-                        ${verb.past ? `
-                            <div class="conjugation-section">
-                                <div class="conjugation-title">Past:</div>
-                                <div class="conjugation-forms">
-                                    ${verb.past.map(form => `<span class="conjugation-form">${form}</span>`).join('')}
-                                </div>
-                            </div>
-                        ` : ''}
-                        
-                        ${verb.presentContinuous ? `
-                            <div class="conjugation-section">
-                                <div class="conjugation-title">Present Continuous:</div>
-                                <div class="conjugation-forms">
-                                    ${verb.presentContinuous.map(form => `<span class="conjugation-form">${form}</span>`).join('')}
-                                </div>
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            }).join('');
+        function showCategory(category) {
+            currentCategory = category;
+            
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event?.target?.classList.add('active') || 
+                document.querySelector(`[onclick="showCategory('${category}')"]`).classList.add('active');
 
-            if (verbListHTML) {
-                document.getElementById('verbList').innerHTML = verbListHTML;
-            } else {
-                document.getElementById('verbList').innerHTML = 
-                    '<div class="no-results">No verbs match your current filters.</div>';
-            }
+            const filteredData = filterVocabulary();
+            displayVocabulary(filteredData);
         }
 
-        function filterVerbs() {
+        function filterVocabulary() {
             const englishFilter = document.getElementById('englishFilter').value.toLowerCase();
             const italianFilter = document.getElementById('italianFilter').value.toLowerCase();
-            const auxiliaryFilter = document.getElementById('auxiliaryFilter').value;
-            const endingFilter = document.getElementById('endingFilter').value;
 
-            let filtered = verbsData.filter(verb => {
-                // English filter
-                if (englishFilter && !verb.english.toLowerCase().includes(englishFilter)) {
-                    return false;
-                }
+            let result = {};
 
-                // Italian filter
-                if (italianFilter && !verb.infinitive.toLowerCase().includes(italianFilter)) {
-                    return false;
-                }
+            // Apply category filter
+            if (currentCategory === 'all') {
+                result = { ...vocabularyData };
+            } else {
+                result = Object.keys(vocabularyData).reduce((acc, key) => {
+                    acc[key] = [];
+                    return acc;
+                }, {});
 
-                // Auxiliary filter
-                if (auxiliaryFilter === 'essere' && !verb.infinitive.includes('(ESSERE)')) {
-                    return false;
+                switch (currentCategory) {
+                    case 'verbs': result.verbs = vocabularyData.verbs; break;
+                    case 'nouns': result.commonNouns = vocabularyData.commonNouns; break;
+                    case 'adjectives': result.adjectives = vocabularyData.adjectives; break;
+                    case 'adverbs': result.adverbs = vocabularyData.adverbs; break;
+                    case 'pronouns': result.pronouns = vocabularyData.pronouns; break;
+                    case 'prepositions': result.prepositions = vocabularyData.prepositions; break;
+                    case 'conjunctions': result.conjunctions = vocabularyData.conjunctions; break;
+                    case 'time': result.timeExpressions = vocabularyData.timeExpressions; break;
                 }
-                if (auxiliaryFilter === 'avere' && verb.infinitive.includes('(ESSERE)')) {
-                    return false;
-                }
+            }
 
-                // Ending filter
-                if (endingFilter) {
-                    const infinitive = verb.infinitive.replace(' (ESSERE)', '');
-                    if (!infinitive.endsWith(endingFilter)) {
-                        return false;
-                    }
-                }
+            // Apply text filters
+            if (englishFilter || italianFilter) {
+                Object.keys(result).forEach(key => {
+                    result[key] = result[key].filter(item => {
+                        const englishMatch = !englishFilter || item.english.toLowerCase().includes(englishFilter);
+                        const italianText = item.infinitive || item.italian || '';
+                        const italianMatch = !italianFilter || italianText.toLowerCase().includes(italianFilter);
+                        return englishMatch && italianMatch;
+                    });
+                });
+            }
 
-                return true;
+            return result;
+        }
+
+        function displayVocabulary(data) {
+            let html = '';
+
+            // Display verbs
+            if (data.verbs && data.verbs.length > 0) {
+                html += createCategorySection('🔸 Verbs', data.verbs, 'verb');
+            }
+
+            // Display other categories
+            const categories = [
+                { key: 'commonNouns', name: '📦 Common Nouns', type: 'noun' },
+                { key: 'adjectives', name: '🎨 Adjectives', type: 'adjective' },
+                { key: 'adverbs', name: '⚡ Adverbs', type: 'adverb' },
+                { key: 'pronouns', name: '👤 Pronouns', type: 'pronoun' },
+                { key: 'prepositions', name: '🔗 Prepositions', type: 'preposition' },
+                { key: 'conjunctions', name: '🌉 Conjunctions', type: 'conjunction' },
+                { key: 'timeExpressions', name: '⏰ Time Expressions', type: 'time' }
+            ];
+
+            categories.forEach(category => {
+                if (data[category.key] && data[category.key].length > 0) {
+                    html += createCategorySection(category.name, data[category.key], category.type);
+                }
             });
 
-            return filtered;
+            if (!html) {
+                html = '<div class="no-results">No vocabulary matches your current filters.</div>';
+            }
+
+            document.getElementById('vocabularyContent').innerHTML = html;
+        }
+
+        function createCategorySection(title, items, type) {
+            let itemsHtml = '';
+
+            items.forEach(item => {
+                if (type === 'verb') {
+                    itemsHtml += createVerbItem(item);
+                } else {
+                    itemsHtml += createWordItem(item, type);
+                }
+            });
+
+            return `
+                <div class="category-section">
+                    <div class="category-title">${title} (${items.length})</div>
+                    <div class="word-grid">
+                        ${itemsHtml}
+                    </div>
+                </div>
+            `;
+        }
+
+        function createVerbItem(verb) {
+            const isEssere = verb.infinitive.includes('(ESSERE)');
+            
+            return `
+                <div class="word-item">
+                    <div class="word-main">
+                        <span class="word-italian">${verb.infinitive}</span>
+                        <span class="word-english">${verb.english}</span>
+                    </div>
+                    ${verb.present ? `
+                        <div class="word-details">
+                            <strong>Present:</strong> ${verb.present.slice(0, 3).join(', ')}...
+                        </div>
+                    ` : ''}
+                    ${verb.past ? `
+                        <div class="word-details">
+                            <strong>Past:</strong> ${verb.past.slice(0, 2).join(', ')}...
+                        </div>
+                    ` : ''}
+                    <div class="word-details">
+                        <strong>Auxiliary:</strong> ${isEssere ? 'ESSERE' : 'AVERE'}
+                    </div>
+                </div>
+            `;
+        }
+
+        function createWordItem(item, type) {
+            let detailsHtml = '';
+            
+            if (item.forms) {
+                detailsHtml += `<div class="word-details"><strong>Forms:</strong> ${item.forms.join(', ')}</div>`;
+            }
+            if (item.gender && item.plural) {
+                detailsHtml += `<div class="word-details"><strong>Gender:</strong> ${item.gender} | <strong>Plural:</strong> ${item.plural}</div>`;
+            }
+            if (item.type) {
+                detailsHtml += `<div class="word-details"><strong>Type:</strong> ${item.type}</div>`;
+            }
+            if (item.usage) {
+                detailsHtml += `<div class="word-details"><strong>Usage:</strong> ${item.usage}</div>`;
+            }
+            if (item.category) {
+                detailsHtml += `<div class="word-details"><strong>Category:</strong> ${item.category}</div>`;
+            }
+
+            return `
+                <div class="word-item">
+                    <div class="word-main">
+                        <span class="word-italian">${item.italian}</span>
+                        <span class="word-english">${item.english}</span>
+                    </div>
+                    ${detailsHtml}
+                    ${item.examples ? `
+                        <div class="word-examples">
+                            <strong>Examples:</strong> ${item.examples.slice(0, 2).join(' • ')}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
         }
 
         function applyFilters() {
-            const filtered = filterVerbs();
-            displayVerbs(filtered);
+            const filteredData = filterVocabulary();
+            displayVocabulary(filteredData);
         }
 
         function clearFilters() {
             document.getElementById('englishFilter').value = '';
             document.getElementById('italianFilter').value = '';
-            document.getElementById('auxiliaryFilter').value = '';
-            document.getElementById('endingFilter').value = '';
-            displayVerbs(verbsData);
+            showCategory(currentCategory);
         }
 
         function setupEventListeners() {
             // Real-time filtering
             document.getElementById('englishFilter').addEventListener('input', applyFilters);
             document.getElementById('italianFilter').addEventListener('input', applyFilters);
-            document.getElementById('auxiliaryFilter').addEventListener('change', applyFilters);
-            document.getElementById('endingFilter').addEventListener('change', applyFilters);
         }
 
-        // Load verbs when page loads
-        loadVerbs();
+        // Load vocabulary when page loads
+        loadVocabulary();
     </script>
 </body>
 </html>
