@@ -1,0 +1,39 @@
+{
+  "story_title": "La Giornata di Sofia",
+  "story_level": "A1",
+  "total_sentences": 8,
+  "story_data": [
+    {
+      "sentence_id": 1,
+      "sentence_text": "Sofia è una studentessa italiana che studia all'università."
+    },
+    {
+      "sentence_id": 2,
+      "sentence_text": "Ogni mattina va a scuola con i suoi amici."
+    },
+    {
+      "sentence_id": 3,
+      "sentence_text": "Oggi ha lezione di italiano e storia."
+    },
+    {
+      "sentence_id": 4,
+      "sentence_text": "Durante la pausa mangia un panino e beve un caffè."
+    },
+    {
+      "sentence_id": 5,
+      "sentence_text": "Dopo le lezioni torna a casa con l'autobus."
+    },
+    {
+      "sentence_id": 6,
+      "sentence_text": "Nel pomeriggio studia e fa i compiti."
+    },
+    {
+      "sentence_id": 7,
+      "sentence_text": "La sera telefona alla sua famiglia e parla con la mamma."
+    },
+    {
+      "sentence_id": 8,
+      "sentence_text": "Prima di dormire legge un libro molto interessante."
+    }
+  ]
+}

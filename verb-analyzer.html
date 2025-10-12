@@ -453,6 +453,152 @@
             text-align: center;
             border: 1px solid #ddd;
         }
+
+        /* Story Reader Styles */
+        .story-section {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .story-container {
+            background: white;
+            color: #333;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .story-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 15px;
+        }
+
+        .story-sentence {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+
+        .story-word {
+            cursor: pointer;
+            padding: 2px 4px;
+            border-radius: 3px;
+            transition: all 0.2s;
+            position: relative;
+            display: inline-block;
+            margin: 0 2px;
+        }
+
+        .story-word:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .story-word.found {
+            border-bottom: 2px dotted #27ae60;
+        }
+
+        .story-word.not-found {
+            border-bottom: 2px dotted #e74c3c;
+            background: #ffe6e6;
+        }
+
+        .word-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 1000;
+            min-width: 250px;
+            max-width: 350px;
+            display: none;
+        }
+
+        .word-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: #2c3e50;
+        }
+
+        .tooltip-word {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #f39c12;
+            margin-bottom: 8px;
+        }
+
+        .tooltip-translation {
+            font-size: 1em;
+            color: #ecf0f1;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .tooltip-details {
+            font-size: 0.85em;
+            color: #bdc3c7;
+            line-height: 1.4;
+        }
+
+        .tooltip-conjugations {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid #34495e;
+        }
+
+        .story-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #ecf0f1;
+            border-radius: 8px;
+        }
+
+        .story-info {
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+
+        .story-toggle {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .story-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -472,6 +618,26 @@
             <button class="export-btn" onclick="openExportModal()" id="exportBtn">
                 📥 Export as PDF
             </button>
+        </div>
+
+        <div class="story-section">
+            <h3>📖 Interactive Story Reader</h3>
+            <p>Click on any word in the story to see its vocabulary information</p>
+            <div class="story-container" id="storyContainer">
+                <div class="story-controls">
+                    <div class="story-info">
+                        <span id="storyLevel">Level: A1</span> | 
+                        <span id="storyProgress">0/0 sentences</span>
+                    </div>
+                    <button class="story-toggle" onclick="toggleStoryMode()" id="storyToggle">
+                        Show Hints
+                    </button>
+                </div>
+                <div class="story-title" id="storyTitle">Loading story...</div>
+                <div id="storyContent">
+                    <!-- Story content will be populated by JavaScript -->
+                </div>
+            </div>
         </div>
 
         <div class="category-filter">
@@ -595,6 +761,8 @@
     <script>
         let vocabularyData = {};
         let currentCategory = 'all';
+        let storyData = {};
+        let showHints = false;
 
         // Load the JSON data
         async function loadVocabulary() {
@@ -611,6 +779,7 @@
                     pronouns: data.pronouns || [],
                     commonNouns: data.commonNouns || []
                 };
+                await loadStory();
                 initializeApp();
             } catch (error) {
                 console.error('Error loading vocabulary:', error);
@@ -619,10 +788,27 @@
             }
         }
 
+        // Load the story data
+        async function loadStory() {
+            try {
+                const response = await fetch('story.json');
+                storyData = await response.json();
+            } catch (error) {
+                console.error('Error loading story:', error);
+                storyData = {
+                    story_title: "Story not available",
+                    story_level: "A1",
+                    total_sentences: 0,
+                    story_data: []
+                };
+            }
+        }
+
         function initializeApp() {
             updateStats();
             showCategory('all');
             setupEventListeners();
+            displayStory();
         }
 
         function updateStats() {
@@ -874,6 +1060,148 @@
             // Real-time filtering
             document.getElementById('englishFilter').addEventListener('input', applyFilters);
             document.getElementById('italianFilter').addEventListener('input', applyFilters);
+        }
+
+        // Story functionality
+        function displayStory() {
+            if (!storyData || !storyData.story_data) {
+                document.getElementById('storyContent').innerHTML = '<div class="no-results">Story not available</div>';
+                return;
+            }
+
+            document.getElementById('storyTitle').textContent = storyData.story_title;
+            document.getElementById('storyLevel').textContent = `Level: ${storyData.story_level}`;
+            document.getElementById('storyProgress').textContent = `${storyData.story_data.length}/${storyData.total_sentences} sentences`;
+
+            let storyHTML = '';
+            storyData.story_data.forEach((sentence, index) => {
+                const words = sentence.sentence_text.split(/(\s+|[.,!?;:])/);
+                let sentenceHTML = '';
+
+                words.forEach(word => {
+                    if (word.trim() && !/^[.,!?;:\s]+$/.test(word)) {
+                        const cleanWord = word.toLowerCase().replace(/[.,!?;:]/g, '');
+                        const wordInfo = findWordInVocabulary(cleanWord);
+                        const className = wordInfo ? 'story-word found' : 'story-word not-found';
+                        sentenceHTML += `<span class="${className}" data-word="${cleanWord}" onclick="showWordTooltip(event, '${cleanWord}')">${word}</span>`;
+                    } else {
+                        sentenceHTML += word;
+                    }
+                });
+
+                storyHTML += `<div class="story-sentence">${sentenceHTML}</div>`;
+            });
+
+            document.getElementById('storyContent').innerHTML = storyHTML;
+        }
+
+        function findWordInVocabulary(word) {
+            // Search in verbs (check infinitive and conjugated forms)
+            for (let verb of vocabularyData.verbs) {
+                if (verb.infinitive.toLowerCase().includes(word)) return verb;
+                if (verb.present && verb.present.some(form => form.toLowerCase().includes(word))) return verb;
+                if (verb.past && verb.past.some(form => form.toLowerCase().includes(word))) return verb;
+                if (verb.presentContinuous && verb.presentContinuous.some(form => form.toLowerCase().includes(word))) return verb;
+            }
+
+            // Search in other categories
+            const categories = ['conjunctions', 'adjectives', 'adverbs', 'prepositions', 'timeExpressions', 'pronouns', 'commonNouns'];
+            for (let category of categories) {
+                for (let item of vocabularyData[category]) {
+                    if (item.italian && item.italian.toLowerCase() === word) return item;
+                    if (item.forms && item.forms.some(form => form.toLowerCase() === word)) return item;
+                }
+            }
+
+            return null;
+        }
+
+        function showWordTooltip(event, word) {
+            // Remove existing tooltips
+            document.querySelectorAll('.word-tooltip').forEach(tooltip => tooltip.remove());
+
+            const wordInfo = findWordInVocabulary(word);
+            if (!wordInfo) {
+                return;
+            }
+
+            const tooltip = document.createElement('div');
+            tooltip.className = 'word-tooltip';
+            tooltip.style.display = 'block';
+
+            let tooltipHTML = `
+                <div class="tooltip-word">${wordInfo.infinitive || wordInfo.italian}</div>
+                <div class="tooltip-translation">${wordInfo.english}</div>
+                <div class="tooltip-details">
+            `;
+
+            if (wordInfo.infinitive) { // It's a verb
+                tooltipHTML += `<strong>Type:</strong> Verb<br>`;
+                if (wordInfo.present) {
+                    tooltipHTML += `<div class="tooltip-conjugations">
+                        <strong>Present:</strong> ${wordInfo.present.slice(0, 3).join(', ')}...
+                    </div>`;
+                }
+                if (wordInfo.past) {
+                    tooltipHTML += `<div class="tooltip-conjugations">
+                        <strong>Past:</strong> ${wordInfo.past.slice(0, 2).join(', ')}...
+                    </div>`;
+                }
+            } else {
+                if (wordInfo.type) tooltipHTML += `<strong>Type:</strong> ${wordInfo.type}<br>`;
+                if (wordInfo.gender) tooltipHTML += `<strong>Gender:</strong> ${wordInfo.gender}<br>`;
+                if (wordInfo.plural) tooltipHTML += `<strong>Plural:</strong> ${wordInfo.plural}<br>`;
+                if (wordInfo.usage) tooltipHTML += `<strong>Usage:</strong> ${wordInfo.usage}<br>`;
+                if (wordInfo.forms) tooltipHTML += `<strong>Forms:</strong> ${wordInfo.forms.join(', ')}<br>`;
+            }
+
+            tooltipHTML += `</div>`;
+            tooltip.innerHTML = tooltipHTML;
+
+            event.target.appendChild(tooltip);
+
+            // Position tooltip
+            const rect = event.target.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+            
+            if (rect.top - tooltipRect.height < 0) {
+                tooltip.style.bottom = 'auto';
+                tooltip.style.top = '100%';
+                tooltip.style.transform = 'translateX(-50%)';
+            }
+
+            // Auto-hide tooltip after 5 seconds
+            setTimeout(() => {
+                if (tooltip.parentNode) {
+                    tooltip.remove();
+                }
+            }, 5000);
+
+            // Hide tooltip when clicking elsewhere
+            document.addEventListener('click', function hideTooltip(e) {
+                if (!tooltip.contains(e.target) && e.target !== event.target) {
+                    tooltip.remove();
+                    document.removeEventListener('click', hideTooltip);
+                }
+            });
+        }
+
+        function toggleStoryMode() {
+            showHints = !showHints;
+            const toggle = document.getElementById('storyToggle');
+            const words = document.querySelectorAll('.story-word');
+
+            if (showHints) {
+                toggle.textContent = 'Hide Hints';
+                words.forEach(word => {
+                    word.style.borderBottomStyle = 'solid';
+                });
+            } else {
+                toggle.textContent = 'Show Hints';
+                words.forEach(word => {
+                    word.style.borderBottomStyle = 'dotted';
+                });
+            }
         }
 
         // Load vocabulary when page loads
