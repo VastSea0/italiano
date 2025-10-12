@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Italian Vocabulary Analyzer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -254,6 +256,167 @@
             color: white;
         }
 
+        .export-section {
+            background: #f1c40f;
+            color: #2c3e50;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .export-btn {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+        }
+
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
+        }
+
+        .export-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-header h2 {
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .option-group {
+            margin-bottom: 20px;
+        }
+
+        .option-group label {
+            display: block;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .option-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .template-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .template-option {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .template-option:hover {
+            border-color: #3498db;
+            background: #f8f9fa;
+        }
+
+        .template-option.selected {
+            border-color: #3498db;
+            background: #e3f2fd;
+        }
+
+        .template-icon {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .modal-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .modal-btn.primary {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .modal-btn.secondary {
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
         .stats-summary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -303,6 +466,14 @@
             </div>
         </div>
 
+        <div class="export-section">
+            <h3>📄 Export Vocabulary</h3>
+            <p>Export the currently displayed vocabulary as a PDF document</p>
+            <button class="export-btn" onclick="openExportModal()" id="exportBtn">
+                📥 Export as PDF
+            </button>
+        </div>
+
         <div class="category-filter">
             <h3>🎯 Browse by Category</h3>
             <div class="filter-buttons" id="categoryButtons">
@@ -331,6 +502,92 @@
         <div id="results">
             <div id="vocabularyContent">
                 <!-- Vocabulary content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div id="exportModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeExportModal()">&times;</span>
+                <h2>🎯 Customize PDF Export</h2>
+            </div>
+
+            <div class="option-group">
+                <label for="wordGroupSelect">📚 Word Group:</label>
+                <select id="wordGroupSelect">
+                    <option value="all">All Categories</option>
+                    <option value="verbs">🔸 Verbs</option>
+                    <option value="nouns">📦 Nouns</option>
+                    <option value="adjectives">🎨 Adjectives</option>
+                    <option value="adverbs">⚡ Adverbs</option>
+                    <option value="pronouns">👤 Pronouns</option>
+                    <option value="prepositions">🔗 Prepositions</option>
+                    <option value="conjunctions">🌉 Conjunctions</option>
+                    <option value="time">⏰ Time Expressions</option>
+                </select>
+            </div>
+
+            <div class="option-group" id="conjugationGroup" style="display: none;">
+                <label for="conjugationSelect">🔄 Tense/Conjugation:</label>
+                <select id="conjugationSelect">
+                    <option value="all">All Tenses</option>
+                    <option value="infinitive">Infinitive Only</option>
+                    <option value="present">Present Tense</option>
+                    <option value="past">Past Tense</option>
+                    <option value="presentContinuous">Present Continuous</option>
+                </select>
+            </div>
+
+            <div class="option-group">
+                <label>📋 Template Style:</label>
+                <div class="template-preview">
+                    <div class="template-option selected" data-template="flashcard">
+                        <div class="template-icon">🃏</div>
+                        <div>Flashcard</div>
+                    </div>
+                    <div class="template-option" data-template="table">
+                        <div class="template-icon">📊</div>
+                        <div>Table</div>
+                    </div>
+                    <div class="template-option" data-template="list">
+                        <div class="template-icon">📝</div>
+                        <div>List View</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="option-group" id="gridConfigGroup" style="display: block;">
+                <label>📐 Flashcard Grid Layout:</label>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
+                    <div>
+                        <label for="columnsSelect" style="font-size: 0.9em; margin-bottom: 5px;">Columns per page:</label>
+                        <select id="columnsSelect" style="width: 100%;">
+                            <option value="2">2 Columns</option>
+                            <option value="3" selected>3 Columns</option>
+                            <option value="4">4 Columns</option>
+                            <option value="5">5 Columns</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="rowsSelect" style="font-size: 0.9em; margin-bottom: 5px;">Rows per page:</label>
+                        <select id="rowsSelect" style="width: 100%;">
+                            <option value="3">3 Rows</option>
+                            <option value="4" selected>4 Rows</option>
+                            <option value="5">5 Rows</option>
+                            <option value="6">6 Rows</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-top: 10px; padding: 10px; background: #f8f9fa; border-radius: 5px; font-size: 0.85em; color: #666;">
+                    <span id="gridPreview">📄 Preview: 12 flashcards per page (3×4 grid)</span>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="modal-btn secondary" onclick="closeExportModal()">Cancel</button>
+                <button class="modal-btn primary" onclick="generateCustomPDF()">Generate PDF</button>
             </div>
         </div>
     </div>
@@ -621,6 +878,584 @@
 
         // Load vocabulary when page loads
         loadVocabulary();
+
+        // Modal and Export functionality
+        let selectedTemplate = 'flashcard';
+
+        function openExportModal() {
+            document.getElementById('exportModal').style.display = 'block';
+            // Set current category as default
+            document.getElementById('wordGroupSelect').value = currentCategory;
+            updateConjugationVisibility();
+            updateGridConfigVisibility();
+            updateGridPreview();
+        }
+
+        function closeExportModal() {
+            document.getElementById('exportModal').style.display = 'none';
+        }
+
+        function updateConjugationVisibility() {
+            const wordGroup = document.getElementById('wordGroupSelect').value;
+            const conjugationGroup = document.getElementById('conjugationGroup');
+            conjugationGroup.style.display = wordGroup === 'verbs' ? 'block' : 'none';
+        }
+
+        // Event listeners for modal
+        document.getElementById('wordGroupSelect').addEventListener('change', updateConjugationVisibility);
+
+        // Template selection
+        document.querySelectorAll('.template-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.template-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedTemplate = this.dataset.template;
+                updateGridConfigVisibility();
+            });
+        });
+
+        // Grid configuration listeners
+        document.getElementById('columnsSelect').addEventListener('change', updateGridPreview);
+        document.getElementById('rowsSelect').addEventListener('change', updateGridPreview);
+
+        function updateGridConfigVisibility() {
+            const gridConfigGroup = document.getElementById('gridConfigGroup');
+            gridConfigGroup.style.display = selectedTemplate === 'flashcard' ? 'block' : 'none';
+        }
+
+        function updateGridPreview() {
+            const columns = parseInt(document.getElementById('columnsSelect').value);
+            const rows = parseInt(document.getElementById('rowsSelect').value);
+            const cardsPerPage = columns * rows;
+            document.getElementById('gridPreview').textContent = 
+                `📄 Preview: ${cardsPerPage} flashcards per page (${columns}×${rows} grid)`;
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('exportModal');
+            if (event.target === modal) {
+                closeExportModal();
+            }
+        });
+
+        function generateCustomPDF() {
+            const { jsPDF } = window.jspdf;
+            
+            const wordGroup = document.getElementById('wordGroupSelect').value;
+            const conjugation = document.getElementById('conjugationSelect').value;
+            
+            // Get filtered data based on selections
+            const exportData = getCustomExportData(wordGroup, conjugation);
+            
+            if (exportData.length === 0) {
+                alert('No words match your selection criteria.');
+                return;
+            }
+
+            try {
+                const doc = new jsPDF();
+                
+                // Generate PDF based on selected template
+                switch (selectedTemplate) {
+                    case 'flashcard':
+                        generateFlashcardPDF(doc, exportData, wordGroup, conjugation);
+                        break;
+                    case 'table':
+                        generateTablePDF(doc, exportData, wordGroup, conjugation);
+                        break;
+                    case 'list':
+                        generateListPDF(doc, exportData, wordGroup, conjugation);
+                        break;
+                }
+
+                // Generate filename
+                const templateName = selectedTemplate;
+                const groupName = wordGroup === 'all' ? 'all_vocabulary' : wordGroup;
+                const conjugationName = conjugation === 'all' ? '' : `_${conjugation}`;
+                const date = new Date().toLocaleDateString().replace(/\//g, '-');
+                const filename = `${groupName}${conjugationName}_${templateName}_${date}.pdf`;
+
+                doc.save(filename);
+                closeExportModal();
+                
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                alert('Error generating PDF. Please try again.');
+            }
+        }
+
+        function getCustomExportData(wordGroup, conjugation) {
+            let data = [];
+            
+            // Get base data based on word group
+            if (wordGroup === 'all') {
+                // Include all categories
+                Object.keys(vocabularyData).forEach(key => {
+                    if (vocabularyData[key] && vocabularyData[key].length > 0) {
+                        data.push(...vocabularyData[key].map(item => ({
+                            ...item,
+                            category: getCategoryName(key)
+                        })));
+                    }
+                });
+            } else {
+                // Get specific category
+                const dataKey = getDataKey(wordGroup);
+                if (vocabularyData[dataKey]) {
+                    data = vocabularyData[dataKey].map(item => ({
+                        ...item,
+                        category: getCategoryName(dataKey)
+                    }));
+                }
+            }
+
+            // Filter by conjugation for verbs
+            if (wordGroup === 'verbs' && conjugation !== 'all') {
+                data = data.map(verb => {
+                    const filteredVerb = { ...verb };
+                    switch (conjugation) {
+                        case 'infinitive':
+                            // Keep only infinitive
+                            delete filteredVerb.present;
+                            delete filteredVerb.past;
+                            delete filteredVerb.presentContinuous;
+                            break;
+                        case 'present':
+                            delete filteredVerb.past;
+                            delete filteredVerb.presentContinuous;
+                            break;
+                        case 'past':
+                            delete filteredVerb.present;
+                            delete filteredVerb.presentContinuous;
+                            break;
+                        case 'presentContinuous':
+                            delete filteredVerb.present;
+                            delete filteredVerb.past;
+                            break;
+                    }
+                    return filteredVerb;
+                });
+            }
+
+            return data;
+        }
+
+        function getDataKey(wordGroup) {
+            const mapping = {
+                'verbs': 'verbs',
+                'nouns': 'commonNouns',
+                'adjectives': 'adjectives',
+                'adverbs': 'adverbs',
+                'pronouns': 'pronouns',
+                'prepositions': 'prepositions',
+                'conjunctions': 'conjunctions',
+                'time': 'timeExpressions'
+            };
+            return mapping[wordGroup];
+        }
+
+        function getCategoryName(key) {
+            const mapping = {
+                'verbs': 'Verb',
+                'commonNouns': 'Noun',
+                'adjectives': 'Adjective',
+                'adverbs': 'Adverb',
+                'pronouns': 'Pronoun',
+                'prepositions': 'Preposition',
+                'conjunctions': 'Conjunction',
+                'timeExpressions': 'Time Expression'
+            };
+            return mapping[key] || 'Unknown';
+        }
+
+        function generateFlashcardPDF(doc, data, wordGroup, conjugation) {
+            const pageWidth = doc.internal.pageSize.width;
+            const pageHeight = doc.internal.pageSize.height;
+            
+            // Get grid configuration
+            const columns = parseInt(document.getElementById('columnsSelect').value);
+            const rows = parseInt(document.getElementById('rowsSelect').value);
+            const cardsPerPage = columns * rows;
+            
+            // Calculate responsive margins and dimensions
+            const baseMarginsX = 20;
+            const baseMarginsY = 25;
+            const densityFactor = Math.max(0.6, 1 - (cardsPerPage - 6) * 0.03); // Scale margins based on density
+            
+            const marginX = baseMarginsX * densityFactor;
+            const marginY = baseMarginsY * densityFactor;
+            const titleHeight = 20;
+            
+            // Calculate card dimensions
+            const usableWidth = pageWidth - (marginX * 2);
+            const usableHeight = pageHeight - (marginY * 2) - titleHeight;
+            const cardSpacingX = Math.max(3, 8 * densityFactor);
+            const cardSpacingY = Math.max(3, 10 * densityFactor);
+            
+            const cardWidth = (usableWidth - (cardSpacingX * (columns - 1))) / columns;
+            const cardHeight = (usableHeight - (cardSpacingY * (rows - 1))) / rows;
+            
+            // Font size scaling based on card size
+            const baseFontSize = 14;
+            const fontScaleFactor = Math.max(0.6, Math.min(1.2, (cardWidth * cardHeight) / (85 * 60))); // Scale based on card area
+            const mainFontSize = Math.max(8, baseFontSize * fontScaleFactor);
+            const detailFontSize = Math.max(6, 9 * fontScaleFactor);
+            const translationFontSize = Math.max(7, 11 * fontScaleFactor);
+            const categoryFontSize = Math.max(5, 8 * fontScaleFactor);
+            
+            let currentPage = 0;
+            let cardCount = 0;
+            
+            // Helper function to start a new page
+            function addNewPage() {
+                if (currentPage > 0) {
+                    doc.addPage();
+                }
+                currentPage++;
+                
+                // Add title
+                doc.setFontSize(Math.max(12, 18 * fontScaleFactor));
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(0, 0, 0);
+                doc.text('Italian Vocabulary Flashcards', pageWidth / 2, 15, { align: 'center' });
+                
+                // Add page info
+                doc.setFontSize(Math.max(8, 10 * fontScaleFactor));
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(100, 100, 100);
+                const gridInfo = `${columns}×${rows} grid - Page ${currentPage}`;
+                doc.text(gridInfo, pageWidth / 2, 22, { align: 'center' });
+            }
+            
+            // Helper function to get card position
+            function getCardPosition(cardIndex) {
+                const row = Math.floor(cardIndex / columns);
+                const col = cardIndex % columns;
+                
+                const x = marginX + col * (cardWidth + cardSpacingX);
+                const y = marginY + titleHeight + row * (cardHeight + cardSpacingY);
+                
+                return { x, y };
+            }
+            
+            // Helper function to wrap text to fit card width
+            function wrapText(text, maxWidth, fontSize) {
+                doc.setFontSize(fontSize);
+                const words = text.split(' ');
+                const lines = [];
+                let currentLine = '';
+                
+                for (const word of words) {
+                    const testLine = currentLine + (currentLine ? ' ' : '') + word;
+                    const testWidth = doc.getTextWidth(testLine);
+                    
+                    if (testWidth <= maxWidth) {
+                        currentLine = testLine;
+                    } else {
+                        if (currentLine) {
+                            lines.push(currentLine);
+                            currentLine = word;
+                        } else {
+                            lines.push(word); // Single word is too long but we still need to show it
+                        }
+                    }
+                }
+                
+                if (currentLine) {
+                    lines.push(currentLine);
+                }
+                
+                return lines;
+            }
+            
+            // Generate flashcards
+            data.forEach((item, index) => {
+                const pageCardIndex = cardCount % cardsPerPage;
+                
+                // Start new page if needed
+                if (pageCardIndex === 0) {
+                    addNewPage();
+                }
+                
+                const position = getCardPosition(pageCardIndex);
+                const centerX = position.x + cardWidth / 2;
+                const centerY = position.y + cardHeight / 2;
+                const contentPadding = Math.max(3, 8 * densityFactor);
+                const maxTextWidth = cardWidth - (contentPadding * 2);
+                
+                // Draw card border
+                doc.setDrawColor(200, 200, 200);
+                doc.setLineWidth(0.5);
+                doc.rect(position.x, position.y, cardWidth, cardHeight);
+                
+                // Italian word (main) - with text wrapping
+                const italianText = item.infinitive || item.italian || '';
+                const italianLines = wrapText(italianText, maxTextWidth, mainFontSize);
+                
+                doc.setFontSize(mainFontSize);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(0, 0, 0);
+                
+                const lineHeight = mainFontSize * 0.35;
+                const italianStartY = centerY - 15 - ((italianLines.length - 1) * lineHeight / 2);
+                
+                italianLines.forEach((line, lineIndex) => {
+                    doc.text(line, centerX, italianStartY + (lineIndex * lineHeight), { align: 'center' });
+                });
+                
+                // Conjugations or forms (if available)
+                doc.setFontSize(detailFontSize);
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(80, 80, 80);
+                
+                let detailY = centerY - 2;
+                const detailLineHeight = detailFontSize * 0.35;
+                
+                if (item.category === 'Verb') {
+                    const conjugations = [];
+                    if (item.present) conjugations.push(`Present: ${item.present.slice(0, 2).join(', ')}...`);
+                    if (item.past) conjugations.push(`Past: ${item.past.slice(0, 2).join(', ')}...`);
+                    
+                    conjugations.forEach((conjText, index) => {
+                        const conjLines = wrapText(conjText, maxTextWidth, detailFontSize);
+                        conjLines.forEach((line, lineIndex) => {
+                            doc.text(line, centerX, detailY + ((index * 2 + lineIndex) * detailLineHeight), { align: 'center' });
+                        });
+                    });
+                } else if (item.forms) {
+                    const formsText = `Forms: ${item.forms.slice(0, 3).join(', ')}`;
+                    const formsLines = wrapText(formsText, maxTextWidth, detailFontSize);
+                    formsLines.forEach((line, lineIndex) => {
+                        doc.text(line, centerX, detailY + (lineIndex * detailLineHeight), { align: 'center' });
+                    });
+                }
+                
+                // English translation
+                const englishLines = wrapText(item.english, maxTextWidth, translationFontSize);
+                
+                doc.setFontSize(translationFontSize);
+                doc.setFont('helvetica', 'italic');
+                doc.setTextColor(100, 100, 100);
+                
+                const englishLineHeight = translationFontSize * 0.35;
+                const englishStartY = centerY + 10 - ((englishLines.length - 1) * englishLineHeight / 2);
+                
+                englishLines.forEach((line, lineIndex) => {
+                    doc.text(line, centerX, englishStartY + (lineIndex * englishLineHeight), { align: 'center' });
+                });
+                
+                // Category badge
+                doc.setFontSize(categoryFontSize);
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(150, 150, 150);
+                doc.text(item.category, centerX, position.y + cardHeight - 5, { align: 'center' });
+                
+                cardCount++;
+            });
+        }
+
+        function generateTablePDF(doc, data, wordGroup, conjugation) {
+            // Add title
+            doc.setFontSize(16);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Italian Vocabulary Table', 20, 20);
+
+            // Add subtitle
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'normal');
+            const subtitle = `${wordGroup === 'all' ? 'All Categories' : wordGroup} - ${conjugation === 'all' ? 'All Forms' : conjugation}`;
+            doc.text(subtitle, 20, 30);
+
+            // Prepare table data
+            const tableData = data.map(item => {
+                const row = [
+                    item.infinitive || item.italian || '',
+                    item.english,
+                    item.category
+                ];
+
+                // Add conjugations or forms
+                if (item.category === 'Verb') {
+                    let conjugations = '';
+                    if (item.present) conjugations += `Present: ${item.present.slice(0, 2).join(', ')}... `;
+                    if (item.past) conjugations += `Past: ${item.past.slice(0, 2).join(', ')}...`;
+                    row.push(conjugations || 'N/A');
+                } else if (item.forms) {
+                    row.push(`Forms: ${item.forms.join(', ')}`);
+                } else {
+                    row.push('N/A');
+                }
+
+                return row;
+            });
+
+            // Add table
+            doc.autoTable({
+                head: [['Italian', 'English', 'Type', 'Details']],
+                body: tableData,
+                startY: 40,
+                styles: {
+                    fontSize: 9,
+                    cellPadding: 4
+                },
+                headStyles: {
+                    fillColor: [52, 152, 219],
+                    textColor: [255, 255, 255]
+                },
+                columnStyles: {
+                    0: { cellWidth: 40, fontStyle: 'bold' },
+                    1: { cellWidth: 50 },
+                    2: { cellWidth: 30 },
+                    3: { cellWidth: 60 }
+                }
+            });
+        }
+
+        function generateListPDF(doc, data, wordGroup, conjugation) {
+            const pageHeight = doc.internal.pageSize.height;
+            let currentY = 30;
+            const lineHeight = 8;
+            const margin = 20;
+
+            // Add title
+            doc.setFontSize(16);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Italian Vocabulary List', 20, 20);
+
+            data.forEach((item, index) => {
+                if (currentY > pageHeight - 30) {
+                    doc.addPage();
+                    currentY = 30;
+                }
+
+                // Item number
+                doc.setFontSize(10);
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(150, 150, 150);
+                doc.text(`${index + 1}.`, margin, currentY);
+
+                // Italian word
+                doc.setFontSize(12);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(0, 0, 0);
+                doc.text(item.infinitive || item.italian || '', margin + 15, currentY);
+
+                // English translation
+                doc.setFontSize(11);
+                doc.setFont('helvetica', 'italic');
+                doc.setTextColor(100, 100, 100);
+                doc.text(`- ${item.english}`, margin + 80, currentY);
+
+                // Category
+                doc.setFontSize(9);
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(150, 150, 150);
+                doc.text(`(${item.category})`, margin + 150, currentY);
+
+                currentY += lineHeight;
+
+                // Add conjugations/forms if available
+                if (item.category === 'Verb' && (item.present || item.past)) {
+                    doc.setFontSize(9);
+                    doc.setFont('helvetica', 'normal');
+                    doc.setTextColor(120, 120, 120);
+                    
+                    if (item.present) {
+                        doc.text(`  Present: ${item.present.slice(0, 3).join(', ')}...`, margin + 15, currentY);
+                        currentY += lineHeight * 0.8;
+                    }
+                    if (item.past) {
+                        doc.text(`  Past: ${item.past.slice(0, 2).join(', ')}...`, margin + 15, currentY);
+                        currentY += lineHeight * 0.8;
+                    }
+                } else if (item.forms) {
+                    doc.setFontSize(9);
+                    doc.setFont('helvetica', 'normal');
+                    doc.setTextColor(120, 120, 120);
+                    doc.text(`  Forms: ${item.forms.join(', ')}`, margin + 15, currentY);
+                    currentY += lineHeight * 0.8;
+                }
+
+                currentY += lineHeight * 0.5; // Extra spacing between items
+            });
+        }
+
+        // PDF Export functionality (legacy function - keep for compatibility)
+        function exportToPDF() {
+            openExportModal();
+        }
+
+        function prepareDataForExport(data) {
+            const exportData = [];
+
+            // Process verbs
+            if (data.verbs && data.verbs.length > 0) {
+                data.verbs.forEach(verb => {
+                    const isEssere = verb.infinitive.includes('(ESSERE)');
+                    const presentForms = verb.present ? verb.present.slice(0, 3).join(', ') + '...' : '';
+                    const pastForms = verb.past ? verb.past.slice(0, 2).join(', ') + '...' : '';
+                    
+                    let details = `Auxiliary: ${isEssere ? 'ESSERE' : 'AVERE'}`;
+                    if (presentForms) details += `\nPresent: ${presentForms}`;
+                    if (pastForms) details += `\nPast: ${pastForms}`;
+
+                    exportData.push({
+                        italian: verb.infinitive,
+                        english: verb.english,
+                        type: 'Verb',
+                        details: details
+                    });
+                });
+            }
+
+            // Process other word types
+            const categories = [
+                { key: 'commonNouns', type: 'Noun' },
+                { key: 'adjectives', type: 'Adjective' },
+                { key: 'adverbs', type: 'Adverb' },
+                { key: 'pronouns', type: 'Pronoun' },
+                { key: 'prepositions', type: 'Preposition' },
+                { key: 'conjunctions', type: 'Conjunction' },
+                { key: 'timeExpressions', type: 'Time Expression' }
+            ];
+
+            categories.forEach(category => {
+                if (data[category.key] && data[category.key].length > 0) {
+                    data[category.key].forEach(item => {
+                        let details = '';
+                        
+                        if (item.forms) {
+                            details += `Forms: ${item.forms.join(', ')}`;
+                        }
+                        if (item.gender && item.plural) {
+                            details += `${details ? '\n' : ''}Gender: ${item.gender} | Plural: ${item.plural}`;
+                        }
+                        if (item.type) {
+                            details += `${details ? '\n' : ''}Type: ${item.type}`;
+                        }
+                        if (item.usage) {
+                            details += `${details ? '\n' : ''}Usage: ${item.usage}`;
+                        }
+                        if (item.category) {
+                            details += `${details ? '\n' : ''}Category: ${item.category}`;
+                        }
+                        if (item.examples && item.examples.length > 0) {
+                            details += `${details ? '\n' : ''}Examples: ${item.examples.slice(0, 2).join(' • ')}`;
+                        }
+
+                        exportData.push({
+                            italian: item.italian,
+                            english: item.english,
+                            type: category.type,
+                            details: details || 'N/A'
+                        });
+                    });
+                }
+            });
+
+            return exportData;
+        }
     </script>
 </body>
 </html>
