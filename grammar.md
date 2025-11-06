@@ -74,78 +74,27 @@ Le ragazze alte (uzun boylu kızlar)
 - **Gli** studenti sono bravi. (Öğrenciler iyiler.)
 
 ---
-
 #### 1.3. Şimdiki Zaman (Presente Indicativo)
 
-**Düzenli Fiiller:**
+| Özne | -ARE (parlare) | -ERE (prendere) | -IRE (dormire / partire) | -IRE (-isc-: capire) |
+|---|---:|---:|---:|---:|
+| io | parlo | prendo | dormo / parto | capisco |
+| tu | parli | prendi | dormi / parti | capisci |
+| lui/lei | parla | prende | dorme / parte | capisce |
+| noi | parliamo | prendiamo | dormiamo / partiamo | capiamo |
+| voi | parlate | prendete | dormite / partite | capite |
+| loro | parlano | prendono | dormono / partono | capiscono |
 
-**-ARE fiilleri (parlare - konuşmak):**
-- io parl**o**
-- tu parl**i**
-- lui/lei parl**a**
-- noi parl**iamo**
-- voi parl**ate**
-- loro parl**ano**
+**Önemli Düzensiz Fiiller**
 
-**-ERE fiilleri (prendere - almak):**
-- io prend**o**
-- tu prend**i**
-- lui/lei prend**e**
-- noi prend**iamo**
-- voi prend**ete**
-- loro prend**ono**
-
-**-IRE fiilleri (dormire - uyumak / partire - ayrılmak):**
-- io dorm**o** / part**o**
-- tu dorm**i** / part**i**
-- lui/lei dorm**e** / part**e**
-- noi dorm**iamo** / part**iamo**
-- voi dorm**ite** / part**ite**
-- loro dorm**ono** / part**ono**
-
-**-IRE fiilleri (-isc- ekli: capire - anlamak):**
-- io cap**isco**
-- tu cap**isci**
-- lui/lei cap**isce**
-- noi cap**iamo**
-- voi cap**ite**
-- loro cap**iscono**
-
-**Önemli Düzensiz Fiiller:**
-
-**ESSERE (olmak):**
-- io **sono**
-- tu **sei**
-- lui/lei **è**
-- noi **siamo**
-- voi **siete**
-- loro **sono**
-
-**AVERE (sahip olmak):**
-- io **ho**
-- tu **hai**
-- lui/lei **ha**
-- noi **abbiamo**
-- voi **avete**
-- loro **hanno**
-
-**ANDARE (gitmek):**
-- io **vado**
-- tu **vai**
-- lui/lei **va**
-- noi **andiamo**
-- voi **andate**
-- loro **vanno**
-
-**FARE (yapmak):**
-- io **faccio**
-- tu **fai**
-- lui/lei **fa**
-- noi **facciamo**
-- voi **fate**
-- loro **fanno**
-
----
+| Özne | ESSERE | AVERE | ANDARE | FARE |
+|---|---:|---:|---:|---:|
+| io | sono | ho | vado | faccio |
+| tu | sei | hai | vai | fai |
+| lui/lei | è | ha | va | fa |
+| noi | siamo | abbiamo | andiamo | facciamo |
+| voi | siete | avete | andate | fate |
+| loro | sono | hanno | vanno | fanno |
 
 #### 1.4. Basit Edatlar
 
