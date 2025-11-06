@@ -1188,97 +1188,29 @@ Congiuntivo, şüphe, fikir, duygu, dilek, belirsizlik ifade eden cümlelerde ku
 
 **Oluşturulması:**
 
-**-ARE fiilleri (parlare):**
-- io parl**i**
-- tu parl**i**
-- lui/lei parl**i**
-- noi parl**iamo**
-- voi parl**iate**
-- loro parl**ino**
+**Düzenli Fiiller:**
 
-**-ERE fiilleri (prendere):**
-- io prend**a**
-- tu prend**a**
-- lui/lei prend**a**
-- noi prend**iamo**
-- voi prend**iate**
-- loro prend**ano**
-
-**-IRE fiilleri (partire):**
-- io part**a**
-- tu part**a**
-- lui/lei part**a**
-- noi part**iamo**
-- voi part**iate**
-- loro part**ano**
+| Özne | -ARE (parlare) | -ERE (prendere) | -IRE (partire) |
+|---|---|---|---|
+| io | parli | prenda | parta |
+| tu | parli | prenda | parta |
+| lui/lei | parli | prenda | parta |
+| noi | parliamo | prendiamo | partiamo |
+| voi | parliate | prendiate | partiate |
+| loro | parlino | prendano | partano |
 
 **DİKKAT:** io, tu, lui/lei aynı form!
 
 **Önemli Düzensiz Fiiller:**
 
-**ESSERE:**
-- io sia
-- tu sia
-- lui/lei sia
-- noi siamo
-- voi siate
-- loro siano
-
-**AVERE:**
-- io abbia
-- tu abbia
-- lui/lei abbia
-- noi abbiamo
-- voi abbiate
-- loro abbiano
-
-**ANDARE:**
-- io vada
-- tu vada
-- lui/lei vada
-- noi andiamo
-- voi andiate
-- loro vadano
-
-**FARE:**
-- io faccia
-- tu faccia
-- lui/lei faccia
-- noi facciamo
-- voi facciate
-- loro facciano
-
-**VENIRE:**
-- io venga
-- tu venga
-- lui/lei venga
-- noi veniamo
-- voi veniate
-- loro vengano
-
-**DOVERE:**
-- io debba/deva
-- tu debba/deva
-- lui/lei debba/deva
-- noi dobbiamo
-- voi dobbiate
-- loro debbano/devano
-
-**POTERE:**
-- io possa
-- tu possa
-- lui/lei possa
-- noi possiamo
-- voi possiate
-- loro possano
-
-**VOLERE:**
-- io voglia
-- tu voglia
-- lui/lei voglia
-- noi vogliamo
-- voi vogliate
-- loro vogliano
+| Özne | ESSERE | AVERE | ANDARE | FARE | VENIRE | DOVERE | POTERE | VOLERE |
+|---|---|---|---|---|---|---|---|---|
+| io | sia | abbia | vada | faccia | venga | debba/deva | possa | voglia |
+| tu | sia | abbia | vada | faccia | venga | debba/deva | possa | voglia |
+| lui/lei | sia | abbia | vada | faccia | venga | debba/deva | possa | voglia |
+| noi | siamo | abbiamo | andiamo | facciamo | veniamo | dobbiamo | possiamo | vogliamo |
+| voi | siate | abbiate | andiate | facciate | veniate | dobbiate | possiate | vogliate |
+| loro | siano | abbiano | vadano | facciano | vengano | debbano/devano | possano | vogliano |
 
 **Kullanım Örnekleri:**
 
