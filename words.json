@@ -370,7 +370,177 @@
       "present": ["io torno", "tu torni", "lui/lei torna", "noi torniamo", "voi tornate", "loro tornano"],
       "past": ["io sono tornato/a", "tu sei tornato/a", "lui è tornato", "lei è tornata", "noi siamo tornati/e", "voi siete tornati/e", "loro sono tornati/e"],
       "presentContinuous": ["io sto tornando", "tu stai tornando", "lui/lei sta tornando", "noi stiamo tornando", "voi state tornando", "loro stanno tornando"]
+    },
+    [
+    {
+      "infinitive": "respirare",
+      "english": "to breathe",
+      "present": ["io respiro", "tu respiri", "lui/lei respira", "noi respiriamo", "voi respirate", "loro respirano"],
+      "past": ["io ho respirato", "tu hai respirato", "lui/lei ha respirato", "noi abbiamo respirato", "voi avete respirato", "loro hanno respirato"],
+      "presentContinuous": ["io sto respirando", "tu stai respirando", "lui/lei sta respirando", "noi stiamo respirando", "voi state respirando", "loro stanno respirando"]
+    },
+    {
+      "infinitive": "nascondere",
+      "english": "to hide",
+      "present": ["io nascondo", "tu nascondi", "lui/lei nasconde", "noi nascondiamo", "voi nascondete", "loro nascondono"],
+      "past": ["io ho nascosto", "tu hai nascosto", "lui/lei ha nascosto", "noi abbiamo nascosto", "voi avete nascosto", "loro hanno nascosto"],
+      "presentContinuous": ["io sto nascondendo", "tu stai nascondendo", "lui/lei sta nascondendo", "noi stiamo nascondendo", "voi state nascondendo", "loro stanno nascondendo"]
+    },
+    {
+      "infinitive": "sentire",
+      "english": "to feel, to hear",
+      "present": ["io sento", "tu senti", "lui/lei sente", "noi sentiamo", "voi sentite", "loro sentono"],
+      "past": ["io ho sentito", "tu hai sentito", "lui/lei ha sentito", "noi abbiamo sentito", "voi avete sentito", "loro hanno sentito"],
+      "presentContinuous": ["io sto sentendo", "tu stai sentendo", "lui/lei sta sentendo", "noi stiamo sentendo", "voi state sentendo", "loro stanno sentendo"]
+    },
+    {
+      "infinitive": "essere",
+      "english": "to be",
+      "present": ["io sono", "tu sei", "lui/lei è", "noi siamo", "voi siete", "loro sono"],
+      "past": ["io sono stato/a", "tu sei stato/a", "lui è stato", "lei è stata", "noi siamo stati/e", "voi siete stati/e", "loro sono stati/e"],
+      "presentContinuous": ["io sto essendo", "tu stai essendo", "lui/lei sta essendo", "noi stiamo essendo", "voi state essendo", "loro stanno essendo"]
+    },
+    {
+      "infinitive": "amare",
+      "english": "to love",
+      "present": ["io amo", "tu ami", "lui/lei ama", "noi amiamo", "voi amate", "loro amano"],
+      "past": ["io ho amato", "tu hai amato", "lui/lei ha amato", "noi abbiamo amato", "voi avete amato", "loro hanno amato"],
+      "presentContinuous": ["io sto amando", "tu stai amando", "lui/lei sta amando", "noi stiamo amando", "voi state amando", "loro stanno amando"]
+    },
+    {
+      "infinitive": "lasciare",
+      "english": "to leave, to let",
+      "present": ["io lascio", "tu lasci", "lui/lei lascia", "noi lasciamo", "voi lasciate", "loro lasciano"],
+      "past": ["io ho lasciato", "tu hai lasciato", "lui/lei ha lasciato", "noi abbiamo lasciato", "voi avete lasciato", "loro hanno lasciato"],
+      "presentContinuous": ["io sto lasciando", "tu stai lasciando", "lui/lei sta lasciando", "noi stiamo lasciando", "voi state lasciando", "loro stanno lasciando"]
+    },
+    {
+      "infinitive": "credere",
+      "english": "to believe",
+      "present": ["io credo", "tu credi", "lui/lei crede", "noi crediamo", "voi credete", "loro credono"],
+      "past": ["io ho creduto", "tu hai creduto", "lui/lei ha creduto", "noi abbiamo creduto", "voi avete creduto", "loro hanno creduto"],
+      "presentContinuous": ["io sto credendo", "tu stai credendo", "lui/lei sta credendo", "noi stiamo credendo", "voi state credendo", "loro stanno credendo"]
+    },
+    {
+      "infinitive": "salire",
+      "english": "to go up, to rise",
+      "present": ["io salgo", "tu sali", "lui/lei sale", "noi saliamo", "voi salite", "loro salgono"],
+      "past": ["io sono salito/a", "tu sei salito/a", "lui è salito", "lei è salita", "noi siamo saliti/e", "voi siete saliti/e", "loro sono saliti/e"],
+      "presentContinuous": ["io sto salendo", "tu stai salendo", "lui/lei sta salendo", "noi stiamo salendo", "voi state salendo", "loro stanno salendo"]
+    },
+    {
+      "infinitive": "bere",
+      "english": "to drink",
+      "present": ["io bevo", "tu bevi", "lui/lei beve", "noi beviamo", "voi bevete", "loro bevono"],
+      "past": ["io ho bevuto", "tu hai bevuto", "lui/lei ha bevuto", "noi abbiamo bevuto", "voi avete bevuto", "loro hanno bevuto"],
+      "presentContinuous": ["io sto bevendo", "tu stai bevendo", "lui/lei sta bevendo", "noi stiamo bevendo", "voi state bevendo", "loro stanno bevendo"]
+    },
+    {
+      "infinitive": "pregare",
+      "english": "to pray, to ask",
+      "present": ["io prego", "tu preghi", "lui/lei prega", "noi preghiamo", "voi pregate", "loro pregano"],
+      "past": ["io ho pregato", "tu hai pregato", "lui/lei ha pregato", "noi abbiamo pregato", "voi avete pregato", "loro hanno pregato"],
+      "presentContinuous": ["io sto pregando", "tu stai pregando", "lui/lei sta pregando", "noi stiamo pregando", "voi state pregando", "loro stanno pregando"]
+    },
+    {
+      "infinitive": "perdere",
+      "english": "to lose",
+      "present": ["io perdo", "tu perdi", "lui/lei perde", "noi perdiamo", "voi perdete", "loro perdono"],
+      "past": ["io ho perso", "tu hai perso", "lui/lei ha perso", "noi abbiamo perso", "voi avete perso", "loro hanno perso"],
+      "presentContinuous": ["io sto perdendo", "tu stai perdendo", "lui/lei sta perdendo", "noi stiamo perdendo", "voi state perdendo", "loro stanno perdendo"]
+    },
+    {
+      "infinitive": "volere",
+      "english": "to want",
+      "present": ["io voglio", "tu vuoi", "lui/lei vuole", "noi vogliamo", "voi volete", "loro vogliono"],
+      "past": ["io ho voluto", "tu hai voluto", "lui/lei ha voluto", "noi abbiamo voluto", "voi avete voluto", "loro hanno voluto"],
+      "presentContinuous": ["io sto volendo", "tu stai volendo", "lui/lei sta volendo", "noi stiamo volendo", "voi state volendo", "loro stanno volendo"]
+    },
+    {
+      "infinitive": "urlare",
+      "english": "to scream, to shout",
+      "present": ["io urlo", "tu urli", "lui/lei urla", "noi urliamo", "voi urlate", "loro urlano"],
+      "past": ["io ho urlato", "tu hai urlato", "lui/lei ha urlato", "noi abbiamo urlato", "voi avete urlato", "loro hanno urlato"],
+      "presentContinuous": ["io sto urlando", "tu stai urlando", "lui/lei sta urlando", "noi stiamo urlando", "voi state urlando", "loro stanno urlando"]
+    },
+    {
+      "infinitive": "bruciare",
+      "english": "to burn",
+      "present": ["io brucio", "tu bruci", "lui/lei brucia", "noi bruciamo", "voi bruciate", "loro bruciano"],
+      "past": ["io ho bruciato", "tu hai bruciato", "lui/lei ha bruciato", "noi abbiamo bruciato", "voi avete bruciato", "loro hanno bruciato"],
+      "presentContinuous": ["io sto bruciando", "tu stai bruciando", "lui/lei sta bruciando", "noi stiamo bruciando", "voi state bruciando", "loro stanno bruciando"]
+    },
+    {
+      "infinitive": "parlare",
+      "english": "to speak, to talk",
+      "present": ["io parlo", "tu parli", "lui/lei parla", "noi parliamo", "voi parlate", "loro parlano"],
+      "past": ["io ho parlato", "tu hai parlato", "lui/lei ha parlato", "noi abbiamo parlato", "voi avete parlato", "loro hanno parlato"],
+      "presentContinuous": ["io sto parlando", "tu stai parlando", "lui/lei sta parlando", "noi stiamo parlando", "voi state parlando", "loro stanno parlando"]
+    },
+    {
+      "infinitive": "piangere",
+      "english": "to cry",
+      "present": ["io piango", "tu piangi", "lui/lei piange", "noi piangiamo", "voi piangete", "loro piangono"],
+      "past": ["io ho pianto", "tu hai pianto", "lui/lei ha pianto", "noi abbiamo pianto", "voi avete pianto", "loro hanno pianto"],
+      "presentContinuous": ["io sto piangendo", "tu stai piangendo", "lui/lei sta piangendo", "noi stiamo piangendo", "voi state piangendo", "loro stanno piangendo"]
+    },
+    {
+      "infinitive": "diluviare",
+      "english": "to deluge",
+      "present": ["io diluvio", "tu diluvi", "lui/lei diluvia", "noi diluviamo", "voi diluviate", "loro diluviano"],
+      "past": ["io ho diluviato", "tu hai diluviato", "lui/lei ha diluviato", "noi abbiamo diluviato", "voi avete diluviato", "loro hanno diluviato"],
+      "presentContinuous": ["io sto diluviando", "tu stai diluviando", "lui/lei sta diluviando", "noi stiamo diluviando", "voi state diluviando", "loro stanno diluviando"]
+    },
+    {
+      "infinitive": "portare",
+      "english": "to bring, to carry",
+      "present": ["io porto", "tu porti", "lui/lei porta", "noi portiamo", "voi portate", "loro portano"],
+      "past": ["io ho portato", "tu hai portato", "lui/lei ha portato", "noi abbiamo portato", "voi avete portato", "loro hanno portato"],
+      "presentContinuous": ["io sto portando", "tu stai portando", "lui/lei sta portando", "noi stiamo portando", "voi state portando", "loro stanno portando"]
+    },
+    {
+      "infinitive": "cantare",
+      "english": "to sing",
+      "present": ["io canto", "tu canti", "lui/lei canta", "noi cantiamo", "voi cantate", "loro cantano"],
+      "past": ["io ho cantato", "tu hai cantato", "lui/lei ha cantato", "noi abbiamo cantato", "voi avete cantato", "loro hanno cantato"],
+      "presentContinuous": ["io sto cantando", "tu stai cantando", "lui/lei sta cantando", "noi stiamo cantando", "voi state cantando", "loro stanno cantando"]
+    },
+    {
+      "infinitive": "restare",
+      "english": "to stay, to remain",
+      "present": ["io resto", "tu resti", "lui/lei resta", "noi restiamo", "voi restate", "loro restano"],
+      "past": ["io sono restato/a", "tu sei restato/a", "lui è restato", "lei è restata", "noi siamo restati/e", "voi siete restati/e", "loro sono restati/e"],
+      "presentContinuous": ["io sto restando", "tu stai restando", "lui/lei sta restando", "noi stiamo restando", "voi state restando", "loro stanno restando"]
+    },
+    {
+      "infinitive": "spaventare",
+      "english": "to scare",
+      "present": ["io spavento", "tu spaventi", "lui/lei spaventa", "noi spaventiamo", "voi spaventate", "loro spaventano"],
+      "past": ["io ho spaventato", "tu hai spaventato", "lui/lei ha spaventato", "noi abbiamo spaventato", "voi avete spaventato", "loro hanno spaventato"],
+      "presentContinuous": ["io sto spaventando", "tu stai spaventando", "lui/lei sta spaventando", "noi stiamo spaventando", "voi state spaventando", "loro stanno spaventando"]
+    },
+    {
+      "infinitive": "stare",
+      "english": "to stay (health/location), to be (in a state)",
+      "present": ["io sto", "tu stai", "lui/lei sta", "noi stiamo", "voi state", "loro stanno"],
+      "past": ["io sono stato/a", "tu sei stato/a", "lui è stato", "lei è stata", "noi siamo stati/e", "voi siete stati/e", "loro sono stati/e"],
+      "presentContinuous": ["io sto stando", "tu stai stando", "lui/lei sta stando", "noi stiamo stando", "voi state stando", "loro stanno stando"]
+    },
+    {
+      "infinitive": "cedere",
+      "english": "to give in, to yield",
+      "present": ["io cedo", "tu cedi", "lui/lei cede", "noi cediamo", "voi cedete", "loro cedono"],
+      "past": ["io ho ceduto", "tu hai ceduto", "lui/lei ha ceduto", "noi abbiamo ceduto", "voi avete ceduto", "loro hanno ceduto"],
+      "presentContinuous": ["io sto cedendo", "tu stai cedendo", "lui/lei sta cedendo", "noi stiamo cedendo", "voi state cedendo", "loro stanno cedendo"]
+    },
+    {
+      "infinitive": "vedere",
+      "english": "to see",
+      "present": ["io vedo", "tu vedi", "lui/lei vede", "noi vediamo", "voi vedete", "loro vedono"],
+      "past": ["io ho visto", "tu hai visto", "lui/lei ha visto", "noi abbiamo visto", "voi avete visto", "loro hanno visto"],
+      "presentContinuous": ["io sto vedendo", "tu stai vedendo", "lui/lei sta vedendo", "noi stiamo vedendo", "voi state vedendo", "loro stanno vedendo"]
     }
+]
   ],
   "conjunctions": [
     {
