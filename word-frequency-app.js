@@ -94,74 +94,46 @@ function findWordInVocabulary(word) {
                 }
             }
             
-            // Check past tense - both full form and participle
+            // Check past tense - only participles, NOT auxiliary verbs
             if (!matchType && verb.past && Array.isArray(verb.past)) {
                 for (let form of verb.past) {
                     if (!form) continue;
                     const formLower = form.toLowerCase();
                     
-                    // Tam eşleşme: "io ho detto"
-                    if (formLower === cleanWord) {
-                        matchType = 'past participle';
-                        break;
-                    }
-                    
-                    // Participle kontrolü: "detto" (son kelime)
+                    // Participle kontrolü: "detto" (son kelime) - SADECE SON KELİME
                     const words = formLower.split(' ');
                     const participle = words[words.length - 1];
-                    if (participle === cleanWord) {
+                    if (participle === cleanWord && words.length > 1) {
+                        // Son kelime ve birden fazla kelime varsa (yani yardımcı fiil + participle)
                         matchType = 'past participle';
                         break;
                     }
-                    
-                    // Yardımcı fiil kontrolü: "ho", "hai", "ha", vb.
-                    for (let w of words) {
-                        if (w === cleanWord) {
-                            matchType = 'auxiliary verb';
-                            break;
-                        }
-                    }
-                    if (matchType) break;
                 }
             }
             
-            // Check present continuous - both full form and gerund
+            // Check present continuous - only gerunds, NOT auxiliary verbs
             if (!matchType && verb.presentContinuous && Array.isArray(verb.presentContinuous)) {
                 for (let form of verb.presentContinuous) {
                     if (!form) continue;
                     const formLower = form.toLowerCase();
                     
-                    // Tam eşleşme: "io sto dicendo"
-                    if (formLower === cleanWord) {
-                        matchType = 'gerund';
-                        break;
-                    }
-                    
-                    // Gerund kontrolü: "dicendo" (son kelime)
+                    // Gerund kontrolü: "dicendo" (son kelime) - SADECE SON KELİME
                     const words = formLower.split(' ');
                     const gerund = words[words.length - 1];
-                    if (gerund === cleanWord) {
+                    if (gerund === cleanWord && words.length > 1) {
+                        // Son kelime ve birden fazla kelime varsa (yani yardımcı fiil + gerund)
                         matchType = 'gerund';
                         break;
                     }
-                    
-                    // Yardımcı fiil kontrolü: "sto", "stai", "sta", vb.
-                    for (let w of words) {
-                        if (w === cleanWord) {
-                            matchType = 'auxiliary verb';
-                            break;
-                        }
-                    }
-                    if (matchType) break;
                 }
             }
             
             if (matchType) {
                 allMatches.push({
-                    ...verb,
+                    infinitive: verb.infinitive,
+                    english: verb.english || 'N/A',
                     type: 'Verb',
-                    matchType: matchType,
-                    english: verb.english || 'N/A'
+                    matchType: matchType
                 });
             }
         }
@@ -187,10 +159,10 @@ function findWordInVocabulary(word) {
             // Check italian word - EXACT match
             if (item.italian && item.italian.toLowerCase() === cleanWord) {
                 allMatches.push({
-                    ...item,
+                    word: item.italian,
+                    english: item.english || 'N/A',
                     type: category.type,
-                    matchType: 'exact',
-                    english: item.english || 'N/A'
+                    matchType: 'exact'
                 });
             }
             
@@ -198,10 +170,10 @@ function findWordInVocabulary(word) {
             if (item.forms && Array.isArray(item.forms)) {
                 if (item.forms.some(form => form && form.toLowerCase() === cleanWord)) {
                     allMatches.push({
-                        ...item,
+                        word: item.italian,
+                        english: item.english || 'N/A',
                         type: category.type,
-                        matchType: 'form',
-                        english: item.english || 'N/A'
+                        matchType: 'form'
                     });
                 }
             }
@@ -213,20 +185,35 @@ function findWordInVocabulary(word) {
         return null;
     }
     
-    // Eğer birden fazla eşleşme varsa, hepsini birleştir
-    if (allMatches.length > 1) {
-        const combinedMeanings = allMatches.map(m => `${m.english} (${m.type}${m.matchType ? ' - ' + m.matchType : ''})`).join(' OR ');
+    // Duplicate anlamları temizle (aynı infinitive + english + type kombinasyonu)
+    const uniqueMatches = [];
+    const seen = new Set();
+    
+    for (let match of allMatches) {
+        const key = `${match.infinitive || match.word}|${match.english}|${match.type}`;
+        if (!seen.has(key)) {
+            seen.add(key);
+            uniqueMatches.push(match);
+        }
+    }
+    
+    // Eğer birden fazla farklı eşleşme varsa, hepsini birleştir
+    if (uniqueMatches.length > 1) {
+        const combinedMeanings = uniqueMatches
+            .map(m => `${m.english} (${m.type})`)
+            .join(' OR ');
+            
         return {
             word: cleanWord,
             english: combinedMeanings,
             type: 'Multiple meanings',
-            allMatches: allMatches,
+            allMatches: uniqueMatches,
             isMultiple: true
         };
     }
     
     // Tek eşleşme varsa direkt döndür
-    return allMatches[0];
+    return uniqueMatches[0];
 }
 
 // Analyze word frequency in the text
@@ -378,7 +365,7 @@ function updateFrequencyDisplay() {
                 extraInfo = `<div style="font-size: 0.85em; margin-top: 5px; color: #e67e22;">
                     <strong>Possible meanings:</strong><br>
                     ${word.vocabInfo.allMatches.map((m, i) => 
-                        `${i + 1}. ${m.english} <em>(${m.type}${m.matchType ? ' - ' + m.matchType : ''})</em>`
+                        `${i + 1}. <strong>${m.infinitive || m.word}</strong>: ${m.english} <em>(${m.type}${m.matchType ? ' - ' + m.matchType : ''})</em>`
                     ).join('<br>')}
                 </div>`;
             } else if (word.vocabInfo.matchType) {
