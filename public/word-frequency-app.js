@@ -1,6 +1,14 @@
 // Word Frequency Analyzer Web Application
-let vocabularyData = {};
-let frequencyAnalysisResults = null;
+// Wrap in IIFE to avoid global scope pollution and redeclaration errors
+(function() {
+    // Check if already initialized
+    if (window.wordFrequencyInitialized) {
+        console.log('Word frequency analyzer already initialized');
+        return;
+    }
+    
+    let vocabularyData = {};
+    let frequencyAnalysisResults = null;
 
 // Italian articles and prepositions for frequency analysis
 const ARTICLES = ['il', 'lo', 'la', 'i', 'gli', 'le', "l'", 'un', 'uno', 'una', "un'"];
@@ -524,5 +532,25 @@ Ci sono molti ristoranti dove si può mangiare cibo tradizionale italiano.`;
     document.getElementById('frequencyInput').value = sampleText;
 }
 
-// Initialize application
-loadVocabulary();
+// Export functions to window object
+window.analyzeFrequency = analyzeFrequency;
+window.exportFrequencyResults = exportFrequencyResults;
+window.exportFrequencyJSON = exportFrequencyJSON;
+window.clearFrequencyAnalysis = clearFrequencyAnalysis;
+window.loadSampleText = loadSampleText;
+window.updateFrequencyDisplay = updateFrequencyDisplay;
+window.loadVocabulary = loadVocabulary;
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        loadVocabulary();
+        window.wordFrequencyInitialized = true;
+    });
+} else {
+    // DOM already loaded
+    loadVocabulary();
+    window.wordFrequencyInitialized = true;
+}
+
+})(); // End of IIFE

@@ -1,9 +1,17 @@
-        let vocabularyData = {};
-        let currentCategory = 'all';
-        let storyData = {};
-        let currentStoryIndex = 0;
-        let showHints = false;
-        let frequencyAnalysisResults = null;
+        // Wrap in IIFE to avoid global scope pollution and redeclaration errors
+(function() {
+    // Check if already initialized
+    if (window.verbAnalyzerInitialized) {
+        console.log('Verb analyzer already initialized');
+        return;
+    }
+    
+    let vocabularyData = {};
+    let currentCategory = 'all';
+    let storyData = {};
+    let currentStoryIndex = 0;
+    let showHints = false;
+    let frequencyAnalysisResults = null;
 
         // Italian articles and prepositions for frequency analysis
         const ARTICLES = ['il', 'lo', 'la', 'i', 'gli', 'le', "l'", 'un', 'uno', 'una', "un'"];
@@ -1091,3 +1099,30 @@
 
             return exportData;
         }
+
+// Export functions to window object
+window.loadVocabulary = loadVocabulary;
+window.showCategory = showCategory;
+window.applyFilters = applyFilters;
+window.clearFilters = clearFilters;
+window.changeStory = changeStory;
+window.previousStory = previousStory;
+window.nextStory = nextStory;
+window.toggleStoryMode = toggleStoryMode;
+window.openExportModal = openExportModal;
+window.closeExportModal = closeExportModal;
+window.generateCustomPDF = generateCustomPDF;
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        loadVocabulary();
+        window.verbAnalyzerInitialized = true;
+    });
+} else {
+    // DOM already loaded
+    loadVocabulary();
+    window.verbAnalyzerInitialized = true;
+}
+
+})(); // End of IIFE
