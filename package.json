@@ -25,6 +25,8 @@
     "word-frequency-json": "node word-frequency-analyzer.js --json"
   },
   "dependencies": {
+     "firebase": "^11.0.1",
+     "firebase-admin": "^12.6.0",
     "jspdf": "^2.5.2",
     "jspdf-autotable": "^3.8.3"
   },
