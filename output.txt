@@ -1,0 +1,1536 @@
+Toplam kelime sayısı: 4993
+Benzersiz kelime sayısı: 1529
+
+==================================================
+
+SIRA | KELİME | TEKRAR SAYISI
+--------------------------------------------------
+   1 | di                             | 138
+   2 | e                              | 122
+   3 | che                            | 122
+   4 | non                            | 102
+   5 | luca                           | 86
+   6 | a                              | 81
+   7 | è                              | 77
+   8 | ma                             | 75
+   9 | mi                             | 68
+  10 | ha                             | 68
+  11 | ho                             | 61
+  12 | per                            | 50
+  13 | da                             | 49
+  14 | in                             | 46
+  15 | io                             | 44
+  16 | sono                           | 40
+  17 | con                            | 37
+  18 | ti                             | 37
+  19 | coraline                       | 37
+  20 | me                             | 35
+  21 | ##                             | 33
+  22 | capitolo                       | 32
+  23 | più                            | 30
+  24 | era                            | 29
+  25 | tu                             | 29
+  26 | sempre                         | 28
+  27 | te                             | 28
+  28 | detto                          | 26
+  29 | ci                             | 26
+  30 | lontana                        | 26
+  31 | abbiamo                        | 24
+  32 | siamo                          | 23
+  33 | come                           | 23
+  34 | se                             | 23
+  35 | sei                            | 22
+  36 | perché                         | 22
+  37 | quindi                         | 22
+  38 | fuori                          | 21
+  39 | anche                          | 20
+  40 | si                             | 20
+  41 | sento                          | 20
+  42 | solo                           | 19
+  43 | casa                           | 19
+  44 | quando                         | 18
+  45 | elena                          | 18
+  46 | il mio                         | 17
+  47 | tutto                          | 16
+  48 | ogni                           | 16
+  49 | dentro                         | 16
+  50 | insieme                        | 15
+  51 | noi                            | 15
+  52 | paura                          | 15
+  53 | essere                         | 15
+  54 | loro                           | 15
+  55 | marlena                        | 15
+  56 | l'amore                        | 14
+  57 | torna                          | 14
+  58 | la mia                         | 13
+  59 | mia                            | 13
+  60 | testa                          | 13
+  61 | ancora                         | 12
+  62 | ero                            | 12
+  63 | la paura                       | 12
+  64 | cosa                           | 12
+  65 | poi                            | 12
+  66 | lei                            | 12
+  67 | il sole                        | 11
+  68 | sì                             | 11
+  69 | forse                          | 11
+  70 | no                             | 11
+  71 | voglio                         | 11
+  72 | andare                         | 11
+  73 | dimmi                          | 11
+  74 | le tue                         | 11
+  75 | verità                         | 11
+  76 | madre                          | 10
+  77 | amo                            | 10
+  78 | niente                         | 10
+  79 | risposto                       | 9
+  80 | quella                         | 9
+  81 | mano                           | 9
+  82 | o                              | 9
+  83 | le sue                         | 9
+  84 | fa                             | 9
+  85 | avere                          | 9
+  86 | parla                          | 9
+  87 | sarò                           | 9
+  88 | storia                         | 8
+  89 | mai                            | 8
+  90 | prima                          | 8
+  91 | iniziato                       | 8
+  92 | sto                            | 8
+  93 | hai                            | 8
+  94 | questo                         | 8
+  95 | stato                          | 8
+  96 | perfetto                       | 8
+  97 | su                             | 8
+  98 | il freddo                      | 8
+  99 | del buio                       | 8
+ 100 | qua                            | 8
+ 101 | forte                          | 7
+ 102 | milano                         | 7
+ 103 | un giorno                      | 7
+ 104 | eravamo                        | 7
+ 105 | la sua                         | 7
+ 106 | avevo                          | 7
+ 107 | diverso                        | 7
+ 108 | amici                          | 7
+ 109 | cui                            | 7
+ 110 | aveva                          | 7
+ 111 | hanno                          | 7
+ 112 | qui                            | 7
+ 113 | capito                         | 7
+ 114 | cose                           | 7
+ 115 | dove                           | 7
+ 116 | mentre                         | 7
+ 117 | chi                            | 7
+ 118 | tutti                          | 7
+ 119 | vent'anni                      | 7
+ 120 | diversi                        | 7
+ 121 | tornerai                       | 7
+ 122 | sentire                        | 7
+ 123 | tra                            | 6
+ 124 | chiesto                        | 6
+ 125 | anch'io                        | 6
+ 126 | verso                          | 6
+ 127 | vita                           | 6
+ 128 | cuore                          | 6
+ 129 | senza                          | 6
+ 130 | lui                            | 6
+ 131 | promesso                       | 6
+ 132 | sera                           | 6
+ 133 | pensavo                        | 6
+ 134 | notte                          | 6
+ 135 | il cuore                       | 6
+ 136 | vicino                         | 6
+ 137 | stata                          | 6
+ 138 | fatto                          | 6
+ 139 | amore                          | 6
+ 140 | così                           | 6
+ 141 | tanto                          | 6
+ 142 | tutte                          | 6
+ 143 | volte                          | 6
+ 144 | mio                            | 6
+ 145 | diceva                         | 6
+ 146 | parlato                        | 6
+ 147 | persone                        | 6
+ 148 | via                            | 6
+ 149 | l'aria                         | 6
+ 150 | continuerò                     | 6
+ 151 | sotto                          | 5
+ 152 | lo stesso                      | 5
+ 153 | volta                          | 5
+ 154 | sentivo                        | 5
+ 155 | gli ho                         | 5
+ 156 | migliore                       | 5
+ 157 | amico                          | 5
+ 158 | qualcosa                       | 5
+ 159 | la nostra                      | 5
+ 160 | la verità                      | 5
+ 161 | marco                          | 5
+ 162 | c'è                            | 5
+ 163 | so                             | 5
+ 164 | viso                           | 5
+ 165 | padre                          | 5
+ 166 | molto                          | 5
+ 167 | il giorno                      | 5
+ 168 | il nostro                      | 5
+ 169 | vero                           | 5
+ 170 | c'ho                           | 5
+ 171 | soltanto                       | 5
+ 172 | son                            | 5
+ 173 | sarai                          | 5
+ 174 | oppure                         | 5
+ 175 | avanti                         | 5
+ 176 | adesso                         | 5
+ 177 | la gente                       | 5
+ 178 | la prima                       | 4
+ 179 | giorno                         | 4
+ 180 | all'università                 | 4
+ 181 | visto                          | 4
+ 182 | scusa                          | 4
+ 183 | anno                           | 4
+ 184 | cambiato                       | 4
+ 185 | dopo                           | 4
+ 186 | vuole                          | 4
+ 187 | piano                          | 4
+ 188 | una sera                       | 4
+ 189 | gioia                          | 4
+ 190 | perso                          | 4
+ 191 | deciso                         | 4
+ 192 | conosciuto                     | 4
+ 193 | felice                         | 4
+ 194 | diversa                        | 4
+ 195 | male                           | 4
+ 196 | volevo                         | 4
+ 197 | portato                        | 4
+ 198 | respiro                        | 4
+ 199 | difficile                      | 4
+ 200 | le lacrime                     | 4
+ 201 | il cielo                       | 4
+ 202 | le nostre                      | 4
+ 203 | tempo                          | 4
+ 204 | già                            | 4
+ 205 | mamma                          | 4
+ 206 | bella                          | 4
+ 207 | due                            | 4
+ 208 | lasciare                       | 4
+ 209 | erano                          | 4
+ 210 | può                            | 4
+ 211 | vedo                           | 4
+ 212 | prendere                       | 4
+ 213 | bello                          | 4
+ 214 | il mondo                       | 4
+ 215 | tua                            | 4
+ 216 | primo                          | 4
+ 217 | piccolo                        | 4
+ 218 | siete                          | 4
+ 219 | pronto                         | 4
+ 220 | lottare                        | 4
+ 221 | la colpa                       | 4
+ 222 | un passo                       | 4
+ 223 | sa                             | 4
+ 224 | portami                        | 4
+ 225 | sparire                        | 4
+ 226 | il mare                        | 4
+ 227 | terra                          | 4
+ 228 | una luce                       | 4
+ 229 | squarcia                       | 4
+ 230 | il suolo                       | 4
+ 231 | cielo                          | 3
+ 232 | il primo                       | 3
+ 233 | stavo                          | 3
+ 234 | l'aula                         | 3
+ 235 | letteratura                    | 3
+ 236 | l'ho                           | 3
+ 237 | un sorriso                     | 3
+ 238 | ridendo                        | 3
+ 239 | stati                          | 3
+ 240 | difficili                      | 3
+ 241 | nuovo                          | 3
+ 242 | spesso                         | 3
+ 243 | sola                           | 3
+ 244 | c'era                          | 3
+ 245 | occhi                          | 3
+ 246 | seduti                         | 3
+ 247 | sembrava                       | 3
+ 248 | grazie                         | 3
+ 249 | sorriso                        | 3
+ 250 | triste                         | 3
+ 251 | avuto                          | 3
+ 252 | innamorata                     | 3
+ 253 | ragione                        | 3
+ 254 | arrivato                       | 3
+ 255 | freddo                         | 3
+ 256 | grande                         | 3
+ 257 | la distanza                    | 3
+ 258 | rispondevo                     | 3
+ 259 | subito                         | 3
+ 260 | bene                           | 3
+ 261 | stanca                         | 3
+ 262 | troppo                         | 3
+ 263 | amica                          | 3
+ 264 | parlare                        | 3
+ 265 | capisco                        | 3
+ 266 | sussurrato                     | 3
+ 267 | la ragione                     | 3
+ 268 | posso                          | 3
+ 269 | sia                            | 3
+ 270 | sul mio                        | 3
+ 271 | vuoi                           | 3
+ 272 | dovevo                         | 3
+ 273 | all'inizio                     | 3
+ 274 | lo so                          | 3
+ 275 | davvero                        | 3
+ 276 | bacio                          | 3
+ 277 | momento                        | 3
+ 278 | sentito                        | 3
+ 279 | pieno                          | 3
+ 280 | felici                         | 3
+ 281 | le persone                     | 3
+ 282 | la famiglia                    | 3
+ 283 | cena                           | 3
+ 284 | seguenti                       | 3
+ 285 | abbia                          | 3
+ 286 | ciò                            | 3
+ 287 | pianto                         | 3
+ 288 | camminavamo                    | 3
+ 289 | un appartamento                | 3
+ 290 | al mio                         | 3
+ 291 | della mia                      | 3
+ 292 | momenti                        | 3
+ 293 | letto                          | 3
+ 294 | scritto                        | 3
+ 295 | piena                          | 3
+ 296 | questa                         | 3
+ 297 | vivere                         | 3
+ 298 | scriveva                       | 3
+ 299 | le parole                      | 3
+ 300 | la tua                         | 3
+ 301 | sarà                           | 3
+ 302 | ad                             | 3
+ 303 | prendo                         | 3
+ 304 | crescere                       | 3
+ 305 | chiedo                         | 3
+ 306 | la strada                      | 3
+ 307 | domani                         | 3
+ 308 | vi                             | 3
+ 309 | sopra                          | 3
+ 310 | purtroppo                      | 3
+ 311 | galla                          | 3
+ 312 | manca                          | 3
+ 313 | piange                         | 3
+ 314 | partire                        | 3
+ 315 | l'ansia                        | 3
+ 316 | un'ascia                       | 3
+ 317 | il fuoco                       | 3
+ 318 | ed                             | 3
+ 319 | città                          | 3
+ 320 | giù                            | 3
+ 321 | col                            | 3
+ 322 | brinderò                       | 3
+ 323 | le mani                        | 3
+ 324 | giunte                         | 3
+ 325 | batte                          | 3
+ 326 | aspettare                      | 3
+ 327 | d'amore                        | 2
+ 328 | settembre                      | 2
+ 329 | brillava                       | 2
+ 330 | nervosa                        | 2
+ 331 | cercando                       | 2
+ 332 | italiana                       | 2
+ 333 | al primo                       | 2
+ 334 | camminato                      | 2
+ 335 | sapevo                         | 2
+ 336 | il caffè                       | 2
+ 337 | devi                           | 2
+ 338 | il tuo                         | 2
+ 339 | diventato                      | 2
+ 340 | novembre                       | 2
+ 341 | intima                         | 2
+ 342 | devo                           | 2
+ 343 | una cosa                       | 2
+ 344 | importante                     | 2
+ 345 | puoi                           | 2
+ 346 | gay                            | 2
+ 347 | nei suoi                       | 2
+ 348 | sta                            | 2
+ 349 | pensato                        | 2
+ 350 | fidanzati                      | 2
+ 351 | speciale                       | 2
+ 352 | sara                           | 2
+ 353 | amicizia                       | 2
+ 354 | dormito                        | 2
+ 355 | gennaio                        | 2
+ 356 | i miei                         | 2
+ 357 | bisessuale                     | 2
+ 358 | perdere                        | 2
+ 359 | silenzio                       | 2
+ 360 | febbraio                       | 2
+ 361 | uscire                         | 2
+ 362 | un ragazzo                     | 2
+ 363 | studiare                       | 2
+ 364 | messaggi                       | 2
+ 365 | gli esami                      | 2
+ 366 | stare                          | 2
+ 367 | faceva                         | 2
+ 368 | terribile                      | 2
+ 369 | ferito                         | 2
+ 370 | urlare                         | 2
+ 371 | troppa                         | 2
+ 372 | aprile                         | 2
+ 373 | al parco                       | 2
+ 374 | mani                           | 2
+ 375 | etero                          | 2
+ 376 | diventa                        | 2
+ 377 | dispiace                       | 2
+ 378 | strana                         | 2
+ 379 | importa                        | 2
+ 380 | preso                          | 2
+ 381 | nella mano                     | 2
+ 382 | sognato                        | 2
+ 383 | il suo                         | 2
+ 384 | dolcemente                     | 2
+ 385 | entrambi                       | 2
+ 386 | stavamo                        | 2
+ 387 | piangendo                      | 2
+ 388 | un sogno                       | 2
+ 389 | alcuni                         | 2
+ 390 | corso                          | 2
+ 391 | nuove                          | 2
+ 392 | famiglia                       | 2
+ 393 | genitori                       | 2
+ 394 | confusa                        | 2
+ 395 | signore                        | 2
+ 396 | al mondo                       | 2
+ 397 | ferma                          | 2
+ 398 | la mano                        | 2
+ 399 | abituarsi                      | 2
+ 400 | silenzioso                     | 2
+ 401 | andate                         | 2
+ 402 | vista                          | 2
+ 403 | conta                          | 2
+ 404 | l'estate                       | 2
+ 405 | libri                          | 2
+ 406 | l'anima                        | 2
+ 407 | insegnato                      | 2
+ 408 | significa                      | 2
+ 409 | amare                          | 2
+ 410 | voleva                         | 2
+ 411 | gatti                          | 2
+ 412 | roma                           | 2
+ 413 | un mese                        | 2
+ 414 | diventata                      | 2
+ 415 | dormire                        | 2
+ 416 | appartamento                   | 2
+ 417 | fiducia                        | 2
+ 418 | i sogni                        | 2
+ 419 | dell'altro                     | 2
+ 420 | agosto                         | 2
+ 421 | scrivendo                      | 2
+ 422 | diventati                      | 2
+ 423 | c'erano                        | 2
+ 424 | la gelosia                     | 2
+ 425 | alessio                        | 2
+ 426 | molte                          | 2
+ 427 | comune                         | 2
+ 428 | carino                         | 2
+ 429 | il secondo                     | 2
+ 430 | un piccolo                     | 2
+ 431 | una nuova                      | 2
+ 432 | giro                           | 2
+ 433 | mattina                        | 2
+ 434 | scoperto                       | 2
+ 435 | strada                         | 2
+ 436 | un gruppo                      | 2
+ 437 | stanco                         | 2
+ 438 | forti                          | 2
+ 439 | reale                          | 2
+ 440 | la forza                       | 2
+ 441 | dell'amore                     | 2
+ 442 | nei giorni                     | 2
+ 443 | fosse                          | 2
+ 444 | vedere                         | 2
+ 445 | allargata                      | 2
+ 446 | famiglie                       | 2
+ 447 | trovato                        | 2
+ 448 | la madre                       | 2
+ 449 | avevamo                        | 2
+ 450 | natale                         | 2
+ 451 | magico                         | 2
+ 452 | guarda                         | 2
+ 453 | tirato                         | 2
+ 454 | aperto                         | 2
+ 455 | vedi                           | 2
+ 456 | anni                           | 2
+ 457 | spero                          | 2
+ 458 | aver                           | 2
+ 459 | pubblicato                     | 2
+ 460 | romanzo                        | 2
+ 461 | volevamo                       | 2
+ 462 | fare                           | 2
+ 463 | online                         | 2
+ 464 | qualcuno                       | 2
+ 465 | lgbtq+                         | 2
+ 466 | soli                           | 2
+ 467 | voi                            | 2
+ 468 | sfide                          | 2
+ 469 | un anno                        | 2
+ 470 | quelli                         | 2
+ 471 | il matrimonio                  | 2
+ 472 | credere                        | 2
+ 473 | negli occhi                    | 2
+ 474 | fianco                         | 2
+ 475 | prometto                       | 2
+ 476 | amarti                         | 2
+ 477 | sposati                        | 2
+ 478 | parlo                          | 2
+ 479 | la vita                        | 2
+ 480 | nome                           | 2
+ 481 | scegli                         | 2
+ 482 | andrai                         | 2
+ 483 | darai                          | 2
+ 484 | agli altri                     | 2
+ 485 | correrai                       | 2
+ 486 | diretto                        | 2
+ 487 | al sole                        | 2
+ 488 | il buio                        | 2
+ 489 | cercare                        | 2
+ 490 | la libertà                     | 2
+ 491 | spiegare                       | 2
+ 492 | cos'è                          | 2
+ 493 | il colore                      | 2
+ 494 | vede                           | 2
+ 495 | bianco                         | 2
+ 496 | nero                           | 2
+ 497 | prometti                       | 2
+ 498 | parlerai                       | 2
+ 499 | dovrò                          | 2
+ 500 | correre                        | 2
+ 501 | c'hai                          | 2
+ 502 | il dubbio                      | 2
+ 503 | nessuno                        | 2
+ 504 | ora                            | 2
+ 505 | conviene                       | 2
+ 506 | tipo                           | 2
+ 507 | chiuso                         | 2
+ 508 | alto                           | 2
+ 509 | pagine                         | 2
+ 510 | sale                           | 2
+ 511 | dio                            | 2
+ 512 | vento                          | 2
+ 513 | senti                          | 2
+ 514 | la testa                       | 2
+ 515 | capelli                        | 2
+ 516 | rosse                          | 2
+ 517 | quei                           | 2
+ 518 | però                           | 2
+ 519 | sente                          | 2
+ 520 | neanche                        | 2
+ 521 | porta                          | 2
+ 522 | dell'acqua                     | 2
+ 523 | parola                         | 2
+ 524 | un taglio                      | 2
+ 525 | sulla schiena                  | 2
+ 526 | una zattera                    | 2
+ 527 | naviga                         | 2
+ 528 | un fiume                       | 2
+ 529 | il fiume                       | 2
+ 530 | la luce                        | 2
+ 531 | cambio                         | 2
+ 532 | un po'                         | 2
+ 533 | potrà                          | 2
+ 534 | colpirti                       | 2
+ 535 | mille                          | 2
+ 536 | perdo                          | 2
+ 537 | prendimi                       | 2
+ 538 | mordimi                        | 2
+ 539 | toglimi                        | 2
+ 540 | distrutto                      | 2
+ 541 | sputami                        | 2
+ 542 | strappami                      | 2
+ 543 | i vestititi                    | 2
+ 544 | dosso                          | 2
+ 545 | comprami                       | 2
+ 546 | vendimi                        | 2
+ 547 | fammi                          | 2
+ 548 | respirerai                     | 2
+ 549 | nasconderò                     | 2
+ 550 | frasi                          | 2
+ 551 | sentirai                       | 2
+ 552 | ieri                           | 2
+ 553 | lasciami                       | 2
+ 554 | il tempo                       | 2
+ 555 | le gambe                       | 2
+ 556 | aria                           | 2
+ 557 | pulita                         | 2
+ 558 | alimenta                       | 2
+ 559 | lascio                         | 2
+ 560 | uccida                         | 2
+ 561 | rinasco                        | 2
+ 562 | dalla mia                      | 2
+ 563 | cenere                         | 2
+ 564 | indietro                       | 2
+ 565 | uno sguardo                    | 2
+ 566 | nasco                          | 2
+ 567 | una voce                       | 2
+ 568 | tagliente                      | 2
+ 569 | un respiro                     | 2
+ 570 | costante                       | 2
+ 571 | rimasto                        | 2
+ 572 | un foglio                      | 2
+ 573 | mezza                          | 2
+ 574 | sigaretta                      | 2
+ 575 | oggi                           | 2
+ 576 | #                              | 1
+ 577 | *una                           | 1
+ 578 | amici*                         | 1
+ 579 | l'incontro                     | 1
+ 580 | incontrato                     | 1
+ 581 | cerchi                         | 1
+ 582 | gentile                        | 1
+ 583 | completamente                  | 1
+ 584 | persa                          | 1
+ 585 | piacere                        | 1
+ 586 | conoscerti                     | 1
+ 587 | quel                           | 1
+ 588 | persona                        | 1
+ 589 | avrebbe                        | 1
+ 590 | l'amicizia                     | 1
+ 591 | i primi                        | 1
+ 592 | mesi                           | 1
+ 593 | studiavamo                     | 1
+ 594 | biblioteca                     | 1
+ 595 | prendevamo                     | 1
+ 596 | le lezioni                     | 1
+ 597 | parlavamo                      | 1
+ 598 | studi                          | 1
+ 599 | economia                       | 1
+ 600 | confessato                     | 1
+ 601 | la letteratura                 | 1
+ 602 | seguire                        | 1
+ 603 | guardava                       | 1
+ 604 | quegli                         | 1
+ 605 | scuri                          | 1
+ 606 | profondi                       | 1
+ 607 | capisci                        | 1
+ 608 | potevo                         | 1
+ 609 | immaginare                     | 1
+ 610 | il segreto                     | 1
+ 611 | al nostro                      | 1
+ 612 | bar                            | 1
+ 613 | preferito                      | 1
+ 614 | pioveva                        | 1
+ 615 | l'atmosfera                    | 1
+ 616 | dirti                          | 1
+ 617 | nervoso                        | 1
+ 618 | dirmi                          | 1
+ 619 | toccando                       | 1
+ 620 | interessato                    | 1
+ 621 | alle ragazze                   | 1
+ 622 | battuto                        | 1
+ 623 | shock                          | 1
+ 624 | capivo                         | 1
+ 625 | avermelo                       | 1
+ 626 | cambia                         | 1
+ 627 | nulla                          | 1
+ 628 | tristezza                      | 1
+ 629 | perderti                       | 1
+ 630 | perderai                       | 1
+ 631 | la confusione                  | 1
+ 632 | guardavo                       | 1
+ 633 | modo                           | 1
+ 634 | rideva                         | 1
+ 635 | riempiva                       | 1
+ 636 | *cosa                          | 1
+ 637 | succedendo                     | 1
+ 638 | *                              | 1
+ 639 | eterosessuale                  | 1
+ 640 | compagna                       | 1
+ 641 | stanza                         | 1
+ 642 | automaticamente                | 1
+ 643 | conosco                        | 1
+ 644 | il modo                        | 1
+ 645 | lo guardi                      | 1
+ 646 | del mio                        | 1
+ 647 | grigio                         | 1
+ 648 | pensieri                       | 1
+ 649 | rovinare                       | 1
+ 650 | abbastanza                     | 1
+ 651 | provasse                       | 1
+ 652 | etichette                      | 1
+ 653 | gli avessi                     | 1
+ 654 | avesse                         | 1
+ 655 | provato                        | 1
+ 656 | avrei                          | 1
+ 657 | rimanere                       | 1
+ 658 | una festa                      | 1
+ 659 | parlava                        | 1
+ 660 | spezzarsi                      | 1
+ 661 | mentivo                        | 1
+ 662 | evitare                        | 1
+ 663 | inventavo                      | 1
+ 664 | scuse                          | 1
+ 665 | ai suoi                        | 1
+ 666 | va                             | 1
+ 667 | un'altra                       | 1
+ 668 | bugia                          | 1
+ 669 | la crisi                       | 1
+ 670 | marzo                          | 1
+ 671 | rotto                          | 1
+ 672 | devastato                      | 1
+ 673 | una cattiva                    | 1
+ 674 | tornati                        | 1
+ 675 | successo                       | 1
+ 676 | perdendo                       | 1
+ 677 | fisicamente                    | 1
+ 678 | dirgli                         | 1
+ 679 | lo amavo                       | 1
+ 680 | i fiori                        | 1
+ 681 | nell'inverno                   | 1
+ 682 | un pomeriggio                  | 1
+ 683 | chiamata                       | 1
+ 684 | dobbiamo                       | 1
+ 685 | vieni                          | 1
+ 686 | sulla nostra                   | 1
+ 687 | panchina                       | 1
+ 688 | preferita                      | 1
+ 689 | al laghetto                    | 1
+ 690 | onesto                         | 1
+ 691 | tremavano                      | 1
+ 692 | funzionato                     | 1
+ 693 | qualcun                        | 1
+ 694 | altro                          | 1
+ 695 | fermato                        | 1
+ 696 | innamorato                     | 1
+ 697 | nasconderlo                    | 1
+ 698 | starti                         | 1
+ 699 | fingere                        | 1
+ 700 | scese                          | 1
+ 701 | dire                           | 1
+ 702 | allontanarti                   | 1
+ 703 | dirtelo                        | 1
+ 704 | il coraggio                    | 1
+ 705 | guardami                       | 1
+ 706 | attraverso                     | 1
+ 707 | ascoltami                      | 1
+ 708 | distante                       | 1
+ 709 | guardata                       | 1
+ 710 | incredulità                    | 1
+ 711 | lo capivo                      | 1
+ 712 | confondevo                     | 1
+ 713 | il genere                      | 1
+ 714 | fluido                         | 1
+ 715 | le risposte                    | 1
+ 716 | rimasti                        | 1
+ 717 | stava                          | 1
+ 718 | tramontando                    | 1
+ 719 | dipingendo                     | 1
+ 720 | rosa                           | 1
+ 721 | arancione                      | 1
+ 722 | tante                          | 1
+ 723 | lentamente                     | 1
+ 724 | avvicinato                     | 1
+ 725 | labbra                         | 1
+ 726 | toccate                        | 1
+ 727 | dolce                          | 1
+ 728 | tenero                         | 1
+ 729 | separati                       | 1
+ 730 | allo stesso                    | 1
+ 731 | le sfide                       | 1
+ 732 | i giorni                       | 1
+ 733 | successivi                     | 1
+ 734 | innamorati                     | 1
+ 735 | completi                       | 1
+ 736 | presto                         | 1
+ 737 | arrivate                       | 1
+ 738 | le prime                       | 1
+ 739 | difficoltà                     | 1
+ 740 | capivano                       | 1
+ 741 | fossi                          | 1
+ 742 | una compagna                   | 1
+ 743 | lo pensavo                     | 1
+ 744 | possono                        | 1
+ 745 | scoprire                       | 1
+ 746 | stesse                         | 1
+ 747 | conoscenza                     | 1
+ 748 | della sua                      | 1
+ 749 | sessualità                     | 1
+ 750 | dirglielo                      | 1
+ 751 | maggio                         | 1
+ 752 | dai miei                       | 1
+ 753 | terrorizzata                   | 1
+ 754 | papà                           | 1
+ 755 | fidanzato                      | 1
+ 756 | il silenzio                    | 1
+ 757 | pesante                        | 1
+ 758 | serio                          | 1
+ 759 | stefano                        | 1
+ 760 | eravate                        | 1
+ 761 | inaspettato                    | 1
+ 762 | guardato                       | 1
+ 763 | ami                            | 1
+ 764 | figlia                         | 1
+ 765 | altra                          | 1
+ 766 | voce                           | 1
+ 767 | la cena                        | 1
+ 768 | avevano                        | 1
+ 769 | bisogno                        | 1
+ 770 | capire                         | 1
+ 771 | teneva                         | 1
+ 772 | andrà                          | 1
+ 773 | sussurrava                     | 1
+ 774 | devono                         | 1
+ 775 | l'accettazione                 | 1
+ 776 | le settimane                   | 1
+ 777 | state                          | 1
+ 778 | complicate                     | 1
+ 779 | chiamava                       | 1
+ 780 | domande                        | 1
+ 781 | venuta                         | 1
+ 782 | trovarmi                       | 1
+ 783 | un caffè                       | 1
+ 784 | delle aspettative              | 1
+ 785 | quanto                         | 1
+ 786 | rende                          | 1
+ 787 | allora                         | 1
+ 788 | lo accetto                     | 1
+ 789 | invita                         | 1
+ 790 | domenica                       | 1
+ 791 | conoscerlo                     | 1
+ 792 | meglio                         | 1
+ 793 | arrivata                       | 1
+ 794 | calda                          | 1
+ 795 | luminosa                       | 1
+ 796 | passato                        | 1
+ 797 | libero                         | 1
+ 798 | andavamo                       | 1
+ 799 | al lago                        | 1
+ 800 | leggevamo                      | 1
+ 801 | all'ombra                      | 1
+ 802 | la persona                     | 1
+ 803 | l'aspetto                      | 1
+ 804 | veramente                      | 1
+ 805 | dei nostri                     | 1
+ 806 | sogni                          | 1
+ 807 | diventare                      | 1
+ 808 | scrittore                      | 1
+ 809 | insegnare                      | 1
+ 810 | vivremo                        | 1
+ 811 | avremo                         | 1
+ 812 | un gatto                       | 1
+ 813 | aggiungevo                     | 1
+ 814 | correggeva                     | 1
+ 815 | crisi                          | 1
+ 816 | luglio                         | 1
+ 817 | vera                           | 1
+ 818 | litigata                       | 1
+ 819 | uno stage                      | 1
+ 820 | estivo                         | 1
+ 821 | scrittura                      | 1
+ 822 | restasse                       | 1
+ 823 | lungo                          | 1
+ 824 | dimentichi                     | 1
+ 825 | ridicola                       | 1
+ 826 | potrei                         | 1
+ 827 | dimenticarmi                   | 1
+ 828 | la discussione                 | 1
+ 829 | accesa                         | 1
+ 830 | andati                         | 1
+ 831 | parlarci                       | 1
+ 832 | il perdono                     | 1
+ 833 | venuto                         | 1
+ 834 | dei fiori                      | 1
+ 835 | egoista                        | 1
+ 836 | considerare                    | 1
+ 837 | i tuoi                         | 1
+ 838 | sentimenti                     | 1
+ 839 | scuso                          | 1
+ 840 | reagito                        | 1
+ 841 | una grande                     | 1
+ 842 | opportunità                    | 1
+ 843 | dovresti                       | 1
+ 844 | verrò                          | 1
+ 845 | trovarti                       | 1
+ 846 | weekend                        | 1
+ 847 | chiamerò                       | 1
+ 848 | abbracciati                    | 1
+ 849 | sostenere                      | 1
+ 850 | mancavamo                      | 1
+ 851 | tantissimo                     | 1
+ 852 | le videochiamate               | 1
+ 853 | la parte                       | 1
+ 854 | giornata                       | 1
+ 855 | raccontava                     | 1
+ 856 | dello stage                    | 1
+ 857 | delle persone                  | 1
+ 858 | conosceva                      | 1
+ 859 | delle cose                     | 1
+ 860 | imparava                       | 1
+ 861 | una storia                     | 1
+ 862 | amanti                         | 1
+ 863 | sorprenderti                   | 1
+ 864 | sciolto                        | 1
+ 865 | l'ora                          | 1
+ 866 | leggerla                       | 1
+ 867 | separasse                      | 1
+ 868 | un altro                       | 1
+ 869 | partecipante                   | 1
+ 870 | allo stage                     | 1
+ 871 | simpatico                      | 1
+ 872 | una fitta                      | 1
+ 873 | gelosia                        | 1
+ 874 | iniziare                       | 1
+ 875 | una domanda                    | 1
+ 876 | ne                             | 1
+ 877 | andava                         | 1
+ 878 | menzionava                     | 1
+ 879 | stomaco                        | 1
+ 880 | stringeva                      | 1
+ 881 | lavorare                       | 1
+ 882 | sulla mia                      | 1
+ 883 | insicurezza                    | 1
+ 884 | funziona                       | 1
+ 885 | il ritorno                     | 1
+ 886 | tornato                        | 1
+ 887 | alla fine                      | 1
+ 888 | corsa                          | 1
+ 889 | alla stazione                  | 1
+ 890 | scendere                       | 1
+ 891 | dal treno                      | 1
+ 892 | mancato                        | 1
+ 893 | sul suo                        | 1
+ 894 | petto                          | 1
+ 895 | ore                            | 1
+ 896 | la storia                      | 1
+ 897 | bellissima                     | 1
+ 898 | emozioni                       | 1
+ 899 | vere                           | 1
+ 900 | mese                           | 1
+ 901 | università                     | 1
+ 902 | una coppia                     | 1
+ 903 | bilocale                       | 1
+ 904 | l'abbiamo                      | 1
+ 905 | aggiunto                       | 1
+ 906 | sorridendo                     | 1
+ 907 | avventura                      | 1
+ 908 | imparato                       | 1
+ 909 | le abitudini                   | 1
+ 910 | lasciava                       | 1
+ 911 | i calzini                      | 1
+ 912 | dimenticavo                    | 1
+ 913 | chiudere                       | 1
+ 914 | il tubetto                     | 1
+ 915 | del dentifricio                | 1
+ 916 | svegliarmi                     | 1
+ 917 | accanto                        | 1
+ 918 | realtà                         | 1
+ 919 | le piccole                     | 1
+ 920 | piccole                        | 1
+ 921 | preparava                      | 1
+ 922 | la mattina                     | 1
+ 923 | gli stiravo                    | 1
+ 924 | le camicie                     | 1
+ 925 | odiavo                         | 1
+ 926 | stirare                        | 1
+ 927 | nelle risate                   | 1
+ 928 | condivise                      | 1
+ 929 | guardavamo                     | 1
+ 930 | film                           | 1
+ 931 | brutti                         | 1
+ 932 | nelle passeggiate              | 1
+ 933 | la pioggia                     | 1
+ 934 | nei messaggi                   | 1
+ 935 | dolci                          | 1
+ 936 | durante                        | 1
+ 937 | penso                          | 1
+ 938 | nelle discussioni              | 1
+ 939 | cucinare                       | 1
+ 940 | nei sabati                     | 1
+ 941 | pigri                          | 1
+ 942 | nelle mani                     | 1
+ 943 | intrecciate                    | 1
+ 944 | la sfida                       | 1
+ 945 | pubblica                       | 1
+ 946 | ottobre                        | 1
+ 947 | sfida                          | 1
+ 948 | al duomo                       | 1
+ 949 | ragazzi                        | 1
+ 950 | gridato                        | 1
+ 951 | insulti                        | 1
+ 952 | froci                          | 1
+ 953 | irrigidito                     | 1
+ 954 | stringere                      | 1
+ 955 | ignoriamoli                    | 1
+ 956 | ignoranti                      | 1
+ 957 | feriscano                      | 1
+ 958 | dover                          | 1
+ 959 | giustificare                   | 1
+ 960 | amiamo                         | 1
+ 961 | abbracciato                    | 1
+ 962 | cambi                          | 1
+ 963 | raccontato                     | 1
+ 964 | le volte                       | 1
+ 965 | discriminazioni                | 1
+ 966 | coming                         | 1
+ 967 | out                            | 1
+ 968 | al liceo                       | 1
+ 969 | abbandonato                    | 1
+ 970 | sbagliato                      | 1
+ 971 | il problema                    | 1
+ 972 | orgogliosa                     | 1
+ 973 | nasconderci                    | 1
+ 974 | stessi                         | 1
+ 975 | ovunque                        | 1
+ 976 | deve                           | 1
+ 977 | forme                          | 1
+ 978 | organizzato                    | 1
+ 979 | una cena                       | 1
+ 980 | entrambe                       | 1
+ 981 | eccitata                       | 1
+ 982 | madri                          | 1
+ 983 | piaciute                       | 1
+ 984 | parlavano                      | 1
+ 985 | ricette                        | 1
+ 986 | bambini                        | 1
+ 987 | i nostri                       | 1
+ 988 | padri                          | 1
+ 989 | silenziosi                     | 1
+ 990 | un terreno                     | 1
+ 991 | nel calcio                     | 1
+ 992 | adorabile                      | 1
+ 993 | guardando                      | 1
+ 994 | costruito                      | 1
+ 995 | una relazione                  | 1
+ 996 | una vera                       | 1
+ 997 | il natale                      | 1
+ 998 | decorato                       | 1
+ 999 | luci                           | 1
+1000 | un albero                      | 1
+1001 | un regalo                      | 1
+1002 | la vigilia                     | 1
+1003 | un pacchetto                   | 1
+1004 | una collana                    | 1
+1005 | un ciondolo                    | 1
+1006 | forma                          | 1
+1007 | libro                          | 1
+1008 | un libro                       | 1
+1009 | la più                         | 1
+1010 | regalo                         | 1
+1011 | un quaderno                    | 1
+1012 | pelle                          | 1
+1013 | iniziali                       | 1
+1014 | le storie                      | 1
+1015 | scriverai                      | 1
+1016 | pagina                         | 1
+1017 | dedicata                       | 1
+1018 | il nuovo                       | 1
+1019 | speranze                       | 1
+1020 | del futuro                     | 1
+1021 | cinque                         | 1
+1022 | esitare                        | 1
+1023 | insegnando                     | 1
+1024 | una scuola                     | 1
+1025 | soprattutto                    | 1
+1026 | viaggi                         | 1
+1027 | parigi                         | 1
+1028 | barcellona                     | 1
+1029 | londra                         | 1
+1030 | una casa                       | 1
+1031 | un futuro                      | 1
+1032 | pensi                          | 1
+1033 | al matrimonio                  | 1
+1034 | timidamente                    | 1
+1035 | ammesso                        | 1
+1036 | paure                          | 1
+1037 | ricevere                       | 1
+1038 | minacce                        | 1
+1039 | anonime                        | 1
+1040 | preoccupare                    | 1
+1041 | vedevo                         | 1
+1042 | insistito                      | 1
+1043 | alla polizia                   | 1
+1044 | la denuncia                    | 1
+1045 | sembravano                     | 1
+1046 | preoccupati                    | 1
+1047 | succede                        | 1
+1048 | l'agente                       | 1
+1049 | noncuranza                     | 1
+1050 | tenuti                         | 1
+1051 | stretti                        | 1
+1052 | conforto                       | 1
+1053 | l'uno                          | 1
+1054 | nell'altro                     | 1
+1055 | la comunità                    | 1
+1056 | una nostra                     | 1
+1057 | giulia                         | 1
+1058 | invitato                       | 1
+1059 | supporto                       | 1
+1060 | incontro                       | 1
+1061 | altre                          | 1
+1062 | coppie                         | 1
+1063 | ognuno                         | 1
+1064 | vittorie                       | 1
+1065 | sentirsi                       | 1
+1066 | regolarmente                   | 1
+1067 | nuovi                          | 1
+1068 | una comunità                   | 1
+1069 | capiva                         | 1
+1070 | sosteneva                      | 1
+1071 | il supporto                    | 1
+1072 | della comunità                 | 1
+1073 | pubblicare                     | 1
+1074 | sappiano                       | 1
+1075 | queer                          | 1
+1076 | normale                        | 1
+1077 | virale                         | 1
+1078 | migliaia                       | 1
+1079 | l'hanno                        | 1
+1080 | letta                          | 1
+1081 | ricevuto                       | 1
+1082 | condiviso                      | 1
+1083 | la vostra                      | 1
+1084 | avete                          | 1
+1085 | dato                           | 1
+1086 | speranza                       | 1
+1087 | un'ispirazione                 | 1
+1088 | una ragazza                    | 1
+1089 | certo                          | 1
+1090 | commenti                       | 1
+1091 | negativi                       | 1
+1092 | i messaggi                     | 1
+1093 | positivi                       | 1
+1094 | molti                          | 1
+1095 | la proposta                    | 1
+1096 | anniversario                   | 1
+1097 | portata                        | 1
+1098 | dichiarati                     | 1
+1099 | quest'anno                     | 1
+1100 | passare                        | 1
+1101 | tutta                          | 1
+1102 | belli                          | 1
+1103 | nella gioia                    | 1
+1104 | nel dolore                     | 1
+1105 | inginocchiato                  | 1
+1106 | una piccola                    | 1
+1107 | scatola                        | 1
+1108 | sposare                        | 1
+1109 | scendevano                     | 1
+1110 | l'anello                       | 1
+1111 | semplice                       | 1
+1112 | baciati                        | 1
+1113 | tramontava                     | 1
+1114 | proprio                        | 1
+1115 | la preparazione                | 1
+1116 | i mesi                         | 1
+1117 | un turbine                     | 1
+1118 | dovevamo                       | 1
+1119 | preparare                      | 1
+1120 | scelto                         | 1
+1121 | sposarci                       | 1
+1122 | estate                         | 1
+1123 | agriturismo                    | 1
+1124 | una cerimonia                  | 1
+1125 | amavamo                        | 1
+1126 | aiutata                        | 1
+1127 | scegliere                      | 1
+1128 | il vestito                     | 1
+1129 | aiutato                        | 1
+1130 | le decorazioni                 | 1
+1131 | sposi                          | 1
+1132 | del matrimonio                 | 1
+1133 | il più                         | 1
+1134 | azzurro                        | 1
+1135 | bellissimo                     | 1
+1136 | nel suo                        | 1
+1137 | completo                       | 1
+1138 | blu                            | 1
+1139 | guardati                       | 1
+1140 | sposo                          | 1
+1141 | sostenerti                     | 1
+1142 | al tuo                         | 1
+1143 | sposa                          | 1
+1144 | costruire                      | 1
+1145 | una vita                       | 1
+1146 | meravigliosa                   | 1
+1147 | dichiarato                     | 1
+1148 | applaudito                     | 1
+1149 | epilogo                        | 1
+1150 | passati                        | 1
+1151 | tre                            | 1
+1152 | dal nostro                     | 1
+1153 | matrimonio                     | 1
+1154 | viviamo                        | 1
+1155 | naturalmente                   | 1
+1156 | chiama                         | 1
+1157 | insegno                        | 1
+1158 | un liceo                       | 1
+1159 | ai miei                        | 1
+1160 | studenti                       | 1
+1161 | della diversità                | 1
+1162 | dell'accettazione              | 1
+1163 | facile                         | 1
+1164 | capiscono                      | 1
+1165 | affrontare                     | 1
+1166 | dice                           | 1
+1167 | rispondo                       | 1
+1168 | confini                        | 1
+1169 | genere                         | 1
+1170 | limiti                         | 1
+1171 | semplicemente                  | 1
+1172 | la prova                       | 1
+1173 | vivente                        | 1
+1174 | vince                          | 1
+1175 | **fine**                       | 1
+1176 | perciò                         | 1
+1177 | stupire                        | 1
+1178 | dal niente                     | 1
+1179 | faccio                         | 1
+1180 | drammi                         | 1
+1181 | denaro                         | 1
+1182 | scompaia                       | 1
+1183 | gli altri                      | 1
+1184 | perdono                        | 1
+1185 | gli sbagli                     | 1
+1186 | commesso                       | 1
+1187 | dura                           | 1
+1188 | stai                           | 1
+1189 | puntando                       | 1
+1190 | al cielo                       | 1
+1191 | le cose                        | 1
+1192 | importanti                     | 1
+1193 | diamanti                       | 1
+1194 | demoni                         | 1
+1195 | santi                          | 1
+1196 | frega                          | 1
+1197 | un cazzo                       | 1
+1198 | zero                           | 1
+1199 | dimostrarvi                    | 1
+1200 | date                           | 1
+1201 | al denaro                      | 1
+1202 | dagli occhi                    | 1
+1203 | puro                           | 1
+1204 | codardi                        | 1
+1205 | tardi                          | 1
+1206 | farà                           | 1
+1207 | resterai                       | 1
+1208 | dagli altri                    | 1
+1209 | sanno                          | 1
+1210 | vestiti                        | 1
+1211 | sporchi                        | 1
+1212 | fra'                           | 1
+1213 | fango                          | 1
+1214 | giallo                         | 1
+1215 | siga'                          | 1
+1216 | fra                            | 1
+1217 | le dita                        | 1
+1218 | la siga'                       | 1
+1219 | camminando                     | 1
+1220 | scusami                        | 1
+1221 | credo                          | 1
+1222 | salto                          | 1
+1223 | salita                         | 1
+1224 | allenando                      | 1
+1225 | buonasera                      | 1
+1226 | signori                        | 1
+1227 | gli attori                     | 1
+1228 | toccarvi                       | 1
+1229 | i coglioni                     | 1
+1230 | zitti                          | 1
+1231 | buoni                          | 1
+1232 | spacciatori                    | 1
+1233 | troppe                         | 1
+1234 | notti                          | 1
+1235 | mo                             | 1
+1236 | li                             | 1
+1237 | calci                          | 1
+1238 | 'sti                           | 1
+1239 | portoni                        | 1
+1240 | sguardo                        | 1
+1241 | scalatori                      | 1
+1242 | lacrime                        | 1
+1243 | questi                         | 1
+1244 | uomini                         | 1
+1245 | macchina                       | 1
+1246 | scalare                        | 1
+1247 | le rapide                      | 1
+1248 | una lapide                     | 1
+1249 | trovi                          | 1
+1250 | il senso                       | 1
+1251 | del tempo                      | 1
+1252 | risalirai                      | 1
+1253 | dal tuo                        | 1
+1254 | oblio                          | 1
+1255 | fermi                          | 1
+1256 | la naturale                    | 1
+1257 | potenza                        | 1
+1258 | dal punto                      | 1
+1259 | giusto                         | 1
+1260 | del vento                      | 1
+1261 | l'ebrezza                      | 1
+1262 | ali                            | 1
+1263 | cera                           | 1
+1264 | alla schiena                   | 1
+1265 | ricercherò                     | 1
+1266 | quell'altezza                  | 1
+1267 | fermarmi                       | 1
+1268 | ritenta                        | 1
+1269 | prova                          | 1
+1270 | tagliarmi                      | 1
+1271 | cazzo                          | 1
+1272 | guerriera                      | 1
+1273 | dal cuore                      | 1
+1274 | zelante                        | 1
+1275 | rose                           | 1
+1276 | preziosi                       | 1
+1277 | fili                           | 1
+1278 | rame                           | 1
+1279 | portali                        | 1
+1280 | campane                        | 1
+1281 | cantare                        | 1
+1282 | vedrai                         | 1
+1283 | prende                         | 1
+1284 | il dolore                      | 1
+1285 | degli altri                    | 1
+1286 | lo porta                       | 1
+1287 | diviso                         | 1
+1288 | metà                           | 1
+1289 | una bambina                    | 1
+1290 | un peso                        | 1
+1291 | spezzerà                       | 1
+1292 | dirà                           | 1
+1293 | vale                           | 1
+1294 | riesce                         | 1
+1295 | una misera                     | 1
+1296 | una volta                      | 1
+1297 | riuscirà                       | 1
+1298 | un mostro                      | 1
+1299 | la tiene                       | 1
+1300 | gabbia                         | 1
+1301 | le ricopre                     | 1
+1302 | mine                           | 1
+1303 | mangiare                       | 1
+1304 | vorrebbe                       | 1
+1305 | riparo                         | 1
+1306 | d'inverno                      | 1
+1307 | respiri                        | 1
+1308 | capirò                         | 1
+1309 | l'acqua                        | 1
+1310 | bere                           | 1
+1311 | il significato                 | 1
+1312 | del bene                       | 1
+1313 | un soldato                     | 1
+1314 | piccola                        | 1
+1315 | lacrima                        | 1
+1316 | oceano                         | 1
+1317 | vessillo                       | 1
+1318 | scudo                          | 1
+1319 | spada                          | 1
+1320 | d'argento                      | 1
+1321 | il frutto                      | 1
+1322 | del suo                        | 1
+1323 | ventre                         | 1
+1324 | un padre                       | 1
+1325 | le han                         | 1
+1326 | un castello                    | 1
+1327 | mura                           | 1
+1328 | talmente                       | 1
+1329 | potenti                        | 1
+1330 | vai                            | 1
+1331 | voci                           | 1
+1332 | parlano                        | 1
+1333 | dicono                         | 1
+1334 | guardo                         | 1
+1335 | allo specchio                  | 1
+1336 | immagino                       | 1
+1337 | al circo                       | 1
+1338 | una giostra                    | 1
+1339 | felicità                       | 1
+1340 | diverto                        | 1
+1341 | un miracolo                    | 1
+1342 | ridicolo                       | 1
+1343 | un attimo                      | 1
+1344 | ditelo                         | 1
+1345 | preparo                        | 1
+1346 | valzer                         | 1
+1347 | diavolo                        | 1
+1348 | darmi                          | 1
+1349 | del pazzo                      | 1
+1350 | bastardo                       | 1
+1351 | malato                         | 1
+1352 | vino                           | 1
+1353 | odiato                         | 1
+1354 | canterai                       | 1
+1355 | porterai                       | 1
+1356 | i dettagli                     | 1
+1357 | sulle braccia                  | 1
+1358 | rimasta                        | 1
+1359 | sulla barca                    | 1
+1360 | riconosco                      | 1
+1361 | i segni                        | 1
+1362 | sulla faccia                   | 1
+1363 | l'errore                       | 1
+1364 | tuo                            | 1
+1365 | amarmi                         | 1
+1366 | uguale                         | 1
+1367 | com'era                        | 1
+1368 | bevo                           | 1
+1369 | prego                          | 1
+1370 | all'acqua                      | 1
+1371 | del mare                       | 1
+1372 | lontane                        | 1
+1373 | le voglio                      | 1
+1374 | brucerà                        | 1
+1375 | i fogli                        | 1
+1376 | parlan                         | 1
+1377 | piangerai                      | 1
+1378 | diluvierà                      | 1
+1379 | portare                        | 1
+1380 | inutili                        | 1
+1381 | canteremo                      | 1
+1382 | restando                       | 1
+1383 | muti                           | 1
+1384 | portarmi                       | 1
+1385 | spaventa                       | 1
+1386 | l'inverno                      | 1
+1387 | stanno                         | 1
+1388 | cedendo                        | 1
+1389 | stupendo                       | 1
+1390 | sai                            | 1
+1391 | un metro                       | 1
+1392 | yeeh                           | 1
+1393 | stronzi                        | 1
+1394 | bianchi                        | 1
+1395 | faccia                         | 1
+1396 | le malelingue                  | 1
+1397 | il suono                       | 1
+1398 | della tua                      | 1
+1399 | brutta                         | 1
+1400 | risata                         | 1
+1401 | il passo                       | 1
+1402 | la retta                       | 1
+1403 | puntata                        | 1
+1404 | aiutare                        | 1
+1405 | volo                           | 1
+1406 | tocco                          | 1
+1407 | cado                           | 1
+1408 | mica                           | 1
+1409 | ridarle                        | 1
+1410 | il dono                        | 1
+1411 | della vita                     | 1
+1412 | spaccarmi                      | 1
+1413 | schiena                        | 1
+1414 | gambe                          | 1
+1415 | braccia                        | 1
+1416 | fiero                          | 1
+1417 | fatica                         | 1
+1418 | pure                           | 1
+1419 | girato                         | 1
+1420 | spalle                         | 1
+1421 | gli dicevo                     | 1
+1422 | cadendo                        | 1
+1423 | basta                          | 1
+1424 | un raggio                      | 1
+1425 | sole                           | 1
+1426 | un soffio                      | 1
+1427 | nel mezzo                      | 1
+1428 | del niente                     | 1
+1429 | cedono                         | 1
+1430 | cammino                        | 1
+1431 | il vento                       | 1
+1432 | soffia                         | 1
+1433 | lasciato                       | 1
+1434 | all'orizzonte                  | 1
+1435 | le case                        | 1
+1436 | lontano                        | 1
+1437 | le porte                       | 1
+1438 | fortuna                        | 1
+1439 | guance                         | 1
+1440 | raccolto                       | 1
+1441 | coperto                        | 1
+1442 | spine                          | 1
+1443 | coi                            | 1
+1444 | morsi                          | 1
+1445 | serpenti                       | 1
+1446 | fermo                          | 1
+1447 | le spire                       | 1
+1448 | ascoltato                      | 1
+1449 | bastardi                       | 1
+1450 | il loro                        | 1
+1451 | maledire                       | 1
+1452 | convinto                       | 1
+1453 | un viaggio                     | 1
+1454 | d'ora                          | 1
+1455 | alice                          | 1
+1456 | meraviglie                     | 1
+1457 | il cappellaio                  | 1
+1458 | matto                          | 1
+1459 | cammineremo                    | 1
+1460 | fino                           | 1
+1461 | porterà                        | 1
+1462 | sui tuoi                       | 1
+1463 | il bianco                      | 1
+1464 | restiamo                       | 1
+1465 | fretta                         | 1
+1466 | una frase                      | 1
+1467 | scritta                        | 1
+1468 | detta                          | 1
+1469 | perfetta                       | 1
+1470 | trasparente                    | 1
+1471 | illumina                       | 1
+1472 | le debolezze                   | 1
+1473 | della gente                    | 1
+1474 | una lacrima                    | 1
+1475 | salata                         | 1
+1476 | bagna                          | 1
+1477 | guancia                        | 1
+1478 | accarezza                      | 1
+1479 | sangue                         | 1
+1480 | sulle mani                     | 1
+1481 | scalerò                        | 1
+1482 | le vette                       | 1
+1483 | arrivare                       | 1
+1484 | l'occhio                       | 1
+1485 | umano                          | 1
+1486 | interrompe                     | 1
+1487 | imparare                       | 1
+1488 | perdonare                      | 1
+1489 | le mie                         | 1
+1490 | colpe                          | 1
+1491 | gli angeli                     | 1
+1492 | han                            | 1
+1493 | della morte                    | 1
+1494 | corriamo                       | 1
+1495 | c'ha                           | 1
+1496 | sete                           | 1
+1497 | vendetta                       | 1
+1498 | ormai                          | 1
+1499 | la sento                       | 1
+1500 | stretta                        | 1
+1501 | quiete                         | 1
+1502 | la tempesta                    | 1
+1503 | un pazzo                       | 1
+1504 | lascia                         | 1
+1505 | racconti                       | 1
+1506 | sgualcita                      | 1
+1507 | portavo                        | 1
+1508 | tagli                          | 1
+1509 | sui polsi                      | 1
+1510 | benedetto                      | 1
+1511 | trovo                          | 1
+1512 | aggiungere                     | 1
+1513 | affaccia                       | 1
+1514 | vedrà                          | 1
+1515 | giungere                       | 1
+1516 | bilico                         | 1
+1517 | l'essere                       | 1
+1518 | vittima                        | 1
+1519 | giudice                        | 1
+1520 | un brivido                     | 1
+1521 | le tenebre                     | 1
+1522 | libera                         | 1
+1523 | queste                         | 1
+1524 | catene                         | 1
+1525 | splendenti                     | 1
+1526 | lucide                         | 1
+1527 | fossero                        | 1
+1528 | morti                          | 1
+1529 | rinasci                        | 1
