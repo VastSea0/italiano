@@ -152,26 +152,26 @@ export default function FlashcardsPage() {
 
   useEffect(() => {
     if (!nextCardCandidate) {
-      setActiveCard(null)
-      setCardTransitioning(false)
       return
     }
+
     if (!activeCard) {
       setActiveCard(nextCardCandidate)
       setCardTransitioning(false)
       return
     }
+
     if (nextCardCandidate.slug === activeCard.slug) {
-      setCardTransitioning(false)
       return
     }
+
     setCardTransitioning(true)
-    const timeout = window.setTimeout(() => {
+    const timer = window.setTimeout(() => {
       setActiveCard(nextCardCandidate)
       setCardTransitioning(false)
-      setShowAnswer(false)
     }, CARD_SWAP_DELAY_MS)
-    return () => window.clearTimeout(timeout)
+
+    return () => window.clearTimeout(timer)
   }, [nextCardCandidate, activeCard])
 
   const intervalPreview = useMemo(() => {
@@ -204,7 +204,6 @@ export default function FlashcardsPage() {
       updateSessionStats(quality, activeCard.slug)
       await persistProgress(user, activeCard.slug, nextProgress)
       setShowAnswer(false)
-      setCardTransitioning(true)
       setCardSeed((prev) => prev + 1)
     } catch (err: unknown) {
       console.error('Failed to record flashcard answer', err)
