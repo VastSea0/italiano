@@ -3,14 +3,17 @@
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import {
+  addDoc,
   collection,
   deleteDoc,
   doc,
+  limit,
   onSnapshot,
   orderBy,
   query,
   serverTimestamp,
   setDoc,
+  Timestamp,
 } from 'firebase/firestore'
 import { signInWithPopup, signOut } from 'firebase/auth'
 import type { User } from 'firebase/auth'
@@ -18,7 +21,6 @@ import type { User } from 'firebase/auth'
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth'
 import { auth, db, googleProvider } from '@/lib/firebase/client'
 import {
-  CATEGORY_OPTIONS,
   KEY_TO_CATEGORY_NAME,
   VOCABULARY_DATA_OPTIONS,
   createEmptyVocabulary,
@@ -47,6 +49,20 @@ type WordRecord = {
   updatedBy?: string
 }
 
+type HistoryAction = 'create' | 'update' | 'delete' | 'restore' | 'import'
+
+type WordHistoryEntry = {
+  id: string
+  slug: string
+  action: HistoryAction
+  actor?: string | null
+  payload?: VerbEntry | WordEntry | null
+  categoryKey?: VocabularyDataKey
+  timestamp?: Date
+  message?: string | null
+  restoredFromId?: string | null
+}
+
 type EditorMode = 'create' | 'edit'
 
 export default function AdminDashboard() {
@@ -64,6 +80,10 @@ export default function AdminDashboard() {
   const [searchTerm, setSearchTerm] = useState('')
   const [categoryFilter, setCategoryFilter] = useState<VocabularyDataKey | 'all'>('all')
   const [seedInProgress, setSeedInProgress] = useState(false)
+  const [historyEntries, setHistoryEntries] = useState<WordHistoryEntry[]>([])
+  const [historyLoading, setHistoryLoading] = useState(false)
+  const [historyError, setHistoryError] = useState<string | null>(null)
+  const [restoringVersionId, setRestoringVersionId] = useState<string | null>(null)
 
   const isAuthorized = useMemo(() => {
     if (!user) return false
@@ -81,17 +101,22 @@ export default function AdminDashboard() {
     const unsubscribe = onSnapshot(
       q,
       (snapshot) => {
-        const docs: WordRecord[] = snapshot.docs.map((docSnap) => {
+        const docs: WordRecord[] = snapshot.docs.reduce<WordRecord[]>((acc, docSnap) => {
           const data = docSnap.data() as FirestoreWordDoc
-          return {
+          const payload = data.payload as VerbEntry | WordEntry | undefined
+          if (!payload) {
+            return acc
+          }
+          acc.push({
             id: docSnap.id,
             slug: data.slug ?? docSnap.id,
             categoryKey: (data.categoryKey as VocabularyDataKey) ?? 'commonNouns',
-            payload: data.payload ?? {},
+            payload,
             updatedAt: data.updatedAt ? data.updatedAt.toDate() : undefined,
             updatedBy: data.updatedBy,
-          }
-        })
+          })
+          return acc
+        }, [])
         setWords(docs)
         setLoadingWords(false)
         setWordsError(null)
@@ -104,6 +129,49 @@ export default function AdminDashboard() {
     )
     return () => unsubscribe()
   }, [user, isAuthorized])
+
+    useEffect(() => {
+      if (!selectedWord) {
+        setHistoryEntries([])
+        setHistoryLoading(false)
+        setHistoryError(null)
+        return
+      }
+
+      setHistoryLoading(true)
+      const historyRef = collection(doc(wordsCollectionRef, selectedWord.slug), 'history')
+      const historyQuery = query(historyRef, orderBy('timestamp', 'desc'), limit(25))
+
+      const unsubscribe = onSnapshot(
+        historyQuery,
+        (snapshot) => {
+          const entries: WordHistoryEntry[] = snapshot.docs.map((docSnap) => {
+            const data = docSnap.data() as FirestoreHistoryDoc
+            return {
+              id: docSnap.id,
+              slug: selectedWord.slug,
+              action: (data.action as HistoryAction) ?? 'update',
+              actor: data.actor ?? null,
+              payload: data.payload ?? null,
+              categoryKey: (data.categoryKey as VocabularyDataKey) ?? undefined,
+              timestamp: data.timestamp ? data.timestamp.toDate() : undefined,
+              message: data.message ?? null,
+              restoredFromId: data.restoredFromId ?? null,
+            }
+          })
+          setHistoryEntries(entries)
+          setHistoryLoading(false)
+          setHistoryError(null)
+        },
+        (err) => {
+          console.error('History subscription failed', err)
+          setHistoryError('Geçmiş verisi alınamadı')
+          setHistoryLoading(false)
+        },
+      )
+
+      return () => unsubscribe()
+    }, [selectedWord])
 
   const filteredWords = useMemo(() => {
     const term = searchTerm.trim().toLowerCase()
@@ -174,6 +242,7 @@ export default function AdminDashboard() {
     setFormSlug(record.slug)
     setFormJson(JSON.stringify(record.payload, null, 2))
     setSaveStatus(null)
+    setHistoryError(null)
   }
 
   const handleNewWord = () => {
@@ -191,19 +260,20 @@ export default function AdminDashboard() {
         throw new Error('Slug / temel anahtar belirlenemedi. Lütfen "Slug" alanını doldurun.')
       }
 
-      const docRef = doc(wordsCollectionRef, derivedSlug)
-      await setDoc(
-        docRef,
-        {
-          slug: derivedSlug,
-          categoryKey: formCategory,
-          payload: parsed,
-          updatedAt: serverTimestamp(),
-          updatedBy: user.email || user.uid,
-        },
-        { merge: true },
-      )
-      setSaveStatus('✅ Kelime kaydedildi')
+      const actorId = user.email || user.uid
+      const existingRecord = words.find((record) => record.slug === derivedSlug)
+      const historyAction: HistoryAction = existingRecord ? 'update' : 'create'
+
+      await persistWordWithHistory({
+        slug: derivedSlug,
+        categoryKey: formCategory,
+        payload: parsed,
+        actor: actorId,
+        action: historyAction,
+        message: historyAction === 'create' ? 'Manuel oluşturma' : 'Manuel güncelleme',
+      })
+
+      setSaveStatus(historyAction === 'create' ? '✅ Kelime oluşturuldu' : '✅ Kelime güncellendi')
       setFormSlug(derivedSlug)
     } catch (err: unknown) {
       console.error('Failed to save word', err)
@@ -219,6 +289,16 @@ export default function AdminDashboard() {
       return
     }
     try {
+      if (user) {
+        await logHistoryEntry({
+          slug: selectedWord.slug,
+          actor: user.email || user.uid,
+          action: 'delete',
+          payload: selectedWord.payload,
+          categoryKey: selectedWord.categoryKey,
+          message: 'Kayıt silindi',
+        })
+      }
       await deleteDoc(doc(wordsCollectionRef, selectedWord.slug))
       resetEditor()
       setSaveStatus('🗑️ Kayıt silindi')
@@ -245,33 +325,59 @@ export default function AdminDashboard() {
       }
       const payload = (await response.json()) as VocabularyPayload
       const normalized = normalizeVocabularyData(payload)
-      const operations: Promise<unknown>[] = []
+      const operations: Promise<void>[] = []
+      let importedCount = 0
+      const actorId = user.email || user.uid
+
       ;(Object.keys(normalized) as VocabularyDataKey[]).forEach((key) => {
         normalized[key].forEach((entry) => {
           const slug = deriveSlug(entry)
           if (!slug) return
+          importedCount += 1
           operations.push(
-            setDoc(
-              doc(wordsCollectionRef, slug),
-              {
-                slug,
-                categoryKey: key,
-                payload: entry,
-                updatedAt: serverTimestamp(),
-                updatedBy: user.email || user.uid,
-              },
-              { merge: true },
-            ),
+            persistWordWithHistory({
+              slug,
+              categoryKey: key,
+              payload: entry,
+              actor: actorId,
+              action: 'import',
+              message: 'words.json içe aktarımı',
+            }),
           )
         })
       })
+
       await Promise.all(operations)
-      setSaveStatus('📥 Local words.json Firestore ile senkronize edildi')
+      setSaveStatus(`📥 ${importedCount} kayıt words.json'dan senkronize edildi`)
     } catch (err) {
       console.error('Seed failed', err)
       setSaveStatus(err instanceof Error ? err.message : 'İçe aktarma başarısız oldu')
     } finally {
       setSeedInProgress(false)
+    }
+  }
+
+  const handleRestoreVersion = async (entry: WordHistoryEntry) => {
+    if (!user || !entry.payload) return
+    if (!confirm('Bu versiyona dönmek istediğinizden emin misiniz?')) return
+
+    setRestoringVersionId(entry.id)
+    try {
+      await persistWordWithHistory({
+        slug: entry.slug,
+        categoryKey: entry.categoryKey || formCategory,
+        payload: entry.payload,
+        actor: user.email || user.uid,
+        action: 'restore',
+        message: `Versiyon ${entry.id} geri yüklendi`,
+        restoredFromId: entry.id,
+      })
+      setSaveStatus('⏪ Versiyon geri yüklendi')
+    } catch (err) {
+      console.error('Restore failed', err)
+      setSaveStatus('Versiyon geri yükleme başarısız oldu')
+    } finally {
+      setRestoringVersionId(null)
     }
   }
 
@@ -517,18 +623,61 @@ export default function AdminDashboard() {
 
         <div className="rounded-3xl border border-dashed border-white/20 bg-white/0 p-6">
           <h3 className="text-2xl font-semibold text-white">📜 Değişiklik Geçmişi</h3>
-          <p className="mt-2 text-sm text-white/70">
-            Her kelime için Git benzeri bir geçmiş ağacı burada gösterilecek. Firestore sub-collection mimarisi için backend yapılandırması
-            sıradaki adımda tamamlanacak.
-          </p>
-          <ul className="mt-4 space-y-3 text-sm text-white/60">
-            <li>• Her kayıt güncellemesinde otomatik versiyon oluşturma</li>
-            <li>• Kullanıcı bazlı imzalama</li>
-            <li>• Tek tıkla önceki versiyona dönme</li>
-          </ul>
-          <p className="mt-4 rounded-2xl border border-amber-300/40 bg-amber-200/10 p-4 text-amber-100">
-            Not: Geçmiş sistemi henüz etkin değil. Bir sonraki iterasyonda Firestore `wordHistory` koleksiyonları ve geri alma işlemleri eklenecek.
-          </p>
+          {!selectedWord && (
+            <p className="mt-2 text-sm text-white/70">Geçmişi incelemek için tablodan bir kelime seçin.</p>
+          )}
+
+          {selectedWord && (
+            <>
+              <p className="mt-1 text-sm text-white/60">
+                {selectedWord.slug} için son {historyEntries.length} değişiklik · kategori {KEY_TO_CATEGORY_NAME[selectedWord.categoryKey]}
+              </p>
+
+              {historyLoading && <p className="mt-4 text-sm text-white/60">Geçmiş yükleniyor…</p>}
+              {historyError && <p className="mt-4 text-sm text-red-300">{historyError}</p>}
+              {!historyLoading && !historyError && historyEntries.length === 0 && (
+                <p className="mt-4 text-sm text-white/60">Henüz geçmiş kaydı bulunmuyor.</p>
+              )}
+
+              <ul className="mt-4 space-y-4">
+                {historyEntries.map((entry) => (
+                  <li key={entry.id} className="rounded-2xl border border-white/10 bg-slate-950/40 p-4 text-white/80">
+                    <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                      <div>
+                        <p className="text-sm font-semibold text-white">
+                          {HISTORY_LABELS[entry.action]}{' '}
+                          <span className="text-xs font-normal text-white/50">· {entry.actor || 'Bilinmiyor'}</span>
+                        </p>
+                        <p className="text-xs uppercase tracking-[0.3em] text-white/40">
+                          {entry.timestamp ? formatDate(entry.timestamp) : 'Bekleniyor'}
+                        </p>
+                      </div>
+                      <div className="flex gap-2">
+                        {entry.restoredFromId && (
+                          <span className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">
+                            ← {entry.restoredFromId}
+                          </span>
+                        )}
+                        <button
+                          className="rounded-full border border-white/20 px-3 py-1 text-xs font-semibold text-white/80 disabled:opacity-40"
+                          disabled={!entry.payload || restoringVersionId === entry.id}
+                          onClick={() => handleRestoreVersion(entry)}
+                        >
+                          {restoringVersionId === entry.id ? 'Yükleniyor...' : 'Versiyona dön'}
+                        </button>
+                      </div>
+                    </div>
+                    {entry.message && <p className="mt-2 text-xs text-white/60">{entry.message}</p>}
+                    {entry.payload && (
+                      <pre className="mt-3 max-h-48 overflow-y-auto rounded-xl border border-white/5 bg-slate-900/60 p-3 text-xs text-emerald-50">
+                        {JSON.stringify(entry.payload, null, 2)}
+                      </pre>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </div>
       </section>
     </main>
@@ -543,12 +692,89 @@ type FirestoreWordDoc = {
   updatedBy?: string
 }
 
+type FirestoreHistoryDoc = {
+  slug?: string
+  action?: HistoryAction
+  actor?: string
+  payload?: VerbEntry | WordEntry | null
+  categoryKey?: string
+  timestamp?: Timestamp
+  message?: string | null
+  restoredFromId?: string | null
+}
+
+type LogHistoryParams = {
+  slug: string
+  actor: string
+  action: HistoryAction
+  payload?: VerbEntry | WordEntry | null
+  categoryKey?: VocabularyDataKey
+  message?: string | null
+  restoredFromId?: string | null
+}
+
+type PersistWordParams = {
+  slug: string
+  payload: VerbEntry | WordEntry
+  categoryKey: VocabularyDataKey
+  actor: string
+  action: HistoryAction
+  message?: string | null
+  restoredFromId?: string | null
+}
+
 function deriveSlug(payload: Record<string, unknown>): string {
   const primary = typeof payload.infinitive === 'string' ? payload.infinitive : payload.italian
   if (!primary || typeof primary !== 'string') {
     return ''
   }
   return slugify(primary)
+}
+
+async function persistWordWithHistory({
+  slug,
+  payload,
+  categoryKey,
+  actor,
+  action,
+  message,
+  restoredFromId,
+}: PersistWordParams) {
+  await setDoc(
+    doc(wordsCollectionRef, slug),
+    {
+      slug,
+      categoryKey,
+      payload,
+      updatedAt: serverTimestamp(),
+      updatedBy: actor,
+    },
+    { merge: true },
+  )
+
+  await logHistoryEntry({
+    slug,
+    actor,
+    action,
+    payload,
+    categoryKey,
+    message,
+    restoredFromId,
+  })
+}
+
+async function logHistoryEntry({ slug, actor, action, payload, categoryKey, message, restoredFromId }: LogHistoryParams) {
+  const historyRef = collection(doc(wordsCollectionRef, slug), 'history')
+  await addDoc(historyRef, {
+    slug,
+    actor,
+    action,
+    payload: payload ?? null,
+    categoryKey: categoryKey ?? null,
+    message: message ?? null,
+    restoredFromId: restoredFromId ?? null,
+    timestamp: serverTimestamp(),
+  })
 }
 
 function downloadTextFile(content: string, filename: string) {
@@ -637,4 +863,12 @@ function StatCard({ label, value, accent }: { label: string; value: number; acce
       <p className="text-xs uppercase tracking-[0.4em] text-white/50">{label}</p>
     </div>
   )
+}
+
+const HISTORY_LABELS: Record<HistoryAction, string> = {
+  create: 'Oluşturuldu',
+  update: 'Güncellendi',
+  delete: 'Silindi',
+  restore: 'Versiyona dönüldü',
+  import: 'İçe aktarıldı',
 }
