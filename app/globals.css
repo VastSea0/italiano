@@ -1,19 +1,279 @@
-@import url('../styles.css');
-@import url('../vocabulary-styles.css');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+:root {
+  color-scheme: dark;
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+@layer base {
+  *, *::before, *::after {
+    @apply box-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply min-h-screen bg-slate-950 text-slate-100 font-sans antialiased;
+  }
+
+  a {
+    @apply text-inherit no-underline;
+  }
+
+  ::selection {
+    @apply bg-brand-400/60 text-white;
+  }
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+@layer components {
+  .loading {
+    @apply text-center text-slate-400 py-16 text-lg font-medium tracking-wide;
+  }
+
+  .stat-card {
+    @apply rounded-3xl border border-white/10 bg-white/10 p-6 shadow-2xl backdrop-blur;
+  }
+
+  .stat-number {
+    @apply text-3xl font-bold text-white;
+  }
+
+  .stat-label {
+    @apply mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/70;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide;
+  }
+
+  .badge-success {
+    @apply bg-emerald-500/90 text-white;
+  }
+
+  .badge-danger {
+    @apply bg-rose-500/90 text-white;
+  }
+
+  .badge-warning {
+    @apply bg-amber-500/90 text-white;
+  }
+
+  .badge-info {
+    @apply bg-brand-500/90 text-white;
+  }
+
+  .text-muted {
+    @apply text-slate-400;
+  }
+
+  .filter-btn {
+    @apply rounded-full border border-white/20 bg-white/5 px-4 py-2 text-sm font-semibold text-white/80 transition hover:border-white/40 hover:text-white;
+  }
+
+  .filter-btn.active {
+    @apply border-brand-400 bg-brand-500/20 text-white shadow-lg shadow-brand-900/30;
+  }
+
+  .story-word {
+    @apply cursor-pointer rounded-md border-b-2 border-dotted border-slate-300/60 px-1 transition hover:bg-brand-500/20;
+  }
+
+  .story-word.found {
+    @apply border-emerald-400 text-emerald-200;
+  }
+
+  .story-word.not-found {
+    @apply border-rose-400 text-rose-200;
+  }
+
+  .word-tooltip {
+    @apply absolute left-1/2 top-full z-20 mt-2 w-64 -translate-x-1/2 rounded-2xl border border-white/10 bg-slate-900/95 p-4 text-sm text-slate-100 shadow-2xl backdrop-blur;
+  }
+
+  .word-item {
+    @apply rounded-2xl border border-white/5 bg-white/5 p-5 shadow-xl backdrop-blur transition hover:-translate-y-1 hover:border-brand-400/50;
+  }
+
+  .word-main {
+    @apply flex items-center justify-between gap-3;
+  }
+
+  .word-italian {
+    @apply text-lg font-semibold text-white;
+  }
+
+  .word-english {
+    @apply text-sm font-medium text-slate-300 italic;
+  }
+
+  .word-details {
+    @apply mt-2 text-sm text-slate-300;
+  }
+
+  .word-examples {
+    @apply mt-3 text-xs text-slate-400;
+  }
+
+  .category-section {
+    @apply rounded-3xl border border-white/5 bg-white/5 p-6 shadow-xl backdrop-blur;
+  }
+
+  .category-title {
+    @apply mb-4 flex items-center gap-2 text-xl font-semibold text-white;
+  }
+
+  .word-grid {
+    @apply grid gap-5 sm:grid-cols-2;
+  }
+
+  .category-filter {
+    @apply rounded-3xl border border-white/10 bg-white/5 p-6 shadow-xl backdrop-blur;
+  }
+
+  .filters {
+    @apply rounded-3xl border border-white/10 bg-white/5 p-6 shadow-xl backdrop-blur space-y-4;
+  }
+
+  .filter-group {
+    @apply grid gap-4 md:grid-cols-2;
+  }
+
+  .story-section {
+    @apply rounded-3xl border border-white/10 bg-gradient-to-br from-rose-500/20 via-rose-600/10 to-orange-500/10 p-6 text-white shadow-2xl backdrop-blur;
+  }
+
+  .story-container {
+    @apply mt-4 rounded-3xl border border-white/5 bg-slate-900/40 p-6 shadow-inner backdrop-blur;
+  }
+
+  .story-selector {
+    @apply flex flex-col gap-4 md:flex-row md:items-end md:justify-between;
+  }
+
+  .story-title {
+    @apply mb-6 text-2xl font-semibold text-white text-center;
+  }
+
+  .story-sentence {
+    @apply mb-4 rounded-2xl border border-white/5 bg-white/5 p-4 text-lg leading-relaxed text-white/90;
+  }
+
+  .story-controls {
+    @apply mt-4 flex flex-wrap items-center justify-between gap-4;
+  }
+
+  .story-toggle {
+    @apply rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:border-white/60 hover:bg-white/20;
+  }
+
+  .story-navigation .nav-btn {
+    @apply rounded-full border border-white/20 px-3 py-2 text-sm font-semibold text-white transition hover:border-brand-400 hover:text-brand-200 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .modal {
+    @apply fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/70 px-4 py-10;
+  }
+
+  .modal-content {
+    @apply mx-auto max-w-2xl rounded-3xl border border-white/10 bg-slate-900/90 p-8 shadow-2xl backdrop-blur;
+  }
+
+  .modal-header {
+    @apply mb-6 flex items-center justify-between;
+  }
+
+  .close {
+    @apply cursor-pointer text-2xl text-slate-400 transition hover:text-white;
+  }
+
+  .option-group {
+    @apply mb-4 space-y-2;
+  }
+
+  .option-group label {
+    @apply text-sm font-semibold uppercase tracking-wide text-slate-300;
+  }
+
+  .option-group select,
+  .option-group input,
+  select,
+  input,
+  textarea {
+    @apply rounded-2xl border border-white/10 bg-white/5 text-sm text-white placeholder:text-white/40 focus:border-brand-400 focus:ring-2 focus:ring-brand-400/40;
+  }
+
+  .template-preview {
+    @apply grid gap-4 sm:grid-cols-3;
+  }
+
+  .template-option {
+    @apply flex flex-col items-center gap-2 rounded-2xl border border-white/10 bg-white/5 p-4 text-center text-sm font-semibold text-white/80 transition hover:border-brand-400 hover:text-white;
+  }
+
+  .template-option.selected {
+    @apply border-brand-400 bg-brand-500/10 text-white shadow-lg shadow-brand-900/30;
+  }
+
+  .template-icon {
+    @apply text-3xl;
+  }
+
+  .modal-actions {
+    @apply mt-6 flex flex-wrap justify-end gap-3;
+  }
+
+  .modal-btn {
+    @apply rounded-full px-5 py-2 text-sm font-semibold transition;
+  }
+
+  .modal-btn.primary {
+    @apply bg-brand-500 text-white shadow-lg shadow-brand-900/40 hover:bg-brand-400;
+  }
+
+  .modal-btn.secondary {
+    @apply border border-white/10 bg-white/5 text-white/80 hover:text-white;
+  }
+
+  .no-results {
+    @apply text-center text-lg font-medium text-slate-400;
+  }
+
+  .story-info {
+    @apply text-sm font-medium text-white/70;
+  }
+
+  .story-selector select {
+    @apply w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white;
+  }
+
+  .story-navigation {
+    @apply flex items-center gap-3;
+  }
+
+  .table-container {
+    @apply overflow-hidden rounded-3xl border border-white/5 bg-slate-900/60 p-4 shadow-inner backdrop-blur;
+  }
+
+  table {
+    @apply w-full border-collapse text-left text-sm text-white/80;
+  }
+
+  thead {
+    @apply sticky top-0 bg-white/5 backdrop-blur;
+  }
+
+  th {
+    @apply px-4 py-3 text-xs font-semibold uppercase tracking-wide text-white/70;
+  }
+
+  td {
+    @apply border-t border-white/5 px-4 py-3;
+  }
+
+  tr:hover td {
+    @apply bg-white/5;
+  }
 }

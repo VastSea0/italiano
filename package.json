@@ -25,9 +25,13 @@
     "word-frequency-json": "node word-frequency-analyzer.js --json"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.10",
     "@types/node": "24.10.1",
     "@types/react": "19.2.4",
     "@types/react-dom": "^19.2.3",
+    "autoprefixer": "^10.4.22",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.13",
     "typescript": "^5.9.3"
   }
 }
