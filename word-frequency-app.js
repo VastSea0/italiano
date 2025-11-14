@@ -64,8 +64,8 @@ function findWordInVocabulary(word) {
         for (let verb of vocabularyData.verbs) {
             if (!verb) continue;
             
-            // Check infinitive
-            if (verb.infinitive && verb.infinitive.toLowerCase().includes(cleanWord)) {
+            // Check infinitive - EXACT match only (tam eşleşme)
+            if (verb.infinitive && verb.infinitive.toLowerCase() === cleanWord) {
                 return { ...verb, type: 'Verb', english: verb.english || 'N/A' };
             }
             
@@ -109,12 +109,12 @@ function findWordInVocabulary(word) {
         for (let item of category.data) {
             if (!item) continue;
             
-            // Check italian word
+            // Check italian word - EXACT match
             if (item.italian && item.italian.toLowerCase() === cleanWord) {
                 return { ...item, type: category.type, english: item.english || 'N/A' };
             }
             
-            // Check forms
+            // Check forms - EXACT match
             if (item.forms && Array.isArray(item.forms)) {
                 if (item.forms.some(form => form && form.toLowerCase() === cleanWord)) {
                     return { ...item, type: category.type, english: item.english || 'N/A' };
