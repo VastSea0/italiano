@@ -8,14 +8,30 @@ export default function Home() {
 
   useEffect(() => {
     setMounted(true)
-    // Load the existing script
+    
+    // Check if script is already loaded
+    if (document.getElementById('verb-analyzer-script')) {
+      // Script already loaded, just re-initialize
+      if ((window as any).loadVocabulary) {
+        (window as any).loadVocabulary()
+      }
+      return
+    }
+    
+    // Load the script only once
     const script = document.createElement('script')
+    script.id = 'verb-analyzer-script'
     script.src = '/verb-analyzer-client.js'
     script.async = true
+    script.onload = () => {
+      // Script loaded successfully
+      console.log('Verb analyzer script loaded')
+    }
     document.body.appendChild(script)
 
     return () => {
-      document.body.removeChild(script)
+      // Don't remove script on unmount to prevent redeclaration
+      // Just clean up if needed
     }
   }, [])
 
