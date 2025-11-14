@@ -40,6 +40,7 @@ const ADMIN_EMAILS = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || '')
   .filter(Boolean)
 
 const wordsCollectionRef = collection(db, 'words')
+const translationQueueCollectionRef = collection(db, 'translationQueue')
 
 type WordRecord = {
   id: string
@@ -66,6 +67,34 @@ type WordHistoryEntry = {
   restoredFromId?: string | null
 }
 
+type TranslationStatus = 'pending' | 'resolved'
+
+type TranslationTask = {
+  id: string
+  slug: string
+  word: string
+  displayWord: string
+  context?: string | null
+  storyTitle?: string | null
+  sentenceId?: number | null
+  status: TranslationStatus
+  createdAt?: Date
+  resolvedAt?: Date
+  resolvedBy?: string | null
+}
+
+type TranslationTaskDoc = {
+  word?: string
+  surface?: string
+  context?: string
+  storyTitle?: string
+  sentenceId?: number
+  status?: TranslationStatus
+  createdAt?: Timestamp
+  resolvedAt?: Timestamp
+  resolvedBy?: string
+}
+
 type EditorMode = 'create' | 'edit'
 
 export default function AdminDashboard() {
@@ -89,6 +118,10 @@ export default function AdminDashboard() {
   const [historyLoading, setHistoryLoading] = useState(false)
   const [historyError, setHistoryError] = useState<string | null>(null)
   const [restoringVersionId, setRestoringVersionId] = useState<string | null>(null)
+  const [translationTasks, setTranslationTasks] = useState<TranslationTask[]>([])
+  const [translationLoading, setTranslationLoading] = useState(false)
+  const [translationError, setTranslationError] = useState<string | null>(null)
+  const [resolvingTaskId, setResolvingTaskId] = useState<string | null>(null)
   const syncStructuredEntry = (entry: GenericEntry | null) => {
     setStructuredEntry(entry)
     if (entry) {
@@ -153,6 +186,14 @@ export default function AdminDashboard() {
     if (ADMIN_EMAILS.length === 0) return true
     return ADMIN_EMAILS.includes((user.email || '').toLowerCase())
   }, [user])
+  const pendingTranslationTasks = useMemo(
+    () => translationTasks.filter((task) => task.status !== 'resolved'),
+    [translationTasks],
+  )
+  const recentResolvedTasks = useMemo(
+    () => translationTasks.filter((task) => task.status === 'resolved').slice(0, 3),
+    [translationTasks],
+  )
 
   useEffect(() => {
     if (!user || !isAuthorized) {
@@ -193,48 +234,84 @@ export default function AdminDashboard() {
     return () => unsubscribe()
   }, [user, isAuthorized])
 
-    useEffect(() => {
-      if (!selectedWord) {
-        setHistoryEntries([])
+  useEffect(() => {
+    setTranslationLoading(true)
+    const queueQuery = query(translationQueueCollectionRef, orderBy('createdAt', 'desc'))
+    const unsubscribe = onSnapshot(
+      queueQuery,
+      (snapshot) => {
+        const docs: TranslationTask[] = snapshot.docs.map((docSnap) => {
+          const data = docSnap.data() as TranslationTaskDoc
+          return {
+            id: docSnap.id,
+            slug: docSnap.id,
+            word: data.word ?? docSnap.id,
+            displayWord: data.surface ?? data.word ?? docSnap.id,
+            context: data.context ?? null,
+            storyTitle: data.storyTitle ?? null,
+            sentenceId: data.sentenceId ?? null,
+            status: data.status ?? 'pending',
+            createdAt: data.createdAt ? data.createdAt.toDate() : undefined,
+            resolvedAt: data.resolvedAt ? data.resolvedAt.toDate() : undefined,
+            resolvedBy: data.resolvedBy ?? null,
+          }
+        })
+        setTranslationTasks(docs)
+        setTranslationLoading(false)
+        setTranslationError(null)
+      },
+      (err) => {
+        console.error('Failed to subscribe to translation queue', err)
+        setTranslationError('Çeviri kuyruğu yüklenemedi')
+        setTranslationLoading(false)
+      },
+    )
+
+    return () => unsubscribe()
+  }, [])
+
+  useEffect(() => {
+    if (!selectedWord) {
+      setHistoryEntries([])
+      setHistoryLoading(false)
+      setHistoryError(null)
+      return
+    }
+
+    setHistoryLoading(true)
+    const historyRef = collection(doc(wordsCollectionRef, selectedWord.slug), 'history')
+    const historyQuery = query(historyRef, orderBy('timestamp', 'desc'), limit(25))
+
+    const unsubscribe = onSnapshot(
+      historyQuery,
+      (snapshot) => {
+        const entries: WordHistoryEntry[] = snapshot.docs.map((docSnap) => {
+          const data = docSnap.data() as FirestoreHistoryDoc
+          return {
+            id: docSnap.id,
+            slug: selectedWord.slug,
+            action: (data.action as HistoryAction) ?? 'update',
+            actor: data.actor ?? null,
+            payload: data.payload ?? null,
+            categoryKey: (data.categoryKey as VocabularyDataKey) ?? undefined,
+            timestamp: data.timestamp ? data.timestamp.toDate() : undefined,
+            message: data.message ?? null,
+            restoredFromId: data.restoredFromId ?? null,
+          }
+        })
+        setHistoryEntries(entries)
         setHistoryLoading(false)
         setHistoryError(null)
-        return
-      }
+      },
+      (err) => {
+        console.error('History subscription failed', err)
+        setHistoryError('Geçmiş verisi alınamadı')
+        setHistoryLoading(false)
+      },
+    )
 
-      setHistoryLoading(true)
-      const historyRef = collection(doc(wordsCollectionRef, selectedWord.slug), 'history')
-      const historyQuery = query(historyRef, orderBy('timestamp', 'desc'), limit(25))
-
-      const unsubscribe = onSnapshot(
-        historyQuery,
-        (snapshot) => {
-          const entries: WordHistoryEntry[] = snapshot.docs.map((docSnap) => {
-            const data = docSnap.data() as FirestoreHistoryDoc
-            return {
-              id: docSnap.id,
-              slug: selectedWord.slug,
-              action: (data.action as HistoryAction) ?? 'update',
-              actor: data.actor ?? null,
-              payload: data.payload ?? null,
-              categoryKey: (data.categoryKey as VocabularyDataKey) ?? undefined,
-              timestamp: data.timestamp ? data.timestamp.toDate() : undefined,
-              message: data.message ?? null,
-              restoredFromId: data.restoredFromId ?? null,
-            }
-          })
-          setHistoryEntries(entries)
-          setHistoryLoading(false)
-          setHistoryError(null)
-        },
-        (err) => {
-          console.error('History subscription failed', err)
-          setHistoryError('Geçmiş verisi alınamadı')
-          setHistoryLoading(false)
-        },
-      )
-
-      return () => unsubscribe()
-    }, [selectedWord])
+    return () => unsubscribe()
+  }, [selectedWord])
 
   const filteredWords = useMemo(() => {
     const term = searchTerm.trim().toLowerCase()
@@ -313,6 +390,35 @@ export default function AdminDashboard() {
     resetEditor()
   }
 
+  const handleAdoptTranslationTask = (task: TranslationTask) => {
+    const inferredCategory = inferCategoryFromWord(task.word)
+    setEditorMode('create')
+    setSelectedWord(null)
+    setFormCategory(inferredCategory)
+    syncStructuredEntry(buildEntryFromTask(task, inferredCategory))
+    setFormSlug(task.slug)
+    setSaveStatus(`"${task.displayWord}" için yeni kayıt oluşturun.`)
+  }
+
+  const handleResolveTranslationTask = async (taskId: string) => {
+    setResolvingTaskId(taskId)
+    try {
+      await setDoc(
+        doc(translationQueueCollectionRef, taskId),
+        {
+          status: 'resolved',
+          resolvedAt: serverTimestamp(),
+          resolvedBy: user?.email || user?.uid || 'unknown',
+        },
+        { merge: true },
+      )
+    } catch (err) {
+      console.error('Failed to resolve translation task', err)
+    } finally {
+      setResolvingTaskId(null)
+    }
+  }
+
   const handleSaveWord = async () => {
     if (!user) return
     setSaving(true)
@@ -339,6 +445,7 @@ export default function AdminDashboard() {
         action: historyAction,
         message: historyAction === 'create' ? 'Manuel oluşturma' : 'Manuel güncelleme',
       })
+      await resolveTranslationTaskBySlug(derivedSlug, actorId)
 
       setSaveStatus(historyAction === 'create' ? '✅ Kelime oluşturuldu' : '✅ Kelime güncellendi')
       setFormSlug(derivedSlug)
@@ -494,6 +601,72 @@ export default function AdminDashboard() {
           <StatCard label="Pronouns" value={dataset.pronouns.length} accent="from-sky-500/30" />
         </div>
       </header>
+
+      <section className="mt-10 rounded-3xl border border-amber-300/30 bg-amber-200/10 p-6 shadow-2xl backdrop-blur">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.5em] text-amber-200">Çeviri Kuyruğu</p>
+            <h2 className="text-2xl font-semibold text-white">🚨 Öncelikli Kelimeler</h2>
+            <p className="text-sm text-white/70">Story bölümünden gelen ve henüz sözlükte olmayan kelimeler.</p>
+          </div>
+          <div className="flex gap-2">
+            <span className="rounded-full border border-amber-200/50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-amber-100">
+              Bekleyen: {pendingTranslationTasks.length}
+            </span>
+            <span className="rounded-full border border-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-white/60">
+              Tamamlanan: {translationTasks.length - pendingTranslationTasks.length}
+            </span>
+          </div>
+        </div>
+
+        <div className="mt-6 space-y-4">
+          {translationLoading && <p className="text-sm text-white/60">Kuyruk yükleniyor…</p>}
+          {translationError && <p className="text-sm text-red-300">{translationError}</p>}
+          {!translationLoading && !translationError && pendingTranslationTasks.length === 0 && (
+            <p className="text-sm text-white/60">Şu anda bekleyen çeviri isteği yok. Harika!</p>
+          )}
+          {pendingTranslationTasks.map((task) => (
+            <div key={task.id} className="rounded-2xl border border-white/10 bg-slate-950/40 p-4 text-white/80">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-lg font-semibold text-white">{task.displayWord}</p>
+                  <p className="text-xs text-white/50">Slug: {task.slug}</p>
+                  {task.storyTitle && <p className="text-xs text-white/60">Hikâye: {task.storyTitle}</p>}
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handleAdoptTranslationTask(task)}
+                    className="rounded-full border border-brand-300/40 bg-brand-400/20 px-4 py-2 text-xs font-semibold text-brand-50"
+                  >
+                    Formda aç
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleResolveTranslationTask(task.slug)}
+                    disabled={resolvingTaskId === task.slug}
+                    className="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold text-white/80 disabled:opacity-60"
+                  >
+                    {resolvingTaskId === task.slug ? 'Kapanıyor…' : 'Tamamlandı'}
+                  </button>
+                </div>
+              </div>
+              {task.context && <p className="mt-3 text-xs text-white/60">{task.context}</p>}
+            </div>
+          ))}
+        </div>
+
+        {recentResolvedTasks.length > 0 && (
+          <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4 text-xs text-white/60">
+            <p className="text-white/80">Son tamamlananlar:</p>
+            <ul className="mt-2 space-y-1">
+              {recentResolvedTasks.map((task) => (
+                <li key={`resolved-${task.id}`}>{task.displayWord}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </section>
 
       <section className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur">
@@ -853,6 +1026,55 @@ async function logHistoryEntry({ slug, actor, action, payload, categoryKey, mess
     restoredFromId: restoredFromId ?? null,
     timestamp: serverTimestamp(),
   })
+}
+
+async function resolveTranslationTaskBySlug(slug: string, actor: string) {
+  if (!slug) return
+  try {
+    await setDoc(
+      doc(translationQueueCollectionRef, slug),
+      {
+        status: 'resolved',
+        resolvedAt: serverTimestamp(),
+        resolvedBy: actor,
+      },
+      { merge: true },
+    )
+  } catch (err) {
+    console.error('Failed to auto-resolve translation task', err)
+  }
+}
+
+function inferCategoryFromWord(word: string): VocabularyDataKey {
+  const normalized = word.toLowerCase()
+  if (normalized.endsWith('are') || normalized.endsWith('ere') || normalized.endsWith('ire')) {
+    return 'verbs'
+  }
+  return 'commonNouns'
+}
+
+function buildEntryFromTask(task: TranslationTask, category: VocabularyDataKey): GenericEntry {
+  if (category === 'verbs') {
+    return {
+      infinitive: task.displayWord || task.word,
+      english: '',
+      present: [],
+      past: [],
+      presentContinuous: [],
+      usage: task.context ?? task.storyTitle ?? '',
+      examples: task.context ? [task.context] : [],
+    }
+  }
+  return {
+    italian: task.displayWord || task.word,
+    english: '',
+    forms: [],
+    gender: '',
+    plural: '',
+    type: '',
+    usage: task.context ?? task.storyTitle ?? '',
+    examples: task.context ? [task.context] : [],
+  }
 }
 
 function downloadTextFile(content: string, filename: string) {
