@@ -24,7 +24,14 @@ function getContentType(filePath) {
 // Create HTTP server
 const server = http.createServer((req, res) => {
     // Parse the URL to get the file path
-    let filePath = req.url === '/' ? '/verb-analyzer.html' : req.url;
+    let filePath = req.url;
+    
+    // Default routes
+    if (filePath === '/') {
+        filePath = '/verb-analyzer.html';
+    } else if (filePath === '/frequency') {
+        filePath = '/word-frequency.html';
+    }
     
     // Remove query parameters
     filePath = filePath.split('?')[0];
@@ -98,10 +105,11 @@ const HOST = process.env.HOST || 'localhost';
 
 // Start the server
 server.listen(PORT, HOST, () => {
-    console.log('\n🇮🇹 Italian Verbs Analyzer Server Started! 🇮🇹');
+    console.log('\n🇮🇹 Italian Learning Platform Server Started! 🇮🇹');
     console.log('==========================================');
     console.log(`📍 Server running at: http://${HOST}:${PORT}`);
-    console.log(`📊 Verb Analyzer: http://${HOST}:${PORT}/`);
+    console.log(`📚 Vocabulary Browser: http://${HOST}:${PORT}/`);
+    console.log(`📊 Frequency Analyzer: http://${HOST}:${PORT}/frequency`);
     console.log(`📄 JSON Data: http://${HOST}:${PORT}/words.json`);
     console.log('==========================================');
     console.log('Press Ctrl+C to stop the server\n');
