@@ -196,6 +196,9 @@ export default function FlashcardsPage() {
     if (!user || !activeCard || grading || cardTransitioning) return
     setGrading(true)
     setSessionMessage(null)
+    setShowAnswer(false)
+    setCardTransitioning(true)
+    
     try {
       const existingProgress = progressMap[activeCard.slug]
       const sm2 = computeSm2(existingProgress, quality)
@@ -203,11 +206,11 @@ export default function FlashcardsPage() {
       setProgressMap((prev) => ({ ...prev, [activeCard.slug]: nextProgress }))
       updateSessionStats(quality, activeCard.slug)
       await persistProgress(user, activeCard.slug, nextProgress)
-      setShowAnswer(false)
       setCardSeed((prev) => prev + 1)
     } catch (err: unknown) {
       console.error('Failed to record flashcard answer', err)
       setSessionMessage('Cevap kaydedilemedi. Lütfen tekrar deneyin.')
+      setCardTransitioning(false)
     } finally {
       setGrading(false)
     }
@@ -370,14 +373,14 @@ export default function FlashcardsPage() {
               )}
 
               {deckReady && activeCard && (
-                <div className="flex h-full flex-col">
+                <div className={`flex h-full flex-col transition-opacity duration-200 ${cardTransitioning ? 'opacity-0' : 'opacity-100'}`}>
                   <p className="text-xs uppercase tracking-[0.3em] text-white/40">{activeCard.categoryLabel}</p>
-                  <div className={`mt-3 text-4xl font-semibold text-white transition-opacity duration-200 ${cardTransitioning ? 'opacity-0' : 'opacity-100'}`}>
+                  <div className="mt-3 text-4xl font-semibold text-white">
                     {activeCard.prompt}
                   </div>
                   {activeCard.extra && <p className="mt-2 text-sm text-white/60">{activeCard.extra}</p>}
 
-                  {showAnswer ? (
+                  {!cardTransitioning && showAnswer ? (
                     <div className="mt-6 flex-1 rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-4">
                       <p className="text-sm uppercase tracking-[0.3em] text-emerald-200">Cevap</p>
                       <p className="mt-2 text-2xl font-semibold text-white">{activeCard.answer}</p>
@@ -389,7 +392,7 @@ export default function FlashcardsPage() {
                         </ul>
                       )}
                     </div>
-                  ) : (
+                  ) : !cardTransitioning ? (
                     <div className="mt-6 flex flex-1 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
                       <button
                         className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-lg disabled:opacity-50"
@@ -399,18 +402,20 @@ export default function FlashcardsPage() {
                         Cevabı göster
                       </button>
                     </div>
+                  ) : (
+                    <div className="mt-6 flex-1" />
                   )}
 
                   {sessionMessage && <p className="mt-4 text-sm text-amber-200">{sessionMessage}</p>}
 
-                  {showAnswer && (
+                  {!cardTransitioning && showAnswer && (
                     <div className="mt-6 grid gap-3 sm:grid-cols-2">
                       {QUALITY_OPTIONS.map((option) => (
                         <button
                           key={option.value}
-                          className={`rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition ${option.color} ${grading || cardTransitioning ? 'opacity-60' : ''}`}
+                          className={`rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition ${option.color} ${grading ? 'opacity-60' : ''}`}
                           onClick={() => handleGradeCard(option.value)}
-                          disabled={grading || cardTransitioning}
+                          disabled={grading}
                         >
                           <div className="flex items-center justify-between">
                             <span>
