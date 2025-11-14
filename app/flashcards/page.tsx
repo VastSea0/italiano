@@ -39,6 +39,8 @@ const QUALITY_OPTIONS: { value: number; label: string; description: string; colo
   { value: 5, label: 'Easy', description: 'Kolay', color: 'border-sky-400/40 bg-sky-500/10 text-sky-100' },
 ]
 
+const CARD_SWAP_DELAY_MS = 220
+
 const createInitialSession = (): SessionStats => ({
   startedAt: null,
   responses: 0,
@@ -62,6 +64,8 @@ export default function FlashcardsPage() {
   const [grading, setGrading] = useState(false)
   const [sessionMessage, setSessionMessage] = useState<string | null>(null)
   const [savingSession, setSavingSession] = useState(false)
+  const [activeCard, setActiveCard] = useState<Flashcard | null>(null)
+  const [cardTransitioning, setCardTransitioning] = useState(false)
 
   useEffect(() => {
     if (!user) {
@@ -144,36 +148,63 @@ export default function FlashcardsPage() {
   }, [user])
 
   const deck = useMemo(() => buildFlashcardDeck(vocabulary), [vocabulary])
-  const currentCard = useMemo(() => selectNextCard(deck, progressMap), [deck, progressMap, cardSeed])
+  const nextCardCandidate = useMemo(() => selectNextCard(deck, progressMap), [deck, progressMap, cardSeed])
+
+  useEffect(() => {
+    if (!nextCardCandidate) {
+      setActiveCard(null)
+      setCardTransitioning(false)
+      return
+    }
+    if (!activeCard) {
+      setActiveCard(nextCardCandidate)
+      setCardTransitioning(false)
+      return
+    }
+    if (nextCardCandidate.slug === activeCard.slug) {
+      setCardTransitioning(false)
+      return
+    }
+    setCardTransitioning(true)
+    const timeout = window.setTimeout(() => {
+      setActiveCard(nextCardCandidate)
+      setCardTransitioning(false)
+      setShowAnswer(false)
+    }, CARD_SWAP_DELAY_MS)
+    return () => window.clearTimeout(timeout)
+  }, [nextCardCandidate, activeCard])
+
   const intervalPreview = useMemo(() => {
-    if (!currentCard) return {}
-    const results = previewIntervals(progressMap[currentCard.slug])
+    if (!activeCard) return {}
+    const results = previewIntervals(progressMap[activeCard.slug])
     return results.reduce<Record<number, IntervalPreview>>((acc, result) => {
       acc[result.quality] = { interval: result.interval, status: result.status }
       return acc
     }, {})
-  }, [currentCard, progressMap])
+  }, [activeCard, progressMap])
 
   const dueCount = useMemo(() => getDueCount(deck, progressMap), [deck, progressMap])
   const newCount = useMemo(() => deck.filter((card) => !progressMap[card.slug]).length, [deck, progressMap])
 
   const handleReveal = () => {
+    if (cardTransitioning) return
     setShowAnswer(true)
     setSessionMessage(null)
   }
 
   const handleGradeCard = async (quality: number) => {
-    if (!user || !currentCard || grading) return
+    if (!user || !activeCard || grading || cardTransitioning) return
     setGrading(true)
     setSessionMessage(null)
     try {
-      const existingProgress = progressMap[currentCard.slug]
+      const existingProgress = progressMap[activeCard.slug]
       const sm2 = computeSm2(existingProgress, quality)
-      const nextProgress = upsertProgress(currentCard.slug, existingProgress, sm2)
-      setProgressMap((prev) => ({ ...prev, [currentCard.slug]: nextProgress }))
-      updateSessionStats(quality, currentCard.slug)
-      await persistProgress(user, currentCard.slug, nextProgress)
+      const nextProgress = upsertProgress(activeCard.slug, existingProgress, sm2)
+      setProgressMap((prev) => ({ ...prev, [activeCard.slug]: nextProgress }))
+      updateSessionStats(quality, activeCard.slug)
+      await persistProgress(user, activeCard.slug, nextProgress)
       setShowAnswer(false)
+      setCardTransitioning(true)
       setCardSeed((prev) => prev + 1)
     } catch (err: unknown) {
       console.error('Failed to record flashcard answer', err)
@@ -248,7 +279,7 @@ export default function FlashcardsPage() {
     })
   }, [])
 
-  const deckReady = deck.length > 0
+  const deckReady = Boolean(activeCard)
   const needsAuth = !initializing && !user
 
   return (
@@ -339,19 +370,21 @@ export default function FlashcardsPage() {
                 </div>
               )}
 
-              {deckReady && currentCard && (
+              {deckReady && activeCard && (
                 <div className="flex h-full flex-col">
-                  <p className="text-xs uppercase tracking-[0.3em] text-white/40">{currentCard.categoryLabel}</p>
-                  <div className="mt-3 text-4xl font-semibold text-white">{currentCard.prompt}</div>
-                  {currentCard.extra && <p className="mt-2 text-sm text-white/60">{currentCard.extra}</p>}
+                  <p className="text-xs uppercase tracking-[0.3em] text-white/40">{activeCard.categoryLabel}</p>
+                  <div className={`mt-3 text-4xl font-semibold text-white transition-opacity duration-200 ${cardTransitioning ? 'opacity-0' : 'opacity-100'}`}>
+                    {activeCard.prompt}
+                  </div>
+                  {activeCard.extra && <p className="mt-2 text-sm text-white/60">{activeCard.extra}</p>}
 
                   {showAnswer ? (
                     <div className="mt-6 flex-1 rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-4">
                       <p className="text-sm uppercase tracking-[0.3em] text-emerald-200">Cevap</p>
-                      <p className="mt-2 text-2xl font-semibold text-white">{currentCard.answer}</p>
-                      {currentCard.examples && currentCard.examples.length > 0 && (
+                      <p className="mt-2 text-2xl font-semibold text-white">{activeCard.answer}</p>
+                      {activeCard.examples && activeCard.examples.length > 0 && (
                         <ul className="mt-3 space-y-1 text-sm text-white/70">
-                          {currentCard.examples.slice(0, 2).map((example) => (
+                          {activeCard.examples.slice(0, 2).map((example) => (
                             <li key={example}>• {example}</li>
                           ))}
                         </ul>
@@ -360,8 +393,9 @@ export default function FlashcardsPage() {
                   ) : (
                     <div className="mt-6 flex flex-1 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
                       <button
-                        className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-lg"
+                        className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-lg disabled:opacity-50"
                         onClick={handleReveal}
+                        disabled={cardTransitioning}
                       >
                         Cevabı göster
                       </button>
@@ -375,9 +409,9 @@ export default function FlashcardsPage() {
                       {QUALITY_OPTIONS.map((option) => (
                         <button
                           key={option.value}
-                          className={`rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition ${option.color} ${grading ? 'opacity-60' : ''}`}
+                          className={`rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition ${option.color} ${grading || cardTransitioning ? 'opacity-60' : ''}`}
                           onClick={() => handleGradeCard(option.value)}
-                          disabled={grading}
+                          disabled={grading || cardTransitioning}
                         >
                           <div className="flex items-center justify-between">
                             <span>
