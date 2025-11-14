@@ -31,6 +31,8 @@ export type VocabularyData = {
   commonNouns: WordEntry[]
 }
 
+export type VocabularyDataKey = keyof VocabularyData
+
 export type VocabularyPayload = {
   mostCommonItalianVerbsA1?: VerbEntry[]
   conjunctions?: WordEntry[]
@@ -84,7 +86,7 @@ export const CATEGORY_LABELS: Record<VocabularyCategory, string> = {
   time: 'Time Expressions',
 }
 
-const CATEGORY_TO_KEY: Record<Exclude<VocabularyCategory, 'all'>, keyof VocabularyData> = {
+export const CATEGORY_TO_KEY: Record<Exclude<VocabularyCategory, 'all'>, VocabularyDataKey> = {
   verbs: 'verbs',
   nouns: 'commonNouns',
   adjectives: 'adjectives',
@@ -95,7 +97,7 @@ const CATEGORY_TO_KEY: Record<Exclude<VocabularyCategory, 'all'>, keyof Vocabula
   time: 'timeExpressions',
 }
 
-const KEY_TO_CATEGORY_NAME: Record<keyof VocabularyData, string> = {
+export const KEY_TO_CATEGORY_NAME: Record<VocabularyDataKey, string> = {
   verbs: 'Verb',
   conjunctions: 'Conjunction',
   adjectives: 'Adjective',
@@ -117,6 +119,13 @@ export const CATEGORY_OPTIONS: { value: VocabularyCategory; label: string; icon:
   { value: 'conjunctions', label: 'Conjunctions', icon: '🌉' },
   { value: 'time', label: 'Time', icon: '⏰' },
 ]
+
+export const VOCABULARY_DATA_OPTIONS: { key: VocabularyDataKey; label: string }[] = (
+  Object.keys(KEY_TO_CATEGORY_NAME) as VocabularyDataKey[]
+).map((key) => ({
+  key,
+  label: KEY_TO_CATEGORY_NAME[key],
+}))
 
 export const DEFAULT_STORY: Story = {
   story_id: 0,
@@ -405,7 +414,7 @@ export function buildExportDataset(
 ): ExportWord[] {
   const includeAll = group === 'all'
   const keys: (keyof VocabularyData)[] = includeAll
-    ? (Object.keys(vocabulary) as (keyof VocabularyData)[])
+    ? (Object.keys(vocabulary) as VocabularyDataKey[])
     : [CATEGORY_TO_KEY[group]]
 
   const dataset: ExportWord[] = []
