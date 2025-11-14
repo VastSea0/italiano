@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
+import type { ChangeEvent } from 'react'
 import Link from 'next/link'
 import {
   addDoc,
@@ -51,6 +52,8 @@ type WordRecord = {
 
 type HistoryAction = 'create' | 'update' | 'delete' | 'restore' | 'import'
 
+type GenericEntry = Record<string, unknown>
+
 type WordHistoryEntry = {
   id: string
   slug: string
@@ -75,6 +78,8 @@ export default function AdminDashboard() {
   const [formCategory, setFormCategory] = useState<VocabularyDataKey>('verbs')
   const [formJson, setFormJson] = useState('')
   const [formSlug, setFormSlug] = useState('')
+  const [structuredEntry, setStructuredEntry] = useState<VerbEntry | WordEntry | GenericEntry | null>(null)
+  const [jsonError, setJsonError] = useState<string | null>(null)
   const [saveStatus, setSaveStatus] = useState<string | null>(null)
   const [saving, setSaving] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
@@ -84,6 +89,64 @@ export default function AdminDashboard() {
   const [historyLoading, setHistoryLoading] = useState(false)
   const [historyError, setHistoryError] = useState<string | null>(null)
   const [restoringVersionId, setRestoringVersionId] = useState<string | null>(null)
+  const syncStructuredEntry = (entry: GenericEntry | null) => {
+    setStructuredEntry(entry)
+    if (entry) {
+      setFormJson(JSON.stringify(entry, null, 2))
+    } else {
+      setFormJson('')
+    }
+    setJsonError(null)
+  }
+
+  const handleJsonChange = (value: string) => {
+    setFormJson(value)
+    if (!value.trim()) {
+      setStructuredEntry(null)
+      setJsonError(null)
+      return
+    }
+    try {
+      const parsed = JSON.parse(value)
+      if (typeof parsed !== 'object' || parsed === null) {
+        setJsonError('JSON bir nesne olmalı')
+        return
+      }
+      setStructuredEntry(parsed as GenericEntry)
+      setJsonError(null)
+    } catch (err) {
+      setJsonError('JSON parse edilemedi')
+    }
+  }
+
+  const handleStructuredFieldChange = (fieldKey: string, rawValue: string, fieldType: StructuredFieldType) => {
+    setStructuredEntry((prev) => {
+      const base: GenericEntry = { ...(prev ?? createDefaultEntry(formCategory)) }
+      if (fieldType === 'array') {
+        const arrayValue = rawValue
+          .split(/\r?\n|,/)
+          .map((item) => item.trim())
+          .filter(Boolean)
+        base[fieldKey] = arrayValue
+      } else {
+        base[fieldKey] = rawValue
+      }
+      setFormJson(JSON.stringify(base, null, 2))
+      setJsonError(null)
+      return base
+    })
+  }
+
+  const handleCategorySelect = (nextCategory: VocabularyDataKey) => {
+    setFormCategory(nextCategory)
+    setStructuredEntry((prev) => {
+      if (prev) return prev
+      const next = createDefaultEntry(nextCategory)
+      setFormJson(JSON.stringify(next, null, 2))
+      setJsonError(null)
+      return next
+    })
+  }
 
   const isAuthorized = useMemo(() => {
     if (!user) return false
@@ -230,7 +293,8 @@ export default function AdminDashboard() {
     setEditorMode('create')
     setSelectedWord(null)
     setFormCategory('verbs')
-    setFormJson('')
+    const emptyEntry = createDefaultEntry('verbs')
+    syncStructuredEntry(emptyEntry)
     setFormSlug('')
     setSaveStatus(null)
   }
@@ -240,7 +304,7 @@ export default function AdminDashboard() {
     setEditorMode('edit')
     setFormCategory(record.categoryKey)
     setFormSlug(record.slug)
-    setFormJson(JSON.stringify(record.payload, null, 2))
+    syncStructuredEntry(record.payload)
     setSaveStatus(null)
     setHistoryError(null)
   }
@@ -254,7 +318,10 @@ export default function AdminDashboard() {
     setSaving(true)
     setSaveStatus(null)
     try {
-      const parsed = JSON.parse(formJson || '{}')
+      if (jsonError) {
+        throw new Error('JSON geçersiz. Lütfen hatayı düzeltin.')
+      }
+      const parsed = structuredEntry ?? (formJson ? JSON.parse(formJson) : createDefaultEntry(formCategory))
       const derivedSlug = formSlug.trim() || deriveSlug(parsed)
       if (!derivedSlug) {
         throw new Error('Slug / temel anahtar belirlenemedi. Lütfen "Slug" alanını doldurun.')
@@ -546,7 +613,7 @@ export default function AdminDashboard() {
               <select
                 className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-2 text-white"
                 value={formCategory}
-                onChange={(event) => setFormCategory(event.target.value as VocabularyDataKey)}
+                onChange={(event) => handleCategorySelect(event.target.value as VocabularyDataKey)}
               >
                 {VOCABULARY_DATA_OPTIONS.map((option) => (
                   <option key={option.key} value={option.key}>
@@ -556,14 +623,25 @@ export default function AdminDashboard() {
               </select>
             </div>
 
+            <StructuredForm
+              category={formCategory}
+              entry={structuredEntry}
+              onChange={handleStructuredFieldChange}
+              onReset={() => syncStructuredEntry(createDefaultEntry(formCategory))}
+            />
+
             <div>
               <label className="text-xs font-semibold uppercase tracking-[0.4em] text-white/50">JSON İçeriği</label>
               <textarea
                 className="mt-2 min-h-[260px] w-full rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 font-mono text-sm text-emerald-50"
                 placeholder={`{\n  "infinitive": "essere",\n  "english": "to be"\n}`}
                 value={formJson}
-                onChange={(event) => setFormJson(event.target.value)}
+                onChange={(event) => handleJsonChange(event.target.value)}
               />
+              {jsonError && <p className="mt-2 text-xs text-red-300">{jsonError}</p>}
+              {!jsonError && (
+                <p className="mt-2 text-xs text-white/50">Form alanlarını kullanarak yaptığınız değişiklikler otomatik olarak JSON'a işlenir.</p>
+              )}
             </div>
 
             {saveStatus && <p className="text-sm text-white/80">{saveStatus}</p>}
@@ -871,4 +949,166 @@ const HISTORY_LABELS: Record<HistoryAction, string> = {
   delete: 'Silindi',
   restore: 'Versiyona dönüldü',
   import: 'İçe aktarıldı',
+}
+
+type StructuredFieldType = 'text' | 'textarea' | 'array'
+
+type StructuredField = {
+  key: string
+  label: string
+  type: StructuredFieldType
+  placeholder?: string
+  helperText?: string
+  only?: 'verb' | 'word'
+}
+
+const STRUCTURED_FIELDS: StructuredField[] = [
+  { key: 'infinitive', label: 'Infinitive', type: 'text', placeholder: 'essere', only: 'verb' },
+  { key: 'italian', label: 'İtalyanca', type: 'text', placeholder: 'casa', only: 'word' },
+  { key: 'english', label: 'İngilizce', type: 'text', placeholder: 'house' },
+  {
+    key: 'present',
+    label: 'Şimdiki zaman (satır satır)',
+    type: 'array',
+    helperText: 'Her satıra bir çekim yazın',
+    only: 'verb',
+  },
+  {
+    key: 'past',
+    label: 'Geçmiş zaman (satır satır)',
+    type: 'array',
+    helperText: 'Her satıra bir birleşik çekim yazın',
+    only: 'verb',
+  },
+  {
+    key: 'presentContinuous',
+    label: 'Devamlı zaman (satır satır)',
+    type: 'array',
+    helperText: 'Her satıra bir yapı yazın',
+    only: 'verb',
+  },
+  {
+    key: 'forms',
+    label: 'Alternatif formlar',
+    type: 'array',
+    helperText: 'Satır başı veya virgül ile ayırabilirsiniz',
+    only: 'word',
+  },
+  { key: 'gender', label: 'Cins (örn. m/f)', type: 'text', only: 'word' },
+  { key: 'plural', label: 'Çoğul', type: 'text', only: 'word' },
+  { key: 'type', label: 'Tür', type: 'text', only: 'word' },
+  { key: 'usage', label: 'Kullanım / Not', type: 'textarea' },
+  {
+    key: 'examples',
+    label: 'Örnek cümleler',
+    type: 'array',
+    helperText: 'Her satıra bir örnek yazın',
+  },
+]
+
+type StructuredFormProps = {
+  category: VocabularyDataKey
+  entry: GenericEntry | null
+  onChange: (key: string, value: string, type: StructuredFieldType) => void
+  onReset: () => void
+}
+
+function StructuredForm({ category, entry, onChange, onReset }: StructuredFormProps) {
+  const isVerb = category === 'verbs'
+  const visibleFields = STRUCTURED_FIELDS.filter((field) => {
+    if (!field.only) return true
+    if (field.only === 'verb') return isVerb
+    if (field.only === 'word') return !isVerb
+    return true
+  })
+
+  return (
+    <div className="rounded-2xl border border-white/10 bg-slate-950/30 p-4">
+      <div className="flex items-center justify-between">
+        <label className="text-xs font-semibold uppercase tracking-[0.4em] text-white/50">Basit Form</label>
+        <button
+          type="button"
+          onClick={onReset}
+          className="text-xs font-semibold text-white/60 hover:text-white"
+        >
+          Alanları sıfırla
+        </button>
+      </div>
+      <div className="mt-3 grid gap-3">
+        {visibleFields.map((field) => {
+          const value = getFieldDisplayValue(entry, field.key, field.type)
+          const commonProps = {
+            key: field.key,
+            value,
+            placeholder: field.placeholder,
+            onChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+              onChange(field.key, event.target.value, field.type),
+          }
+
+          return (
+            <div key={field.key}>
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/50">{field.label}</p>
+              {field.type === 'text' ? (
+                <input
+                  {...commonProps}
+                  type="text"
+                  className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-2 text-white"
+                />
+              ) : (
+                <textarea
+                  {...commonProps}
+                  className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-2 text-white"
+                  rows={field.type === 'array' ? 3 : 4}
+                />
+              )}
+              {field.helperText && <p className="mt-1 text-xs text-white/40">{field.helperText}</p>}
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+function getFieldDisplayValue(entry: GenericEntry | null, key: string, type: StructuredFieldType): string {
+  if (!entry || entry[key] === undefined || entry[key] === null) {
+    return ''
+  }
+  const raw = entry[key]
+  if (type === 'array') {
+    if (Array.isArray(raw)) {
+      return raw.join('\n')
+    }
+    if (typeof raw === 'string') {
+      return raw
+    }
+    return ''
+  }
+  if (typeof raw === 'string') {
+    return raw
+  }
+  return Array.isArray(raw) ? raw.join(', ') : ''
+}
+
+function createDefaultEntry(categoryKey: VocabularyDataKey): GenericEntry {
+  if (categoryKey === 'verbs') {
+    return {
+      infinitive: '',
+      english: '',
+      present: [],
+      past: [],
+      presentContinuous: [],
+      examples: [],
+    }
+  }
+  return {
+    italian: '',
+    english: '',
+    forms: [],
+    gender: '',
+    plural: '',
+    type: '',
+    usage: '',
+    examples: [],
+  }
 }
