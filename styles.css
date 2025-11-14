@@ -246,6 +246,11 @@ tr:hover {
     color: white;
 }
 
+.badge-warning {
+    background: #f39c12;
+    color: white;
+}
+
 /* Utility Classes */
 .text-center {
     text-align: center;
