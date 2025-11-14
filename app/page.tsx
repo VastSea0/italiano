@@ -256,6 +256,12 @@ export default function Home() {
           >
             📊 Frequency Analyzer
           </Link>
+          <Link
+            href="/flashcards"
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-5 py-2 text-sm font-semibold text-white/80 transition hover:border-white/50 hover:text-white"
+          >
+            🃏 Flashcard Studio
+          </Link>
         </nav>
       </section>
 
