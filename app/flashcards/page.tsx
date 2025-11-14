@@ -13,6 +13,9 @@ import {
   serverTimestamp,
   setDoc,
   Timestamp,
+  type DocumentData,
+  type QueryDocumentSnapshot,
+  type QuerySnapshot,
 } from 'firebase/firestore'
 import { signInWithPopup, signOut, type User } from 'firebase/auth'
 
@@ -51,6 +54,7 @@ export default function FlashcardsPage() {
   const { vocabulary, loading: vocabLoading, error: vocabularyError, reload } = useVocabularyResources({ includeStories: false })
   const [progressMap, setProgressMap] = useState<Record<string, FlashcardProgress>>({})
   const [progressLoading, setProgressLoading] = useState(false)
+  const dataLoading = vocabLoading || progressLoading
   const [sessionStats, setSessionStats] = useState<SessionStats>(createInitialSession())
   const [sessionHistory, setSessionHistory] = useState<FlashcardSession[]>([])
   const [cardSeed, setCardSeed] = useState(0)
@@ -71,9 +75,9 @@ export default function FlashcardsPage() {
     const progressRef = collection(db, 'users', user.uid, 'flashcards')
     const unsubscribe = onSnapshot(
       progressRef,
-      (snapshot) => {
+      (snapshot: QuerySnapshot<DocumentData>) => {
         const next: Record<string, FlashcardProgress> = {}
-        snapshot.forEach((docSnap) => {
+        snapshot.forEach((docSnap: QueryDocumentSnapshot<DocumentData>) => {
           const data = docSnap.data() as FirestoreProgressDoc
           next[docSnap.id] = {
             slug: docSnap.id,
@@ -89,7 +93,7 @@ export default function FlashcardsPage() {
         setProgressMap(next)
         setProgressLoading(false)
       },
-      (err) => {
+      (err: Error) => {
         console.error('Progress subscription failed', err)
         setProgressLoading(false)
       },
@@ -107,8 +111,8 @@ export default function FlashcardsPage() {
     const sessionsQuery = query(sessionsRef, orderBy('startedAt', 'desc'), limit(12))
     const unsubscribe = onSnapshot(
       sessionsQuery,
-      (snapshot) => {
-        const logs: FlashcardSession[] = snapshot.docs.map((docSnap) => {
+      (snapshot: QuerySnapshot<DocumentData>) => {
+        const logs: FlashcardSession[] = snapshot.docs.map((docSnap: QueryDocumentSnapshot<DocumentData>) => {
           const data = docSnap.data() as FirestoreSessionDoc
           return {
             id: docSnap.id,
@@ -127,7 +131,7 @@ export default function FlashcardsPage() {
         })
         setSessionHistory(logs)
       },
-      (err) => {
+      (err: Error) => {
         console.error('Session subscription failed', err)
       },
     )
@@ -136,7 +140,7 @@ export default function FlashcardsPage() {
 
   useEffect(() => {
     if (!user) return
-    ensureUserDocument(user).catch((err) => console.error('Failed to upsert user profile', err))
+    ensureUserDocument(user).catch((err: unknown) => console.error('Failed to upsert user profile', err))
   }, [user])
 
   const deck = useMemo(() => buildFlashcardDeck(vocabulary), [vocabulary])
@@ -152,7 +156,6 @@ export default function FlashcardsPage() {
 
   const dueCount = useMemo(() => getDueCount(deck, progressMap), [deck, progressMap])
   const newCount = useMemo(() => deck.filter((card) => !progressMap[card.slug]).length, [deck, progressMap])
-  const reviewCount = Math.max(deck.length - newCount, 0)
 
   const handleReveal = () => {
     setShowAnswer(true)
@@ -172,7 +175,7 @@ export default function FlashcardsPage() {
       await persistProgress(user, currentCard.slug, nextProgress)
       setShowAnswer(false)
       setCardSeed((prev) => prev + 1)
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Failed to record flashcard answer', err)
       setSessionMessage('Cevap kaydedilemedi. Lütfen tekrar deneyin.')
     } finally {
@@ -213,7 +216,7 @@ export default function FlashcardsPage() {
       })
       setSessionMessage('Oturum kaydedildi ✅')
       setSessionStats(createInitialSession())
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Failed to save session', err)
       setSessionMessage('Oturum kaydedilemedi. Lütfen tekrar deneyin.')
     } finally {
@@ -222,11 +225,11 @@ export default function FlashcardsPage() {
   }
 
   const handleSignIn = () => {
-    signInWithPopup(auth, googleProvider).catch((err) => console.error('Google sign-in failed', err))
+    signInWithPopup(auth, googleProvider).catch((err: unknown) => console.error('Google sign-in failed', err))
   }
 
   const handleSignOut = () => {
-    signOut(auth).catch((err) => console.error('Sign-out failed', err))
+    signOut(auth).catch((err: unknown) => console.error('Sign-out failed', err))
   }
 
   const updateSessionStats = useCallback((quality: number, slug: string) => {
@@ -257,6 +260,7 @@ export default function FlashcardsPage() {
           SM-2 algoritmasıyla çalışan bu sayfa, her kelimeyi Anki'deki gibi aralıklı tekrar mantığıyla sıraya koyar. Yanıtladığınız her kart ve
           oturum Firestore'a kaydedilir, böylece serilerinizi ve gelişiminizi takip edebilirsiniz.
         </p>
+        {authError && <p className="mt-2 text-sm text-red-300">{authError}</p>}
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
             href="/"
@@ -331,7 +335,7 @@ export default function FlashcardsPage() {
             <div className="mt-6 min-h-[280px] rounded-3xl border border-white/10 bg-slate-950/40 p-6">
               {!deckReady && (
                 <div className="flex h-full items-center justify-center text-sm text-white/60">
-                  {vocabLoading ? 'Kelime listesi yükleniyor...' : vocabularyError || 'Gösterilecek kart bulunamadı.'}
+                  {dataLoading ? 'Kart verileri yükleniyor...' : vocabularyError || 'Gösterilecek kart bulunamadı.'}
                 </div>
               )}
 
@@ -469,6 +473,15 @@ export default function FlashcardsPage() {
         </section>
       )}
     </main>
+  )
+}
+
+function StatPill({ label, value, accent }: { label: string; value: number; accent: string }) {
+  return (
+    <div className={`rounded-2xl border border-white/5 bg-gradient-to-br ${accent} via-white/5 to-transparent p-4 text-white`}>
+      <p className="text-xs font-semibold uppercase tracking-[0.4em] text-white/50">{label}</p>
+      <div className="mt-2 text-3xl font-semibold">{value.toLocaleString()}</div>
+    </div>
   )
 }
 
