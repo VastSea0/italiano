@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
+import { collection, doc, onSnapshot, orderBy, query, serverTimestamp, setDoc } from 'firebase/firestore'
 
 import { useVocabularyResources } from '@/hooks/useVocabularyResources'
 import {
@@ -11,9 +12,11 @@ import {
   calculateVocabularyStats,
   filterVocabularyByCategory,
   findWordInVocabulary,
+  slugify,
   type ConjugationFilter,
   type FilteredVocabulary,
   type Story,
+  type StorySentence,
   type VocabularyCategory,
   type VocabularyData,
   type WordEntry,
@@ -21,11 +24,40 @@ import {
   type VerbEntry,
 } from '@/lib/vocabulary'
 import { generateVocabularyPDF, type TemplateVariant } from '@/lib/pdf'
+import { db } from '@/lib/firebase/client'
 
 type StoryWordSelection = {
   surface: string
   normalized: string
+  sentenceText: string
+  sentenceId: number
   info: WordMatch | null
+}
+
+type StoryWordTrigger = {
+  surface: string
+  normalized: string
+  sentenceText: string
+  sentenceId: number
+}
+
+type StoryUnknownWord = {
+  normalized: string
+  surface: string
+  count: number
+  sentenceText: string
+  sentenceId: number
+}
+
+type TranslationQueueEntry = {
+  id: string
+  word: string
+  surface?: string | null
+  context?: string | null
+  storyTitle?: string | null
+  sentenceId?: number | null
+  status: 'pending' | 'resolved'
+  createdAt?: Date
 }
 
 type GridState = {
@@ -61,6 +93,9 @@ export default function Home() {
   const [conjugation, setConjugation] = useState<ConjugationFilter>('all')
   const [grid, setGrid] = useState<GridState>({ columns: 2, rows: 2 })
   const [exporting, setExporting] = useState(false)
+  const [translationQueue, setTranslationQueue] = useState<Record<string, TranslationQueueEntry>>({})
+  const [flaggingWordId, setFlaggingWordId] = useState<string | null>(null)
+  const [flagMessage, setFlagMessage] = useState<string | null>(null)
 
   useEffect(() => {
     if (storyIndex >= stories.length && stories.length > 0) {
@@ -84,10 +119,83 @@ export default function Home() {
 
   const currentStory: Story | undefined = stories[storyIndex]
   const storySentences = currentStory?.story_data ?? []
+  const storyUnknownWords = useMemo(() => collectStoryUnknownWords(storySentences, vocabulary), [storySentences, vocabulary])
+  const translationQueueSet = useMemo(() => new Set(Object.keys(translationQueue)), [translationQueue])
+  const selectedWordSlug = useMemo(() => {
+    if (!selectedWord) return null
+    return slugify(selectedWord.normalized || selectedWord.surface)
+  }, [selectedWord])
+  const selectedWordFlagged = selectedWordSlug ? translationQueueSet.has(selectedWordSlug) : false
+  const isFlaggingSelectedWord = selectedWordSlug ? flaggingWordId === selectedWordSlug : false
 
-  const handleSelectWord = (surface: string, normalized: string) => {
-    const match = findWordInVocabulary(normalized, vocabulary)
-    setSelectedWord({ surface, normalized, info: match })
+  useEffect(() => {
+    const queueRef = query(collection(db, 'translationQueue'), orderBy('createdAt', 'desc'))
+    const unsubscribe = onSnapshot(queueRef, (snapshot) => {
+      const map: Record<string, TranslationQueueEntry> = {}
+      snapshot.forEach((docSnap) => {
+        const data = docSnap.data() as TranslationQueueDoc
+        map[docSnap.id] = {
+          id: docSnap.id,
+          word: data.word ?? docSnap.id,
+          surface: data.surface ?? null,
+          context: data.context ?? null,
+          storyTitle: data.storyTitle ?? null,
+          sentenceId: data.sentenceId ?? null,
+          status: (data.status as TranslationStatus) ?? 'pending',
+          createdAt: data.createdAt ? data.createdAt.toDate() : undefined,
+        }
+      })
+      setTranslationQueue(map)
+    })
+    return () => unsubscribe()
+  }, [])
+
+  const isWordFlagged = (normalized: string) => translationQueueSet.has(slugify(normalized))
+
+  const handleFlagTranslation = async (selection: StoryWordSelection) => {
+    if (!selection) return
+    const slug = slugify(selection.normalized || selection.surface)
+    if (!slug) return
+    setFlaggingWordId(slug)
+    setFlagMessage(null)
+    try {
+      await setDoc(
+        doc(collection(db, 'translationQueue'), slug),
+        {
+          word: selection.normalized,
+          surface: selection.surface,
+          context: selection.sentenceText,
+          sentenceId: selection.sentenceId,
+          storyId: currentStory?.story_id ?? null,
+          storyTitle: currentStory?.story_title ?? null,
+          status: 'pending',
+          createdAt: serverTimestamp(),
+        },
+        { merge: true },
+      )
+      setFlagMessage('Kelime çeviri kuyruğuna alındı.')
+    } catch (err) {
+      console.error('Failed to queue translation', err)
+      setFlagMessage('Kuyruğa eklenemedi. Lütfen tekrar deneyin.')
+    } finally {
+      setFlaggingWordId(null)
+    }
+  }
+
+  const handleQuickFlagWord = (word: StoryUnknownWord) => {
+    handleFlagTranslation({
+      surface: word.surface,
+      normalized: word.normalized,
+      sentenceText: word.sentenceText,
+      sentenceId: word.sentenceId,
+      info: null,
+    })
+  }
+
+  const handleSelectWord = (word: StoryWordTrigger) => {
+    const match = findWordInVocabulary(word.normalized, vocabulary)
+    setSelectedWord({ ...word, info: match })
+    setFlagMessage(null)
   }
 
   const toggleHints = () => setShowHints((prev) => !prev)
@@ -251,7 +359,7 @@ export default function Home() {
             {storySentences.length === 0 && <div className="no-results">No stories available.</div>}
             {storySentences.map((sentence) => (
               <p key={sentence.sentence_id} className="story-sentence">
-                {renderSentence(sentence.sentence_text, showHints, (word) => handleSelectWord(word.surface, word.normalized), vocabulary)}
+                {renderSentence(sentence, showHints, handleSelectWord, vocabulary)}
               </p>
             ))}
           </div>
@@ -283,12 +391,65 @@ export default function Home() {
                   )}
                 </div>
               ) : (
-                <p className="mt-2 text-sm text-white/70">Not in vocabulary yet.</p>
+                <div className="mt-2 space-y-3 text-sm text-white/70">
+                  <p>Bu kelime henüz sözlükte yok.</p>
+                  <button
+                    type="button"
+                    onClick={() => handleFlagTranslation(selectedWord)}
+                    disabled={selectedWordFlagged || isFlaggingSelectedWord}
+                    className="w-full rounded-2xl border border-amber-300/40 bg-amber-200/20 px-4 py-2 text-sm font-semibold text-amber-100 disabled:opacity-60"
+                  >
+                    {selectedWordFlagged ? 'Çeviri kuyruğunda' : isFlaggingSelectedWord ? 'Gönderiliyor…' : 'Çeviri kuyruğuna ekle'}
+                  </button>
+                  {flagMessage && <p className="text-xs text-white/60">{flagMessage}</p>}
+                </div>
               )}
             </div>
           )}
         </div>
       </section>
+
+      {storyUnknownWords.length > 0 && (
+        <section className="mt-8 rounded-3xl border border-amber-300/30 bg-amber-200/10 p-6 shadow-2xl backdrop-blur">
+          <div className="flex flex-col gap-2">
+            <h3 className="text-2xl font-semibold text-white">🚨 Çevrilmesi Gereken Kelimeler</h3>
+            <p className="text-sm text-white/80">
+              Hikâyede sözlüğümüzde bulunmayan kelimeler. Bir tıkla admin kuyruğuna gönderip çeviri önceliği oluşturabilirsiniz.
+            </p>
+          </div>
+          <div className="mt-4 space-y-3">
+            {storyUnknownWords.slice(0, 15).map((word: StoryUnknownWord) => {
+              const slug = slugify(word.normalized)
+              const alreadyFlagged = translationQueueSet.has(slug)
+              const loading = flaggingWordId === slug
+              return (
+                <div
+                  key={`${word.normalized}-${word.sentenceId}`}
+                  className="rounded-2xl border border-white/10 bg-slate-950/40 p-4 text-white/80"
+                >
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <p className="text-lg font-semibold text-white">{word.surface}</p>
+                      <p className="text-xs text-white/50">{word.sentenceText}</p>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="rounded-full border border-white/20 px-3 py-1 text-xs text-white/70">{word.count}× geçiyor</span>
+                      <button
+                        type="button"
+                        onClick={() => handleQuickFlagWord(word)}
+                        disabled={alreadyFlagged || loading}
+                        className="rounded-full border border-amber-300/40 bg-amber-200/20 px-4 py-2 text-xs font-semibold text-amber-100 disabled:opacity-60"
+                      >
+                        {alreadyFlagged ? 'Kuyrukta' : loading ? 'Gönderiliyor…' : 'Kuyruğa ekle'}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </section>
+      )}
 
       <section className="category-filter">
         <div className="flex flex-col gap-2">
@@ -587,18 +748,15 @@ function WordCard({ word }: { word: WordEntry }) {
   )
 }
 
-type SentenceWord = {
-  surface: string
-  normalized: string
-}
+type SentenceWord = StoryWordTrigger
 
 function renderSentence(
-  text: string,
+  sentence: StorySentence,
   showHints: boolean,
   onSelect: (word: SentenceWord) => void,
   vocabulary: VocabularyData,
 ) {
-  const tokens = text.split(/(\s+|[.,!?;:])/)
+  const tokens = sentence.sentence_text.split(/(\s+|[.,!?;:])/)
   return tokens.map((token, index) => {
     const trimmed = token.trim()
     const isWord = trimmed && !/^[.,!?;:\s]+$/.test(token)
@@ -611,13 +769,67 @@ function renderSentence(
     return (
       <button
         type="button"
-        key={`${normalized}-${index}`}
+        key={`${normalized}-${sentence.sentence_id}-${index}`}
         className={`story-word ${statusClass}`}
         style={{ borderBottomStyle: showHints ? 'solid' : 'dotted' }}
-        onClick={() => onSelect({ surface: token, normalized })}
+        onClick={() =>
+          onSelect({
+            surface: token,
+            normalized,
+            sentenceText: sentence.sentence_text,
+            sentenceId: sentence.sentence_id,
+          })
+        }
       >
         {token}
       </button>
     )
   })
+}
+
+type TranslationStatus = 'pending' | 'resolved'
+
+type TranslationQueueDoc = {
+  word?: string
+  surface?: string
+  context?: string
+  storyTitle?: string
+  sentenceId?: number
+  status?: TranslationStatus
+  createdAt?: { toDate: () => Date }
+}
+
+function collectStoryUnknownWords(sentences: StorySentence[], vocabulary: VocabularyData): StoryUnknownWord[] {
+  const wordMap = new Map<string, StoryUnknownWord>()
+  sentences.forEach((sentence) => {
+    const tokens = sentence.sentence_text.split(/(\s+|[.,!?;:])/)
+    tokens.forEach((token) => {
+      const trimmed = token.trim()
+      const isWord = trimmed && !/^[.,!?;:\s]+$/.test(token)
+      if (!isWord) {
+        return
+      }
+      const normalized = trimmed.toLowerCase().replace(/[.,!?;:]/g, '')
+      if (!normalized) {
+        return
+      }
+      const match = findWordInVocabulary(normalized, vocabulary)
+      if (match) {
+        return
+      }
+      const existing = wordMap.get(normalized)
+      if (existing) {
+        existing.count += 1
+      } else {
+        wordMap.set(normalized, {
+          normalized,
+          surface: trimmed,
+          count: 1,
+          sentenceText: sentence.sentence_text,
+          sentenceId: sentence.sentence_id,
+        })
+      }
+    })
+  })
+  return Array.from(wordMap.values()).sort((a, b) => b.count - a.count)
 }
