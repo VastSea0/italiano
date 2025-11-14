@@ -14,62 +14,111 @@ const ARTICULATED_PREPS = ['del', 'dello', 'della', 'dei', 'degli', 'delle',
 async function loadVocabulary() {
     try {
         const response = await fetch('words.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
+        
+        // Safely assign vocabulary data with defaults
         vocabularyData = {
-            verbs: data.mostCommonItalianVerbsA1 || [],
-            conjunctions: data.conjunctions || [],
-            adjectives: data.adjectives || [],
-            adverbs: data.adverbs || [],
-            prepositions: data.prepositions || [],
-            timeExpressions: data.timeExpressions || [],
-            pronouns: data.pronouns || [],
-            commonNouns: data.commonNouns || []
+            verbs: Array.isArray(data.mostCommonItalianVerbsA1) ? data.mostCommonItalianVerbsA1 : [],
+            conjunctions: Array.isArray(data.conjunctions) ? data.conjunctions : [],
+            adjectives: Array.isArray(data.adjectives) ? data.adjectives : [],
+            adverbs: Array.isArray(data.adverbs) ? data.adverbs : [],
+            prepositions: Array.isArray(data.prepositions) ? data.prepositions : [],
+            timeExpressions: Array.isArray(data.timeExpressions) ? data.timeExpressions : [],
+            pronouns: Array.isArray(data.pronouns) ? data.pronouns : [],
+            commonNouns: Array.isArray(data.commonNouns) ? data.commonNouns : []
         };
+        
         console.log('✓ Vocabulary loaded successfully!');
+        console.log(`  - Verbs: ${vocabularyData.verbs.length}`);
+        console.log(`  - Nouns: ${vocabularyData.commonNouns.length}`);
+        console.log(`  - Adjectives: ${vocabularyData.adjectives.length}`);
+        console.log(`  - Total: ${Object.values(vocabularyData).reduce((sum, arr) => sum + arr.length, 0)} words`);
     } catch (error) {
         console.error('Error loading vocabulary:', error);
         alert('Error loading vocabulary data. Make sure words.json is available.');
+        
+        // Initialize with empty arrays to prevent errors
+        vocabularyData = {
+            verbs: [],
+            conjunctions: [],
+            adjectives: [],
+            adverbs: [],
+            prepositions: [],
+            timeExpressions: [],
+            pronouns: [],
+            commonNouns: []
+        };
     }
 }
 
 // Find word in vocabulary database
 function findWordInVocabulary(word) {
+    if (!word) return null;
     const cleanWord = word.toLowerCase().trim();
     
     // Search in verbs
-    for (let verb of vocabularyData.verbs) {
-        if (verb.infinitive.toLowerCase().includes(cleanWord)) {
-            return { ...verb, type: 'Verb' };
-        }
-        if (verb.present && verb.present.some(form => form.toLowerCase() === cleanWord)) {
-            return { ...verb, type: 'Verb' };
-        }
-        if (verb.past && verb.past.some(form => form.toLowerCase() === cleanWord)) {
-            return { ...verb, type: 'Verb' };
-        }
-        if (verb.presentContinuous && verb.presentContinuous.some(form => form.toLowerCase() === cleanWord)) {
-            return { ...verb, type: 'Verb' };
+    if (vocabularyData.verbs && Array.isArray(vocabularyData.verbs)) {
+        for (let verb of vocabularyData.verbs) {
+            if (!verb) continue;
+            
+            // Check infinitive
+            if (verb.infinitive && verb.infinitive.toLowerCase().includes(cleanWord)) {
+                return { ...verb, type: 'Verb', english: verb.english || 'N/A' };
+            }
+            
+            // Check present tense
+            if (verb.present && Array.isArray(verb.present)) {
+                if (verb.present.some(form => form && form.toLowerCase() === cleanWord)) {
+                    return { ...verb, type: 'Verb', english: verb.english || 'N/A' };
+                }
+            }
+            
+            // Check past tense
+            if (verb.past && Array.isArray(verb.past)) {
+                if (verb.past.some(form => form && form.toLowerCase() === cleanWord)) {
+                    return { ...verb, type: 'Verb', english: verb.english || 'N/A' };
+                }
+            }
+            
+            // Check present continuous
+            if (verb.presentContinuous && Array.isArray(verb.presentContinuous)) {
+                if (verb.presentContinuous.some(form => form && form.toLowerCase() === cleanWord)) {
+                    return { ...verb, type: 'Verb', english: verb.english || 'N/A' };
+                }
+            }
         }
     }
 
     // Search in other categories
     const categories = [
-        { data: vocabularyData.conjunctions, type: 'Conjunction' },
-        { data: vocabularyData.adjectives, type: 'Adjective' },
-        { data: vocabularyData.adverbs, type: 'Adverb' },
-        { data: vocabularyData.prepositions, type: 'Preposition' },
-        { data: vocabularyData.timeExpressions, type: 'Time Expression' },
-        { data: vocabularyData.pronouns, type: 'Pronoun' },
-        { data: vocabularyData.commonNouns, type: 'Noun' }
+        { data: vocabularyData.conjunctions || [], type: 'Conjunction' },
+        { data: vocabularyData.adjectives || [], type: 'Adjective' },
+        { data: vocabularyData.adverbs || [], type: 'Adverb' },
+        { data: vocabularyData.prepositions || [], type: 'Preposition' },
+        { data: vocabularyData.timeExpressions || [], type: 'Time Expression' },
+        { data: vocabularyData.pronouns || [], type: 'Pronoun' },
+        { data: vocabularyData.commonNouns || [], type: 'Noun' }
     ];
 
     for (let category of categories) {
+        if (!Array.isArray(category.data)) continue;
+        
         for (let item of category.data) {
+            if (!item) continue;
+            
+            // Check italian word
             if (item.italian && item.italian.toLowerCase() === cleanWord) {
-                return { ...item, type: category.type };
+                return { ...item, type: category.type, english: item.english || 'N/A' };
             }
-            if (item.forms && item.forms.some(form => form.toLowerCase() === cleanWord)) {
-                return { ...item, type: category.type };
+            
+            // Check forms
+            if (item.forms && Array.isArray(item.forms)) {
+                if (item.forms.some(form => form && form.toLowerCase() === cleanWord)) {
+                    return { ...item, type: category.type, english: item.english || 'N/A' };
+                }
             }
         }
     }
