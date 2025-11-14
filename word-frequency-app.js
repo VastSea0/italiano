@@ -69,24 +69,77 @@ function findWordInVocabulary(word) {
                 return { ...verb, type: 'Verb', english: verb.english || 'N/A' };
             }
             
-            // Check present tense
+            // Check present tense - both full form and main verb
             if (verb.present && Array.isArray(verb.present)) {
-                if (verb.present.some(form => form && form.toLowerCase() === cleanWord)) {
-                    return { ...verb, type: 'Verb', english: verb.english || 'N/A' };
+                for (let form of verb.present) {
+                    if (!form) continue;
+                    const formLower = form.toLowerCase();
+                    
+                    // Tam eşleşme: "io dico"
+                    if (formLower === cleanWord) {
+                        return { ...verb, type: 'Verb', english: verb.english || 'N/A' };
+                    }
+                    
+                    // Fiil kısmını kontrol et: "dico" (son kelime)
+                    const words = formLower.split(' ');
+                    const mainVerb = words[words.length - 1];
+                    if (mainVerb === cleanWord) {
+                        return { ...verb, type: 'Verb', english: verb.english || 'N/A' };
+                    }
                 }
             }
             
-            // Check past tense
+            // Check past tense - both full form and participle
             if (verb.past && Array.isArray(verb.past)) {
-                if (verb.past.some(form => form && form.toLowerCase() === cleanWord)) {
-                    return { ...verb, type: 'Verb', english: verb.english || 'N/A' };
+                for (let form of verb.past) {
+                    if (!form) continue;
+                    const formLower = form.toLowerCase();
+                    
+                    // Tam eşleşme: "io ho detto"
+                    if (formLower === cleanWord) {
+                        return { ...verb, type: 'Verb', english: verb.english || 'N/A' };
+                    }
+                    
+                    // Participle kontrolü: "detto" (son kelime)
+                    const words = formLower.split(' ');
+                    const participle = words[words.length - 1];
+                    if (participle === cleanWord) {
+                        return { ...verb, type: 'Verb', english: verb.english || 'N/A' };
+                    }
+                    
+                    // Yardımcı fiil kontrolü: "ho", "hai", "ha", vb.
+                    for (let w of words) {
+                        if (w === cleanWord) {
+                            return { ...verb, type: 'Verb', english: verb.english || 'N/A' };
+                        }
+                    }
                 }
             }
             
-            // Check present continuous
+            // Check present continuous - both full form and gerund
             if (verb.presentContinuous && Array.isArray(verb.presentContinuous)) {
-                if (verb.presentContinuous.some(form => form && form.toLowerCase() === cleanWord)) {
-                    return { ...verb, type: 'Verb', english: verb.english || 'N/A' };
+                for (let form of verb.presentContinuous) {
+                    if (!form) continue;
+                    const formLower = form.toLowerCase();
+                    
+                    // Tam eşleşme: "io sto dicendo"
+                    if (formLower === cleanWord) {
+                        return { ...verb, type: 'Verb', english: verb.english || 'N/A' };
+                    }
+                    
+                    // Gerund kontrolü: "dicendo" (son kelime)
+                    const words = formLower.split(' ');
+                    const gerund = words[words.length - 1];
+                    if (gerund === cleanWord) {
+                        return { ...verb, type: 'Verb', english: verb.english || 'N/A' };
+                    }
+                    
+                    // Yardımcı fiil kontrolü: "sto", "stai", "sta", vb.
+                    for (let w of words) {
+                        if (w === cleanWord) {
+                            return { ...verb, type: 'Verb', english: verb.english || 'N/A' };
+                        }
+                    }
                 }
             }
         }
