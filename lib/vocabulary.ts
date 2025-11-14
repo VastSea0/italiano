@@ -278,12 +278,86 @@ export function findWordInVocabulary(word: string, vocabulary: VocabularyData): 
   }
 
   const cleanWord = word.toLowerCase().trim()
+  const articleMatch = matchItalianArticle(cleanWord)
+  if (articleMatch) {
+    return articleMatch
+  }
+
+  const directMatch = finalizeMatches(collectMatchesForWord(cleanWord, vocabulary))
+  if (directMatch) {
+    return directMatch
+  }
+
+  const variantCandidates = generateVariantCandidates(cleanWord)
+  for (const variant of variantCandidates) {
+    const variantMatch = finalizeMatches(collectMatchesForWord(variant, vocabulary))
+    if (variantMatch) {
+      return {
+        ...variantMatch,
+        matchType: variantMatch.matchType ? `${variantMatch.matchType} (normalized)` : 'normalized form',
+      }
+    }
+  }
+
+  return null
+}
+
+const ITALIAN_ARTICLES: Record<string, string> = {
+  il: 'the (masculine singular)',
+  lo: 'the (masculine singular)',
+  la: 'the (feminine singular)',
+  l: 'the (elided singular)',
+  "l'": 'the (elided singular)',
+  i: 'the (masculine plural)',
+  gli: 'the (masculine plural)',
+  le: 'the (feminine plural)',
+  un: 'a/an (masculine)',
+  uno: 'a/an (masculine)',
+  una: 'a/an (feminine)',
+  "un'": 'a/an (feminine)',
+  dei: 'some (masculine plural)',
+  degli: 'some (masculine plural)',
+  delle: 'some (feminine plural)',
+  del: 'some (masculine singular)',
+  dello: 'some (masculine singular)',
+  della: 'some (feminine singular)',
+  dell: 'some (elided singular)',
+  "dell'": 'some (elided singular)',
+}
+
+function matchItalianArticle(word: string): WordMatch | null {
+  const normalized = word.replace(/'/g, '')
+  if (ITALIAN_ARTICLES[word]) {
+    return {
+      key: word,
+      english: ITALIAN_ARTICLES[word],
+      type: 'Article',
+      matchType: 'article',
+    }
+  }
+  if (ITALIAN_ARTICLES[normalized]) {
+    return {
+      key: normalized,
+      english: ITALIAN_ARTICLES[normalized],
+      type: 'Article',
+      matchType: 'article',
+    }
+  }
+  return null
+}
+
+function collectMatchesForWord(target: string, vocabulary: VocabularyData): WordMatch[] {
+  if (!target) {
+    return []
+  }
+
   const matches: WordMatch[] = []
 
   vocabulary.verbs.forEach((verb) => {
     let matchType: string | null = null
+    const infinitive = verb.infinitive?.toLowerCase()
 
-    if (verb.infinitive && verb.infinitive.toLowerCase() === cleanWord) {
+    if (infinitive && infinitive === target) {
       matchType = 'infinitive'
     }
 
@@ -291,13 +365,13 @@ export function findWordInVocabulary(word: string, vocabulary: VocabularyData): 
       for (const form of verb.present) {
         if (!form) continue
         const formLower = form.toLowerCase()
-        if (formLower === cleanWord) {
+        if (formLower === target) {
           matchType = 'present tense'
           break
         }
         const words = formLower.split(' ')
         const mainVerb = words[words.length - 1]
-        if (mainVerb === cleanWord) {
+        if (mainVerb === target) {
           matchType = 'present tense'
           break
         }
@@ -310,7 +384,7 @@ export function findWordInVocabulary(word: string, vocabulary: VocabularyData): 
         const formLower = form.toLowerCase()
         const words = formLower.split(' ')
         const participle = words[words.length - 1]
-        if (participle === cleanWord && words.length > 1) {
+        if (participle === target && words.length > 1) {
           matchType = 'past participle'
           break
         }
@@ -323,7 +397,7 @@ export function findWordInVocabulary(word: string, vocabulary: VocabularyData): 
         const formLower = form.toLowerCase()
         const words = formLower.split(' ')
         const gerund = words[words.length - 1]
-        if (gerund === cleanWord && words.length > 1) {
+        if (gerund === target && words.length > 1) {
           matchType = 'gerund'
           break
         }
@@ -354,7 +428,8 @@ export function findWordInVocabulary(word: string, vocabulary: VocabularyData): 
   otherCategories.forEach((category) => {
     const items = (vocabulary[category.key] ?? []) as WordEntry[]
     items.forEach((item) => {
-      if (item.italian && item.italian.toLowerCase() === cleanWord) {
+      const base = item.italian?.toLowerCase()
+      if (base && base === target) {
         matches.push({
           key: item.italian,
           english: item.english ?? 'N/A',
@@ -363,8 +438,17 @@ export function findWordInVocabulary(word: string, vocabulary: VocabularyData): 
         })
       }
 
+      if (item.plural && item.plural.toLowerCase() === target) {
+        matches.push({
+          key: item.italian,
+          english: item.english ?? 'N/A',
+          type: category.type,
+          matchType: 'plural form',
+        })
+      }
+
       if (Array.isArray(item.forms)) {
-        const hasForm = item.forms.some((form) => form && form.toLowerCase() === cleanWord)
+        const hasForm = item.forms.some((form) => form && form.toLowerCase() === target)
         if (hasForm) {
           matches.push({
             key: item.italian,
@@ -377,6 +461,10 @@ export function findWordInVocabulary(word: string, vocabulary: VocabularyData): 
     })
   })
 
+  return matches
+}
+
+function finalizeMatches(matches: WordMatch[]): WordMatch | null {
   if (matches.length === 0) {
     return null
   }
@@ -384,7 +472,7 @@ export function findWordInVocabulary(word: string, vocabulary: VocabularyData): 
   const unique: WordMatch[] = []
   const seen = new Set<string>()
   matches.forEach((match) => {
-    const key = `${match.key}|${match.english}|${match.type}`
+    const key = `${match.key}|${match.english}|${match.type}|${match.matchType ?? ''}`
     if (!seen.has(key)) {
       seen.add(key)
       unique.push(match)
@@ -396,13 +484,49 @@ export function findWordInVocabulary(word: string, vocabulary: VocabularyData): 
   }
 
   return {
-    key: cleanWord,
+    key: unique[0].key,
     english: unique.map((item) => `${item.english} (${item.type})`).join(' OR '),
     type: 'Multiple meanings',
     matchType: 'multiple',
     isMultiple: true,
     allMatches: unique,
   }
+}
+
+function generateVariantCandidates(word: string): string[] {
+  const variants = new Set<string>()
+
+  if (word.endsWith('i')) {
+    variants.add(`${word.slice(0, -1)}o`)
+    variants.add(`${word.slice(0, -1)}e`)
+    if (word.endsWith('ci')) {
+      variants.add(`${word.slice(0, -2)}co`)
+    }
+    if (word.endsWith('gi')) {
+      variants.add(`${word.slice(0, -2)}go`)
+    }
+  }
+
+  if (word.endsWith('e')) {
+    variants.add(`${word.slice(0, -1)}a`)
+    variants.add(`${word.slice(0, -1)}o`)
+  }
+
+  if (word.endsWith('hi')) {
+    variants.add(`${word.slice(0, -2)}co`)
+    variants.add(`${word.slice(0, -2)}ca`)
+  }
+
+  if (word.endsWith('che')) {
+    variants.add(`${word.slice(0, -3)}ca`)
+  }
+
+  if (word.endsWith('ghi')) {
+    variants.add(`${word.slice(0, -3)}go`)
+  }
+
+  variants.delete(word)
+  return Array.from(variants).filter((candidate) => candidate.length > 1)
 }
 
 export type ExportWord = (VerbEntry | WordEntry) & { category: string }
