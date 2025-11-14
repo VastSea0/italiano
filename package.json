@@ -24,6 +24,10 @@
     "word-frequency": "node word-frequency-analyzer.js",
     "word-frequency-json": "node word-frequency-analyzer.js --json"
   },
+  "dependencies": {
+    "jspdf": "^2.5.2",
+    "jspdf-autotable": "^3.8.3"
+  },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.10",
     "@types/node": "24.10.1",
