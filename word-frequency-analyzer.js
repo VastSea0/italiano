@@ -6,16 +6,58 @@ const path = require('path');
  * Usage: node word-frequency-analyzer.js <input-file> [output-file]
  */
 
+// Italian articles that should be combined with following nouns
+const ARTICLES = ['il', 'lo', 'la', 'i', 'gli', 'le', "l'", 'un', 'uno', 'una', "un'"];
+// Prepositions that combine with articles
+const ARTICULATED_PREPS = ['del', 'dello', 'della', 'dei', 'degli', 'delle', 
+                            'al', 'allo', 'alla', 'ai', 'agli', 'alle',
+                            'dal', 'dallo', 'dalla', 'dai', 'dagli', 'dalle',
+                            'nel', 'nello', 'nella', 'nei', 'negli', 'nelle',
+                            'sul', 'sullo', 'sulla', 'sui', 'sugli', 'sulle'];
+
 function analyzeWordFrequency(inputFilePath, outputFilePath) {
     // Read the input file
     const text = fs.readFileSync(inputFilePath, 'utf-8');
     
-    // Tokenize: split by whitespace and punctuation, but keep words with apostrophes
-    const words = text
+    // Tokenize: split by whitespace and punctuation, preserve apostrophes
+    const rawWords = text
         .toLowerCase()
-        .replace(/[.,;:!?()[\]{}""«»—–\-]/g, ' ') // Remove punctuation except apostrophes
-        .split(/\s+/)
-        .filter(word => word.length > 0);
+        .replace(/[.,;:!?()[\]{}""«»—–]/g, ' ') // Remove punctuation except apostrophes and hyphens
+        .replace(/\s+/g, ' ')
+        .trim()
+        .split(' ')
+        .filter(word => word.length > 0)
+        .filter(word => !/^\d+$/.test(word)); // Remove pure numbers
+    
+    // Combine articles with following nouns
+    const words = [];
+    for (let i = 0; i < rawWords.length; i++) {
+        const currentWord = rawWords[i];
+        const nextWord = rawWords[i + 1];
+        
+        // If current word is an article and there's a next word
+        if (ARTICLES.includes(currentWord) && nextWord) {
+            // Check if next word is also an article or preposition (then keep separate)
+            if (!ARTICLES.includes(nextWord) && !ARTICULATED_PREPS.includes(nextWord)) {
+                // Combine article with noun
+                words.push(`${currentWord} ${nextWord}`);
+                i++; // Skip next word since we combined it
+                continue;
+            }
+        }
+        
+        // Keep articulated prepositions combined with following noun
+        if (ARTICULATED_PREPS.includes(currentWord) && nextWord) {
+            if (!ARTICLES.includes(nextWord) && !ARTICULATED_PREPS.includes(nextWord)) {
+                words.push(`${currentWord} ${nextWord}`);
+                i++;
+                continue;
+            }
+        }
+        
+        // Otherwise add word as is
+        words.push(currentWord);
+    }
     
     // Count word frequencies
     const wordCount = {};
@@ -35,7 +77,7 @@ function analyzeWordFrequency(inputFilePath, outputFilePath) {
     output += `${'-'.repeat(50)}\n`;
     
     sortedWords.forEach(([word, count], index) => {
-        output += `${(index + 1).toString().padStart(4)} | ${word.padEnd(25)} | ${count}\n`;
+        output += `${(index + 1).toString().padStart(4)} | ${word.padEnd(30)} | ${count}\n`;
     });
     
     // Write to output file
@@ -46,8 +88,8 @@ function analyzeWordFrequency(inputFilePath, outputFilePath) {
     console.log(`✓ Toplam kelime: ${words.length}`);
     console.log(`✓ Benzersiz kelime: ${sortedWords.length}`);
     console.log(`✓ Sonuçlar yazıldı: ${outputFilePath}\n`);
-    console.log(`İlk 10 en çok geçen kelime:`);
-    sortedWords.slice(0, 10).forEach(([word, count], index) => {
+    console.log(`İlk 20 en çok geçen kelime:`);
+    sortedWords.slice(0, 20).forEach(([word, count], index) => {
         console.log(`  ${index + 1}. ${word} (${count} kez)`);
     });
 }
