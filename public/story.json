@@ -1,0 +1,220 @@
+{
+  "stories": [
+    {
+      "story_id": 1,
+      "story_title": "La Giornata di Sofia",
+      "story_level": "A1",
+      "total_sentences": 8,
+      "story_data": [
+        {
+          "sentence_id": 1,
+          "sentence_text": "Sofia è una studentessa italiana che studia all'università."
+        },
+        {
+          "sentence_id": 2,
+          "sentence_text": "Ogni mattina va a scuola con i suoi amici."
+        },
+        {
+          "sentence_id": 3,
+          "sentence_text": "Oggi ha lezione di italiano e storia."
+        },
+        {
+          "sentence_id": 4,
+          "sentence_text": "Durante la pausa mangia un panino e beve un caffè."
+        },
+        {
+          "sentence_id": 5,
+          "sentence_text": "Dopo le lezioni torna a casa con l'autobus."
+        },
+        {
+          "sentence_id": 6,
+          "sentence_text": "Nel pomeriggio studia e fa i compiti."
+        },
+        {
+          "sentence_id": 7,
+          "sentence_text": "La sera telefona alla sua famiglia e parla con la mamma."
+        },
+        {
+          "sentence_id": 8,
+          "sentence_text": "Prima di dormire legge un libro molto interessante."
+        }
+      ]
+    },
+    {
+      "story_id": 2,
+      "story_title": "Al Ristorante con Marco",
+      "story_level": "A1",
+      "total_sentences": 7,
+      "story_data": [
+        {
+          "sentence_id": 1,
+          "sentence_text": "Marco ha fame e vuole mangiare qualcosa di buono."
+        },
+        {
+          "sentence_id": 2,
+          "sentence_text": "Va al ristorante italiano vicino a casa sua."
+        },
+        {
+          "sentence_id": 3,
+          "sentence_text": "Il cameriere è molto gentile e parla piano."
+        },
+        {
+          "sentence_id": 4,
+          "sentence_text": "Marco legge il menu e sceglie la pasta con pomodoro."
+        },
+        {
+          "sentence_id": 5,
+          "sentence_text": "Beve un bicchiere di acqua fresca durante il pranzo."
+        },
+        {
+          "sentence_id": 6,
+          "sentence_text": "Il cibo è delizioso e costa poco."
+        },
+        {
+          "sentence_id": 7,
+          "sentence_text": "Dopo mangiare paga il conto e ringrazia il cameriere."
+        }
+      ]
+    },
+    {
+      "story_id": 3,
+      "story_title": "La Famiglia di Anna",
+      "story_level": "A1",
+      "total_sentences": 6,
+      "story_data": [
+        {
+          "sentence_id": 1,
+          "sentence_text": "Anna vive con la sua famiglia in una casa grande."
+        },
+        {
+          "sentence_id": 2,
+          "sentence_text": "Ha due fratelli piccoli che giocano sempre insieme."
+        },
+        {
+          "sentence_id": 3,
+          "sentence_text": "La mamma cucina bene e prepara cena ogni sera."
+        },
+        {
+          "sentence_id": 4,
+          "sentence_text": "Il papà lavora in ufficio e torna a casa tardi."
+        },
+        {
+          "sentence_id": 5,
+          "sentence_text": "La domenica tutta la famiglia va al parco."
+        },
+        {
+          "sentence_id": 6,
+          "sentence_text": "Anna è felice quando sta con le persone che ama."
+        }
+      ]
+    },
+    {
+      "story_id": 4,
+      "story_title": "Una Giornata di Pioggia",
+      "story_level": "A1",
+      "total_sentences": 6,
+      "story_data": [
+        {
+          "sentence_id": 1,
+          "sentence_text": "Oggi il tempo è brutto e piove molto."
+        },
+        {
+          "sentence_id": 2,
+          "sentence_text": "Luca non può uscire perché non ha l'ombrello."
+        },
+        {
+          "sentence_id": 3,
+          "sentence_text": "Resta a casa e guarda la televisione."
+        },
+        {
+          "sentence_id": 4,
+          "sentence_text": "Ascolta la musica e legge un libro interessante."
+        },
+        {
+          "sentence_id": 5,
+          "sentence_text": "La sera smette di piovere e esce il sole."
+        },
+        {
+          "sentence_id": 6,
+          "sentence_text": "Domani farà bel tempo e potrà andare fuori."
+        }
+      ]
+    },
+    {
+      "story_id": 5,
+      "story_title": "Al Supermercato",
+      "story_level": "A1",
+      "total_sentences": 7,
+      "story_data": [
+        {
+          "sentence_id": 1,
+          "sentence_text": "Maria deve fare la spesa e va al supermercato."
+        },
+        {
+          "sentence_id": 2,
+          "sentence_text": "Prende un carrello e cammina tra i corridoi."
+        },
+        {
+          "sentence_id": 3,
+          "sentence_text": "Compra pane fresco, latte, frutta e verdura."
+        },
+        {
+          "sentence_id": 4,
+          "sentence_text": "Sceglie anche carne per preparare il pranzo di domani."
+        },
+        {
+          "sentence_id": 5,
+          "sentence_text": "Alla cassa paga con la carta di credito."
+        },
+        {
+          "sentence_id": 6,
+          "sentence_text": "Mette tutto nelle borse della spesa."
+        },
+        {
+          "sentence_id": 7,
+          "sentence_text": "Torna a casa contenta dei suoi acquisti."
+        }
+      ]
+    },
+    {
+      "story_id": 6,
+      "story_title": "Il Primo Giorno di Lavoro",
+      "story_level": "A1",
+      "total_sentences": 8,
+      "story_data": [
+        {
+          "sentence_id": 1,
+          "sentence_text": "Oggi è il primo giorno di lavoro di Roberto."
+        },
+        {
+          "sentence_id": 2,
+          "sentence_text": "Si alza presto la mattina e fa colazione velocemente."
+        },
+        {
+          "sentence_id": 3,
+          "sentence_text": "Mette i vestiti eleganti e esce di casa."
+        },
+        {
+          "sentence_id": 4,
+          "sentence_text": "Prende il treno perché l'ufficio è lontano."
+        },
+        {
+          "sentence_id": 5,
+          "sentence_text": "I colleghi sono gentili e lo aiutano molto."
+        },
+        {
+          "sentence_id": 6,
+          "sentence_text": "Durante la pausa pranzo mangia un panino veloce."
+        },
+        {
+          "sentence_id": 7,
+          "sentence_text": "Il lavoro è interessante ma anche difficile."
+        },
+        {
+          "sentence_id": 8,
+          "sentence_text": "La sera torna a casa stanco ma felice."
+        }
+      ]
+    }
+  ]
+}
