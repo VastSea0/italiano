@@ -678,6 +678,54 @@
             </button>
         </div>
 
+        <div class="story-section" style="background: linear-gradient(135deg, #16a085, #138d75);">
+            <h3>📊 Word Frequency Analyzer</h3>
+            <p>Analyze word frequency in Italian texts and find which vocabulary you need to learn</p>
+            <div class="story-container" id="frequencyContainer">
+                <div class="story-controls" style="flex-direction: column; gap: 15px;">
+                    <div style="width: 100%; display: flex; flex-direction: column; gap: 10px;">
+                        <label style="font-weight: bold; color: #2c3e50;">📝 Paste your Italian text here:</label>
+                        <textarea id="frequencyInput" 
+                                  placeholder="İtalyanca metninizi buraya yapıştırın..." 
+                                  style="width: 100%; min-height: 150px; padding: 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit; resize: vertical;"></textarea>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+                        <button class="story-toggle" onclick="analyzeFrequency()">🔍 Analyze Frequency</button>
+                        <button class="story-toggle" style="background: linear-gradient(135deg, #e67e22, #d35400);" onclick="exportFrequencyResults()">📥 Export Results</button>
+                        <button class="story-toggle" style="background: linear-gradient(135deg, #95a5a6, #7f8c8d);" onclick="clearFrequencyAnalysis()">🗑️ Clear</button>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; background: white; padding: 8px 15px; border-radius: 20px;">
+                            <input type="checkbox" id="highlightKnownWords" onchange="updateFrequencyDisplay()" style="cursor: pointer;">
+                            <span style="color: #2c3e50; font-weight: bold; font-size: 0.9em;">Highlight Known Words</span>
+                        </label>
+                    </div>
+                </div>
+                <div id="frequencyResults" style="margin-top: 20px; display: none;">
+                    <div class="stats-grid" id="frequencyStats" style="margin-bottom: 20px;">
+                        <!-- Stats will be populated -->
+                    </div>
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                        <h3 style="color: #2c3e50; margin-bottom: 15px;">📊 Word Frequency Table</h3>
+                        <div style="max-height: 500px; overflow-y: auto; background: white; border-radius: 8px; padding: 15px;">
+                            <table id="frequencyTable" style="width: 100%; border-collapse: collapse;">
+                                <thead style="position: sticky; top: 0; background: #3498db; color: white;">
+                                    <tr>
+                                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #2980b9;">Rank</th>
+                                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #2980b9;">Word</th>
+                                        <th style="padding: 12px; text-align: center; border-bottom: 2px solid #2980b9;">Count</th>
+                                        <th style="padding: 12px; text-align: center; border-bottom: 2px solid #2980b9;">Status</th>
+                                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #2980b9;">Translation</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="frequencyTableBody">
+                                    <!-- Table rows will be populated -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="story-section">
             <h3>📖 Interactive Story Reader</h3>
             <p>Click on any word in the story to see its vocabulary information</p>
@@ -832,6 +880,15 @@
         let storyData = {};
         let currentStoryIndex = 0;
         let showHints = false;
+        let frequencyAnalysisResults = null;
+
+        // Italian articles and prepositions for frequency analysis
+        const ARTICLES = ['il', 'lo', 'la', 'i', 'gli', 'le', "l'", 'un', 'uno', 'una', "un'"];
+        const ARTICULATED_PREPS = ['del', 'dello', 'della', 'dei', 'degli', 'delle', 
+                                    'al', 'allo', 'alla', 'ai', 'agli', 'alle',
+                                    'dal', 'dallo', 'dalla', 'dai', 'dagli', 'dalle',
+                                    'nel', 'nello', 'nella', 'nei', 'negli', 'nelle',
+                                    'sul', 'sullo', 'sulla', 'sui', 'sugli', 'sulle'];
 
         // Load the JSON data
         async function loadVocabulary() {
