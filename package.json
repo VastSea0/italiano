@@ -20,6 +20,7 @@
     "start": "node serve.js",
     "analyze": "node verb-analyzer.js",
     "analyze-interactive": "node verb-analyzer.js --interactive",
-    "dev": "node serve.js"
+    "dev": "node serve.js",
+    "word-frequency": "node word-frequency-analyzer.js"
   }
 }
