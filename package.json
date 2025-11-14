@@ -21,6 +21,7 @@
     "analyze": "node verb-analyzer.js",
     "analyze-interactive": "node verb-analyzer.js --interactive",
     "dev": "node serve.js",
-    "word-frequency": "node word-frequency-analyzer.js"
+    "word-frequency": "node word-frequency-analyzer.js",
+    "word-frequency-json": "node word-frequency-analyzer.js --json"
   }
 }
