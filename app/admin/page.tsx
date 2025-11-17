@@ -779,13 +779,13 @@ export default function AdminDashboard() {
               <div className="flex flex-col sm:flex-row gap-4 mb-4">
                 <input
                   type="text"
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-md"
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-md text-gray-900"
                   placeholder="Kelime veya slug ara..."
                   value={searchTerm}
                   onChange={(event) => setSearchTerm(event.target.value)}
                 />
                 <select
-                  className="px-4 py-2 border border-gray-300 rounded-md"
+                  className="px-4 py-2 border border-gray-300 rounded-md text-gray-900"
                   value={categoryFilter}
                   onChange={(event) => setCategoryFilter(event.target.value as VocabularyDataKey | 'all')}
                 >
@@ -865,7 +865,7 @@ export default function AdminDashboard() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Slug (zorunlu)</label>
                   <input
                     type="text"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md text-gray-900"
                     placeholder="örn. essere"
                     value={formSlug}
                     onChange={(event) => setFormSlug(event.target.value)}
@@ -876,7 +876,7 @@ export default function AdminDashboard() {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
                   <select
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md text-gray-900"
                     value={formCategory}
                     onChange={(event) => handleCategorySelect(event.target.value as VocabularyDataKey)}
                   >
@@ -899,7 +899,7 @@ export default function AdminDashboard() {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">JSON İçeriği</label>
                   <textarea
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md font-mono text-sm"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md font-mono text-sm text-gray-900"
                     rows={10}
                     placeholder={`{\n  "infinitive": "essere",\n  "english": "to be"\n}`}
                     value={formJson}
@@ -1069,8 +1069,8 @@ function deriveSlug(payload: Record<string, unknown>): string {
   if (!primary || typeof primary !== 'string') {
     return ''
   }
-  // Return the word as-is, normalized to lowercase
-  return primary.toLowerCase().trim()
+  // Return the word as slugified
+  return slugify(primary)
 }
 
 async function persistWordWithHistory({

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { collection, query, getDocs, addDoc, serverTimestamp } from 'firebase/firestore'
+import { collection, query, getDocs, setDoc, doc, serverTimestamp } from 'firebase/firestore'
 import { db } from '@/lib/firebase/client'
 import { useFirebaseAuth } from '@/hooks/useFirebaseAuth'
 
@@ -89,12 +89,12 @@ export default function BulkTranslatePage() {
       )
 
       // Filter out existing words
-      const newWords = uniqueWords.filter((item) => !existingSlugs.has(deriveSlug(item.word)))
+      const newWords = uniqueWords.filter((item) => !existingSlugs.has(item.word))
 
       // Add to translation queue
       const translationQueueRef = collection(db, 'translationQueue')
       for (const item of newWords) {
-        await addDoc(translationQueueRef, {
+        await setDoc(doc(translationQueueRef, item.word), {
           word: item.word,
           surface: item.original,
           context: `Category: ${item.category}`,
