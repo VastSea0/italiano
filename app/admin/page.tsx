@@ -124,17 +124,32 @@ export default function AdminDashboard() {
   const [resolvingTaskId, setResolvingTaskId] = useState<string | null>(null)
   const [translationPage, setTranslationPage] = useState(1)
   const translationPageSize = 10
+  const [translationSearchTerm, setTranslationSearchTerm] = useState('')
+  const pendingTranslationTasks = useMemo(
+    () => translationTasks.filter((task) => task.status !== 'resolved'),
+    [translationTasks],
+  )
   const totalTranslationPages = useMemo(() => {
     const pending = translationTasks.filter((task) => task.status !== 'resolved')
     return Math.ceil(pending.length / translationPageSize)
   }, [translationTasks, translationPageSize])
+  const filteredTranslationTasks = useMemo(() => {
+    const term = translationSearchTerm.trim().toLowerCase()
+    return pendingTranslationTasks.filter((task) => {
+      if (!term) return true
+      const haystack = [task.displayWord, task.slug, task.storyTitle, task.context].join(' ').toLowerCase()
+      return haystack.includes(term)
+    })
+  }, [pendingTranslationTasks, translationSearchTerm])
   const paginatedTranslationTasks = useMemo(() => {
-    const pending = translationTasks.filter((task) => task.status !== 'resolved')
-    return pending.slice(
+    return filteredTranslationTasks.slice(
       (translationPage - 1) * translationPageSize,
       translationPage * translationPageSize,
     )
-  }, [translationTasks, translationPage, translationPageSize])
+  }, [filteredTranslationTasks, translationPage, translationPageSize])
+  const totalFilteredTranslationPages = useMemo(() => {
+    return Math.ceil(filteredTranslationTasks.length / translationPageSize)
+  }, [filteredTranslationTasks, translationPageSize])
   const [wordsPage, setWordsPage] = useState(1)
   const wordsPageSize = 20
   const [totalWordsPages, setTotalWordsPages] = useState(1)
@@ -203,10 +218,6 @@ export default function AdminDashboard() {
     if (ADMIN_EMAILS.length === 0) return true
     return ADMIN_EMAILS.includes((user.email || '').toLowerCase())
   }, [user])
-  const pendingTranslationTasks = useMemo(
-    () => translationTasks.filter((task) => task.status !== 'resolved'),
-    [translationTasks],
-  )
   const recentResolvedTasks = useMemo(
     () => translationTasks.filter((task) => task.status === 'resolved').slice(0, 3),
     [translationTasks],
@@ -688,7 +699,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className="flex gap-2">
                   <span className="px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-sm">
-                    Bekleyen: {pendingTranslationTasks.length}
+                    Bekleyen: {filteredTranslationTasks.length}
                   </span>
                   <span className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">
                     Tamamlanan: {translationTasks.length - pendingTranslationTasks.length}
@@ -699,45 +710,69 @@ export default function AdminDashboard() {
               <div className="space-y-4">
                 {translationLoading && <p className="text-sm text-gray-600">Kuyruk yükleniyor…</p>}
                 {translationError && <p className="text-sm text-red-600">{translationError}</p>}
-                {!translationLoading && !translationError && pendingTranslationTasks.length === 0 && (
-                  <p className="text-sm text-gray-600">Şu anda bekleyen çeviri isteği yok. Harika!</p>
+                {!translationLoading && !translationError && filteredTranslationTasks.length === 0 && pendingTranslationTasks.length > 0 && (
+                  <p className="text-sm text-gray-600">Arama kriterlerine uyan bekleyen çeviri isteği yok.</p>
                 )}
-                {paginatedTranslationTasks.map((task) => (
-                  <div key={task.id} className="border border-gray-200 rounded-lg p-4 bg-white">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-semibold text-gray-900">{task.displayWord}</p>
-                        <p className="text-sm text-gray-500">Slug: {task.slug}</p>
-                        {task.storyTitle && <p className="text-sm text-gray-600">Hikâye: {task.storyTitle}</p>}
-                      </div>
-                      <div className="flex gap-2">
-                        <button
-                          type="button"
-                          onClick={() => handleAdoptTranslationTask(task)}
-                          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                        >
-                          Formda aç
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => handleResolveTranslationTask(task.slug)}
-                          disabled={resolvingTaskId === task.slug}
-                          className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 disabled:opacity-50"
-                        >
-                          {resolvingTaskId === task.slug ? 'Kapanıyor…' : 'Tamamlandı'}
-                        </button>
-                      </div>
+                {!translationLoading && !translationError && pendingTranslationTasks.length > 0 && (
+                  <>
+                    <div className="mb-4">
+                      <input
+                        type="text"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md text-gray-900"
+                        placeholder="Kuyrukta kelime, slug veya hikaye ara..."
+                        value={translationSearchTerm}
+                        onChange={(event) => setTranslationSearchTerm(event.target.value)}
+                      />
                     </div>
-                    {task.context && <p className="mt-3 text-sm text-gray-700">{task.context}</p>}
-                  </div>
-                ))}
+                    <div className="border border-gray-200 rounded-lg overflow-hidden">
+                      <table className="w-full text-left text-sm">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="px-4 py-3 text-gray-700">Kelime</th>
+                            <th className="px-4 py-3 text-gray-700">Slug</th>
+                            <th className="px-4 py-3 text-gray-700">Hikaye</th>
+                            <th className="px-4 py-3 text-gray-700">İşlemler</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {paginatedTranslationTasks.map((task) => (
+                            <tr key={task.id} className="border-t border-gray-100">
+                              <td className="px-4 py-3 font-semibold text-gray-900">{task.displayWord}</td>
+                              <td className="px-4 py-3 text-gray-600">{task.slug}</td>
+                              <td className="px-4 py-3 text-gray-600">{task.storyTitle || '—'}</td>
+                              <td className="px-4 py-3">
+                                <div className="flex gap-2">
+                                  <button
+                                    type="button"
+                                    onClick={() => handleAdoptTranslationTask(task)}
+                                    className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-xs"
+                                  >
+                                    Formda aç
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => handleResolveTranslationTask(task.slug)}
+                                    disabled={resolvingTaskId === task.slug}
+                                    className="px-3 py-1 bg-gray-600 text-white rounded-md hover:bg-gray-700 disabled:opacity-50 text-xs"
+                                  >
+                                    {resolvingTaskId === task.slug ? 'Kapanıyor…' : 'Tamamlandı'}
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </>
+                )}
               </div>
 
-              {totalTranslationPages > 1 && (
+              {totalFilteredTranslationPages > 1 && (
                 <div className="mt-6 flex justify-center gap-2">
                   <button onClick={() => setTranslationPage(Math.max(1, translationPage - 1))} disabled={translationPage === 1} className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 disabled:opacity-50">Önceki</button>
-                  <span className="px-4 py-2 text-gray-700">{translationPage} / {totalTranslationPages}</span>
-                  <button onClick={() => setTranslationPage(Math.min(totalTranslationPages, translationPage + 1))} disabled={translationPage === totalTranslationPages} className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 disabled:opacity-50">Sonraki</button>
+                  <span className="px-4 py-2 text-gray-700">{translationPage} / {totalFilteredTranslationPages}</span>
+                  <button onClick={() => setTranslationPage(Math.min(totalFilteredTranslationPages, translationPage + 1))} disabled={translationPage === totalFilteredTranslationPages} className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 disabled:opacity-50">Sonraki</button>
                 </div>
               )}
 
@@ -1122,15 +1157,7 @@ async function logHistoryEntry({ slug, actor, action, payload, categoryKey, mess
 async function resolveTranslationTaskBySlug(slug: string, actor: string) {
   if (!slug) return
   try {
-    await setDoc(
-      doc(translationQueueCollectionRef, slug),
-      {
-        status: 'resolved',
-        resolvedAt: serverTimestamp(),
-        resolvedBy: actor,
-      },
-      { merge: true },
-    )
+    await deleteDoc(doc(translationQueueCollectionRef, slug))
   } catch (err) {
     console.error('Failed to auto-resolve translation task', err)
   }
