@@ -466,15 +466,7 @@ export default function AdminDashboard() {
   const handleResolveTranslationTask = async (taskId: string) => {
     setResolvingTaskId(taskId)
     try {
-      await setDoc(
-        doc(translationQueueCollectionRef, taskId),
-        {
-          status: 'resolved',
-          resolvedAt: serverTimestamp(),
-          resolvedBy: user?.email || user?.uid || 'unknown',
-        },
-        { merge: true },
-      )
+      await deleteDoc(doc(translationQueueCollectionRef, taskId))
     } catch (err) {
       console.error('Failed to resolve translation task', err)
     } finally {
@@ -1051,7 +1043,10 @@ function deriveSlug(payload: Record<string, unknown>): string {
   if (!primary || typeof primary !== 'string') {
     return ''
   }
-  return slugify(primary)
+  // Remove articles
+  let normalized = primary.toLowerCase()
+  normalized = normalized.replace(/^(il |la |l'|i |gli |le |lo |un |una |uno |un')/, '')
+  return slugify(normalized.trim())
 }
 
 async function persistWordWithHistory({

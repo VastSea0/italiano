@@ -263,7 +263,7 @@ export default function WritingAtelierPage() {
                     <div>
                       <div className="font-semibold">{(selectedPoolEntry.item as VerbEntry).infinitive}</div>
                       <div className="text-sm text-white/60">{(selectedPoolEntry.item as VerbEntry).english}</div>
-                      {(selectedPoolEntry.item as VerbEntry).present && <div className="text-sm mt-2">Present: {(selectedPoolEntry.item as VerbEntry).present.join(', ')}</div>}
+                      {(selectedPoolEntry.item as VerbEntry).present && <div className="text-sm mt-2">Present: {(selectedPoolEntry.item as VerbEntry).present?.join(', ')}</div>}
                     </div>
                   ) : (
                     <div>
