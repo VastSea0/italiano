@@ -33,6 +33,14 @@ function deriveSlug(word: string): string {
   return normalizeWord(word).replace(/[^a-z0-9]/g, '').toLowerCase()
 }
 
+function inferCategoryFromWord(word: string): string {
+  const normalized = word.toLowerCase()
+  if (normalized.endsWith('are') || normalized.endsWith('ere') || normalized.endsWith('ire')) {
+    return 'verbs'
+  }
+  return 'commonNouns'
+}
+
 export default function BulkTranslatePage() {
   const { user, initializing } = useFirebaseAuth()
   const [loading, setLoading] = useState(false)
@@ -46,12 +54,12 @@ export default function BulkTranslatePage() {
     setError(null)
 
     try {
-      // Fetch words.json
-      const response = await fetch('/words.json')
+      // Fetch output.json
+      const response = await fetch('/output.json')
       if (!response.ok) {
-        throw new Error('Failed to fetch words.json')
+        throw new Error('Failed to fetch output.json')
       }
-      const payload: VocabularyPayload = await response.json()
+      const payload = await response.json()
 
       // Get existing words
       const wordsRef = collection(db, 'words')
@@ -65,38 +73,14 @@ export default function BulkTranslatePage() {
       // Extract words from payload
       const allWords: { word: string; category: string; original: string }[] = []
 
-      // Verbs
-      payload.mostCommonItalianVerbsA1.forEach((verb) => {
-        if (verb.infinitive) {
+      payload.words.forEach((item: any) => {
+        if (item.word) {
           allWords.push({
-            word: normalizeWord(verb.infinitive),
-            category: 'verbs',
-            original: verb.infinitive,
+            word: normalizeWord(item.word),
+            category: inferCategoryFromWord(item.word),
+            original: item.word,
           })
         }
-      })
-
-      // Other categories
-      const categories = [
-        { key: 'conjunctions', field: 'italian' },
-        { key: 'adjectives', field: 'italian' },
-        { key: 'adverbs', field: 'italian' },
-        { key: 'prepositions', field: 'italian' },
-        { key: 'timeExpressions', field: 'italian' },
-        { key: 'pronouns', field: 'italian' },
-        { key: 'commonNouns', field: 'italian' },
-      ]
-
-      categories.forEach(({ key, field }) => {
-        payload[key as keyof VocabularyPayload].forEach((item: any) => {
-          if (item[field]) {
-            allWords.push({
-              word: normalizeWord(item[field]),
-              category: key,
-              original: item[field],
-            })
-          }
-        })
       })
 
       // Remove duplicates based on normalized word
@@ -109,7 +93,6 @@ export default function BulkTranslatePage() {
 
       // Add to translation queue
       const translationQueueRef = collection(db, 'translationQueue')
-      const addedCount = 0
       for (const item of newWords) {
         await addDoc(translationQueueRef, {
           word: item.word,
@@ -141,7 +124,7 @@ export default function BulkTranslatePage() {
     <main className="mx-auto max-w-4xl px-4 py-10">
       <h1 className="text-2xl font-bold mb-6">Bulk Translation Queue Add</h1>
       <p className="mb-4">
-        Bu sayfa words.json dosyasındaki kelimeleri çeviri kuyruğuna ekler. Mevcut kelimeler eklenmez.
+        Bu sayfa output.json dosyasındaki kelimeleri çeviri kuyruğuna ekler. Mevcut kelimeler eklenmez.
       </p>
       <button
         onClick={handleBulkAdd}
