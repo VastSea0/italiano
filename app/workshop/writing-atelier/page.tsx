@@ -1,529 +1,338 @@
 "use client";
-import React, { useEffect, useState, useMemo, useRef } from "react";
-import { collection, doc, onSnapshot, orderBy, query, serverTimestamp, setDoc } from 'firebase/firestore'
-import { useVocabularyResources } from '@/hooks/useVocabularyResources';
-import { findWordInVocabulary, slugify, type Story, type StorySentence, type VocabularyData, type WordMatch } from '@/lib/vocabulary'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { useVocabularyResources } from '@/hooks/useVocabularyResources'
 import { db } from '@/lib/firebase/client'
-
-type StoryUnknownWord = {
-  normalized: string
-  surface: string
-  count: number
-  sentenceText: string
-  sentenceId: number
-}
+import { collection, doc, onSnapshot, orderBy, query, serverTimestamp, setDoc } from 'firebase/firestore'
+import { findWordInVocabulary, slugify } from '@/lib/vocabulary'
+import type { StorySentence, VocabularyData, VerbEntry, WordEntry, WordMatch } from '@/lib/vocabulary'
 
 export default function WritingAtelierPage() {
-  // State
+  // Core data
+  const { vocabulary, stories, loading, error, reload } = useVocabularyResources()
+
+  // UI state
+  const [selectedActivity, setSelectedActivity] = useState<'diario'|'traduzione'|'dialogo'>('diario')
+  const [userText, setUserText] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
+  const [isPoolOpen, setIsPoolOpen] = useState(true)
+  const [selectedRightTab, setSelectedRightTab] = useState<'pool'|'story'|'unknown'|'results'>('pool')
+  const [storyIndex, setStoryIndex] = useState(0)
+  const [showHints, setShowHints] = useState(false)
+
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null)
+
+  // Suggestions and selection
+  const [suggestions, setSuggestions] = useState<Array<{ label: string; type: 'verb'|'word'; item: VerbEntry | WordEntry }>>([])
+  const [showSuggestions, setShowSuggestions] = useState(false)
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1)
+
+  // Additional state: hovered/pool & queue
+  const [hoveredWord, setHoveredWord] = useState<string | null>(null)
+  const [hoveredInfo, setHoveredInfo] = useState<WordMatch | null>(null)
+  const [selectedPoolEntry, setSelectedPoolEntry] = useState<{ type: 'verb'|'word'; item: VerbEntry | WordEntry } | null>(null)
+  const [translationQueue, setTranslationQueue] = useState<Record<string, { id: string; word: string }>>({})
+  const [flaggingWordId, setFlaggingWordId] = useState<string | null>(null)
+  const [flagMessage, setFlagMessage] = useState<string | null>(null)
+
   const activities = [
     { key: 'diario', label: 'Günlük Yazısı (Diario)' },
     { key: 'traduzione', label: 'Çeviri (Traduzione)' },
     { key: 'dialogo', label: 'Diyalog (Dialogo)' },
   ]
-  const [selectedActivity, setSelectedActivity] = useState('diario')
-  const [storyIndex, setStoryIndex] = useState(0)
-  const [showHints, setShowHints] = useState(false)
-  const [selectedWord, setSelectedWord] = useState<{
-    surface: string
-    normalized: string
-    sentenceText: string
-    sentenceId: number
-    info: WordMatch | null
-  } | null>(null)
-  const [translationQueue, setTranslationQueue] = useState<Record<string, { id: string; word: string }>>({})
-  const [flaggingWordId, setFlaggingWordId] = useState<string | null>(null)
-  const [flagMessage, setFlagMessage] = useState<string | null>(null)
-  const [userText, setUserText] = useState("");
-  const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState<number>(-1);
-  const [hoveredWord, setHoveredWord] = useState<string | null>(null);
-  const [hoveredInfo, setHoveredInfo] = useState<WordMatch | null>(null);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedSuggestion, setSelectedSuggestion] = useState<string | null>(null);
-  // storyIndex state already defined above and used here
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Firestore'dan kelime ve hikaye verilerini çek
-  const { vocabulary, stories, loading, error, reload } = useVocabularyResources();
-
-  // Tüm kelime havuzunu tek bir diziye topla
+  // Derived data: flatten vocabulary -> simple array of words
   const allWords = useMemo(() => {
-    if (!vocabulary) return [];
-    const keys = Object.keys(vocabulary) as Array<keyof typeof vocabulary>;
-    const words: string[] = [];
-    keys.forEach((key) => {
-      if (key === "verbs") {
-        words.push(...(vocabulary.verbs?.map((v) => v.infinitive) ?? []));
-      } else {
-        words.push(...((vocabulary[key] as any[] ?? []).map((w: any) => w.italian)));
-      }
-    });
-    return Array.from(new Set(words)).sort();
-  }, [vocabulary]);
+    if (!vocabulary) return [] as string[]
+    const list: string[] = []
+    Object.keys(vocabulary).forEach((k) => {
+      const items = (vocabulary as any)[k]
+      if (!Array.isArray(items)) return
+      items.forEach((i: any) => { if (i.italian) list.push(i.italian); if (i.infinitive) list.push(i.infinitive) })
+    })
+    return Array.from(new Set(list)).sort()
+  }, [vocabulary])
 
-  // Aktif hikaye/metin
-  const activeStory = stories?.[storyIndex] ?? null;
-  const translationSource = activeStory?.story_data?.[0]?.sentence_text ?? "Çevrilecek metin bulunamadı.";
+  // Flattened entries for autocomplete
+  const flattenedEntries = useMemo(() => {
+    if (!vocabulary) return [] as Array<{ key: string; type: 'verb'|'word'; item: any; variants: string[] }>
+    const out: Array<{ key: string; type: 'verb'|'word'; item: any; variants: string[] }> = []
+    ;(vocabulary.verbs ?? []).forEach((v) => out.push({ key: v.infinitive, type: 'verb', item: v, variants: [v.infinitive, ...(v.present ?? []), ...(v.past ?? []), ...(v.presentContinuous ?? [])].map(x => (x||'').toLowerCase()) }))
+    const other = ['commonNouns','adjectives','adverbs','prepositions','timeExpressions','pronouns','conjunctions'] as (keyof VocabularyData)[]
+    other.forEach(k => { ((vocabulary as any)[k] ?? []).forEach((w: any) => out.push({ key: w.italian, type: 'word', item: w, variants: [w.italian, ...(w.forms ?? []), ...(w.plural ? [w.plural] : [])].map((v: any) => (v||'').toLowerCase()) })) })
+    return out
+  }, [vocabulary])
 
-  // Word count helper
-  const wordCount = userText.trim().length > 0 ? userText.trim().split(/\s+/).length : 0;
-
-  // activity content & per-activity vocabulary
+  // Activity content – small helper to present suggestions per mode
   const activityContent = useMemo(() => {
-    if (selectedActivity === 'diario') {
-      return {
-        scenario: 'Bugün neler hissettin? Kısa bir günlük yazısı yaz.',
-        vocabulary: (vocabulary?.commonNouns ?? []).slice(0, 8).map((w: any) => w.italian),
-      }
-    }
+    if (selectedActivity === 'diario') return { scenario: 'Bugün neler hissettin? Kısa bir günlük yaz.', vocabulary: (vocabulary?.commonNouns ?? []).slice(0,8).map((w:any)=>w.italian) }
     if (selectedActivity === 'traduzione') {
-      const story = stories?.[storyIndex ?? 0]
-      return {
-        sourceText: story?.story_data?.[0]?.sentence_text ?? 'Çevrilecek metin bulunamadı.',
-        vocabulary: (vocabulary?.verbs ?? []).slice(0, 8).map((w: any) => w.infinitive),
-      }
+      const s = stories?.[storyIndex]
+      return { sourceText: s?.story_data?.[0]?.sentence_text ?? 'Çevrilecek metin bulunamadı.', vocabulary: (vocabulary?.verbs ?? []).slice(0,8).map((w:any)=>w.infinitive) }
     }
-    if (selectedActivity === 'dialogo') {
-      return {
-        scenario: 'Bir kafede iki arkadaş buluşuyor. Diyalog oluştur.',
-        expressions: [
-          { category: 'Soru sorma', phrases: ['Come stai?', 'Che cosa vuoi bere?'] },
-          { category: 'Kabul etme', phrases: ['Va bene!', 'Certo!'] },
-        ],
-        vocabulary: (vocabulary?.adjectives ?? []).slice(0, 8).map((w: any) => w.italian),
-      }
-    }
-    return {}
+    if (selectedActivity === 'dialogo') return { scenario: 'Kısa bir diyalog yaz. İki kişinin konuşması olsun.', vocabulary: (vocabulary?.adjectives ?? []).slice(0,8).map((w:any)=>w.italian) }
+    return { scenario: '', vocabulary: [] }
   }, [selectedActivity, vocabulary, stories, storyIndex])
 
-  // Autocomplete: yazarken öneri
+  const activeStory = stories?.[storyIndex] ?? null
+
+  // Suggestions: when typing
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value;
-    setUserText(value);
-    // Son kelimeyi bul
-    const lastWord = value.split(/\s+/).pop()?.toLowerCase() ?? "";
-    if (lastWord.length > 1) {
-      const filtered = allWords.filter((w) => w.toLowerCase().startsWith(lastWord)).slice(0, 8);
-      setSuggestions(filtered);
-      setShowSuggestions(filtered.length > 0);
-      setSelectedSuggestionIndex(-1);
-    } else {
-      setShowSuggestions(false);
-      setSuggestions([]);
-    }
-  };
+    const value = e.target.value
+    setUserText(value)
+    const last = value.split(/\s+/).pop()?.toLowerCase() ?? ''
+    if (last.length === 0) { setShowSuggestions(false); setSuggestions([]); return }
+    const matches = flattenedEntries.filter(en => en.variants.some(v => v.includes(last))).slice(0, 12).map(en => ({label: en.key, type: en.type, item: en.item}))
+    setSuggestions(matches)
+    setShowSuggestions(matches.length > 0)
+    setSelectedSuggestionIndex(-1)
+  }
 
-  // Suggestion seçilince
-  const handleSuggestionClick = (word: string) => {
-    // Son kelimeyi değiştir
-    const words = userText.split(/\s+/);
-    words[words.length - 1] = word;
-    setUserText(words.join(" ") + " ");
-    setShowSuggestions(false);
-    setSelectedSuggestion(word);
-    textareaRef.current?.focus();
-    setSelectedSuggestionIndex(-1);
-  };
+  const insertWordAtCursor = (w: string) => {
+    if (!textareaRef.current) { setUserText(prev => prev + w + ' '); return }
+    const t = textareaRef.current
+    const s = t.selectionStart, e = t.selectionEnd
+    const nv = t.value.substring(0,s) + w + ' ' + t.value.substring(e)
+    setUserText(nv)
+    requestAnimationFrame(() => { t.focus(); t.setSelectionRange(s + w.length + 1, s + w.length + 1) })
+  }
 
-  // Sağdaki kelime havuzunda arama
-  const filteredWordPool = useMemo(() => {
-    if (!searchTerm) return allWords;
-    return allWords.filter((w) => w.toLowerCase().includes(searchTerm.toLowerCase()));
-  }, [allWords, searchTerm]);
+  const handleSuggestionClick = (entry: { label: string; type: 'verb'|'word'; item: VerbEntry | WordEntry }) => {
+    const parts = userText.split(/\s+/)
+    parts[parts.length - 1] = entry.label
+    setUserText(parts.join(' ') + ' ')
+    setShowSuggestions(false)
+    textareaRef.current?.focus()
+    setSelectedPoolEntry({ type: entry.type, item: entry.item })
+  }
 
-  // Sync translation queue from Firestore
+  // translationQueue subscription
   useEffect(() => {
-    const queueRef = query(collection(db, 'translationQueue'), orderBy('createdAt', 'desc'))
-    const unsubscribe = onSnapshot(queueRef, (snapshot) => {
+    const q = query(collection(db, 'translationQueue'), orderBy('createdAt', 'desc'))
+    const unsub = onSnapshot(q, (snapshot) => {
       const map: Record<string, { id: string; word: string }> = {}
-      snapshot.forEach((docSnap) => {
-        const data = docSnap.data() as any
-        map[docSnap.id] = { id: docSnap.id, word: data.word ?? docSnap.id }
-      })
+      snapshot.forEach((d) => { const data = d.data() as any; map[d.id] = { id: d.id, word: data.word ?? d.id } })
       setTranslationQueue(map)
     })
-    return () => unsubscribe()
+    return () => unsub()
   }, [])
 
   const translationQueueSet = useMemo(() => new Set(Object.keys(translationQueue)), [translationQueue])
 
-  const handleFlagTranslation = async (selection: { surface: string; normalized: string; sentenceText: string; sentenceId: number }) => {
-    if (!selection) return
-    const slug = slugify(selection.normalized || selection.surface)
+  // search pool
+  const filteredWordPool = useMemo(() => {
+    if (!searchTerm) return allWords
+    return allWords.filter(w => w.toLowerCase().includes(searchTerm.toLowerCase()))
+  }, [allWords, searchTerm])
+
+  // flag translation (to Firestore)
+  const handleFlagTranslation = async (word: { surface: string; normalized: string; sentenceText: string; sentenceId: number }) => {
+    if (!word) return
+    const slug = slugify(word.normalized || word.surface)
     if (!slug) return
     setFlaggingWordId(slug)
     setFlagMessage(null)
     try {
-      await setDoc(doc(collection(db, 'translationQueue'), slug), {
-        word: selection.normalized,
-        surface: selection.surface,
-        context: selection.sentenceText,
-        sentenceId: selection.sentenceId,
+      await setDoc(doc(collection(db,'translationQueue'), slug), {
+        word: word.normalized,
+        surface: word.surface,
+        context: word.sentenceText,
+        sentenceId: word.sentenceId,
         storyId: activeStory?.story_id ?? null,
         storyTitle: activeStory?.story_title ?? null,
         status: 'pending',
         createdAt: serverTimestamp(),
       }, { merge: true })
-      setFlagMessage('Kelime çeviri kuyruğuna alındı.')
-    } catch (err) {
-      console.error('Failed to queue translation', err)
-      setFlagMessage('Kuyruğa eklenemedi. Lütfen tekrar deneyin.')
-    } finally {
-      setFlaggingWordId(null)
-    }
+      setFlagMessage('Kelime kuyruğa alındı.')
+    } catch (err) { console.error(err); setFlagMessage('Kuyruğa eklenemedi. Lütfen tekrar deneyin.') } finally { setFlaggingWordId(null) }
   }
 
-  const handleTextKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (!showSuggestions || suggestions.length === 0) return
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      setSelectedSuggestionIndex((prev) => Math.min(prev + 1, suggestions.length - 1))
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      setSelectedSuggestionIndex((prev) => Math.max(prev - 1, 0))
-    } else if (e.key === 'Enter') {
-      if (selectedSuggestionIndex >= 0 && selectedSuggestionIndex < suggestions.length) {
-        e.preventDefault()
-        handleSuggestionClick(suggestions[selectedSuggestionIndex])
-      }
-    } else if (e.key === 'Escape') {
-      setShowSuggestions(false)
-      setSelectedSuggestionIndex(-1)
+  // helpers
+  function findEntryBySurface(surface: string) {
+    if (!vocabulary) return null
+    const v = (vocabulary.verbs ?? []).find((vb) => vb.infinitive === surface)
+    if (v) return { type: 'verb' as const, item: v }
+    const other: (keyof VocabularyData)[] = ['commonNouns','adjectives','adverbs','prepositions','timeExpressions','pronouns','conjunctions']
+    for (const k of other) {
+      const items = (vocabulary as any)[k] as WordEntry[]
+      if (!Array.isArray(items)) continue
+      const found = items.find(w => w.italian === surface || (w.plural && w.plural === surface) || (w.forms ?? []).includes(surface))
+      if (found) return { type: 'word' as const, item: found }
     }
-    // Select with Tab too
-    if (e.key === 'Tab' && showSuggestions && suggestions.length > 0) {
-      e.preventDefault()
-      const idx = selectedSuggestionIndex >= 0 ? selectedSuggestionIndex : 0
-      handleSuggestionClick(suggestions[idx])
-    }
+    return null
   }
 
-  const handleQuickFlagWord = (word: StoryUnknownWord) => {
-    handleFlagTranslation({ surface: word.surface, normalized: word.normalized, sentenceText: word.sentenceText, sentenceId: word.sentenceId })
+  // story-related helpers
+  function collectStoryUnknownWords(storyData: StorySentence[], voc: VocabularyData) {
+    const map = new Map<string, { normalized: string; surface: string; count: number; sentenceText: string; sentenceId: number }>()
+    storyData.forEach((s) => {
+      const tokens = s.sentence_text.split(/\s+/)
+      tokens.forEach((tok) => {
+        const t = tok.replace(/[.,!?;:()]/g, '').toLowerCase().trim()
+        if (!t) return
+        const match = findWordInVocabulary(t, voc)
+        if (!match) {
+          const existing = map.get(t)
+          if (existing) existing.count++
+          else map.set(t, { normalized: t, surface: tok, count: 1, sentenceText: s.sentence_text, sentenceId: s.sentence_id })
+        }
+      })
+    })
+    return Array.from(map.values()).sort((a,b)=>b.count-a.count)
   }
 
-  const handleSelectWord = (word: { surface: string; normalized: string; sentenceText: string; sentenceId: number }) => {
-    const match = findWordInVocabulary(word.normalized, vocabulary)
-    setSelectedWord({ ...word, info: match })
-    setFlagMessage(null)
-  }
-
-  const insertWordAtCursor = (word: string) => {
-    const textarea = textareaRef.current
-    if (!textarea) {
-      setUserText((prev) => (prev ? prev + ' ' + word + ' ' : word + ' '))
-      return
-    }
-    const start = textarea.selectionStart
-    const end = textarea.selectionEnd
-    const value = textarea.value
-    const newValue = value.substring(0, start) + word + ' ' + value.substring(end)
-    setUserText(newValue)
-    // reposition cursor after the inserted word
-    requestAnimationFrame(() => {
-      textarea.focus()
-      const pos = start + word.length + 1
-      textarea.setSelectionRange(pos, pos)
+  function renderSentence(sentence: StorySentence, showHints: boolean, onSelect: (w: { surface: string; normalized: string; sentenceText: string; sentenceId: number }) => void, voc: VocabularyData) {
+    const tokens = sentence.sentence_text.split(/(\s+|[.,!?;:])/)
+    return tokens.map((token, idx) => {
+      const trimmed = token.trim()
+      const isWord = !!trimmed && !/^[.,!?;:\s]+$/.test(token)
+      if (!isWord) return token
+      const normalized = trimmed.toLowerCase()
+      const match = findWordInVocabulary(normalized, voc)
+      const cls = match ? 'text-white' : 'text-amber-300 underline'
+      return (
+        <button key={idx} onClick={() => onSelect({ surface: trimmed, normalized, sentenceText: sentence.sentence_text, sentenceId: sentence.sentence_id })} className={cls}>
+          {token}
+        </button>
+      )
     })
   }
 
+  // UI – simplified single-viewport, right panel with tabs
   return (
-    <main className="mx-auto max-w-7xl px-4 py-10 lg:py-20 flex flex-col min-h-screen">
-      <section className="rounded-3xl border border-white/10 bg-white/5 p-10 text-center shadow-2xl backdrop-blur mb-10">
-        <p className="text-xs font-semibold uppercase tracking-[0.5em] text-brand-200">Italiano Studio</p>
-        <h1 className="mt-4 text-4xl font-semibold text-white sm:text-5xl">Yazma Atölyesi</h1>
-        <p className="mx-auto mt-4 max-w-3xl text-base text-white/70">
-          İtalyanca yazma pratiği: solda yazı alanı ve kelime önerileri, sağda kelime havuzu ve çevrilecek metin.
-        </p>
+    <main className="mx-auto max-w-7xl px-4 py-6 lg:py-12 flex flex-col h-screen overflow-hidden">
+      <section className="mb-6">
+        <h1 className="text-3xl font-semibold">Yazma Atölyesi</h1>
       </section>
 
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-10 flex-1">
-          {/* Left column / Mode selector area */}
-          <div className="lg:col-span-12 lg:col-start-1">
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur mb-6">
-              <div className="flex items-center justify-between gap-3">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.5em] text-brand-200">Mod Seçimi</p>
-                  <h3 className="text-lg font-semibold text-white">Aktivite Tipi</h3>
-                </div>
-                <div className="flex gap-2 items-center">
-                  {activities.map((act) => (
-                    <button key={act.key} onClick={() => setSelectedActivity(act.key)} className={`filter-btn ${selectedActivity === act.key ? 'active' : ''}`}>
-                      {act.label}
-                    </button>
-                  ))}
-                  <button className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:border-white/60 hover:bg-white/20 ml-3" onClick={() => reload()}>
-                    🔄 Yenile
-                  </button>
-                </div>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 h-full">
+        <div className="lg:col-span-8 flex flex-col h-full">
+          <div className="rounded-xl p-4 border bg-white/5 flex-1 flex flex-col">
+            <div className="flex justify-between items-center mb-2">
+              <div className="flex gap-2 items-center">
+                {activities.map(a => (
+                  <button key={a.key} onClick={() => setSelectedActivity(a.key as any)} className={`px-3 py-1 rounded ${selectedActivity === a.key ? 'bg-blue-600 text-white' : 'bg-white/10 text-white'}`}>{a.label}</button>
+                ))}
+              </div>
+              <div className="flex gap-2">
+                <button onClick={() => setUserText('')} className="px-3 py-1 rounded border bg-white/5">Temizle</button>
+                <button onClick={() => navigator.clipboard?.writeText(userText)} className="px-3 py-1 rounded border bg-white/5">Kopyala</button>
+                <button onClick={() => reload()} className="px-3 py-1 rounded border bg-white/5">🔄 Yenile</button>
+              </div>
+            </div>
+
+            <textarea ref={textareaRef} value={userText} onChange={handleTextChange} placeholder={selectedActivity === 'diario' ? activityContent.scenario : (selectedActivity === 'traduzione' ? activityContent.sourceText : 'Bir sahne düşün...' )} className="flex-1 w-full p-3 rounded border bg-transparent text-white" />
+
+            {showSuggestions && suggestions.length > 0 && (
+              <div className="mt-2 rounded border bg-white/3 p-2 max-h-48 overflow-auto">
+                {suggestions.map((s, idx) => (
+                  <div key={s.label} className={`py-1 px-2 ${idx === selectedSuggestionIndex ? 'bg-white/10' : ''}`}>
+                    <button onClick={() => handleSuggestionClick(s)} className="text-white">{s.label}</button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        <aside className="lg:col-span-4 flex flex-col gap-4 h-full">
+          <div className="rounded-xl p-4 border bg-white/5">
+            <div className="flex justify-between">
+              <div>
+                <h3 className="text-lg font-semibold">Pool / Story</h3>
+                <div className="text-sm text-white/60">Kelime havuzu ve hikaye</div>
+              </div>
+              <div className="flex gap-2">
+                <button onClick={() => setIsPoolOpen(v => !v)} className="px-3 py-1 rounded border bg-white/5">{isPoolOpen ? 'Hide' : 'Show'}</button>
+                <button onClick={() => setSelectedRightTab('story')} className="px-3 py-1 rounded border bg-white/5">Story</button>
               </div>
             </div>
           </div>
-        {/* Sol: Yazma alanı + autocomplete */}
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur relative col-span-12 lg:col-span-8 flex flex-col min-h-[380px]">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-bold text-white">Yazma Alanı</h2>
-            <div className="flex items-center gap-3">
-              <span className="text-sm text-white/60">{selectedActivity.toUpperCase()}</span>
-              <button onClick={() => { setUserText('') }} className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-sm text-white/80">Temizle</button>
-              <button onClick={() => { navigator.clipboard?.writeText(userText) }} className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-sm text-white/80">Kopyala</button>
-              <div className="text-sm text-white/60">{wordCount} kelime</div>
-            </div>
-          </div>
-          <textarea
-            ref={textareaRef}
-            className="flex-1 resize-none rounded-2xl border border-white/10 bg-slate-950/40 p-5 mb-4 text-white placeholder:text-slate-400 text-lg min-h-[220px]"
-            placeholder="İtalyanca metninizi buraya yazın..."
-            value={userText}
-            onChange={handleTextChange}
-            onKeyDown={handleTextKeyDown}
-            rows={12}
-            autoFocus
-          />
-          {/* Autocomplete dropdown */}
-          {showSuggestions && (
-            <ul className="absolute left-0 right-0 top-full z-30 mt-2 bg-slate-900 rounded-2xl shadow-2xl border border-white/10 max-h-64 overflow-auto text-lg">
-              {suggestions.map((word) => (
-                <li
-                  key={word}
-                  className={`px-6 py-3 cursor-pointer hover:bg-brand-500/20 text-white transition-all ${selectedSuggestionIndex >= 0 && suggestions[selectedSuggestionIndex] === word ? 'bg-brand-500/40 text-white' : ''}`}
-                  onClick={() => handleSuggestionClick(word)}
-                >
-                  {word}
-                </li>
-              ))}
-            </ul>
-          )}
-          <div className="text-right text-base text-slate-400 mt-4">Kelime sayısı: {wordCount}</div>
-        </div>
 
-        {/* Sağ: Kelime havuzu + çevrilecek metin */}
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur col-span-12 lg:col-span-4 flex flex-col gap-8 min-h-[400px] lg:sticky lg:top-20 lg:h-[calc(100vh-120px)] lg:overflow-auto">
-          <div>
-            <h2 className="text-2xl font-bold mb-4 text-white">Kelime Havuzu</h2>
-            <div className="relative">
-            <input
-              type="text"
-              className="w-full mb-4 rounded-2xl border border-white/10 bg-slate-950/30 p-4 text-white placeholder:text-slate-400 text-lg"
-              placeholder="Kelime ara..."
-              value={searchTerm}
-              onChange={e => setSearchTerm(e.target.value)}
-            />
-            {searchTerm && (
-              <button onClick={() => setSearchTerm('')} className="absolute right-3 top-3 text-sm text-white/60 rounded-md px-2 py-1 hover:bg-white/5">✕</button>
-            )}
+          {selectedRightTab === 'pool' && isPoolOpen && (
+            <div className="rounded-xl p-4 border bg-white/5 flex flex-col gap-3 flex-1 overflow-auto">
+              <input className="px-3 py-2 rounded border bg-transparent" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} placeholder="Kelime ara..." />
+              <div className="grid grid-cols-2 gap-2">
+                {filteredWordPool.slice(0, 60).map((w) => (
+                  <button key={w} onClick={() => { setSelectedPoolEntry(findEntryBySurface(w)); }} onDoubleClick={() => insertWordAtCursor(w)} onMouseEnter={() => { setHoveredWord(w); setHoveredInfo(findWordInVocabulary(w.toLowerCase(), vocabulary)) }} onMouseLeave={() => { setHoveredWord(null); setHoveredInfo(null) }} className="px-2 py-1 rounded border bg-white/10">{w}</button>
+                ))}
+              </div>
+
+              {selectedPoolEntry && (
+                <div className="mt-2 p-2 rounded border bg-white/6">
+                  {selectedPoolEntry.type === 'verb' ? (
+                    <div>
+                      <div className="font-semibold">{(selectedPoolEntry.item as VerbEntry).infinitive}</div>
+                      <div className="text-sm text-white/60">{(selectedPoolEntry.item as VerbEntry).english}</div>
+                      {(selectedPoolEntry.item as VerbEntry).present && <div className="text-sm mt-2">Present: {(selectedPoolEntry.item as VerbEntry).present.join(', ')}</div>}
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="font-semibold">{(selectedPoolEntry.item as WordEntry).italian}</div>
+                      <div className="text-sm text-white/60">{(selectedPoolEntry.item as WordEntry).english}</div>
+                    </div>
+                  )}
+                  <div className="mt-2 flex gap-2">
+                    <button onClick={() => insertWordAtCursor((selectedPoolEntry.type === 'verb' ? (selectedPoolEntry.item as VerbEntry).infinitive : (selectedPoolEntry.item as WordEntry).italian))} className="px-3 py-1 rounded border bg-white/5">Ekle</button>
+                    <button onClick={() => setSelectedPoolEntry(null)} className="px-3 py-1 rounded border bg-white/5">Kapat</button>
+                  </div>
+                </div>
+              )}
             </div>
-            <div className="max-h-72 overflow-auto border rounded-2xl bg-white/10 p-4">
-              {/* Show activity-specific small pool first */}
-              {activityContent.vocabulary && activityContent.vocabulary.length > 0 && (
-                <div className="mb-4">
-                  <div className="text-sm text-white/70 mb-1">Aktivite - Önerilen Kelimeler</div>
-                  <div className="flex flex-wrap gap-2 mb-2">
-                    {activityContent.vocabulary.map((w: string) => (
-                      <button key={w} onClick={() => insertWordAtCursor(w)} className="px-3 py-1 rounded-full bg-white/5 text-white text-sm hover:bg-white/10 transition">{w}</button>
+          )}
+
+          {selectedRightTab === 'story' && (
+            <div className="rounded-xl p-4 border bg-white/5 flex flex-col gap-3 overflow-auto">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-sm">{activeStory?.story_title ?? 'Hikaye'}</div>
+                </div>
+                <div className="flex gap-2">
+                  <button onClick={() => setStoryIndex(Math.max(0, storyIndex - 1))} className="px-2 py-1 rounded border bg-white/5">←</button>
+                  <button onClick={() => setStoryIndex(Math.min((stories?.length ?? 1) - 1, storyIndex + 1))} className="px-2 py-1 rounded border bg-white/5">→</button>
+                </div>
+              </div>
+              <div className="space-y-2">
+                {(activeStory?.story_data ?? []).map((s) => (
+                  <p key={s.sentence_id} className="text-white/90">{renderSentence(s, showHints, (w) => handleFlagTranslation(w), vocabulary)}</p>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {selectedRightTab === 'unknown' && activeStory && (
+            <div className="rounded-xl p-4 border bg-white/5 overflow-auto">
+              <div className="text-sm mb-2">Bilinmeyen Kelimeler</div>
+              {collectStoryUnknownWords(activeStory.story_data ?? [], vocabulary).slice(0, 50).map(w => (
+                <div key={`${w.normalized}-${w.sentenceId}`} className="mb-2 p-2 rounded border bg-white/6 flex justify-between items-center">
+                  <div>
+                    <div className="font-semibold">{w.surface}</div>
+                    <div className="text-xs text-white/60">{w.sentenceText}</div>
+                  </div>
+                  <div className="flex gap-2">
+                    <button disabled={translationQueueSet.has(slugify(w.normalized))} onClick={() => handleFlagTranslation(w)} className="px-3 py-1 rounded border bg-amber-300/20">Kuyruğa ekle</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {selectedRightTab === 'results' && (
+            <div className="rounded-xl p-4 border bg-white/5 overflow-auto">
+              <div className="text-sm mb-2">Vocabulary Snapshot</div>
+              {Object.keys(vocabulary ?? {}).map(k => (
+                <div key={k} className="mb-2">
+                  <div className="font-semibold text-white">{k}</div>
+                  <div className="text-sm grid grid-cols-2 gap-2 mt-1">
+                    {((vocabulary as any)[k] ?? []).slice(0, 8).map((it: any) => (
+                      <button key={it.italian ?? it.infinitive} onClick={() => insertWordAtCursor(it.italian ?? it.infinitive)} className="px-2 py-1 rounded border bg-white/10">{it.italian ?? it.infinitive}</button>
                     ))}
                   </div>
                 </div>
-              )}
-              {loading ? (
-                <div className="text-slate-400 text-lg">Yükleniyor...</div>
-              ) : error ? (
-                <div className="text-red-500 text-lg">{error}</div>
-              ) : filteredWordPool.length === 0 ? (
-                <div className="text-slate-400 text-lg">Hiç kelime yok.</div>
-              ) : (
-                <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                  {filteredWordPool.map((word) => (
-                    <li key={word} onMouseEnter={() => {
-                        setHoveredWord(word)
-                        const match = findWordInVocabulary(word.toLowerCase(), vocabulary)
-                        setHoveredInfo(match)
-                       }} onMouseLeave={() => { setHoveredWord(null); setHoveredInfo(null) }} className="px-4 py-2 rounded-xl bg-white/5 text-white text-lg font-semibold cursor-pointer hover:bg-white/10 transition-all" onClick={() => insertWordAtCursor(word)}>
-                      {word}
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {hoveredInfo && hoveredWord && (
-                <div className="word-tooltip text-white hidden lg:block">
-                  <div className="text-sm font-semibold">{hoveredWord} {hoveredInfo?.infinitive ? `· ${hoveredInfo.infinitive}` : ''}</div>
-                  <div className="text-xs text-white/60">{hoveredInfo.english}</div>
-                  <div className="mt-2 text-xs">{hoveredInfo.type} {hoveredInfo.matchType ? `· ${hoveredInfo.matchType}` : ''}</div>
-                </div>
-              )}
+              ))}
             </div>
-          </div>
-          <div>
-            <h2 className="text-2xl font-bold mb-4 text-white">Çevrilecek Metin</h2>
-            <div className="rounded-2xl bg-slate-950/30 p-5 text-white/80 border border-brand-500/20 italic text-lg min-h-[80px]">
-              {selectedActivity === 'diario' ? activityContent.scenario : translationSource}
-            </div>
-            {/* Hikaye seçimi */}
-            {stories && stories.length > 1 && (
-              <div className="mt-4 flex gap-3 items-center">
-                <label htmlFor="storySelect" className="text-base text-white/60">Hikaye seç:</label>
-                <select
-                      id="storySelect"
-                      value={storyIndex}
-                      onChange={e => setStoryIndex(Number(e.target.value))}
-                  className="rounded-2xl border bg-white/10 text-white px-4 py-2 text-lg"
-                >
-                  {stories.map((story, idx) => (
-                    <option key={story.story_id} value={idx}>{story.story_title}</option>
-                  ))}
-                </select>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Story/Reader Section */}
-      <section className="mt-8 rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur">
-        <div className="flex items-center justify-between">
-          <div>
-            <h3 className="text-2xl font-semibold text-white">📖 Interactive Story Reader</h3>
-            <p className="text-white/80">Click any word in the story to reveal meanings, conjugations, and usage notes.</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <button className="nav-btn" disabled={storyIndex === 0} onClick={() => setStoryIndex((prev) => Math.max(0, prev - 1))}>← Previous</button>
-            <button className="nav-btn" disabled={storyIndex >= (stories?.length ?? 0) - 1} onClick={() => setStoryIndex((prev) => Math.min((stories?.length ?? 1) - 1, prev + 1))}>Next →</button>
-            <button onClick={() => setShowHints((prev) => !prev)} className="story-toggle">{showHints ? 'Hide Hints' : 'Show Hints'}</button>
-          </div>
-        </div>
-        <div className="mt-4">
-          <div className="story-title text-white font-semibold">{activeStory?.story_title ?? 'Loading story...'}</div>
-          <div className="space-y-2 mt-3">
-            {(activeStory?.story_data ?? []).map((sentence) => (
-              <p key={sentence.sentence_id} className="story-sentence">
-                {renderSentence(sentence, showHints, handleSelectWord, vocabulary)}
-              </p>
-            ))}
-          </div>
-        </div>
-        {selectedWord && (
-          <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4 text-white/90">
-            <p className="text-sm uppercase tracking-[0.4em] text-white/50">Selected</p>
-            <h4 className="mt-1 text-2xl font-semibold text-white">{selectedWord.surface}</h4>
-            {selectedWord.info ? (
-              <div className="mt-2 text-sm text-white/80">
-                <p><strong>Translation:</strong> {selectedWord.info.english}</p>
-                <p><strong>Type:</strong> {selectedWord.info.type}</p>
-                {selectedWord.info.matchType && <p><strong>Match:</strong> {selectedWord.info.matchType}</p>}
-              </div>
-            ) : (
-              <div className="mt-2 space-y-3 text-sm text-white/70">
-                <p>Bu kelime henüz sözlükte yok.</p>
-                <button type="button" onClick={() => handleFlagTranslation(selectedWord)} disabled={translationQueueSet.has(slugify(selectedWord.normalized)) || flaggingWordId === slugify(selectedWord.normalized)} className="w-full rounded-2xl border border-amber-300/40 bg-amber-200/20 px-4 py-2 text-sm font-semibold text-amber-100 disabled:opacity-60">
-                  {translationQueueSet.has(slugify(selectedWord.normalized)) ? 'Çeviri kuyruğunda' : flaggingWordId === slugify(selectedWord.normalized) ? 'Gönderiliyor…' : 'Çeviri kuyruğuna ekle'}
-                </button>
-                {flagMessage && <p className="text-xs text-white/60">{flagMessage}</p>}
-              </div>
-            )}
-          </div>
-        )}
-      </section>
-
-      {/* Unknown words list */}
-      <section className="mt-8 rounded-3xl border border-amber-300/30 bg-amber-200/10 p-6 shadow-2xl backdrop-blur">
-        <div className="flex flex-col gap-2">
-          <h3 className="text-2xl font-semibold text-white">🚨 Çevrilmesi Gereken Kelimeler</h3>
-          <p className="text-sm text-white/80">Hikâyede sözlüğümüzde bulunmayan kelimeler. Bir tıkla admin kuyruğuna gönderip çeviri önceliği oluşturabilirsiniz.</p>
-        </div>
-        <div className="mt-4 space-y-3">
-          {collectStoryUnknownWords(activeStory?.story_data ?? [], vocabulary).slice(0, 15).map((word) => {
-            const slug = slugify(word.normalized)
-            const alreadyFlagged = translationQueueSet.has(slug)
-            const loading = flaggingWordId === slug
-            return (
-              <div key={`${word.normalized}-${word.sentenceId}`} className="rounded-2xl border border-white/10 bg-slate-950/40 p-4 text-white/80">
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <p className="text-lg font-semibold text-white">{word.surface}</p>
-                    <p className="text-xs text-white/50">{word.sentenceText}</p>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="rounded-full border border-white/20 px-3 py-1 text-xs text-white/70">{word.count}× geçiyor</span>
-                    <button type="button" onClick={() => handleQuickFlagWord(word)} disabled={alreadyFlagged || loading} className="rounded-full border border-amber-300/40 bg-amber-200/20 px-4 py-2 text-xs font-semibold text-amber-100 disabled:opacity-60">{alreadyFlagged ? 'Kuyrukta' : loading ? 'Gönderiliyor…' : 'Kuyruğa ekle'}</button>
-                  </div>
-                </div>
-              </div>
-            )
-          })}
-        </div>
-      </section>
-
-      {/* Category filter and vocabulary results */}
-      <section className="mt-8">
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur">
-          <div className="flex items-center justify-between">
-            <h3 className="text-2xl font-semibold text-white">📚 Vocabulary Results</h3>
-            <p className="text-sm text-white/60">{(vocabulary && Object.keys(vocabulary).length) ?? 0} categories</p>
-          </div>
-          <div className="mt-4 grid gap-6">
-            {/* Basic flattened result list */}
-            {Object.keys(vocabulary ?? {}).map((key: string) => (
-              <div key={key} className="rounded-md bg-white/5 p-3">
-                <div className="font-semibold text-white mb-2">{key}</div>
-                <div className="grid grid-cols-3 gap-3">
-                    {((vocabulary as any)[key] ?? []).slice(0, 6).map((item: any) => (
-                    <div key={item.italian ?? item.infinitive} onClick={() => insertWordAtCursor(item.italian ?? item.infinitive)} className="rounded-md p-2 bg-white/10 text-white cursor-pointer hover:bg-white/20">{item.italian ?? item.infinitive}</div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+          )}
+        </aside>
+      </div>
     </main>
-  );
-}
-
-function renderSentence(
-  sentence: StorySentence,
-  showHints: boolean,
-  onSelect: (word: { surface: string; normalized: string; sentenceText: string; sentenceId: number }) => void,
-  vocabulary: VocabularyData,
-) {
-  const tokens = sentence.sentence_text.split(/(\s+|[.,!?;:])/)
-  return tokens.map((token, index) => {
-    const trimmed = token.trim()
-    const isWord = trimmed && !/^[.,!?;:\s]+$/.test(token)
-    if (!isWord) return token
-    const normalized = trimmed.toLowerCase().replace(/[.,!?;:]/g, '')
-    const match = findWordInVocabulary(normalized, vocabulary)
-    const statusClass = match ? 'found' : 'not-found'
-    return (
-      <button
-        type="button"
-        key={`${normalized}-${sentence.sentence_id}-${index}`}
-        className={`story-word ${statusClass}`}
-        style={{ borderBottomStyle: showHints ? 'solid' : 'dotted' }}
-        onClick={() => onSelect({ surface: token, normalized, sentenceText: sentence.sentence_text, sentenceId: sentence.sentence_id })}
-      >
-        {token}
-      </button>
-    )
-  })
-}
-
-function collectStoryUnknownWords(sentences: StorySentence[] = [], vocabulary: VocabularyData): StoryUnknownWord[] {
-  const wordMap = new Map<string, StoryUnknownWord>()
-  sentences.forEach((sentence) => {
-    const tokens = sentence.sentence_text.split(/(\s+|[.,!?;:])/)    
-    tokens.forEach((token) => {
-      const trimmed = token.trim()
-      const isWord = trimmed && !/^[.,!?;:\s]+$/.test(token)
-      if (!isWord) return
-      const normalized = trimmed.toLowerCase().replace(/[.,!?;:]/g, '')
-      if (!normalized) return
-      const match = findWordInVocabulary(normalized, vocabulary)
-      if (match) return
-      const existing = wordMap.get(normalized)
-      if (existing) existing.count += 1
-      else wordMap.set(normalized, { normalized, surface: trimmed, count: 1, sentenceText: sentence.sentence_text, sentenceId: sentence.sentence_id })
-    })
-  })
-  return Array.from(wordMap.values()).sort((a, b) => b.count - a.count)
+  )
 }
