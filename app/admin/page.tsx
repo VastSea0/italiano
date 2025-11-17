@@ -403,6 +403,34 @@ export default function AdminDashboard() {
     resetEditor()
   }
 
+  const handleTranslate = async () => {
+    setSaving(true)
+    setSaveStatus(null)
+    try {
+      const word = formSlug || (structuredEntry?.italian as string) || (structuredEntry?.infinitive as string) || ''
+      if (!word) {
+        setSaveStatus('Kelime belirtin')
+        return
+      }
+      const response = await fetch('/api/translate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ word }),
+      })
+      if (!response.ok) {
+        throw new Error('Çeviri başarısız')
+      }
+      const data = await response.json()
+      syncStructuredEntry(data)
+      setSaveStatus('Çeviri uygulandı')
+    } catch (err: unknown) {
+      console.error('Translation failed', err)
+      setSaveStatus(err instanceof Error ? err.message : 'Çeviri hatası')
+    } finally {
+      setSaving(false)
+    }
+  }
+
   const handleAdoptTranslationTask = (task: TranslationTask) => {
     const alreadyExists = isWordAlreadyInConjugations(task.word, words)
     if (alreadyExists) {
@@ -839,6 +867,7 @@ export default function AdminDashboard() {
               entry={structuredEntry}
               onChange={handleStructuredFieldChange}
               onReset={() => syncStructuredEntry(createDefaultEntry(formCategory))}
+              onTranslate={handleTranslate}
             />
 
             <div>
@@ -1271,9 +1300,10 @@ type StructuredFormProps = {
   entry: GenericEntry | null
   onChange: (key: string, value: string, type: StructuredFieldType) => void
   onReset: () => void
+  onTranslate?: () => void
 }
 
-function StructuredForm({ category, entry, onChange, onReset }: StructuredFormProps) {
+function StructuredForm({ category, entry, onChange, onReset, onTranslate }: StructuredFormProps) {
   const isVerb = category === 'verbs'
   const visibleFields = STRUCTURED_FIELDS.filter((field) => {
     if (!field.only) return true
@@ -1286,13 +1316,25 @@ function StructuredForm({ category, entry, onChange, onReset }: StructuredFormPr
     <div className="rounded-2xl border border-white/10 bg-slate-950/30 p-4">
       <div className="flex items-center justify-between">
         <label className="text-xs font-semibold uppercase tracking-[0.4em] text-white/50">Basit Form</label>
-        <button
-          type="button"
-          onClick={onReset}
-          className="text-xs font-semibold text-white/60 hover:text-white"
-        >
-          Alanları sıfırla
-        </button>
+        <div className="flex gap-2">
+          {onTranslate && (
+            <button
+              type="button"
+              onClick={onTranslate}
+              className="text-xs font-semibold text-white/60 hover:text-white"
+              title="Yapay zeka ile çevir"
+            >
+              ✨
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={onReset}
+            className="text-xs font-semibold text-white/60 hover:text-white"
+          >
+            Alanları sıfırla
+          </button>
+        </div>
       </div>
       <div className="mt-3 grid gap-3">
         {visibleFields.map((field) => {
