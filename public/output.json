@@ -1,0 +1,7653 @@
+{
+  "totalWords": 4993,
+  "uniqueWords": 1529,
+  "inputFile": "input.txt",
+  "analyzedAt": "2025-11-14T18:14:00.232Z",
+  "words": [
+    {
+      "rank": 1,
+      "word": "di",
+      "frequency": 138
+    },
+    {
+      "rank": 2,
+      "word": "e",
+      "frequency": 122
+    },
+    {
+      "rank": 3,
+      "word": "che",
+      "frequency": 122
+    },
+    {
+      "rank": 4,
+      "word": "non",
+      "frequency": 102
+    },
+    {
+      "rank": 5,
+      "word": "luca",
+      "frequency": 86
+    },
+    {
+      "rank": 6,
+      "word": "a",
+      "frequency": 81
+    },
+    {
+      "rank": 7,
+      "word": "è",
+      "frequency": 77
+    },
+    {
+      "rank": 8,
+      "word": "ma",
+      "frequency": 75
+    },
+    {
+      "rank": 9,
+      "word": "mi",
+      "frequency": 68
+    },
+    {
+      "rank": 10,
+      "word": "ha",
+      "frequency": 68
+    },
+    {
+      "rank": 11,
+      "word": "ho",
+      "frequency": 61
+    },
+    {
+      "rank": 12,
+      "word": "per",
+      "frequency": 50
+    },
+    {
+      "rank": 13,
+      "word": "da",
+      "frequency": 49
+    },
+    {
+      "rank": 14,
+      "word": "in",
+      "frequency": 46
+    },
+    {
+      "rank": 15,
+      "word": "io",
+      "frequency": 44
+    },
+    {
+      "rank": 16,
+      "word": "sono",
+      "frequency": 40
+    },
+    {
+      "rank": 17,
+      "word": "con",
+      "frequency": 37
+    },
+    {
+      "rank": 18,
+      "word": "ti",
+      "frequency": 37
+    },
+    {
+      "rank": 19,
+      "word": "coraline",
+      "frequency": 37
+    },
+    {
+      "rank": 20,
+      "word": "me",
+      "frequency": 35
+    },
+    {
+      "rank": 21,
+      "word": "##",
+      "frequency": 33
+    },
+    {
+      "rank": 22,
+      "word": "capitolo",
+      "frequency": 32
+    },
+    {
+      "rank": 23,
+      "word": "più",
+      "frequency": 30
+    },
+    {
+      "rank": 24,
+      "word": "era",
+      "frequency": 29
+    },
+    {
+      "rank": 25,
+      "word": "tu",
+      "frequency": 29
+    },
+    {
+      "rank": 26,
+      "word": "sempre",
+      "frequency": 28
+    },
+    {
+      "rank": 27,
+      "word": "te",
+      "frequency": 28
+    },
+    {
+      "rank": 28,
+      "word": "detto",
+      "frequency": 26
+    },
+    {
+      "rank": 29,
+      "word": "ci",
+      "frequency": 26
+    },
+    {
+      "rank": 30,
+      "word": "lontana",
+      "frequency": 26
+    },
+    {
+      "rank": 31,
+      "word": "abbiamo",
+      "frequency": 24
+    },
+    {
+      "rank": 32,
+      "word": "siamo",
+      "frequency": 23
+    },
+    {
+      "rank": 33,
+      "word": "come",
+      "frequency": 23
+    },
+    {
+      "rank": 34,
+      "word": "se",
+      "frequency": 23
+    },
+    {
+      "rank": 35,
+      "word": "sei",
+      "frequency": 22
+    },
+    {
+      "rank": 36,
+      "word": "perché",
+      "frequency": 22
+    },
+    {
+      "rank": 37,
+      "word": "quindi",
+      "frequency": 22
+    },
+    {
+      "rank": 38,
+      "word": "fuori",
+      "frequency": 21
+    },
+    {
+      "rank": 39,
+      "word": "anche",
+      "frequency": 20
+    },
+    {
+      "rank": 40,
+      "word": "si",
+      "frequency": 20
+    },
+    {
+      "rank": 41,
+      "word": "sento",
+      "frequency": 20
+    },
+    {
+      "rank": 42,
+      "word": "solo",
+      "frequency": 19
+    },
+    {
+      "rank": 43,
+      "word": "casa",
+      "frequency": 19
+    },
+    {
+      "rank": 44,
+      "word": "quando",
+      "frequency": 18
+    },
+    {
+      "rank": 45,
+      "word": "elena",
+      "frequency": 18
+    },
+    {
+      "rank": 46,
+      "word": "il mio",
+      "frequency": 17
+    },
+    {
+      "rank": 47,
+      "word": "tutto",
+      "frequency": 16
+    },
+    {
+      "rank": 48,
+      "word": "ogni",
+      "frequency": 16
+    },
+    {
+      "rank": 49,
+      "word": "dentro",
+      "frequency": 16
+    },
+    {
+      "rank": 50,
+      "word": "insieme",
+      "frequency": 15
+    },
+    {
+      "rank": 51,
+      "word": "noi",
+      "frequency": 15
+    },
+    {
+      "rank": 52,
+      "word": "paura",
+      "frequency": 15
+    },
+    {
+      "rank": 53,
+      "word": "essere",
+      "frequency": 15
+    },
+    {
+      "rank": 54,
+      "word": "loro",
+      "frequency": 15
+    },
+    {
+      "rank": 55,
+      "word": "marlena",
+      "frequency": 15
+    },
+    {
+      "rank": 56,
+      "word": "l'amore",
+      "frequency": 14
+    },
+    {
+      "rank": 57,
+      "word": "torna",
+      "frequency": 14
+    },
+    {
+      "rank": 58,
+      "word": "la mia",
+      "frequency": 13
+    },
+    {
+      "rank": 59,
+      "word": "mia",
+      "frequency": 13
+    },
+    {
+      "rank": 60,
+      "word": "testa",
+      "frequency": 13
+    },
+    {
+      "rank": 61,
+      "word": "ancora",
+      "frequency": 12
+    },
+    {
+      "rank": 62,
+      "word": "ero",
+      "frequency": 12
+    },
+    {
+      "rank": 63,
+      "word": "la paura",
+      "frequency": 12
+    },
+    {
+      "rank": 64,
+      "word": "cosa",
+      "frequency": 12
+    },
+    {
+      "rank": 65,
+      "word": "poi",
+      "frequency": 12
+    },
+    {
+      "rank": 66,
+      "word": "lei",
+      "frequency": 12
+    },
+    {
+      "rank": 67,
+      "word": "il sole",
+      "frequency": 11
+    },
+    {
+      "rank": 68,
+      "word": "sì",
+      "frequency": 11
+    },
+    {
+      "rank": 69,
+      "word": "forse",
+      "frequency": 11
+    },
+    {
+      "rank": 70,
+      "word": "no",
+      "frequency": 11
+    },
+    {
+      "rank": 71,
+      "word": "voglio",
+      "frequency": 11
+    },
+    {
+      "rank": 72,
+      "word": "andare",
+      "frequency": 11
+    },
+    {
+      "rank": 73,
+      "word": "dimmi",
+      "frequency": 11
+    },
+    {
+      "rank": 74,
+      "word": "le tue",
+      "frequency": 11
+    },
+    {
+      "rank": 75,
+      "word": "verità",
+      "frequency": 11
+    },
+    {
+      "rank": 76,
+      "word": "madre",
+      "frequency": 10
+    },
+    {
+      "rank": 77,
+      "word": "amo",
+      "frequency": 10
+    },
+    {
+      "rank": 78,
+      "word": "niente",
+      "frequency": 10
+    },
+    {
+      "rank": 79,
+      "word": "risposto",
+      "frequency": 9
+    },
+    {
+      "rank": 80,
+      "word": "quella",
+      "frequency": 9
+    },
+    {
+      "rank": 81,
+      "word": "mano",
+      "frequency": 9
+    },
+    {
+      "rank": 82,
+      "word": "o",
+      "frequency": 9
+    },
+    {
+      "rank": 83,
+      "word": "le sue",
+      "frequency": 9
+    },
+    {
+      "rank": 84,
+      "word": "fa",
+      "frequency": 9
+    },
+    {
+      "rank": 85,
+      "word": "avere",
+      "frequency": 9
+    },
+    {
+      "rank": 86,
+      "word": "parla",
+      "frequency": 9
+    },
+    {
+      "rank": 87,
+      "word": "sarò",
+      "frequency": 9
+    },
+    {
+      "rank": 88,
+      "word": "storia",
+      "frequency": 8
+    },
+    {
+      "rank": 89,
+      "word": "mai",
+      "frequency": 8
+    },
+    {
+      "rank": 90,
+      "word": "prima",
+      "frequency": 8
+    },
+    {
+      "rank": 91,
+      "word": "iniziato",
+      "frequency": 8
+    },
+    {
+      "rank": 92,
+      "word": "sto",
+      "frequency": 8
+    },
+    {
+      "rank": 93,
+      "word": "hai",
+      "frequency": 8
+    },
+    {
+      "rank": 94,
+      "word": "questo",
+      "frequency": 8
+    },
+    {
+      "rank": 95,
+      "word": "stato",
+      "frequency": 8
+    },
+    {
+      "rank": 96,
+      "word": "perfetto",
+      "frequency": 8
+    },
+    {
+      "rank": 97,
+      "word": "su",
+      "frequency": 8
+    },
+    {
+      "rank": 98,
+      "word": "il freddo",
+      "frequency": 8
+    },
+    {
+      "rank": 99,
+      "word": "del buio",
+      "frequency": 8
+    },
+    {
+      "rank": 100,
+      "word": "qua",
+      "frequency": 8
+    },
+    {
+      "rank": 101,
+      "word": "forte",
+      "frequency": 7
+    },
+    {
+      "rank": 102,
+      "word": "milano",
+      "frequency": 7
+    },
+    {
+      "rank": 103,
+      "word": "un giorno",
+      "frequency": 7
+    },
+    {
+      "rank": 104,
+      "word": "eravamo",
+      "frequency": 7
+    },
+    {
+      "rank": 105,
+      "word": "la sua",
+      "frequency": 7
+    },
+    {
+      "rank": 106,
+      "word": "avevo",
+      "frequency": 7
+    },
+    {
+      "rank": 107,
+      "word": "diverso",
+      "frequency": 7
+    },
+    {
+      "rank": 108,
+      "word": "amici",
+      "frequency": 7
+    },
+    {
+      "rank": 109,
+      "word": "cui",
+      "frequency": 7
+    },
+    {
+      "rank": 110,
+      "word": "aveva",
+      "frequency": 7
+    },
+    {
+      "rank": 111,
+      "word": "hanno",
+      "frequency": 7
+    },
+    {
+      "rank": 112,
+      "word": "qui",
+      "frequency": 7
+    },
+    {
+      "rank": 113,
+      "word": "capito",
+      "frequency": 7
+    },
+    {
+      "rank": 114,
+      "word": "cose",
+      "frequency": 7
+    },
+    {
+      "rank": 115,
+      "word": "dove",
+      "frequency": 7
+    },
+    {
+      "rank": 116,
+      "word": "mentre",
+      "frequency": 7
+    },
+    {
+      "rank": 117,
+      "word": "chi",
+      "frequency": 7
+    },
+    {
+      "rank": 118,
+      "word": "tutti",
+      "frequency": 7
+    },
+    {
+      "rank": 119,
+      "word": "vent'anni",
+      "frequency": 7
+    },
+    {
+      "rank": 120,
+      "word": "diversi",
+      "frequency": 7
+    },
+    {
+      "rank": 121,
+      "word": "tornerai",
+      "frequency": 7
+    },
+    {
+      "rank": 122,
+      "word": "sentire",
+      "frequency": 7
+    },
+    {
+      "rank": 123,
+      "word": "tra",
+      "frequency": 6
+    },
+    {
+      "rank": 124,
+      "word": "chiesto",
+      "frequency": 6
+    },
+    {
+      "rank": 125,
+      "word": "anch'io",
+      "frequency": 6
+    },
+    {
+      "rank": 126,
+      "word": "verso",
+      "frequency": 6
+    },
+    {
+      "rank": 127,
+      "word": "vita",
+      "frequency": 6
+    },
+    {
+      "rank": 128,
+      "word": "cuore",
+      "frequency": 6
+    },
+    {
+      "rank": 129,
+      "word": "senza",
+      "frequency": 6
+    },
+    {
+      "rank": 130,
+      "word": "lui",
+      "frequency": 6
+    },
+    {
+      "rank": 131,
+      "word": "promesso",
+      "frequency": 6
+    },
+    {
+      "rank": 132,
+      "word": "sera",
+      "frequency": 6
+    },
+    {
+      "rank": 133,
+      "word": "pensavo",
+      "frequency": 6
+    },
+    {
+      "rank": 134,
+      "word": "notte",
+      "frequency": 6
+    },
+    {
+      "rank": 135,
+      "word": "il cuore",
+      "frequency": 6
+    },
+    {
+      "rank": 136,
+      "word": "vicino",
+      "frequency": 6
+    },
+    {
+      "rank": 137,
+      "word": "stata",
+      "frequency": 6
+    },
+    {
+      "rank": 138,
+      "word": "fatto",
+      "frequency": 6
+    },
+    {
+      "rank": 139,
+      "word": "amore",
+      "frequency": 6
+    },
+    {
+      "rank": 140,
+      "word": "così",
+      "frequency": 6
+    },
+    {
+      "rank": 141,
+      "word": "tanto",
+      "frequency": 6
+    },
+    {
+      "rank": 142,
+      "word": "tutte",
+      "frequency": 6
+    },
+    {
+      "rank": 143,
+      "word": "volte",
+      "frequency": 6
+    },
+    {
+      "rank": 144,
+      "word": "mio",
+      "frequency": 6
+    },
+    {
+      "rank": 145,
+      "word": "diceva",
+      "frequency": 6
+    },
+    {
+      "rank": 146,
+      "word": "parlato",
+      "frequency": 6
+    },
+    {
+      "rank": 147,
+      "word": "persone",
+      "frequency": 6
+    },
+    {
+      "rank": 148,
+      "word": "via",
+      "frequency": 6
+    },
+    {
+      "rank": 149,
+      "word": "l'aria",
+      "frequency": 6
+    },
+    {
+      "rank": 150,
+      "word": "continuerò",
+      "frequency": 6
+    },
+    {
+      "rank": 151,
+      "word": "sotto",
+      "frequency": 5
+    },
+    {
+      "rank": 152,
+      "word": "lo stesso",
+      "frequency": 5
+    },
+    {
+      "rank": 153,
+      "word": "volta",
+      "frequency": 5
+    },
+    {
+      "rank": 154,
+      "word": "sentivo",
+      "frequency": 5
+    },
+    {
+      "rank": 155,
+      "word": "gli ho",
+      "frequency": 5
+    },
+    {
+      "rank": 156,
+      "word": "migliore",
+      "frequency": 5
+    },
+    {
+      "rank": 157,
+      "word": "amico",
+      "frequency": 5
+    },
+    {
+      "rank": 158,
+      "word": "qualcosa",
+      "frequency": 5
+    },
+    {
+      "rank": 159,
+      "word": "la nostra",
+      "frequency": 5
+    },
+    {
+      "rank": 160,
+      "word": "la verità",
+      "frequency": 5
+    },
+    {
+      "rank": 161,
+      "word": "marco",
+      "frequency": 5
+    },
+    {
+      "rank": 162,
+      "word": "c'è",
+      "frequency": 5
+    },
+    {
+      "rank": 163,
+      "word": "so",
+      "frequency": 5
+    },
+    {
+      "rank": 164,
+      "word": "viso",
+      "frequency": 5
+    },
+    {
+      "rank": 165,
+      "word": "padre",
+      "frequency": 5
+    },
+    {
+      "rank": 166,
+      "word": "molto",
+      "frequency": 5
+    },
+    {
+      "rank": 167,
+      "word": "il giorno",
+      "frequency": 5
+    },
+    {
+      "rank": 168,
+      "word": "il nostro",
+      "frequency": 5
+    },
+    {
+      "rank": 169,
+      "word": "vero",
+      "frequency": 5
+    },
+    {
+      "rank": 170,
+      "word": "c'ho",
+      "frequency": 5
+    },
+    {
+      "rank": 171,
+      "word": "soltanto",
+      "frequency": 5
+    },
+    {
+      "rank": 172,
+      "word": "son",
+      "frequency": 5
+    },
+    {
+      "rank": 173,
+      "word": "sarai",
+      "frequency": 5
+    },
+    {
+      "rank": 174,
+      "word": "oppure",
+      "frequency": 5
+    },
+    {
+      "rank": 175,
+      "word": "avanti",
+      "frequency": 5
+    },
+    {
+      "rank": 176,
+      "word": "adesso",
+      "frequency": 5
+    },
+    {
+      "rank": 177,
+      "word": "la gente",
+      "frequency": 5
+    },
+    {
+      "rank": 178,
+      "word": "la prima",
+      "frequency": 4
+    },
+    {
+      "rank": 179,
+      "word": "giorno",
+      "frequency": 4
+    },
+    {
+      "rank": 180,
+      "word": "all'università",
+      "frequency": 4
+    },
+    {
+      "rank": 181,
+      "word": "visto",
+      "frequency": 4
+    },
+    {
+      "rank": 182,
+      "word": "scusa",
+      "frequency": 4
+    },
+    {
+      "rank": 183,
+      "word": "anno",
+      "frequency": 4
+    },
+    {
+      "rank": 184,
+      "word": "cambiato",
+      "frequency": 4
+    },
+    {
+      "rank": 185,
+      "word": "dopo",
+      "frequency": 4
+    },
+    {
+      "rank": 186,
+      "word": "vuole",
+      "frequency": 4
+    },
+    {
+      "rank": 187,
+      "word": "piano",
+      "frequency": 4
+    },
+    {
+      "rank": 188,
+      "word": "una sera",
+      "frequency": 4
+    },
+    {
+      "rank": 189,
+      "word": "gioia",
+      "frequency": 4
+    },
+    {
+      "rank": 190,
+      "word": "perso",
+      "frequency": 4
+    },
+    {
+      "rank": 191,
+      "word": "deciso",
+      "frequency": 4
+    },
+    {
+      "rank": 192,
+      "word": "conosciuto",
+      "frequency": 4
+    },
+    {
+      "rank": 193,
+      "word": "felice",
+      "frequency": 4
+    },
+    {
+      "rank": 194,
+      "word": "diversa",
+      "frequency": 4
+    },
+    {
+      "rank": 195,
+      "word": "male",
+      "frequency": 4
+    },
+    {
+      "rank": 196,
+      "word": "volevo",
+      "frequency": 4
+    },
+    {
+      "rank": 197,
+      "word": "portato",
+      "frequency": 4
+    },
+    {
+      "rank": 198,
+      "word": "respiro",
+      "frequency": 4
+    },
+    {
+      "rank": 199,
+      "word": "difficile",
+      "frequency": 4
+    },
+    {
+      "rank": 200,
+      "word": "le lacrime",
+      "frequency": 4
+    },
+    {
+      "rank": 201,
+      "word": "il cielo",
+      "frequency": 4
+    },
+    {
+      "rank": 202,
+      "word": "le nostre",
+      "frequency": 4
+    },
+    {
+      "rank": 203,
+      "word": "tempo",
+      "frequency": 4
+    },
+    {
+      "rank": 204,
+      "word": "già",
+      "frequency": 4
+    },
+    {
+      "rank": 205,
+      "word": "mamma",
+      "frequency": 4
+    },
+    {
+      "rank": 206,
+      "word": "bella",
+      "frequency": 4
+    },
+    {
+      "rank": 207,
+      "word": "due",
+      "frequency": 4
+    },
+    {
+      "rank": 208,
+      "word": "lasciare",
+      "frequency": 4
+    },
+    {
+      "rank": 209,
+      "word": "erano",
+      "frequency": 4
+    },
+    {
+      "rank": 210,
+      "word": "può",
+      "frequency": 4
+    },
+    {
+      "rank": 211,
+      "word": "vedo",
+      "frequency": 4
+    },
+    {
+      "rank": 212,
+      "word": "prendere",
+      "frequency": 4
+    },
+    {
+      "rank": 213,
+      "word": "bello",
+      "frequency": 4
+    },
+    {
+      "rank": 214,
+      "word": "il mondo",
+      "frequency": 4
+    },
+    {
+      "rank": 215,
+      "word": "tua",
+      "frequency": 4
+    },
+    {
+      "rank": 216,
+      "word": "primo",
+      "frequency": 4
+    },
+    {
+      "rank": 217,
+      "word": "piccolo",
+      "frequency": 4
+    },
+    {
+      "rank": 218,
+      "word": "siete",
+      "frequency": 4
+    },
+    {
+      "rank": 219,
+      "word": "pronto",
+      "frequency": 4
+    },
+    {
+      "rank": 220,
+      "word": "lottare",
+      "frequency": 4
+    },
+    {
+      "rank": 221,
+      "word": "la colpa",
+      "frequency": 4
+    },
+    {
+      "rank": 222,
+      "word": "un passo",
+      "frequency": 4
+    },
+    {
+      "rank": 223,
+      "word": "sa",
+      "frequency": 4
+    },
+    {
+      "rank": 224,
+      "word": "portami",
+      "frequency": 4
+    },
+    {
+      "rank": 225,
+      "word": "sparire",
+      "frequency": 4
+    },
+    {
+      "rank": 226,
+      "word": "il mare",
+      "frequency": 4
+    },
+    {
+      "rank": 227,
+      "word": "terra",
+      "frequency": 4
+    },
+    {
+      "rank": 228,
+      "word": "una luce",
+      "frequency": 4
+    },
+    {
+      "rank": 229,
+      "word": "squarcia",
+      "frequency": 4
+    },
+    {
+      "rank": 230,
+      "word": "il suolo",
+      "frequency": 4
+    },
+    {
+      "rank": 231,
+      "word": "cielo",
+      "frequency": 3
+    },
+    {
+      "rank": 232,
+      "word": "il primo",
+      "frequency": 3
+    },
+    {
+      "rank": 233,
+      "word": "stavo",
+      "frequency": 3
+    },
+    {
+      "rank": 234,
+      "word": "l'aula",
+      "frequency": 3
+    },
+    {
+      "rank": 235,
+      "word": "letteratura",
+      "frequency": 3
+    },
+    {
+      "rank": 236,
+      "word": "l'ho",
+      "frequency": 3
+    },
+    {
+      "rank": 237,
+      "word": "un sorriso",
+      "frequency": 3
+    },
+    {
+      "rank": 238,
+      "word": "ridendo",
+      "frequency": 3
+    },
+    {
+      "rank": 239,
+      "word": "stati",
+      "frequency": 3
+    },
+    {
+      "rank": 240,
+      "word": "difficili",
+      "frequency": 3
+    },
+    {
+      "rank": 241,
+      "word": "nuovo",
+      "frequency": 3
+    },
+    {
+      "rank": 242,
+      "word": "spesso",
+      "frequency": 3
+    },
+    {
+      "rank": 243,
+      "word": "sola",
+      "frequency": 3
+    },
+    {
+      "rank": 244,
+      "word": "c'era",
+      "frequency": 3
+    },
+    {
+      "rank": 245,
+      "word": "occhi",
+      "frequency": 3
+    },
+    {
+      "rank": 246,
+      "word": "seduti",
+      "frequency": 3
+    },
+    {
+      "rank": 247,
+      "word": "sembrava",
+      "frequency": 3
+    },
+    {
+      "rank": 248,
+      "word": "grazie",
+      "frequency": 3
+    },
+    {
+      "rank": 249,
+      "word": "sorriso",
+      "frequency": 3
+    },
+    {
+      "rank": 250,
+      "word": "triste",
+      "frequency": 3
+    },
+    {
+      "rank": 251,
+      "word": "avuto",
+      "frequency": 3
+    },
+    {
+      "rank": 252,
+      "word": "innamorata",
+      "frequency": 3
+    },
+    {
+      "rank": 253,
+      "word": "ragione",
+      "frequency": 3
+    },
+    {
+      "rank": 254,
+      "word": "arrivato",
+      "frequency": 3
+    },
+    {
+      "rank": 255,
+      "word": "freddo",
+      "frequency": 3
+    },
+    {
+      "rank": 256,
+      "word": "grande",
+      "frequency": 3
+    },
+    {
+      "rank": 257,
+      "word": "la distanza",
+      "frequency": 3
+    },
+    {
+      "rank": 258,
+      "word": "rispondevo",
+      "frequency": 3
+    },
+    {
+      "rank": 259,
+      "word": "subito",
+      "frequency": 3
+    },
+    {
+      "rank": 260,
+      "word": "bene",
+      "frequency": 3
+    },
+    {
+      "rank": 261,
+      "word": "stanca",
+      "frequency": 3
+    },
+    {
+      "rank": 262,
+      "word": "troppo",
+      "frequency": 3
+    },
+    {
+      "rank": 263,
+      "word": "amica",
+      "frequency": 3
+    },
+    {
+      "rank": 264,
+      "word": "parlare",
+      "frequency": 3
+    },
+    {
+      "rank": 265,
+      "word": "capisco",
+      "frequency": 3
+    },
+    {
+      "rank": 266,
+      "word": "sussurrato",
+      "frequency": 3
+    },
+    {
+      "rank": 267,
+      "word": "la ragione",
+      "frequency": 3
+    },
+    {
+      "rank": 268,
+      "word": "posso",
+      "frequency": 3
+    },
+    {
+      "rank": 269,
+      "word": "sia",
+      "frequency": 3
+    },
+    {
+      "rank": 270,
+      "word": "sul mio",
+      "frequency": 3
+    },
+    {
+      "rank": 271,
+      "word": "vuoi",
+      "frequency": 3
+    },
+    {
+      "rank": 272,
+      "word": "dovevo",
+      "frequency": 3
+    },
+    {
+      "rank": 273,
+      "word": "all'inizio",
+      "frequency": 3
+    },
+    {
+      "rank": 274,
+      "word": "lo so",
+      "frequency": 3
+    },
+    {
+      "rank": 275,
+      "word": "davvero",
+      "frequency": 3
+    },
+    {
+      "rank": 276,
+      "word": "bacio",
+      "frequency": 3
+    },
+    {
+      "rank": 277,
+      "word": "momento",
+      "frequency": 3
+    },
+    {
+      "rank": 278,
+      "word": "sentito",
+      "frequency": 3
+    },
+    {
+      "rank": 279,
+      "word": "pieno",
+      "frequency": 3
+    },
+    {
+      "rank": 280,
+      "word": "felici",
+      "frequency": 3
+    },
+    {
+      "rank": 281,
+      "word": "le persone",
+      "frequency": 3
+    },
+    {
+      "rank": 282,
+      "word": "la famiglia",
+      "frequency": 3
+    },
+    {
+      "rank": 283,
+      "word": "cena",
+      "frequency": 3
+    },
+    {
+      "rank": 284,
+      "word": "seguenti",
+      "frequency": 3
+    },
+    {
+      "rank": 285,
+      "word": "abbia",
+      "frequency": 3
+    },
+    {
+      "rank": 286,
+      "word": "ciò",
+      "frequency": 3
+    },
+    {
+      "rank": 287,
+      "word": "pianto",
+      "frequency": 3
+    },
+    {
+      "rank": 288,
+      "word": "camminavamo",
+      "frequency": 3
+    },
+    {
+      "rank": 289,
+      "word": "un appartamento",
+      "frequency": 3
+    },
+    {
+      "rank": 290,
+      "word": "al mio",
+      "frequency": 3
+    },
+    {
+      "rank": 291,
+      "word": "della mia",
+      "frequency": 3
+    },
+    {
+      "rank": 292,
+      "word": "momenti",
+      "frequency": 3
+    },
+    {
+      "rank": 293,
+      "word": "letto",
+      "frequency": 3
+    },
+    {
+      "rank": 294,
+      "word": "scritto",
+      "frequency": 3
+    },
+    {
+      "rank": 295,
+      "word": "piena",
+      "frequency": 3
+    },
+    {
+      "rank": 296,
+      "word": "questa",
+      "frequency": 3
+    },
+    {
+      "rank": 297,
+      "word": "vivere",
+      "frequency": 3
+    },
+    {
+      "rank": 298,
+      "word": "scriveva",
+      "frequency": 3
+    },
+    {
+      "rank": 299,
+      "word": "le parole",
+      "frequency": 3
+    },
+    {
+      "rank": 300,
+      "word": "la tua",
+      "frequency": 3
+    },
+    {
+      "rank": 301,
+      "word": "sarà",
+      "frequency": 3
+    },
+    {
+      "rank": 302,
+      "word": "ad",
+      "frequency": 3
+    },
+    {
+      "rank": 303,
+      "word": "prendo",
+      "frequency": 3
+    },
+    {
+      "rank": 304,
+      "word": "crescere",
+      "frequency": 3
+    },
+    {
+      "rank": 305,
+      "word": "chiedo",
+      "frequency": 3
+    },
+    {
+      "rank": 306,
+      "word": "la strada",
+      "frequency": 3
+    },
+    {
+      "rank": 307,
+      "word": "domani",
+      "frequency": 3
+    },
+    {
+      "rank": 308,
+      "word": "vi",
+      "frequency": 3
+    },
+    {
+      "rank": 309,
+      "word": "sopra",
+      "frequency": 3
+    },
+    {
+      "rank": 310,
+      "word": "purtroppo",
+      "frequency": 3
+    },
+    {
+      "rank": 311,
+      "word": "galla",
+      "frequency": 3
+    },
+    {
+      "rank": 312,
+      "word": "manca",
+      "frequency": 3
+    },
+    {
+      "rank": 313,
+      "word": "piange",
+      "frequency": 3
+    },
+    {
+      "rank": 314,
+      "word": "partire",
+      "frequency": 3
+    },
+    {
+      "rank": 315,
+      "word": "l'ansia",
+      "frequency": 3
+    },
+    {
+      "rank": 316,
+      "word": "un'ascia",
+      "frequency": 3
+    },
+    {
+      "rank": 317,
+      "word": "il fuoco",
+      "frequency": 3
+    },
+    {
+      "rank": 318,
+      "word": "ed",
+      "frequency": 3
+    },
+    {
+      "rank": 319,
+      "word": "città",
+      "frequency": 3
+    },
+    {
+      "rank": 320,
+      "word": "giù",
+      "frequency": 3
+    },
+    {
+      "rank": 321,
+      "word": "col",
+      "frequency": 3
+    },
+    {
+      "rank": 322,
+      "word": "brinderò",
+      "frequency": 3
+    },
+    {
+      "rank": 323,
+      "word": "le mani",
+      "frequency": 3
+    },
+    {
+      "rank": 324,
+      "word": "giunte",
+      "frequency": 3
+    },
+    {
+      "rank": 325,
+      "word": "batte",
+      "frequency": 3
+    },
+    {
+      "rank": 326,
+      "word": "aspettare",
+      "frequency": 3
+    },
+    {
+      "rank": 327,
+      "word": "d'amore",
+      "frequency": 2
+    },
+    {
+      "rank": 328,
+      "word": "settembre",
+      "frequency": 2
+    },
+    {
+      "rank": 329,
+      "word": "brillava",
+      "frequency": 2
+    },
+    {
+      "rank": 330,
+      "word": "nervosa",
+      "frequency": 2
+    },
+    {
+      "rank": 331,
+      "word": "cercando",
+      "frequency": 2
+    },
+    {
+      "rank": 332,
+      "word": "italiana",
+      "frequency": 2
+    },
+    {
+      "rank": 333,
+      "word": "al primo",
+      "frequency": 2
+    },
+    {
+      "rank": 334,
+      "word": "camminato",
+      "frequency": 2
+    },
+    {
+      "rank": 335,
+      "word": "sapevo",
+      "frequency": 2
+    },
+    {
+      "rank": 336,
+      "word": "il caffè",
+      "frequency": 2
+    },
+    {
+      "rank": 337,
+      "word": "devi",
+      "frequency": 2
+    },
+    {
+      "rank": 338,
+      "word": "il tuo",
+      "frequency": 2
+    },
+    {
+      "rank": 339,
+      "word": "diventato",
+      "frequency": 2
+    },
+    {
+      "rank": 340,
+      "word": "novembre",
+      "frequency": 2
+    },
+    {
+      "rank": 341,
+      "word": "intima",
+      "frequency": 2
+    },
+    {
+      "rank": 342,
+      "word": "devo",
+      "frequency": 2
+    },
+    {
+      "rank": 343,
+      "word": "una cosa",
+      "frequency": 2
+    },
+    {
+      "rank": 344,
+      "word": "importante",
+      "frequency": 2
+    },
+    {
+      "rank": 345,
+      "word": "puoi",
+      "frequency": 2
+    },
+    {
+      "rank": 346,
+      "word": "gay",
+      "frequency": 2
+    },
+    {
+      "rank": 347,
+      "word": "nei suoi",
+      "frequency": 2
+    },
+    {
+      "rank": 348,
+      "word": "sta",
+      "frequency": 2
+    },
+    {
+      "rank": 349,
+      "word": "pensato",
+      "frequency": 2
+    },
+    {
+      "rank": 350,
+      "word": "fidanzati",
+      "frequency": 2
+    },
+    {
+      "rank": 351,
+      "word": "speciale",
+      "frequency": 2
+    },
+    {
+      "rank": 352,
+      "word": "sara",
+      "frequency": 2
+    },
+    {
+      "rank": 353,
+      "word": "amicizia",
+      "frequency": 2
+    },
+    {
+      "rank": 354,
+      "word": "dormito",
+      "frequency": 2
+    },
+    {
+      "rank": 355,
+      "word": "gennaio",
+      "frequency": 2
+    },
+    {
+      "rank": 356,
+      "word": "i miei",
+      "frequency": 2
+    },
+    {
+      "rank": 357,
+      "word": "bisessuale",
+      "frequency": 2
+    },
+    {
+      "rank": 358,
+      "word": "perdere",
+      "frequency": 2
+    },
+    {
+      "rank": 359,
+      "word": "silenzio",
+      "frequency": 2
+    },
+    {
+      "rank": 360,
+      "word": "febbraio",
+      "frequency": 2
+    },
+    {
+      "rank": 361,
+      "word": "uscire",
+      "frequency": 2
+    },
+    {
+      "rank": 362,
+      "word": "un ragazzo",
+      "frequency": 2
+    },
+    {
+      "rank": 363,
+      "word": "studiare",
+      "frequency": 2
+    },
+    {
+      "rank": 364,
+      "word": "messaggi",
+      "frequency": 2
+    },
+    {
+      "rank": 365,
+      "word": "gli esami",
+      "frequency": 2
+    },
+    {
+      "rank": 366,
+      "word": "stare",
+      "frequency": 2
+    },
+    {
+      "rank": 367,
+      "word": "faceva",
+      "frequency": 2
+    },
+    {
+      "rank": 368,
+      "word": "terribile",
+      "frequency": 2
+    },
+    {
+      "rank": 369,
+      "word": "ferito",
+      "frequency": 2
+    },
+    {
+      "rank": 370,
+      "word": "urlare",
+      "frequency": 2
+    },
+    {
+      "rank": 371,
+      "word": "troppa",
+      "frequency": 2
+    },
+    {
+      "rank": 372,
+      "word": "aprile",
+      "frequency": 2
+    },
+    {
+      "rank": 373,
+      "word": "al parco",
+      "frequency": 2
+    },
+    {
+      "rank": 374,
+      "word": "mani",
+      "frequency": 2
+    },
+    {
+      "rank": 375,
+      "word": "etero",
+      "frequency": 2
+    },
+    {
+      "rank": 376,
+      "word": "diventa",
+      "frequency": 2
+    },
+    {
+      "rank": 377,
+      "word": "dispiace",
+      "frequency": 2
+    },
+    {
+      "rank": 378,
+      "word": "strana",
+      "frequency": 2
+    },
+    {
+      "rank": 379,
+      "word": "importa",
+      "frequency": 2
+    },
+    {
+      "rank": 380,
+      "word": "preso",
+      "frequency": 2
+    },
+    {
+      "rank": 381,
+      "word": "nella mano",
+      "frequency": 2
+    },
+    {
+      "rank": 382,
+      "word": "sognato",
+      "frequency": 2
+    },
+    {
+      "rank": 383,
+      "word": "il suo",
+      "frequency": 2
+    },
+    {
+      "rank": 384,
+      "word": "dolcemente",
+      "frequency": 2
+    },
+    {
+      "rank": 385,
+      "word": "entrambi",
+      "frequency": 2
+    },
+    {
+      "rank": 386,
+      "word": "stavamo",
+      "frequency": 2
+    },
+    {
+      "rank": 387,
+      "word": "piangendo",
+      "frequency": 2
+    },
+    {
+      "rank": 388,
+      "word": "un sogno",
+      "frequency": 2
+    },
+    {
+      "rank": 389,
+      "word": "alcuni",
+      "frequency": 2
+    },
+    {
+      "rank": 390,
+      "word": "corso",
+      "frequency": 2
+    },
+    {
+      "rank": 391,
+      "word": "nuove",
+      "frequency": 2
+    },
+    {
+      "rank": 392,
+      "word": "famiglia",
+      "frequency": 2
+    },
+    {
+      "rank": 393,
+      "word": "genitori",
+      "frequency": 2
+    },
+    {
+      "rank": 394,
+      "word": "confusa",
+      "frequency": 2
+    },
+    {
+      "rank": 395,
+      "word": "signore",
+      "frequency": 2
+    },
+    {
+      "rank": 396,
+      "word": "al mondo",
+      "frequency": 2
+    },
+    {
+      "rank": 397,
+      "word": "ferma",
+      "frequency": 2
+    },
+    {
+      "rank": 398,
+      "word": "la mano",
+      "frequency": 2
+    },
+    {
+      "rank": 399,
+      "word": "abituarsi",
+      "frequency": 2
+    },
+    {
+      "rank": 400,
+      "word": "silenzioso",
+      "frequency": 2
+    },
+    {
+      "rank": 401,
+      "word": "andate",
+      "frequency": 2
+    },
+    {
+      "rank": 402,
+      "word": "vista",
+      "frequency": 2
+    },
+    {
+      "rank": 403,
+      "word": "conta",
+      "frequency": 2
+    },
+    {
+      "rank": 404,
+      "word": "l'estate",
+      "frequency": 2
+    },
+    {
+      "rank": 405,
+      "word": "libri",
+      "frequency": 2
+    },
+    {
+      "rank": 406,
+      "word": "l'anima",
+      "frequency": 2
+    },
+    {
+      "rank": 407,
+      "word": "insegnato",
+      "frequency": 2
+    },
+    {
+      "rank": 408,
+      "word": "significa",
+      "frequency": 2
+    },
+    {
+      "rank": 409,
+      "word": "amare",
+      "frequency": 2
+    },
+    {
+      "rank": 410,
+      "word": "voleva",
+      "frequency": 2
+    },
+    {
+      "rank": 411,
+      "word": "gatti",
+      "frequency": 2
+    },
+    {
+      "rank": 412,
+      "word": "roma",
+      "frequency": 2
+    },
+    {
+      "rank": 413,
+      "word": "un mese",
+      "frequency": 2
+    },
+    {
+      "rank": 414,
+      "word": "diventata",
+      "frequency": 2
+    },
+    {
+      "rank": 415,
+      "word": "dormire",
+      "frequency": 2
+    },
+    {
+      "rank": 416,
+      "word": "appartamento",
+      "frequency": 2
+    },
+    {
+      "rank": 417,
+      "word": "fiducia",
+      "frequency": 2
+    },
+    {
+      "rank": 418,
+      "word": "i sogni",
+      "frequency": 2
+    },
+    {
+      "rank": 419,
+      "word": "dell'altro",
+      "frequency": 2
+    },
+    {
+      "rank": 420,
+      "word": "agosto",
+      "frequency": 2
+    },
+    {
+      "rank": 421,
+      "word": "scrivendo",
+      "frequency": 2
+    },
+    {
+      "rank": 422,
+      "word": "diventati",
+      "frequency": 2
+    },
+    {
+      "rank": 423,
+      "word": "c'erano",
+      "frequency": 2
+    },
+    {
+      "rank": 424,
+      "word": "la gelosia",
+      "frequency": 2
+    },
+    {
+      "rank": 425,
+      "word": "alessio",
+      "frequency": 2
+    },
+    {
+      "rank": 426,
+      "word": "molte",
+      "frequency": 2
+    },
+    {
+      "rank": 427,
+      "word": "comune",
+      "frequency": 2
+    },
+    {
+      "rank": 428,
+      "word": "carino",
+      "frequency": 2
+    },
+    {
+      "rank": 429,
+      "word": "il secondo",
+      "frequency": 2
+    },
+    {
+      "rank": 430,
+      "word": "un piccolo",
+      "frequency": 2
+    },
+    {
+      "rank": 431,
+      "word": "una nuova",
+      "frequency": 2
+    },
+    {
+      "rank": 432,
+      "word": "giro",
+      "frequency": 2
+    },
+    {
+      "rank": 433,
+      "word": "mattina",
+      "frequency": 2
+    },
+    {
+      "rank": 434,
+      "word": "scoperto",
+      "frequency": 2
+    },
+    {
+      "rank": 435,
+      "word": "strada",
+      "frequency": 2
+    },
+    {
+      "rank": 436,
+      "word": "un gruppo",
+      "frequency": 2
+    },
+    {
+      "rank": 437,
+      "word": "stanco",
+      "frequency": 2
+    },
+    {
+      "rank": 438,
+      "word": "forti",
+      "frequency": 2
+    },
+    {
+      "rank": 439,
+      "word": "reale",
+      "frequency": 2
+    },
+    {
+      "rank": 440,
+      "word": "la forza",
+      "frequency": 2
+    },
+    {
+      "rank": 441,
+      "word": "dell'amore",
+      "frequency": 2
+    },
+    {
+      "rank": 442,
+      "word": "nei giorni",
+      "frequency": 2
+    },
+    {
+      "rank": 443,
+      "word": "fosse",
+      "frequency": 2
+    },
+    {
+      "rank": 444,
+      "word": "vedere",
+      "frequency": 2
+    },
+    {
+      "rank": 445,
+      "word": "allargata",
+      "frequency": 2
+    },
+    {
+      "rank": 446,
+      "word": "famiglie",
+      "frequency": 2
+    },
+    {
+      "rank": 447,
+      "word": "trovato",
+      "frequency": 2
+    },
+    {
+      "rank": 448,
+      "word": "la madre",
+      "frequency": 2
+    },
+    {
+      "rank": 449,
+      "word": "avevamo",
+      "frequency": 2
+    },
+    {
+      "rank": 450,
+      "word": "natale",
+      "frequency": 2
+    },
+    {
+      "rank": 451,
+      "word": "magico",
+      "frequency": 2
+    },
+    {
+      "rank": 452,
+      "word": "guarda",
+      "frequency": 2
+    },
+    {
+      "rank": 453,
+      "word": "tirato",
+      "frequency": 2
+    },
+    {
+      "rank": 454,
+      "word": "aperto",
+      "frequency": 2
+    },
+    {
+      "rank": 455,
+      "word": "vedi",
+      "frequency": 2
+    },
+    {
+      "rank": 456,
+      "word": "anni",
+      "frequency": 2
+    },
+    {
+      "rank": 457,
+      "word": "spero",
+      "frequency": 2
+    },
+    {
+      "rank": 458,
+      "word": "aver",
+      "frequency": 2
+    },
+    {
+      "rank": 459,
+      "word": "pubblicato",
+      "frequency": 2
+    },
+    {
+      "rank": 460,
+      "word": "romanzo",
+      "frequency": 2
+    },
+    {
+      "rank": 461,
+      "word": "volevamo",
+      "frequency": 2
+    },
+    {
+      "rank": 462,
+      "word": "fare",
+      "frequency": 2
+    },
+    {
+      "rank": 463,
+      "word": "online",
+      "frequency": 2
+    },
+    {
+      "rank": 464,
+      "word": "qualcuno",
+      "frequency": 2
+    },
+    {
+      "rank": 465,
+      "word": "lgbtq+",
+      "frequency": 2
+    },
+    {
+      "rank": 466,
+      "word": "soli",
+      "frequency": 2
+    },
+    {
+      "rank": 467,
+      "word": "voi",
+      "frequency": 2
+    },
+    {
+      "rank": 468,
+      "word": "sfide",
+      "frequency": 2
+    },
+    {
+      "rank": 469,
+      "word": "un anno",
+      "frequency": 2
+    },
+    {
+      "rank": 470,
+      "word": "quelli",
+      "frequency": 2
+    },
+    {
+      "rank": 471,
+      "word": "il matrimonio",
+      "frequency": 2
+    },
+    {
+      "rank": 472,
+      "word": "credere",
+      "frequency": 2
+    },
+    {
+      "rank": 473,
+      "word": "negli occhi",
+      "frequency": 2
+    },
+    {
+      "rank": 474,
+      "word": "fianco",
+      "frequency": 2
+    },
+    {
+      "rank": 475,
+      "word": "prometto",
+      "frequency": 2
+    },
+    {
+      "rank": 476,
+      "word": "amarti",
+      "frequency": 2
+    },
+    {
+      "rank": 477,
+      "word": "sposati",
+      "frequency": 2
+    },
+    {
+      "rank": 478,
+      "word": "parlo",
+      "frequency": 2
+    },
+    {
+      "rank": 479,
+      "word": "la vita",
+      "frequency": 2
+    },
+    {
+      "rank": 480,
+      "word": "nome",
+      "frequency": 2
+    },
+    {
+      "rank": 481,
+      "word": "scegli",
+      "frequency": 2
+    },
+    {
+      "rank": 482,
+      "word": "andrai",
+      "frequency": 2
+    },
+    {
+      "rank": 483,
+      "word": "darai",
+      "frequency": 2
+    },
+    {
+      "rank": 484,
+      "word": "agli altri",
+      "frequency": 2
+    },
+    {
+      "rank": 485,
+      "word": "correrai",
+      "frequency": 2
+    },
+    {
+      "rank": 486,
+      "word": "diretto",
+      "frequency": 2
+    },
+    {
+      "rank": 487,
+      "word": "al sole",
+      "frequency": 2
+    },
+    {
+      "rank": 488,
+      "word": "il buio",
+      "frequency": 2
+    },
+    {
+      "rank": 489,
+      "word": "cercare",
+      "frequency": 2
+    },
+    {
+      "rank": 490,
+      "word": "la libertà",
+      "frequency": 2
+    },
+    {
+      "rank": 491,
+      "word": "spiegare",
+      "frequency": 2
+    },
+    {
+      "rank": 492,
+      "word": "cos'è",
+      "frequency": 2
+    },
+    {
+      "rank": 493,
+      "word": "il colore",
+      "frequency": 2
+    },
+    {
+      "rank": 494,
+      "word": "vede",
+      "frequency": 2
+    },
+    {
+      "rank": 495,
+      "word": "bianco",
+      "frequency": 2
+    },
+    {
+      "rank": 496,
+      "word": "nero",
+      "frequency": 2
+    },
+    {
+      "rank": 497,
+      "word": "prometti",
+      "frequency": 2
+    },
+    {
+      "rank": 498,
+      "word": "parlerai",
+      "frequency": 2
+    },
+    {
+      "rank": 499,
+      "word": "dovrò",
+      "frequency": 2
+    },
+    {
+      "rank": 500,
+      "word": "correre",
+      "frequency": 2
+    },
+    {
+      "rank": 501,
+      "word": "c'hai",
+      "frequency": 2
+    },
+    {
+      "rank": 502,
+      "word": "il dubbio",
+      "frequency": 2
+    },
+    {
+      "rank": 503,
+      "word": "nessuno",
+      "frequency": 2
+    },
+    {
+      "rank": 504,
+      "word": "ora",
+      "frequency": 2
+    },
+    {
+      "rank": 505,
+      "word": "conviene",
+      "frequency": 2
+    },
+    {
+      "rank": 506,
+      "word": "tipo",
+      "frequency": 2
+    },
+    {
+      "rank": 507,
+      "word": "chiuso",
+      "frequency": 2
+    },
+    {
+      "rank": 508,
+      "word": "alto",
+      "frequency": 2
+    },
+    {
+      "rank": 509,
+      "word": "pagine",
+      "frequency": 2
+    },
+    {
+      "rank": 510,
+      "word": "sale",
+      "frequency": 2
+    },
+    {
+      "rank": 511,
+      "word": "dio",
+      "frequency": 2
+    },
+    {
+      "rank": 512,
+      "word": "vento",
+      "frequency": 2
+    },
+    {
+      "rank": 513,
+      "word": "senti",
+      "frequency": 2
+    },
+    {
+      "rank": 514,
+      "word": "la testa",
+      "frequency": 2
+    },
+    {
+      "rank": 515,
+      "word": "capelli",
+      "frequency": 2
+    },
+    {
+      "rank": 516,
+      "word": "rosse",
+      "frequency": 2
+    },
+    {
+      "rank": 517,
+      "word": "quei",
+      "frequency": 2
+    },
+    {
+      "rank": 518,
+      "word": "però",
+      "frequency": 2
+    },
+    {
+      "rank": 519,
+      "word": "sente",
+      "frequency": 2
+    },
+    {
+      "rank": 520,
+      "word": "neanche",
+      "frequency": 2
+    },
+    {
+      "rank": 521,
+      "word": "porta",
+      "frequency": 2
+    },
+    {
+      "rank": 522,
+      "word": "dell'acqua",
+      "frequency": 2
+    },
+    {
+      "rank": 523,
+      "word": "parola",
+      "frequency": 2
+    },
+    {
+      "rank": 524,
+      "word": "un taglio",
+      "frequency": 2
+    },
+    {
+      "rank": 525,
+      "word": "sulla schiena",
+      "frequency": 2
+    },
+    {
+      "rank": 526,
+      "word": "una zattera",
+      "frequency": 2
+    },
+    {
+      "rank": 527,
+      "word": "naviga",
+      "frequency": 2
+    },
+    {
+      "rank": 528,
+      "word": "un fiume",
+      "frequency": 2
+    },
+    {
+      "rank": 529,
+      "word": "il fiume",
+      "frequency": 2
+    },
+    {
+      "rank": 530,
+      "word": "la luce",
+      "frequency": 2
+    },
+    {
+      "rank": 531,
+      "word": "cambio",
+      "frequency": 2
+    },
+    {
+      "rank": 532,
+      "word": "un po'",
+      "frequency": 2
+    },
+    {
+      "rank": 533,
+      "word": "potrà",
+      "frequency": 2
+    },
+    {
+      "rank": 534,
+      "word": "colpirti",
+      "frequency": 2
+    },
+    {
+      "rank": 535,
+      "word": "mille",
+      "frequency": 2
+    },
+    {
+      "rank": 536,
+      "word": "perdo",
+      "frequency": 2
+    },
+    {
+      "rank": 537,
+      "word": "prendimi",
+      "frequency": 2
+    },
+    {
+      "rank": 538,
+      "word": "mordimi",
+      "frequency": 2
+    },
+    {
+      "rank": 539,
+      "word": "toglimi",
+      "frequency": 2
+    },
+    {
+      "rank": 540,
+      "word": "distrutto",
+      "frequency": 2
+    },
+    {
+      "rank": 541,
+      "word": "sputami",
+      "frequency": 2
+    },
+    {
+      "rank": 542,
+      "word": "strappami",
+      "frequency": 2
+    },
+    {
+      "rank": 543,
+      "word": "i vestititi",
+      "frequency": 2
+    },
+    {
+      "rank": 544,
+      "word": "dosso",
+      "frequency": 2
+    },
+    {
+      "rank": 545,
+      "word": "comprami",
+      "frequency": 2
+    },
+    {
+      "rank": 546,
+      "word": "vendimi",
+      "frequency": 2
+    },
+    {
+      "rank": 547,
+      "word": "fammi",
+      "frequency": 2
+    },
+    {
+      "rank": 548,
+      "word": "respirerai",
+      "frequency": 2
+    },
+    {
+      "rank": 549,
+      "word": "nasconderò",
+      "frequency": 2
+    },
+    {
+      "rank": 550,
+      "word": "frasi",
+      "frequency": 2
+    },
+    {
+      "rank": 551,
+      "word": "sentirai",
+      "frequency": 2
+    },
+    {
+      "rank": 552,
+      "word": "ieri",
+      "frequency": 2
+    },
+    {
+      "rank": 553,
+      "word": "lasciami",
+      "frequency": 2
+    },
+    {
+      "rank": 554,
+      "word": "il tempo",
+      "frequency": 2
+    },
+    {
+      "rank": 555,
+      "word": "le gambe",
+      "frequency": 2
+    },
+    {
+      "rank": 556,
+      "word": "aria",
+      "frequency": 2
+    },
+    {
+      "rank": 557,
+      "word": "pulita",
+      "frequency": 2
+    },
+    {
+      "rank": 558,
+      "word": "alimenta",
+      "frequency": 2
+    },
+    {
+      "rank": 559,
+      "word": "lascio",
+      "frequency": 2
+    },
+    {
+      "rank": 560,
+      "word": "uccida",
+      "frequency": 2
+    },
+    {
+      "rank": 561,
+      "word": "rinasco",
+      "frequency": 2
+    },
+    {
+      "rank": 562,
+      "word": "dalla mia",
+      "frequency": 2
+    },
+    {
+      "rank": 563,
+      "word": "cenere",
+      "frequency": 2
+    },
+    {
+      "rank": 564,
+      "word": "indietro",
+      "frequency": 2
+    },
+    {
+      "rank": 565,
+      "word": "uno sguardo",
+      "frequency": 2
+    },
+    {
+      "rank": 566,
+      "word": "nasco",
+      "frequency": 2
+    },
+    {
+      "rank": 567,
+      "word": "una voce",
+      "frequency": 2
+    },
+    {
+      "rank": 568,
+      "word": "tagliente",
+      "frequency": 2
+    },
+    {
+      "rank": 569,
+      "word": "un respiro",
+      "frequency": 2
+    },
+    {
+      "rank": 570,
+      "word": "costante",
+      "frequency": 2
+    },
+    {
+      "rank": 571,
+      "word": "rimasto",
+      "frequency": 2
+    },
+    {
+      "rank": 572,
+      "word": "un foglio",
+      "frequency": 2
+    },
+    {
+      "rank": 573,
+      "word": "mezza",
+      "frequency": 2
+    },
+    {
+      "rank": 574,
+      "word": "sigaretta",
+      "frequency": 2
+    },
+    {
+      "rank": 575,
+      "word": "oggi",
+      "frequency": 2
+    },
+    {
+      "rank": 576,
+      "word": "#",
+      "frequency": 1
+    },
+    {
+      "rank": 577,
+      "word": "*una",
+      "frequency": 1
+    },
+    {
+      "rank": 578,
+      "word": "amici*",
+      "frequency": 1
+    },
+    {
+      "rank": 579,
+      "word": "l'incontro",
+      "frequency": 1
+    },
+    {
+      "rank": 580,
+      "word": "incontrato",
+      "frequency": 1
+    },
+    {
+      "rank": 581,
+      "word": "cerchi",
+      "frequency": 1
+    },
+    {
+      "rank": 582,
+      "word": "gentile",
+      "frequency": 1
+    },
+    {
+      "rank": 583,
+      "word": "completamente",
+      "frequency": 1
+    },
+    {
+      "rank": 584,
+      "word": "persa",
+      "frequency": 1
+    },
+    {
+      "rank": 585,
+      "word": "piacere",
+      "frequency": 1
+    },
+    {
+      "rank": 586,
+      "word": "conoscerti",
+      "frequency": 1
+    },
+    {
+      "rank": 587,
+      "word": "quel",
+      "frequency": 1
+    },
+    {
+      "rank": 588,
+      "word": "persona",
+      "frequency": 1
+    },
+    {
+      "rank": 589,
+      "word": "avrebbe",
+      "frequency": 1
+    },
+    {
+      "rank": 590,
+      "word": "l'amicizia",
+      "frequency": 1
+    },
+    {
+      "rank": 591,
+      "word": "i primi",
+      "frequency": 1
+    },
+    {
+      "rank": 592,
+      "word": "mesi",
+      "frequency": 1
+    },
+    {
+      "rank": 593,
+      "word": "studiavamo",
+      "frequency": 1
+    },
+    {
+      "rank": 594,
+      "word": "biblioteca",
+      "frequency": 1
+    },
+    {
+      "rank": 595,
+      "word": "prendevamo",
+      "frequency": 1
+    },
+    {
+      "rank": 596,
+      "word": "le lezioni",
+      "frequency": 1
+    },
+    {
+      "rank": 597,
+      "word": "parlavamo",
+      "frequency": 1
+    },
+    {
+      "rank": 598,
+      "word": "studi",
+      "frequency": 1
+    },
+    {
+      "rank": 599,
+      "word": "economia",
+      "frequency": 1
+    },
+    {
+      "rank": 600,
+      "word": "confessato",
+      "frequency": 1
+    },
+    {
+      "rank": 601,
+      "word": "la letteratura",
+      "frequency": 1
+    },
+    {
+      "rank": 602,
+      "word": "seguire",
+      "frequency": 1
+    },
+    {
+      "rank": 603,
+      "word": "guardava",
+      "frequency": 1
+    },
+    {
+      "rank": 604,
+      "word": "quegli",
+      "frequency": 1
+    },
+    {
+      "rank": 605,
+      "word": "scuri",
+      "frequency": 1
+    },
+    {
+      "rank": 606,
+      "word": "profondi",
+      "frequency": 1
+    },
+    {
+      "rank": 607,
+      "word": "capisci",
+      "frequency": 1
+    },
+    {
+      "rank": 608,
+      "word": "potevo",
+      "frequency": 1
+    },
+    {
+      "rank": 609,
+      "word": "immaginare",
+      "frequency": 1
+    },
+    {
+      "rank": 610,
+      "word": "il segreto",
+      "frequency": 1
+    },
+    {
+      "rank": 611,
+      "word": "al nostro",
+      "frequency": 1
+    },
+    {
+      "rank": 612,
+      "word": "bar",
+      "frequency": 1
+    },
+    {
+      "rank": 613,
+      "word": "preferito",
+      "frequency": 1
+    },
+    {
+      "rank": 614,
+      "word": "pioveva",
+      "frequency": 1
+    },
+    {
+      "rank": 615,
+      "word": "l'atmosfera",
+      "frequency": 1
+    },
+    {
+      "rank": 616,
+      "word": "dirti",
+      "frequency": 1
+    },
+    {
+      "rank": 617,
+      "word": "nervoso",
+      "frequency": 1
+    },
+    {
+      "rank": 618,
+      "word": "dirmi",
+      "frequency": 1
+    },
+    {
+      "rank": 619,
+      "word": "toccando",
+      "frequency": 1
+    },
+    {
+      "rank": 620,
+      "word": "interessato",
+      "frequency": 1
+    },
+    {
+      "rank": 621,
+      "word": "alle ragazze",
+      "frequency": 1
+    },
+    {
+      "rank": 622,
+      "word": "battuto",
+      "frequency": 1
+    },
+    {
+      "rank": 623,
+      "word": "shock",
+      "frequency": 1
+    },
+    {
+      "rank": 624,
+      "word": "capivo",
+      "frequency": 1
+    },
+    {
+      "rank": 625,
+      "word": "avermelo",
+      "frequency": 1
+    },
+    {
+      "rank": 626,
+      "word": "cambia",
+      "frequency": 1
+    },
+    {
+      "rank": 627,
+      "word": "nulla",
+      "frequency": 1
+    },
+    {
+      "rank": 628,
+      "word": "tristezza",
+      "frequency": 1
+    },
+    {
+      "rank": 629,
+      "word": "perderti",
+      "frequency": 1
+    },
+    {
+      "rank": 630,
+      "word": "perderai",
+      "frequency": 1
+    },
+    {
+      "rank": 631,
+      "word": "la confusione",
+      "frequency": 1
+    },
+    {
+      "rank": 632,
+      "word": "guardavo",
+      "frequency": 1
+    },
+    {
+      "rank": 633,
+      "word": "modo",
+      "frequency": 1
+    },
+    {
+      "rank": 634,
+      "word": "rideva",
+      "frequency": 1
+    },
+    {
+      "rank": 635,
+      "word": "riempiva",
+      "frequency": 1
+    },
+    {
+      "rank": 636,
+      "word": "*cosa",
+      "frequency": 1
+    },
+    {
+      "rank": 637,
+      "word": "succedendo",
+      "frequency": 1
+    },
+    {
+      "rank": 638,
+      "word": "*",
+      "frequency": 1
+    },
+    {
+      "rank": 639,
+      "word": "eterosessuale",
+      "frequency": 1
+    },
+    {
+      "rank": 640,
+      "word": "compagna",
+      "frequency": 1
+    },
+    {
+      "rank": 641,
+      "word": "stanza",
+      "frequency": 1
+    },
+    {
+      "rank": 642,
+      "word": "automaticamente",
+      "frequency": 1
+    },
+    {
+      "rank": 643,
+      "word": "conosco",
+      "frequency": 1
+    },
+    {
+      "rank": 644,
+      "word": "il modo",
+      "frequency": 1
+    },
+    {
+      "rank": 645,
+      "word": "lo guardi",
+      "frequency": 1
+    },
+    {
+      "rank": 646,
+      "word": "del mio",
+      "frequency": 1
+    },
+    {
+      "rank": 647,
+      "word": "grigio",
+      "frequency": 1
+    },
+    {
+      "rank": 648,
+      "word": "pensieri",
+      "frequency": 1
+    },
+    {
+      "rank": 649,
+      "word": "rovinare",
+      "frequency": 1
+    },
+    {
+      "rank": 650,
+      "word": "abbastanza",
+      "frequency": 1
+    },
+    {
+      "rank": 651,
+      "word": "provasse",
+      "frequency": 1
+    },
+    {
+      "rank": 652,
+      "word": "etichette",
+      "frequency": 1
+    },
+    {
+      "rank": 653,
+      "word": "gli avessi",
+      "frequency": 1
+    },
+    {
+      "rank": 654,
+      "word": "avesse",
+      "frequency": 1
+    },
+    {
+      "rank": 655,
+      "word": "provato",
+      "frequency": 1
+    },
+    {
+      "rank": 656,
+      "word": "avrei",
+      "frequency": 1
+    },
+    {
+      "rank": 657,
+      "word": "rimanere",
+      "frequency": 1
+    },
+    {
+      "rank": 658,
+      "word": "una festa",
+      "frequency": 1
+    },
+    {
+      "rank": 659,
+      "word": "parlava",
+      "frequency": 1
+    },
+    {
+      "rank": 660,
+      "word": "spezzarsi",
+      "frequency": 1
+    },
+    {
+      "rank": 661,
+      "word": "mentivo",
+      "frequency": 1
+    },
+    {
+      "rank": 662,
+      "word": "evitare",
+      "frequency": 1
+    },
+    {
+      "rank": 663,
+      "word": "inventavo",
+      "frequency": 1
+    },
+    {
+      "rank": 664,
+      "word": "scuse",
+      "frequency": 1
+    },
+    {
+      "rank": 665,
+      "word": "ai suoi",
+      "frequency": 1
+    },
+    {
+      "rank": 666,
+      "word": "va",
+      "frequency": 1
+    },
+    {
+      "rank": 667,
+      "word": "un'altra",
+      "frequency": 1
+    },
+    {
+      "rank": 668,
+      "word": "bugia",
+      "frequency": 1
+    },
+    {
+      "rank": 669,
+      "word": "la crisi",
+      "frequency": 1
+    },
+    {
+      "rank": 670,
+      "word": "marzo",
+      "frequency": 1
+    },
+    {
+      "rank": 671,
+      "word": "rotto",
+      "frequency": 1
+    },
+    {
+      "rank": 672,
+      "word": "devastato",
+      "frequency": 1
+    },
+    {
+      "rank": 673,
+      "word": "una cattiva",
+      "frequency": 1
+    },
+    {
+      "rank": 674,
+      "word": "tornati",
+      "frequency": 1
+    },
+    {
+      "rank": 675,
+      "word": "successo",
+      "frequency": 1
+    },
+    {
+      "rank": 676,
+      "word": "perdendo",
+      "frequency": 1
+    },
+    {
+      "rank": 677,
+      "word": "fisicamente",
+      "frequency": 1
+    },
+    {
+      "rank": 678,
+      "word": "dirgli",
+      "frequency": 1
+    },
+    {
+      "rank": 679,
+      "word": "lo amavo",
+      "frequency": 1
+    },
+    {
+      "rank": 680,
+      "word": "i fiori",
+      "frequency": 1
+    },
+    {
+      "rank": 681,
+      "word": "nell'inverno",
+      "frequency": 1
+    },
+    {
+      "rank": 682,
+      "word": "un pomeriggio",
+      "frequency": 1
+    },
+    {
+      "rank": 683,
+      "word": "chiamata",
+      "frequency": 1
+    },
+    {
+      "rank": 684,
+      "word": "dobbiamo",
+      "frequency": 1
+    },
+    {
+      "rank": 685,
+      "word": "vieni",
+      "frequency": 1
+    },
+    {
+      "rank": 686,
+      "word": "sulla nostra",
+      "frequency": 1
+    },
+    {
+      "rank": 687,
+      "word": "panchina",
+      "frequency": 1
+    },
+    {
+      "rank": 688,
+      "word": "preferita",
+      "frequency": 1
+    },
+    {
+      "rank": 689,
+      "word": "al laghetto",
+      "frequency": 1
+    },
+    {
+      "rank": 690,
+      "word": "onesto",
+      "frequency": 1
+    },
+    {
+      "rank": 691,
+      "word": "tremavano",
+      "frequency": 1
+    },
+    {
+      "rank": 692,
+      "word": "funzionato",
+      "frequency": 1
+    },
+    {
+      "rank": 693,
+      "word": "qualcun",
+      "frequency": 1
+    },
+    {
+      "rank": 694,
+      "word": "altro",
+      "frequency": 1
+    },
+    {
+      "rank": 695,
+      "word": "fermato",
+      "frequency": 1
+    },
+    {
+      "rank": 696,
+      "word": "innamorato",
+      "frequency": 1
+    },
+    {
+      "rank": 697,
+      "word": "nasconderlo",
+      "frequency": 1
+    },
+    {
+      "rank": 698,
+      "word": "starti",
+      "frequency": 1
+    },
+    {
+      "rank": 699,
+      "word": "fingere",
+      "frequency": 1
+    },
+    {
+      "rank": 700,
+      "word": "scese",
+      "frequency": 1
+    },
+    {
+      "rank": 701,
+      "word": "dire",
+      "frequency": 1
+    },
+    {
+      "rank": 702,
+      "word": "allontanarti",
+      "frequency": 1
+    },
+    {
+      "rank": 703,
+      "word": "dirtelo",
+      "frequency": 1
+    },
+    {
+      "rank": 704,
+      "word": "il coraggio",
+      "frequency": 1
+    },
+    {
+      "rank": 705,
+      "word": "guardami",
+      "frequency": 1
+    },
+    {
+      "rank": 706,
+      "word": "attraverso",
+      "frequency": 1
+    },
+    {
+      "rank": 707,
+      "word": "ascoltami",
+      "frequency": 1
+    },
+    {
+      "rank": 708,
+      "word": "distante",
+      "frequency": 1
+    },
+    {
+      "rank": 709,
+      "word": "guardata",
+      "frequency": 1
+    },
+    {
+      "rank": 710,
+      "word": "incredulità",
+      "frequency": 1
+    },
+    {
+      "rank": 711,
+      "word": "lo capivo",
+      "frequency": 1
+    },
+    {
+      "rank": 712,
+      "word": "confondevo",
+      "frequency": 1
+    },
+    {
+      "rank": 713,
+      "word": "il genere",
+      "frequency": 1
+    },
+    {
+      "rank": 714,
+      "word": "fluido",
+      "frequency": 1
+    },
+    {
+      "rank": 715,
+      "word": "le risposte",
+      "frequency": 1
+    },
+    {
+      "rank": 716,
+      "word": "rimasti",
+      "frequency": 1
+    },
+    {
+      "rank": 717,
+      "word": "stava",
+      "frequency": 1
+    },
+    {
+      "rank": 718,
+      "word": "tramontando",
+      "frequency": 1
+    },
+    {
+      "rank": 719,
+      "word": "dipingendo",
+      "frequency": 1
+    },
+    {
+      "rank": 720,
+      "word": "rosa",
+      "frequency": 1
+    },
+    {
+      "rank": 721,
+      "word": "arancione",
+      "frequency": 1
+    },
+    {
+      "rank": 722,
+      "word": "tante",
+      "frequency": 1
+    },
+    {
+      "rank": 723,
+      "word": "lentamente",
+      "frequency": 1
+    },
+    {
+      "rank": 724,
+      "word": "avvicinato",
+      "frequency": 1
+    },
+    {
+      "rank": 725,
+      "word": "labbra",
+      "frequency": 1
+    },
+    {
+      "rank": 726,
+      "word": "toccate",
+      "frequency": 1
+    },
+    {
+      "rank": 727,
+      "word": "dolce",
+      "frequency": 1
+    },
+    {
+      "rank": 728,
+      "word": "tenero",
+      "frequency": 1
+    },
+    {
+      "rank": 729,
+      "word": "separati",
+      "frequency": 1
+    },
+    {
+      "rank": 730,
+      "word": "allo stesso",
+      "frequency": 1
+    },
+    {
+      "rank": 731,
+      "word": "le sfide",
+      "frequency": 1
+    },
+    {
+      "rank": 732,
+      "word": "i giorni",
+      "frequency": 1
+    },
+    {
+      "rank": 733,
+      "word": "successivi",
+      "frequency": 1
+    },
+    {
+      "rank": 734,
+      "word": "innamorati",
+      "frequency": 1
+    },
+    {
+      "rank": 735,
+      "word": "completi",
+      "frequency": 1
+    },
+    {
+      "rank": 736,
+      "word": "presto",
+      "frequency": 1
+    },
+    {
+      "rank": 737,
+      "word": "arrivate",
+      "frequency": 1
+    },
+    {
+      "rank": 738,
+      "word": "le prime",
+      "frequency": 1
+    },
+    {
+      "rank": 739,
+      "word": "difficoltà",
+      "frequency": 1
+    },
+    {
+      "rank": 740,
+      "word": "capivano",
+      "frequency": 1
+    },
+    {
+      "rank": 741,
+      "word": "fossi",
+      "frequency": 1
+    },
+    {
+      "rank": 742,
+      "word": "una compagna",
+      "frequency": 1
+    },
+    {
+      "rank": 743,
+      "word": "lo pensavo",
+      "frequency": 1
+    },
+    {
+      "rank": 744,
+      "word": "possono",
+      "frequency": 1
+    },
+    {
+      "rank": 745,
+      "word": "scoprire",
+      "frequency": 1
+    },
+    {
+      "rank": 746,
+      "word": "stesse",
+      "frequency": 1
+    },
+    {
+      "rank": 747,
+      "word": "conoscenza",
+      "frequency": 1
+    },
+    {
+      "rank": 748,
+      "word": "della sua",
+      "frequency": 1
+    },
+    {
+      "rank": 749,
+      "word": "sessualità",
+      "frequency": 1
+    },
+    {
+      "rank": 750,
+      "word": "dirglielo",
+      "frequency": 1
+    },
+    {
+      "rank": 751,
+      "word": "maggio",
+      "frequency": 1
+    },
+    {
+      "rank": 752,
+      "word": "dai miei",
+      "frequency": 1
+    },
+    {
+      "rank": 753,
+      "word": "terrorizzata",
+      "frequency": 1
+    },
+    {
+      "rank": 754,
+      "word": "papà",
+      "frequency": 1
+    },
+    {
+      "rank": 755,
+      "word": "fidanzato",
+      "frequency": 1
+    },
+    {
+      "rank": 756,
+      "word": "il silenzio",
+      "frequency": 1
+    },
+    {
+      "rank": 757,
+      "word": "pesante",
+      "frequency": 1
+    },
+    {
+      "rank": 758,
+      "word": "serio",
+      "frequency": 1
+    },
+    {
+      "rank": 759,
+      "word": "stefano",
+      "frequency": 1
+    },
+    {
+      "rank": 760,
+      "word": "eravate",
+      "frequency": 1
+    },
+    {
+      "rank": 761,
+      "word": "inaspettato",
+      "frequency": 1
+    },
+    {
+      "rank": 762,
+      "word": "guardato",
+      "frequency": 1
+    },
+    {
+      "rank": 763,
+      "word": "ami",
+      "frequency": 1
+    },
+    {
+      "rank": 764,
+      "word": "figlia",
+      "frequency": 1
+    },
+    {
+      "rank": 765,
+      "word": "altra",
+      "frequency": 1
+    },
+    {
+      "rank": 766,
+      "word": "voce",
+      "frequency": 1
+    },
+    {
+      "rank": 767,
+      "word": "la cena",
+      "frequency": 1
+    },
+    {
+      "rank": 768,
+      "word": "avevano",
+      "frequency": 1
+    },
+    {
+      "rank": 769,
+      "word": "bisogno",
+      "frequency": 1
+    },
+    {
+      "rank": 770,
+      "word": "capire",
+      "frequency": 1
+    },
+    {
+      "rank": 771,
+      "word": "teneva",
+      "frequency": 1
+    },
+    {
+      "rank": 772,
+      "word": "andrà",
+      "frequency": 1
+    },
+    {
+      "rank": 773,
+      "word": "sussurrava",
+      "frequency": 1
+    },
+    {
+      "rank": 774,
+      "word": "devono",
+      "frequency": 1
+    },
+    {
+      "rank": 775,
+      "word": "l'accettazione",
+      "frequency": 1
+    },
+    {
+      "rank": 776,
+      "word": "le settimane",
+      "frequency": 1
+    },
+    {
+      "rank": 777,
+      "word": "state",
+      "frequency": 1
+    },
+    {
+      "rank": 778,
+      "word": "complicate",
+      "frequency": 1
+    },
+    {
+      "rank": 779,
+      "word": "chiamava",
+      "frequency": 1
+    },
+    {
+      "rank": 780,
+      "word": "domande",
+      "frequency": 1
+    },
+    {
+      "rank": 781,
+      "word": "venuta",
+      "frequency": 1
+    },
+    {
+      "rank": 782,
+      "word": "trovarmi",
+      "frequency": 1
+    },
+    {
+      "rank": 783,
+      "word": "un caffè",
+      "frequency": 1
+    },
+    {
+      "rank": 784,
+      "word": "delle aspettative",
+      "frequency": 1
+    },
+    {
+      "rank": 785,
+      "word": "quanto",
+      "frequency": 1
+    },
+    {
+      "rank": 786,
+      "word": "rende",
+      "frequency": 1
+    },
+    {
+      "rank": 787,
+      "word": "allora",
+      "frequency": 1
+    },
+    {
+      "rank": 788,
+      "word": "lo accetto",
+      "frequency": 1
+    },
+    {
+      "rank": 789,
+      "word": "invita",
+      "frequency": 1
+    },
+    {
+      "rank": 790,
+      "word": "domenica",
+      "frequency": 1
+    },
+    {
+      "rank": 791,
+      "word": "conoscerlo",
+      "frequency": 1
+    },
+    {
+      "rank": 792,
+      "word": "meglio",
+      "frequency": 1
+    },
+    {
+      "rank": 793,
+      "word": "arrivata",
+      "frequency": 1
+    },
+    {
+      "rank": 794,
+      "word": "calda",
+      "frequency": 1
+    },
+    {
+      "rank": 795,
+      "word": "luminosa",
+      "frequency": 1
+    },
+    {
+      "rank": 796,
+      "word": "passato",
+      "frequency": 1
+    },
+    {
+      "rank": 797,
+      "word": "libero",
+      "frequency": 1
+    },
+    {
+      "rank": 798,
+      "word": "andavamo",
+      "frequency": 1
+    },
+    {
+      "rank": 799,
+      "word": "al lago",
+      "frequency": 1
+    },
+    {
+      "rank": 800,
+      "word": "leggevamo",
+      "frequency": 1
+    },
+    {
+      "rank": 801,
+      "word": "all'ombra",
+      "frequency": 1
+    },
+    {
+      "rank": 802,
+      "word": "la persona",
+      "frequency": 1
+    },
+    {
+      "rank": 803,
+      "word": "l'aspetto",
+      "frequency": 1
+    },
+    {
+      "rank": 804,
+      "word": "veramente",
+      "frequency": 1
+    },
+    {
+      "rank": 805,
+      "word": "dei nostri",
+      "frequency": 1
+    },
+    {
+      "rank": 806,
+      "word": "sogni",
+      "frequency": 1
+    },
+    {
+      "rank": 807,
+      "word": "diventare",
+      "frequency": 1
+    },
+    {
+      "rank": 808,
+      "word": "scrittore",
+      "frequency": 1
+    },
+    {
+      "rank": 809,
+      "word": "insegnare",
+      "frequency": 1
+    },
+    {
+      "rank": 810,
+      "word": "vivremo",
+      "frequency": 1
+    },
+    {
+      "rank": 811,
+      "word": "avremo",
+      "frequency": 1
+    },
+    {
+      "rank": 812,
+      "word": "un gatto",
+      "frequency": 1
+    },
+    {
+      "rank": 813,
+      "word": "aggiungevo",
+      "frequency": 1
+    },
+    {
+      "rank": 814,
+      "word": "correggeva",
+      "frequency": 1
+    },
+    {
+      "rank": 815,
+      "word": "crisi",
+      "frequency": 1
+    },
+    {
+      "rank": 816,
+      "word": "luglio",
+      "frequency": 1
+    },
+    {
+      "rank": 817,
+      "word": "vera",
+      "frequency": 1
+    },
+    {
+      "rank": 818,
+      "word": "litigata",
+      "frequency": 1
+    },
+    {
+      "rank": 819,
+      "word": "uno stage",
+      "frequency": 1
+    },
+    {
+      "rank": 820,
+      "word": "estivo",
+      "frequency": 1
+    },
+    {
+      "rank": 821,
+      "word": "scrittura",
+      "frequency": 1
+    },
+    {
+      "rank": 822,
+      "word": "restasse",
+      "frequency": 1
+    },
+    {
+      "rank": 823,
+      "word": "lungo",
+      "frequency": 1
+    },
+    {
+      "rank": 824,
+      "word": "dimentichi",
+      "frequency": 1
+    },
+    {
+      "rank": 825,
+      "word": "ridicola",
+      "frequency": 1
+    },
+    {
+      "rank": 826,
+      "word": "potrei",
+      "frequency": 1
+    },
+    {
+      "rank": 827,
+      "word": "dimenticarmi",
+      "frequency": 1
+    },
+    {
+      "rank": 828,
+      "word": "la discussione",
+      "frequency": 1
+    },
+    {
+      "rank": 829,
+      "word": "accesa",
+      "frequency": 1
+    },
+    {
+      "rank": 830,
+      "word": "andati",
+      "frequency": 1
+    },
+    {
+      "rank": 831,
+      "word": "parlarci",
+      "frequency": 1
+    },
+    {
+      "rank": 832,
+      "word": "il perdono",
+      "frequency": 1
+    },
+    {
+      "rank": 833,
+      "word": "venuto",
+      "frequency": 1
+    },
+    {
+      "rank": 834,
+      "word": "dei fiori",
+      "frequency": 1
+    },
+    {
+      "rank": 835,
+      "word": "egoista",
+      "frequency": 1
+    },
+    {
+      "rank": 836,
+      "word": "considerare",
+      "frequency": 1
+    },
+    {
+      "rank": 837,
+      "word": "i tuoi",
+      "frequency": 1
+    },
+    {
+      "rank": 838,
+      "word": "sentimenti",
+      "frequency": 1
+    },
+    {
+      "rank": 839,
+      "word": "scuso",
+      "frequency": 1
+    },
+    {
+      "rank": 840,
+      "word": "reagito",
+      "frequency": 1
+    },
+    {
+      "rank": 841,
+      "word": "una grande",
+      "frequency": 1
+    },
+    {
+      "rank": 842,
+      "word": "opportunità",
+      "frequency": 1
+    },
+    {
+      "rank": 843,
+      "word": "dovresti",
+      "frequency": 1
+    },
+    {
+      "rank": 844,
+      "word": "verrò",
+      "frequency": 1
+    },
+    {
+      "rank": 845,
+      "word": "trovarti",
+      "frequency": 1
+    },
+    {
+      "rank": 846,
+      "word": "weekend",
+      "frequency": 1
+    },
+    {
+      "rank": 847,
+      "word": "chiamerò",
+      "frequency": 1
+    },
+    {
+      "rank": 848,
+      "word": "abbracciati",
+      "frequency": 1
+    },
+    {
+      "rank": 849,
+      "word": "sostenere",
+      "frequency": 1
+    },
+    {
+      "rank": 850,
+      "word": "mancavamo",
+      "frequency": 1
+    },
+    {
+      "rank": 851,
+      "word": "tantissimo",
+      "frequency": 1
+    },
+    {
+      "rank": 852,
+      "word": "le videochiamate",
+      "frequency": 1
+    },
+    {
+      "rank": 853,
+      "word": "la parte",
+      "frequency": 1
+    },
+    {
+      "rank": 854,
+      "word": "giornata",
+      "frequency": 1
+    },
+    {
+      "rank": 855,
+      "word": "raccontava",
+      "frequency": 1
+    },
+    {
+      "rank": 856,
+      "word": "dello stage",
+      "frequency": 1
+    },
+    {
+      "rank": 857,
+      "word": "delle persone",
+      "frequency": 1
+    },
+    {
+      "rank": 858,
+      "word": "conosceva",
+      "frequency": 1
+    },
+    {
+      "rank": 859,
+      "word": "delle cose",
+      "frequency": 1
+    },
+    {
+      "rank": 860,
+      "word": "imparava",
+      "frequency": 1
+    },
+    {
+      "rank": 861,
+      "word": "una storia",
+      "frequency": 1
+    },
+    {
+      "rank": 862,
+      "word": "amanti",
+      "frequency": 1
+    },
+    {
+      "rank": 863,
+      "word": "sorprenderti",
+      "frequency": 1
+    },
+    {
+      "rank": 864,
+      "word": "sciolto",
+      "frequency": 1
+    },
+    {
+      "rank": 865,
+      "word": "l'ora",
+      "frequency": 1
+    },
+    {
+      "rank": 866,
+      "word": "leggerla",
+      "frequency": 1
+    },
+    {
+      "rank": 867,
+      "word": "separasse",
+      "frequency": 1
+    },
+    {
+      "rank": 868,
+      "word": "un altro",
+      "frequency": 1
+    },
+    {
+      "rank": 869,
+      "word": "partecipante",
+      "frequency": 1
+    },
+    {
+      "rank": 870,
+      "word": "allo stage",
+      "frequency": 1
+    },
+    {
+      "rank": 871,
+      "word": "simpatico",
+      "frequency": 1
+    },
+    {
+      "rank": 872,
+      "word": "una fitta",
+      "frequency": 1
+    },
+    {
+      "rank": 873,
+      "word": "gelosia",
+      "frequency": 1
+    },
+    {
+      "rank": 874,
+      "word": "iniziare",
+      "frequency": 1
+    },
+    {
+      "rank": 875,
+      "word": "una domanda",
+      "frequency": 1
+    },
+    {
+      "rank": 876,
+      "word": "ne",
+      "frequency": 1
+    },
+    {
+      "rank": 877,
+      "word": "andava",
+      "frequency": 1
+    },
+    {
+      "rank": 878,
+      "word": "menzionava",
+      "frequency": 1
+    },
+    {
+      "rank": 879,
+      "word": "stomaco",
+      "frequency": 1
+    },
+    {
+      "rank": 880,
+      "word": "stringeva",
+      "frequency": 1
+    },
+    {
+      "rank": 881,
+      "word": "lavorare",
+      "frequency": 1
+    },
+    {
+      "rank": 882,
+      "word": "sulla mia",
+      "frequency": 1
+    },
+    {
+      "rank": 883,
+      "word": "insicurezza",
+      "frequency": 1
+    },
+    {
+      "rank": 884,
+      "word": "funziona",
+      "frequency": 1
+    },
+    {
+      "rank": 885,
+      "word": "il ritorno",
+      "frequency": 1
+    },
+    {
+      "rank": 886,
+      "word": "tornato",
+      "frequency": 1
+    },
+    {
+      "rank": 887,
+      "word": "alla fine",
+      "frequency": 1
+    },
+    {
+      "rank": 888,
+      "word": "corsa",
+      "frequency": 1
+    },
+    {
+      "rank": 889,
+      "word": "alla stazione",
+      "frequency": 1
+    },
+    {
+      "rank": 890,
+      "word": "scendere",
+      "frequency": 1
+    },
+    {
+      "rank": 891,
+      "word": "dal treno",
+      "frequency": 1
+    },
+    {
+      "rank": 892,
+      "word": "mancato",
+      "frequency": 1
+    },
+    {
+      "rank": 893,
+      "word": "sul suo",
+      "frequency": 1
+    },
+    {
+      "rank": 894,
+      "word": "petto",
+      "frequency": 1
+    },
+    {
+      "rank": 895,
+      "word": "ore",
+      "frequency": 1
+    },
+    {
+      "rank": 896,
+      "word": "la storia",
+      "frequency": 1
+    },
+    {
+      "rank": 897,
+      "word": "bellissima",
+      "frequency": 1
+    },
+    {
+      "rank": 898,
+      "word": "emozioni",
+      "frequency": 1
+    },
+    {
+      "rank": 899,
+      "word": "vere",
+      "frequency": 1
+    },
+    {
+      "rank": 900,
+      "word": "mese",
+      "frequency": 1
+    },
+    {
+      "rank": 901,
+      "word": "università",
+      "frequency": 1
+    },
+    {
+      "rank": 902,
+      "word": "una coppia",
+      "frequency": 1
+    },
+    {
+      "rank": 903,
+      "word": "bilocale",
+      "frequency": 1
+    },
+    {
+      "rank": 904,
+      "word": "l'abbiamo",
+      "frequency": 1
+    },
+    {
+      "rank": 905,
+      "word": "aggiunto",
+      "frequency": 1
+    },
+    {
+      "rank": 906,
+      "word": "sorridendo",
+      "frequency": 1
+    },
+    {
+      "rank": 907,
+      "word": "avventura",
+      "frequency": 1
+    },
+    {
+      "rank": 908,
+      "word": "imparato",
+      "frequency": 1
+    },
+    {
+      "rank": 909,
+      "word": "le abitudini",
+      "frequency": 1
+    },
+    {
+      "rank": 910,
+      "word": "lasciava",
+      "frequency": 1
+    },
+    {
+      "rank": 911,
+      "word": "i calzini",
+      "frequency": 1
+    },
+    {
+      "rank": 912,
+      "word": "dimenticavo",
+      "frequency": 1
+    },
+    {
+      "rank": 913,
+      "word": "chiudere",
+      "frequency": 1
+    },
+    {
+      "rank": 914,
+      "word": "il tubetto",
+      "frequency": 1
+    },
+    {
+      "rank": 915,
+      "word": "del dentifricio",
+      "frequency": 1
+    },
+    {
+      "rank": 916,
+      "word": "svegliarmi",
+      "frequency": 1
+    },
+    {
+      "rank": 917,
+      "word": "accanto",
+      "frequency": 1
+    },
+    {
+      "rank": 918,
+      "word": "realtà",
+      "frequency": 1
+    },
+    {
+      "rank": 919,
+      "word": "le piccole",
+      "frequency": 1
+    },
+    {
+      "rank": 920,
+      "word": "piccole",
+      "frequency": 1
+    },
+    {
+      "rank": 921,
+      "word": "preparava",
+      "frequency": 1
+    },
+    {
+      "rank": 922,
+      "word": "la mattina",
+      "frequency": 1
+    },
+    {
+      "rank": 923,
+      "word": "gli stiravo",
+      "frequency": 1
+    },
+    {
+      "rank": 924,
+      "word": "le camicie",
+      "frequency": 1
+    },
+    {
+      "rank": 925,
+      "word": "odiavo",
+      "frequency": 1
+    },
+    {
+      "rank": 926,
+      "word": "stirare",
+      "frequency": 1
+    },
+    {
+      "rank": 927,
+      "word": "nelle risate",
+      "frequency": 1
+    },
+    {
+      "rank": 928,
+      "word": "condivise",
+      "frequency": 1
+    },
+    {
+      "rank": 929,
+      "word": "guardavamo",
+      "frequency": 1
+    },
+    {
+      "rank": 930,
+      "word": "film",
+      "frequency": 1
+    },
+    {
+      "rank": 931,
+      "word": "brutti",
+      "frequency": 1
+    },
+    {
+      "rank": 932,
+      "word": "nelle passeggiate",
+      "frequency": 1
+    },
+    {
+      "rank": 933,
+      "word": "la pioggia",
+      "frequency": 1
+    },
+    {
+      "rank": 934,
+      "word": "nei messaggi",
+      "frequency": 1
+    },
+    {
+      "rank": 935,
+      "word": "dolci",
+      "frequency": 1
+    },
+    {
+      "rank": 936,
+      "word": "durante",
+      "frequency": 1
+    },
+    {
+      "rank": 937,
+      "word": "penso",
+      "frequency": 1
+    },
+    {
+      "rank": 938,
+      "word": "nelle discussioni",
+      "frequency": 1
+    },
+    {
+      "rank": 939,
+      "word": "cucinare",
+      "frequency": 1
+    },
+    {
+      "rank": 940,
+      "word": "nei sabati",
+      "frequency": 1
+    },
+    {
+      "rank": 941,
+      "word": "pigri",
+      "frequency": 1
+    },
+    {
+      "rank": 942,
+      "word": "nelle mani",
+      "frequency": 1
+    },
+    {
+      "rank": 943,
+      "word": "intrecciate",
+      "frequency": 1
+    },
+    {
+      "rank": 944,
+      "word": "la sfida",
+      "frequency": 1
+    },
+    {
+      "rank": 945,
+      "word": "pubblica",
+      "frequency": 1
+    },
+    {
+      "rank": 946,
+      "word": "ottobre",
+      "frequency": 1
+    },
+    {
+      "rank": 947,
+      "word": "sfida",
+      "frequency": 1
+    },
+    {
+      "rank": 948,
+      "word": "al duomo",
+      "frequency": 1
+    },
+    {
+      "rank": 949,
+      "word": "ragazzi",
+      "frequency": 1
+    },
+    {
+      "rank": 950,
+      "word": "gridato",
+      "frequency": 1
+    },
+    {
+      "rank": 951,
+      "word": "insulti",
+      "frequency": 1
+    },
+    {
+      "rank": 952,
+      "word": "froci",
+      "frequency": 1
+    },
+    {
+      "rank": 953,
+      "word": "irrigidito",
+      "frequency": 1
+    },
+    {
+      "rank": 954,
+      "word": "stringere",
+      "frequency": 1
+    },
+    {
+      "rank": 955,
+      "word": "ignoriamoli",
+      "frequency": 1
+    },
+    {
+      "rank": 956,
+      "word": "ignoranti",
+      "frequency": 1
+    },
+    {
+      "rank": 957,
+      "word": "feriscano",
+      "frequency": 1
+    },
+    {
+      "rank": 958,
+      "word": "dover",
+      "frequency": 1
+    },
+    {
+      "rank": 959,
+      "word": "giustificare",
+      "frequency": 1
+    },
+    {
+      "rank": 960,
+      "word": "amiamo",
+      "frequency": 1
+    },
+    {
+      "rank": 961,
+      "word": "abbracciato",
+      "frequency": 1
+    },
+    {
+      "rank": 962,
+      "word": "cambi",
+      "frequency": 1
+    },
+    {
+      "rank": 963,
+      "word": "raccontato",
+      "frequency": 1
+    },
+    {
+      "rank": 964,
+      "word": "le volte",
+      "frequency": 1
+    },
+    {
+      "rank": 965,
+      "word": "discriminazioni",
+      "frequency": 1
+    },
+    {
+      "rank": 966,
+      "word": "coming",
+      "frequency": 1
+    },
+    {
+      "rank": 967,
+      "word": "out",
+      "frequency": 1
+    },
+    {
+      "rank": 968,
+      "word": "al liceo",
+      "frequency": 1
+    },
+    {
+      "rank": 969,
+      "word": "abbandonato",
+      "frequency": 1
+    },
+    {
+      "rank": 970,
+      "word": "sbagliato",
+      "frequency": 1
+    },
+    {
+      "rank": 971,
+      "word": "il problema",
+      "frequency": 1
+    },
+    {
+      "rank": 972,
+      "word": "orgogliosa",
+      "frequency": 1
+    },
+    {
+      "rank": 973,
+      "word": "nasconderci",
+      "frequency": 1
+    },
+    {
+      "rank": 974,
+      "word": "stessi",
+      "frequency": 1
+    },
+    {
+      "rank": 975,
+      "word": "ovunque",
+      "frequency": 1
+    },
+    {
+      "rank": 976,
+      "word": "deve",
+      "frequency": 1
+    },
+    {
+      "rank": 977,
+      "word": "forme",
+      "frequency": 1
+    },
+    {
+      "rank": 978,
+      "word": "organizzato",
+      "frequency": 1
+    },
+    {
+      "rank": 979,
+      "word": "una cena",
+      "frequency": 1
+    },
+    {
+      "rank": 980,
+      "word": "entrambe",
+      "frequency": 1
+    },
+    {
+      "rank": 981,
+      "word": "eccitata",
+      "frequency": 1
+    },
+    {
+      "rank": 982,
+      "word": "madri",
+      "frequency": 1
+    },
+    {
+      "rank": 983,
+      "word": "piaciute",
+      "frequency": 1
+    },
+    {
+      "rank": 984,
+      "word": "parlavano",
+      "frequency": 1
+    },
+    {
+      "rank": 985,
+      "word": "ricette",
+      "frequency": 1
+    },
+    {
+      "rank": 986,
+      "word": "bambini",
+      "frequency": 1
+    },
+    {
+      "rank": 987,
+      "word": "i nostri",
+      "frequency": 1
+    },
+    {
+      "rank": 988,
+      "word": "padri",
+      "frequency": 1
+    },
+    {
+      "rank": 989,
+      "word": "silenziosi",
+      "frequency": 1
+    },
+    {
+      "rank": 990,
+      "word": "un terreno",
+      "frequency": 1
+    },
+    {
+      "rank": 991,
+      "word": "nel calcio",
+      "frequency": 1
+    },
+    {
+      "rank": 992,
+      "word": "adorabile",
+      "frequency": 1
+    },
+    {
+      "rank": 993,
+      "word": "guardando",
+      "frequency": 1
+    },
+    {
+      "rank": 994,
+      "word": "costruito",
+      "frequency": 1
+    },
+    {
+      "rank": 995,
+      "word": "una relazione",
+      "frequency": 1
+    },
+    {
+      "rank": 996,
+      "word": "una vera",
+      "frequency": 1
+    },
+    {
+      "rank": 997,
+      "word": "il natale",
+      "frequency": 1
+    },
+    {
+      "rank": 998,
+      "word": "decorato",
+      "frequency": 1
+    },
+    {
+      "rank": 999,
+      "word": "luci",
+      "frequency": 1
+    },
+    {
+      "rank": 1000,
+      "word": "un albero",
+      "frequency": 1
+    },
+    {
+      "rank": 1001,
+      "word": "un regalo",
+      "frequency": 1
+    },
+    {
+      "rank": 1002,
+      "word": "la vigilia",
+      "frequency": 1
+    },
+    {
+      "rank": 1003,
+      "word": "un pacchetto",
+      "frequency": 1
+    },
+    {
+      "rank": 1004,
+      "word": "una collana",
+      "frequency": 1
+    },
+    {
+      "rank": 1005,
+      "word": "un ciondolo",
+      "frequency": 1
+    },
+    {
+      "rank": 1006,
+      "word": "forma",
+      "frequency": 1
+    },
+    {
+      "rank": 1007,
+      "word": "libro",
+      "frequency": 1
+    },
+    {
+      "rank": 1008,
+      "word": "un libro",
+      "frequency": 1
+    },
+    {
+      "rank": 1009,
+      "word": "la più",
+      "frequency": 1
+    },
+    {
+      "rank": 1010,
+      "word": "regalo",
+      "frequency": 1
+    },
+    {
+      "rank": 1011,
+      "word": "un quaderno",
+      "frequency": 1
+    },
+    {
+      "rank": 1012,
+      "word": "pelle",
+      "frequency": 1
+    },
+    {
+      "rank": 1013,
+      "word": "iniziali",
+      "frequency": 1
+    },
+    {
+      "rank": 1014,
+      "word": "le storie",
+      "frequency": 1
+    },
+    {
+      "rank": 1015,
+      "word": "scriverai",
+      "frequency": 1
+    },
+    {
+      "rank": 1016,
+      "word": "pagina",
+      "frequency": 1
+    },
+    {
+      "rank": 1017,
+      "word": "dedicata",
+      "frequency": 1
+    },
+    {
+      "rank": 1018,
+      "word": "il nuovo",
+      "frequency": 1
+    },
+    {
+      "rank": 1019,
+      "word": "speranze",
+      "frequency": 1
+    },
+    {
+      "rank": 1020,
+      "word": "del futuro",
+      "frequency": 1
+    },
+    {
+      "rank": 1021,
+      "word": "cinque",
+      "frequency": 1
+    },
+    {
+      "rank": 1022,
+      "word": "esitare",
+      "frequency": 1
+    },
+    {
+      "rank": 1023,
+      "word": "insegnando",
+      "frequency": 1
+    },
+    {
+      "rank": 1024,
+      "word": "una scuola",
+      "frequency": 1
+    },
+    {
+      "rank": 1025,
+      "word": "soprattutto",
+      "frequency": 1
+    },
+    {
+      "rank": 1026,
+      "word": "viaggi",
+      "frequency": 1
+    },
+    {
+      "rank": 1027,
+      "word": "parigi",
+      "frequency": 1
+    },
+    {
+      "rank": 1028,
+      "word": "barcellona",
+      "frequency": 1
+    },
+    {
+      "rank": 1029,
+      "word": "londra",
+      "frequency": 1
+    },
+    {
+      "rank": 1030,
+      "word": "una casa",
+      "frequency": 1
+    },
+    {
+      "rank": 1031,
+      "word": "un futuro",
+      "frequency": 1
+    },
+    {
+      "rank": 1032,
+      "word": "pensi",
+      "frequency": 1
+    },
+    {
+      "rank": 1033,
+      "word": "al matrimonio",
+      "frequency": 1
+    },
+    {
+      "rank": 1034,
+      "word": "timidamente",
+      "frequency": 1
+    },
+    {
+      "rank": 1035,
+      "word": "ammesso",
+      "frequency": 1
+    },
+    {
+      "rank": 1036,
+      "word": "paure",
+      "frequency": 1
+    },
+    {
+      "rank": 1037,
+      "word": "ricevere",
+      "frequency": 1
+    },
+    {
+      "rank": 1038,
+      "word": "minacce",
+      "frequency": 1
+    },
+    {
+      "rank": 1039,
+      "word": "anonime",
+      "frequency": 1
+    },
+    {
+      "rank": 1040,
+      "word": "preoccupare",
+      "frequency": 1
+    },
+    {
+      "rank": 1041,
+      "word": "vedevo",
+      "frequency": 1
+    },
+    {
+      "rank": 1042,
+      "word": "insistito",
+      "frequency": 1
+    },
+    {
+      "rank": 1043,
+      "word": "alla polizia",
+      "frequency": 1
+    },
+    {
+      "rank": 1044,
+      "word": "la denuncia",
+      "frequency": 1
+    },
+    {
+      "rank": 1045,
+      "word": "sembravano",
+      "frequency": 1
+    },
+    {
+      "rank": 1046,
+      "word": "preoccupati",
+      "frequency": 1
+    },
+    {
+      "rank": 1047,
+      "word": "succede",
+      "frequency": 1
+    },
+    {
+      "rank": 1048,
+      "word": "l'agente",
+      "frequency": 1
+    },
+    {
+      "rank": 1049,
+      "word": "noncuranza",
+      "frequency": 1
+    },
+    {
+      "rank": 1050,
+      "word": "tenuti",
+      "frequency": 1
+    },
+    {
+      "rank": 1051,
+      "word": "stretti",
+      "frequency": 1
+    },
+    {
+      "rank": 1052,
+      "word": "conforto",
+      "frequency": 1
+    },
+    {
+      "rank": 1053,
+      "word": "l'uno",
+      "frequency": 1
+    },
+    {
+      "rank": 1054,
+      "word": "nell'altro",
+      "frequency": 1
+    },
+    {
+      "rank": 1055,
+      "word": "la comunità",
+      "frequency": 1
+    },
+    {
+      "rank": 1056,
+      "word": "una nostra",
+      "frequency": 1
+    },
+    {
+      "rank": 1057,
+      "word": "giulia",
+      "frequency": 1
+    },
+    {
+      "rank": 1058,
+      "word": "invitato",
+      "frequency": 1
+    },
+    {
+      "rank": 1059,
+      "word": "supporto",
+      "frequency": 1
+    },
+    {
+      "rank": 1060,
+      "word": "incontro",
+      "frequency": 1
+    },
+    {
+      "rank": 1061,
+      "word": "altre",
+      "frequency": 1
+    },
+    {
+      "rank": 1062,
+      "word": "coppie",
+      "frequency": 1
+    },
+    {
+      "rank": 1063,
+      "word": "ognuno",
+      "frequency": 1
+    },
+    {
+      "rank": 1064,
+      "word": "vittorie",
+      "frequency": 1
+    },
+    {
+      "rank": 1065,
+      "word": "sentirsi",
+      "frequency": 1
+    },
+    {
+      "rank": 1066,
+      "word": "regolarmente",
+      "frequency": 1
+    },
+    {
+      "rank": 1067,
+      "word": "nuovi",
+      "frequency": 1
+    },
+    {
+      "rank": 1068,
+      "word": "una comunità",
+      "frequency": 1
+    },
+    {
+      "rank": 1069,
+      "word": "capiva",
+      "frequency": 1
+    },
+    {
+      "rank": 1070,
+      "word": "sosteneva",
+      "frequency": 1
+    },
+    {
+      "rank": 1071,
+      "word": "il supporto",
+      "frequency": 1
+    },
+    {
+      "rank": 1072,
+      "word": "della comunità",
+      "frequency": 1
+    },
+    {
+      "rank": 1073,
+      "word": "pubblicare",
+      "frequency": 1
+    },
+    {
+      "rank": 1074,
+      "word": "sappiano",
+      "frequency": 1
+    },
+    {
+      "rank": 1075,
+      "word": "queer",
+      "frequency": 1
+    },
+    {
+      "rank": 1076,
+      "word": "normale",
+      "frequency": 1
+    },
+    {
+      "rank": 1077,
+      "word": "virale",
+      "frequency": 1
+    },
+    {
+      "rank": 1078,
+      "word": "migliaia",
+      "frequency": 1
+    },
+    {
+      "rank": 1079,
+      "word": "l'hanno",
+      "frequency": 1
+    },
+    {
+      "rank": 1080,
+      "word": "letta",
+      "frequency": 1
+    },
+    {
+      "rank": 1081,
+      "word": "ricevuto",
+      "frequency": 1
+    },
+    {
+      "rank": 1082,
+      "word": "condiviso",
+      "frequency": 1
+    },
+    {
+      "rank": 1083,
+      "word": "la vostra",
+      "frequency": 1
+    },
+    {
+      "rank": 1084,
+      "word": "avete",
+      "frequency": 1
+    },
+    {
+      "rank": 1085,
+      "word": "dato",
+      "frequency": 1
+    },
+    {
+      "rank": 1086,
+      "word": "speranza",
+      "frequency": 1
+    },
+    {
+      "rank": 1087,
+      "word": "un'ispirazione",
+      "frequency": 1
+    },
+    {
+      "rank": 1088,
+      "word": "una ragazza",
+      "frequency": 1
+    },
+    {
+      "rank": 1089,
+      "word": "certo",
+      "frequency": 1
+    },
+    {
+      "rank": 1090,
+      "word": "commenti",
+      "frequency": 1
+    },
+    {
+      "rank": 1091,
+      "word": "negativi",
+      "frequency": 1
+    },
+    {
+      "rank": 1092,
+      "word": "i messaggi",
+      "frequency": 1
+    },
+    {
+      "rank": 1093,
+      "word": "positivi",
+      "frequency": 1
+    },
+    {
+      "rank": 1094,
+      "word": "molti",
+      "frequency": 1
+    },
+    {
+      "rank": 1095,
+      "word": "la proposta",
+      "frequency": 1
+    },
+    {
+      "rank": 1096,
+      "word": "anniversario",
+      "frequency": 1
+    },
+    {
+      "rank": 1097,
+      "word": "portata",
+      "frequency": 1
+    },
+    {
+      "rank": 1098,
+      "word": "dichiarati",
+      "frequency": 1
+    },
+    {
+      "rank": 1099,
+      "word": "quest'anno",
+      "frequency": 1
+    },
+    {
+      "rank": 1100,
+      "word": "passare",
+      "frequency": 1
+    },
+    {
+      "rank": 1101,
+      "word": "tutta",
+      "frequency": 1
+    },
+    {
+      "rank": 1102,
+      "word": "belli",
+      "frequency": 1
+    },
+    {
+      "rank": 1103,
+      "word": "nella gioia",
+      "frequency": 1
+    },
+    {
+      "rank": 1104,
+      "word": "nel dolore",
+      "frequency": 1
+    },
+    {
+      "rank": 1105,
+      "word": "inginocchiato",
+      "frequency": 1
+    },
+    {
+      "rank": 1106,
+      "word": "una piccola",
+      "frequency": 1
+    },
+    {
+      "rank": 1107,
+      "word": "scatola",
+      "frequency": 1
+    },
+    {
+      "rank": 1108,
+      "word": "sposare",
+      "frequency": 1
+    },
+    {
+      "rank": 1109,
+      "word": "scendevano",
+      "frequency": 1
+    },
+    {
+      "rank": 1110,
+      "word": "l'anello",
+      "frequency": 1
+    },
+    {
+      "rank": 1111,
+      "word": "semplice",
+      "frequency": 1
+    },
+    {
+      "rank": 1112,
+      "word": "baciati",
+      "frequency": 1
+    },
+    {
+      "rank": 1113,
+      "word": "tramontava",
+      "frequency": 1
+    },
+    {
+      "rank": 1114,
+      "word": "proprio",
+      "frequency": 1
+    },
+    {
+      "rank": 1115,
+      "word": "la preparazione",
+      "frequency": 1
+    },
+    {
+      "rank": 1116,
+      "word": "i mesi",
+      "frequency": 1
+    },
+    {
+      "rank": 1117,
+      "word": "un turbine",
+      "frequency": 1
+    },
+    {
+      "rank": 1118,
+      "word": "dovevamo",
+      "frequency": 1
+    },
+    {
+      "rank": 1119,
+      "word": "preparare",
+      "frequency": 1
+    },
+    {
+      "rank": 1120,
+      "word": "scelto",
+      "frequency": 1
+    },
+    {
+      "rank": 1121,
+      "word": "sposarci",
+      "frequency": 1
+    },
+    {
+      "rank": 1122,
+      "word": "estate",
+      "frequency": 1
+    },
+    {
+      "rank": 1123,
+      "word": "agriturismo",
+      "frequency": 1
+    },
+    {
+      "rank": 1124,
+      "word": "una cerimonia",
+      "frequency": 1
+    },
+    {
+      "rank": 1125,
+      "word": "amavamo",
+      "frequency": 1
+    },
+    {
+      "rank": 1126,
+      "word": "aiutata",
+      "frequency": 1
+    },
+    {
+      "rank": 1127,
+      "word": "scegliere",
+      "frequency": 1
+    },
+    {
+      "rank": 1128,
+      "word": "il vestito",
+      "frequency": 1
+    },
+    {
+      "rank": 1129,
+      "word": "aiutato",
+      "frequency": 1
+    },
+    {
+      "rank": 1130,
+      "word": "le decorazioni",
+      "frequency": 1
+    },
+    {
+      "rank": 1131,
+      "word": "sposi",
+      "frequency": 1
+    },
+    {
+      "rank": 1132,
+      "word": "del matrimonio",
+      "frequency": 1
+    },
+    {
+      "rank": 1133,
+      "word": "il più",
+      "frequency": 1
+    },
+    {
+      "rank": 1134,
+      "word": "azzurro",
+      "frequency": 1
+    },
+    {
+      "rank": 1135,
+      "word": "bellissimo",
+      "frequency": 1
+    },
+    {
+      "rank": 1136,
+      "word": "nel suo",
+      "frequency": 1
+    },
+    {
+      "rank": 1137,
+      "word": "completo",
+      "frequency": 1
+    },
+    {
+      "rank": 1138,
+      "word": "blu",
+      "frequency": 1
+    },
+    {
+      "rank": 1139,
+      "word": "guardati",
+      "frequency": 1
+    },
+    {
+      "rank": 1140,
+      "word": "sposo",
+      "frequency": 1
+    },
+    {
+      "rank": 1141,
+      "word": "sostenerti",
+      "frequency": 1
+    },
+    {
+      "rank": 1142,
+      "word": "al tuo",
+      "frequency": 1
+    },
+    {
+      "rank": 1143,
+      "word": "sposa",
+      "frequency": 1
+    },
+    {
+      "rank": 1144,
+      "word": "costruire",
+      "frequency": 1
+    },
+    {
+      "rank": 1145,
+      "word": "una vita",
+      "frequency": 1
+    },
+    {
+      "rank": 1146,
+      "word": "meravigliosa",
+      "frequency": 1
+    },
+    {
+      "rank": 1147,
+      "word": "dichiarato",
+      "frequency": 1
+    },
+    {
+      "rank": 1148,
+      "word": "applaudito",
+      "frequency": 1
+    },
+    {
+      "rank": 1149,
+      "word": "epilogo",
+      "frequency": 1
+    },
+    {
+      "rank": 1150,
+      "word": "passati",
+      "frequency": 1
+    },
+    {
+      "rank": 1151,
+      "word": "tre",
+      "frequency": 1
+    },
+    {
+      "rank": 1152,
+      "word": "dal nostro",
+      "frequency": 1
+    },
+    {
+      "rank": 1153,
+      "word": "matrimonio",
+      "frequency": 1
+    },
+    {
+      "rank": 1154,
+      "word": "viviamo",
+      "frequency": 1
+    },
+    {
+      "rank": 1155,
+      "word": "naturalmente",
+      "frequency": 1
+    },
+    {
+      "rank": 1156,
+      "word": "chiama",
+      "frequency": 1
+    },
+    {
+      "rank": 1157,
+      "word": "insegno",
+      "frequency": 1
+    },
+    {
+      "rank": 1158,
+      "word": "un liceo",
+      "frequency": 1
+    },
+    {
+      "rank": 1159,
+      "word": "ai miei",
+      "frequency": 1
+    },
+    {
+      "rank": 1160,
+      "word": "studenti",
+      "frequency": 1
+    },
+    {
+      "rank": 1161,
+      "word": "della diversità",
+      "frequency": 1
+    },
+    {
+      "rank": 1162,
+      "word": "dell'accettazione",
+      "frequency": 1
+    },
+    {
+      "rank": 1163,
+      "word": "facile",
+      "frequency": 1
+    },
+    {
+      "rank": 1164,
+      "word": "capiscono",
+      "frequency": 1
+    },
+    {
+      "rank": 1165,
+      "word": "affrontare",
+      "frequency": 1
+    },
+    {
+      "rank": 1166,
+      "word": "dice",
+      "frequency": 1
+    },
+    {
+      "rank": 1167,
+      "word": "rispondo",
+      "frequency": 1
+    },
+    {
+      "rank": 1168,
+      "word": "confini",
+      "frequency": 1
+    },
+    {
+      "rank": 1169,
+      "word": "genere",
+      "frequency": 1
+    },
+    {
+      "rank": 1170,
+      "word": "limiti",
+      "frequency": 1
+    },
+    {
+      "rank": 1171,
+      "word": "semplicemente",
+      "frequency": 1
+    },
+    {
+      "rank": 1172,
+      "word": "la prova",
+      "frequency": 1
+    },
+    {
+      "rank": 1173,
+      "word": "vivente",
+      "frequency": 1
+    },
+    {
+      "rank": 1174,
+      "word": "vince",
+      "frequency": 1
+    },
+    {
+      "rank": 1175,
+      "word": "**fine**",
+      "frequency": 1
+    },
+    {
+      "rank": 1176,
+      "word": "perciò",
+      "frequency": 1
+    },
+    {
+      "rank": 1177,
+      "word": "stupire",
+      "frequency": 1
+    },
+    {
+      "rank": 1178,
+      "word": "dal niente",
+      "frequency": 1
+    },
+    {
+      "rank": 1179,
+      "word": "faccio",
+      "frequency": 1
+    },
+    {
+      "rank": 1180,
+      "word": "drammi",
+      "frequency": 1
+    },
+    {
+      "rank": 1181,
+      "word": "denaro",
+      "frequency": 1
+    },
+    {
+      "rank": 1182,
+      "word": "scompaia",
+      "frequency": 1
+    },
+    {
+      "rank": 1183,
+      "word": "gli altri",
+      "frequency": 1
+    },
+    {
+      "rank": 1184,
+      "word": "perdono",
+      "frequency": 1
+    },
+    {
+      "rank": 1185,
+      "word": "gli sbagli",
+      "frequency": 1
+    },
+    {
+      "rank": 1186,
+      "word": "commesso",
+      "frequency": 1
+    },
+    {
+      "rank": 1187,
+      "word": "dura",
+      "frequency": 1
+    },
+    {
+      "rank": 1188,
+      "word": "stai",
+      "frequency": 1
+    },
+    {
+      "rank": 1189,
+      "word": "puntando",
+      "frequency": 1
+    },
+    {
+      "rank": 1190,
+      "word": "al cielo",
+      "frequency": 1
+    },
+    {
+      "rank": 1191,
+      "word": "le cose",
+      "frequency": 1
+    },
+    {
+      "rank": 1192,
+      "word": "importanti",
+      "frequency": 1
+    },
+    {
+      "rank": 1193,
+      "word": "diamanti",
+      "frequency": 1
+    },
+    {
+      "rank": 1194,
+      "word": "demoni",
+      "frequency": 1
+    },
+    {
+      "rank": 1195,
+      "word": "santi",
+      "frequency": 1
+    },
+    {
+      "rank": 1196,
+      "word": "frega",
+      "frequency": 1
+    },
+    {
+      "rank": 1197,
+      "word": "un cazzo",
+      "frequency": 1
+    },
+    {
+      "rank": 1198,
+      "word": "zero",
+      "frequency": 1
+    },
+    {
+      "rank": 1199,
+      "word": "dimostrarvi",
+      "frequency": 1
+    },
+    {
+      "rank": 1200,
+      "word": "date",
+      "frequency": 1
+    },
+    {
+      "rank": 1201,
+      "word": "al denaro",
+      "frequency": 1
+    },
+    {
+      "rank": 1202,
+      "word": "dagli occhi",
+      "frequency": 1
+    },
+    {
+      "rank": 1203,
+      "word": "puro",
+      "frequency": 1
+    },
+    {
+      "rank": 1204,
+      "word": "codardi",
+      "frequency": 1
+    },
+    {
+      "rank": 1205,
+      "word": "tardi",
+      "frequency": 1
+    },
+    {
+      "rank": 1206,
+      "word": "farà",
+      "frequency": 1
+    },
+    {
+      "rank": 1207,
+      "word": "resterai",
+      "frequency": 1
+    },
+    {
+      "rank": 1208,
+      "word": "dagli altri",
+      "frequency": 1
+    },
+    {
+      "rank": 1209,
+      "word": "sanno",
+      "frequency": 1
+    },
+    {
+      "rank": 1210,
+      "word": "vestiti",
+      "frequency": 1
+    },
+    {
+      "rank": 1211,
+      "word": "sporchi",
+      "frequency": 1
+    },
+    {
+      "rank": 1212,
+      "word": "fra'",
+      "frequency": 1
+    },
+    {
+      "rank": 1213,
+      "word": "fango",
+      "frequency": 1
+    },
+    {
+      "rank": 1214,
+      "word": "giallo",
+      "frequency": 1
+    },
+    {
+      "rank": 1215,
+      "word": "siga'",
+      "frequency": 1
+    },
+    {
+      "rank": 1216,
+      "word": "fra",
+      "frequency": 1
+    },
+    {
+      "rank": 1217,
+      "word": "le dita",
+      "frequency": 1
+    },
+    {
+      "rank": 1218,
+      "word": "la siga'",
+      "frequency": 1
+    },
+    {
+      "rank": 1219,
+      "word": "camminando",
+      "frequency": 1
+    },
+    {
+      "rank": 1220,
+      "word": "scusami",
+      "frequency": 1
+    },
+    {
+      "rank": 1221,
+      "word": "credo",
+      "frequency": 1
+    },
+    {
+      "rank": 1222,
+      "word": "salto",
+      "frequency": 1
+    },
+    {
+      "rank": 1223,
+      "word": "salita",
+      "frequency": 1
+    },
+    {
+      "rank": 1224,
+      "word": "allenando",
+      "frequency": 1
+    },
+    {
+      "rank": 1225,
+      "word": "buonasera",
+      "frequency": 1
+    },
+    {
+      "rank": 1226,
+      "word": "signori",
+      "frequency": 1
+    },
+    {
+      "rank": 1227,
+      "word": "gli attori",
+      "frequency": 1
+    },
+    {
+      "rank": 1228,
+      "word": "toccarvi",
+      "frequency": 1
+    },
+    {
+      "rank": 1229,
+      "word": "i coglioni",
+      "frequency": 1
+    },
+    {
+      "rank": 1230,
+      "word": "zitti",
+      "frequency": 1
+    },
+    {
+      "rank": 1231,
+      "word": "buoni",
+      "frequency": 1
+    },
+    {
+      "rank": 1232,
+      "word": "spacciatori",
+      "frequency": 1
+    },
+    {
+      "rank": 1233,
+      "word": "troppe",
+      "frequency": 1
+    },
+    {
+      "rank": 1234,
+      "word": "notti",
+      "frequency": 1
+    },
+    {
+      "rank": 1235,
+      "word": "mo",
+      "frequency": 1
+    },
+    {
+      "rank": 1236,
+      "word": "li",
+      "frequency": 1
+    },
+    {
+      "rank": 1237,
+      "word": "calci",
+      "frequency": 1
+    },
+    {
+      "rank": 1238,
+      "word": "'sti",
+      "frequency": 1
+    },
+    {
+      "rank": 1239,
+      "word": "portoni",
+      "frequency": 1
+    },
+    {
+      "rank": 1240,
+      "word": "sguardo",
+      "frequency": 1
+    },
+    {
+      "rank": 1241,
+      "word": "scalatori",
+      "frequency": 1
+    },
+    {
+      "rank": 1242,
+      "word": "lacrime",
+      "frequency": 1
+    },
+    {
+      "rank": 1243,
+      "word": "questi",
+      "frequency": 1
+    },
+    {
+      "rank": 1244,
+      "word": "uomini",
+      "frequency": 1
+    },
+    {
+      "rank": 1245,
+      "word": "macchina",
+      "frequency": 1
+    },
+    {
+      "rank": 1246,
+      "word": "scalare",
+      "frequency": 1
+    },
+    {
+      "rank": 1247,
+      "word": "le rapide",
+      "frequency": 1
+    },
+    {
+      "rank": 1248,
+      "word": "una lapide",
+      "frequency": 1
+    },
+    {
+      "rank": 1249,
+      "word": "trovi",
+      "frequency": 1
+    },
+    {
+      "rank": 1250,
+      "word": "il senso",
+      "frequency": 1
+    },
+    {
+      "rank": 1251,
+      "word": "del tempo",
+      "frequency": 1
+    },
+    {
+      "rank": 1252,
+      "word": "risalirai",
+      "frequency": 1
+    },
+    {
+      "rank": 1253,
+      "word": "dal tuo",
+      "frequency": 1
+    },
+    {
+      "rank": 1254,
+      "word": "oblio",
+      "frequency": 1
+    },
+    {
+      "rank": 1255,
+      "word": "fermi",
+      "frequency": 1
+    },
+    {
+      "rank": 1256,
+      "word": "la naturale",
+      "frequency": 1
+    },
+    {
+      "rank": 1257,
+      "word": "potenza",
+      "frequency": 1
+    },
+    {
+      "rank": 1258,
+      "word": "dal punto",
+      "frequency": 1
+    },
+    {
+      "rank": 1259,
+      "word": "giusto",
+      "frequency": 1
+    },
+    {
+      "rank": 1260,
+      "word": "del vento",
+      "frequency": 1
+    },
+    {
+      "rank": 1261,
+      "word": "l'ebrezza",
+      "frequency": 1
+    },
+    {
+      "rank": 1262,
+      "word": "ali",
+      "frequency": 1
+    },
+    {
+      "rank": 1263,
+      "word": "cera",
+      "frequency": 1
+    },
+    {
+      "rank": 1264,
+      "word": "alla schiena",
+      "frequency": 1
+    },
+    {
+      "rank": 1265,
+      "word": "ricercherò",
+      "frequency": 1
+    },
+    {
+      "rank": 1266,
+      "word": "quell'altezza",
+      "frequency": 1
+    },
+    {
+      "rank": 1267,
+      "word": "fermarmi",
+      "frequency": 1
+    },
+    {
+      "rank": 1268,
+      "word": "ritenta",
+      "frequency": 1
+    },
+    {
+      "rank": 1269,
+      "word": "prova",
+      "frequency": 1
+    },
+    {
+      "rank": 1270,
+      "word": "tagliarmi",
+      "frequency": 1
+    },
+    {
+      "rank": 1271,
+      "word": "cazzo",
+      "frequency": 1
+    },
+    {
+      "rank": 1272,
+      "word": "guerriera",
+      "frequency": 1
+    },
+    {
+      "rank": 1273,
+      "word": "dal cuore",
+      "frequency": 1
+    },
+    {
+      "rank": 1274,
+      "word": "zelante",
+      "frequency": 1
+    },
+    {
+      "rank": 1275,
+      "word": "rose",
+      "frequency": 1
+    },
+    {
+      "rank": 1276,
+      "word": "preziosi",
+      "frequency": 1
+    },
+    {
+      "rank": 1277,
+      "word": "fili",
+      "frequency": 1
+    },
+    {
+      "rank": 1278,
+      "word": "rame",
+      "frequency": 1
+    },
+    {
+      "rank": 1279,
+      "word": "portali",
+      "frequency": 1
+    },
+    {
+      "rank": 1280,
+      "word": "campane",
+      "frequency": 1
+    },
+    {
+      "rank": 1281,
+      "word": "cantare",
+      "frequency": 1
+    },
+    {
+      "rank": 1282,
+      "word": "vedrai",
+      "frequency": 1
+    },
+    {
+      "rank": 1283,
+      "word": "prende",
+      "frequency": 1
+    },
+    {
+      "rank": 1284,
+      "word": "il dolore",
+      "frequency": 1
+    },
+    {
+      "rank": 1285,
+      "word": "degli altri",
+      "frequency": 1
+    },
+    {
+      "rank": 1286,
+      "word": "lo porta",
+      "frequency": 1
+    },
+    {
+      "rank": 1287,
+      "word": "diviso",
+      "frequency": 1
+    },
+    {
+      "rank": 1288,
+      "word": "metà",
+      "frequency": 1
+    },
+    {
+      "rank": 1289,
+      "word": "una bambina",
+      "frequency": 1
+    },
+    {
+      "rank": 1290,
+      "word": "un peso",
+      "frequency": 1
+    },
+    {
+      "rank": 1291,
+      "word": "spezzerà",
+      "frequency": 1
+    },
+    {
+      "rank": 1292,
+      "word": "dirà",
+      "frequency": 1
+    },
+    {
+      "rank": 1293,
+      "word": "vale",
+      "frequency": 1
+    },
+    {
+      "rank": 1294,
+      "word": "riesce",
+      "frequency": 1
+    },
+    {
+      "rank": 1295,
+      "word": "una misera",
+      "frequency": 1
+    },
+    {
+      "rank": 1296,
+      "word": "una volta",
+      "frequency": 1
+    },
+    {
+      "rank": 1297,
+      "word": "riuscirà",
+      "frequency": 1
+    },
+    {
+      "rank": 1298,
+      "word": "un mostro",
+      "frequency": 1
+    },
+    {
+      "rank": 1299,
+      "word": "la tiene",
+      "frequency": 1
+    },
+    {
+      "rank": 1300,
+      "word": "gabbia",
+      "frequency": 1
+    },
+    {
+      "rank": 1301,
+      "word": "le ricopre",
+      "frequency": 1
+    },
+    {
+      "rank": 1302,
+      "word": "mine",
+      "frequency": 1
+    },
+    {
+      "rank": 1303,
+      "word": "mangiare",
+      "frequency": 1
+    },
+    {
+      "rank": 1304,
+      "word": "vorrebbe",
+      "frequency": 1
+    },
+    {
+      "rank": 1305,
+      "word": "riparo",
+      "frequency": 1
+    },
+    {
+      "rank": 1306,
+      "word": "d'inverno",
+      "frequency": 1
+    },
+    {
+      "rank": 1307,
+      "word": "respiri",
+      "frequency": 1
+    },
+    {
+      "rank": 1308,
+      "word": "capirò",
+      "frequency": 1
+    },
+    {
+      "rank": 1309,
+      "word": "l'acqua",
+      "frequency": 1
+    },
+    {
+      "rank": 1310,
+      "word": "bere",
+      "frequency": 1
+    },
+    {
+      "rank": 1311,
+      "word": "il significato",
+      "frequency": 1
+    },
+    {
+      "rank": 1312,
+      "word": "del bene",
+      "frequency": 1
+    },
+    {
+      "rank": 1313,
+      "word": "un soldato",
+      "frequency": 1
+    },
+    {
+      "rank": 1314,
+      "word": "piccola",
+      "frequency": 1
+    },
+    {
+      "rank": 1315,
+      "word": "lacrima",
+      "frequency": 1
+    },
+    {
+      "rank": 1316,
+      "word": "oceano",
+      "frequency": 1
+    },
+    {
+      "rank": 1317,
+      "word": "vessillo",
+      "frequency": 1
+    },
+    {
+      "rank": 1318,
+      "word": "scudo",
+      "frequency": 1
+    },
+    {
+      "rank": 1319,
+      "word": "spada",
+      "frequency": 1
+    },
+    {
+      "rank": 1320,
+      "word": "d'argento",
+      "frequency": 1
+    },
+    {
+      "rank": 1321,
+      "word": "il frutto",
+      "frequency": 1
+    },
+    {
+      "rank": 1322,
+      "word": "del suo",
+      "frequency": 1
+    },
+    {
+      "rank": 1323,
+      "word": "ventre",
+      "frequency": 1
+    },
+    {
+      "rank": 1324,
+      "word": "un padre",
+      "frequency": 1
+    },
+    {
+      "rank": 1325,
+      "word": "le han",
+      "frequency": 1
+    },
+    {
+      "rank": 1326,
+      "word": "un castello",
+      "frequency": 1
+    },
+    {
+      "rank": 1327,
+      "word": "mura",
+      "frequency": 1
+    },
+    {
+      "rank": 1328,
+      "word": "talmente",
+      "frequency": 1
+    },
+    {
+      "rank": 1329,
+      "word": "potenti",
+      "frequency": 1
+    },
+    {
+      "rank": 1330,
+      "word": "vai",
+      "frequency": 1
+    },
+    {
+      "rank": 1331,
+      "word": "voci",
+      "frequency": 1
+    },
+    {
+      "rank": 1332,
+      "word": "parlano",
+      "frequency": 1
+    },
+    {
+      "rank": 1333,
+      "word": "dicono",
+      "frequency": 1
+    },
+    {
+      "rank": 1334,
+      "word": "guardo",
+      "frequency": 1
+    },
+    {
+      "rank": 1335,
+      "word": "allo specchio",
+      "frequency": 1
+    },
+    {
+      "rank": 1336,
+      "word": "immagino",
+      "frequency": 1
+    },
+    {
+      "rank": 1337,
+      "word": "al circo",
+      "frequency": 1
+    },
+    {
+      "rank": 1338,
+      "word": "una giostra",
+      "frequency": 1
+    },
+    {
+      "rank": 1339,
+      "word": "felicità",
+      "frequency": 1
+    },
+    {
+      "rank": 1340,
+      "word": "diverto",
+      "frequency": 1
+    },
+    {
+      "rank": 1341,
+      "word": "un miracolo",
+      "frequency": 1
+    },
+    {
+      "rank": 1342,
+      "word": "ridicolo",
+      "frequency": 1
+    },
+    {
+      "rank": 1343,
+      "word": "un attimo",
+      "frequency": 1
+    },
+    {
+      "rank": 1344,
+      "word": "ditelo",
+      "frequency": 1
+    },
+    {
+      "rank": 1345,
+      "word": "preparo",
+      "frequency": 1
+    },
+    {
+      "rank": 1346,
+      "word": "valzer",
+      "frequency": 1
+    },
+    {
+      "rank": 1347,
+      "word": "diavolo",
+      "frequency": 1
+    },
+    {
+      "rank": 1348,
+      "word": "darmi",
+      "frequency": 1
+    },
+    {
+      "rank": 1349,
+      "word": "del pazzo",
+      "frequency": 1
+    },
+    {
+      "rank": 1350,
+      "word": "bastardo",
+      "frequency": 1
+    },
+    {
+      "rank": 1351,
+      "word": "malato",
+      "frequency": 1
+    },
+    {
+      "rank": 1352,
+      "word": "vino",
+      "frequency": 1
+    },
+    {
+      "rank": 1353,
+      "word": "odiato",
+      "frequency": 1
+    },
+    {
+      "rank": 1354,
+      "word": "canterai",
+      "frequency": 1
+    },
+    {
+      "rank": 1355,
+      "word": "porterai",
+      "frequency": 1
+    },
+    {
+      "rank": 1356,
+      "word": "i dettagli",
+      "frequency": 1
+    },
+    {
+      "rank": 1357,
+      "word": "sulle braccia",
+      "frequency": 1
+    },
+    {
+      "rank": 1358,
+      "word": "rimasta",
+      "frequency": 1
+    },
+    {
+      "rank": 1359,
+      "word": "sulla barca",
+      "frequency": 1
+    },
+    {
+      "rank": 1360,
+      "word": "riconosco",
+      "frequency": 1
+    },
+    {
+      "rank": 1361,
+      "word": "i segni",
+      "frequency": 1
+    },
+    {
+      "rank": 1362,
+      "word": "sulla faccia",
+      "frequency": 1
+    },
+    {
+      "rank": 1363,
+      "word": "l'errore",
+      "frequency": 1
+    },
+    {
+      "rank": 1364,
+      "word": "tuo",
+      "frequency": 1
+    },
+    {
+      "rank": 1365,
+      "word": "amarmi",
+      "frequency": 1
+    },
+    {
+      "rank": 1366,
+      "word": "uguale",
+      "frequency": 1
+    },
+    {
+      "rank": 1367,
+      "word": "com'era",
+      "frequency": 1
+    },
+    {
+      "rank": 1368,
+      "word": "bevo",
+      "frequency": 1
+    },
+    {
+      "rank": 1369,
+      "word": "prego",
+      "frequency": 1
+    },
+    {
+      "rank": 1370,
+      "word": "all'acqua",
+      "frequency": 1
+    },
+    {
+      "rank": 1371,
+      "word": "del mare",
+      "frequency": 1
+    },
+    {
+      "rank": 1372,
+      "word": "lontane",
+      "frequency": 1
+    },
+    {
+      "rank": 1373,
+      "word": "le voglio",
+      "frequency": 1
+    },
+    {
+      "rank": 1374,
+      "word": "brucerà",
+      "frequency": 1
+    },
+    {
+      "rank": 1375,
+      "word": "i fogli",
+      "frequency": 1
+    },
+    {
+      "rank": 1376,
+      "word": "parlan",
+      "frequency": 1
+    },
+    {
+      "rank": 1377,
+      "word": "piangerai",
+      "frequency": 1
+    },
+    {
+      "rank": 1378,
+      "word": "diluvierà",
+      "frequency": 1
+    },
+    {
+      "rank": 1379,
+      "word": "portare",
+      "frequency": 1
+    },
+    {
+      "rank": 1380,
+      "word": "inutili",
+      "frequency": 1
+    },
+    {
+      "rank": 1381,
+      "word": "canteremo",
+      "frequency": 1
+    },
+    {
+      "rank": 1382,
+      "word": "restando",
+      "frequency": 1
+    },
+    {
+      "rank": 1383,
+      "word": "muti",
+      "frequency": 1
+    },
+    {
+      "rank": 1384,
+      "word": "portarmi",
+      "frequency": 1
+    },
+    {
+      "rank": 1385,
+      "word": "spaventa",
+      "frequency": 1
+    },
+    {
+      "rank": 1386,
+      "word": "l'inverno",
+      "frequency": 1
+    },
+    {
+      "rank": 1387,
+      "word": "stanno",
+      "frequency": 1
+    },
+    {
+      "rank": 1388,
+      "word": "cedendo",
+      "frequency": 1
+    },
+    {
+      "rank": 1389,
+      "word": "stupendo",
+      "frequency": 1
+    },
+    {
+      "rank": 1390,
+      "word": "sai",
+      "frequency": 1
+    },
+    {
+      "rank": 1391,
+      "word": "un metro",
+      "frequency": 1
+    },
+    {
+      "rank": 1392,
+      "word": "yeeh",
+      "frequency": 1
+    },
+    {
+      "rank": 1393,
+      "word": "stronzi",
+      "frequency": 1
+    },
+    {
+      "rank": 1394,
+      "word": "bianchi",
+      "frequency": 1
+    },
+    {
+      "rank": 1395,
+      "word": "faccia",
+      "frequency": 1
+    },
+    {
+      "rank": 1396,
+      "word": "le malelingue",
+      "frequency": 1
+    },
+    {
+      "rank": 1397,
+      "word": "il suono",
+      "frequency": 1
+    },
+    {
+      "rank": 1398,
+      "word": "della tua",
+      "frequency": 1
+    },
+    {
+      "rank": 1399,
+      "word": "brutta",
+      "frequency": 1
+    },
+    {
+      "rank": 1400,
+      "word": "risata",
+      "frequency": 1
+    },
+    {
+      "rank": 1401,
+      "word": "il passo",
+      "frequency": 1
+    },
+    {
+      "rank": 1402,
+      "word": "la retta",
+      "frequency": 1
+    },
+    {
+      "rank": 1403,
+      "word": "puntata",
+      "frequency": 1
+    },
+    {
+      "rank": 1404,
+      "word": "aiutare",
+      "frequency": 1
+    },
+    {
+      "rank": 1405,
+      "word": "volo",
+      "frequency": 1
+    },
+    {
+      "rank": 1406,
+      "word": "tocco",
+      "frequency": 1
+    },
+    {
+      "rank": 1407,
+      "word": "cado",
+      "frequency": 1
+    },
+    {
+      "rank": 1408,
+      "word": "mica",
+      "frequency": 1
+    },
+    {
+      "rank": 1409,
+      "word": "ridarle",
+      "frequency": 1
+    },
+    {
+      "rank": 1410,
+      "word": "il dono",
+      "frequency": 1
+    },
+    {
+      "rank": 1411,
+      "word": "della vita",
+      "frequency": 1
+    },
+    {
+      "rank": 1412,
+      "word": "spaccarmi",
+      "frequency": 1
+    },
+    {
+      "rank": 1413,
+      "word": "schiena",
+      "frequency": 1
+    },
+    {
+      "rank": 1414,
+      "word": "gambe",
+      "frequency": 1
+    },
+    {
+      "rank": 1415,
+      "word": "braccia",
+      "frequency": 1
+    },
+    {
+      "rank": 1416,
+      "word": "fiero",
+      "frequency": 1
+    },
+    {
+      "rank": 1417,
+      "word": "fatica",
+      "frequency": 1
+    },
+    {
+      "rank": 1418,
+      "word": "pure",
+      "frequency": 1
+    },
+    {
+      "rank": 1419,
+      "word": "girato",
+      "frequency": 1
+    },
+    {
+      "rank": 1420,
+      "word": "spalle",
+      "frequency": 1
+    },
+    {
+      "rank": 1421,
+      "word": "gli dicevo",
+      "frequency": 1
+    },
+    {
+      "rank": 1422,
+      "word": "cadendo",
+      "frequency": 1
+    },
+    {
+      "rank": 1423,
+      "word": "basta",
+      "frequency": 1
+    },
+    {
+      "rank": 1424,
+      "word": "un raggio",
+      "frequency": 1
+    },
+    {
+      "rank": 1425,
+      "word": "sole",
+      "frequency": 1
+    },
+    {
+      "rank": 1426,
+      "word": "un soffio",
+      "frequency": 1
+    },
+    {
+      "rank": 1427,
+      "word": "nel mezzo",
+      "frequency": 1
+    },
+    {
+      "rank": 1428,
+      "word": "del niente",
+      "frequency": 1
+    },
+    {
+      "rank": 1429,
+      "word": "cedono",
+      "frequency": 1
+    },
+    {
+      "rank": 1430,
+      "word": "cammino",
+      "frequency": 1
+    },
+    {
+      "rank": 1431,
+      "word": "il vento",
+      "frequency": 1
+    },
+    {
+      "rank": 1432,
+      "word": "soffia",
+      "frequency": 1
+    },
+    {
+      "rank": 1433,
+      "word": "lasciato",
+      "frequency": 1
+    },
+    {
+      "rank": 1434,
+      "word": "all'orizzonte",
+      "frequency": 1
+    },
+    {
+      "rank": 1435,
+      "word": "le case",
+      "frequency": 1
+    },
+    {
+      "rank": 1436,
+      "word": "lontano",
+      "frequency": 1
+    },
+    {
+      "rank": 1437,
+      "word": "le porte",
+      "frequency": 1
+    },
+    {
+      "rank": 1438,
+      "word": "fortuna",
+      "frequency": 1
+    },
+    {
+      "rank": 1439,
+      "word": "guance",
+      "frequency": 1
+    },
+    {
+      "rank": 1440,
+      "word": "raccolto",
+      "frequency": 1
+    },
+    {
+      "rank": 1441,
+      "word": "coperto",
+      "frequency": 1
+    },
+    {
+      "rank": 1442,
+      "word": "spine",
+      "frequency": 1
+    },
+    {
+      "rank": 1443,
+      "word": "coi",
+      "frequency": 1
+    },
+    {
+      "rank": 1444,
+      "word": "morsi",
+      "frequency": 1
+    },
+    {
+      "rank": 1445,
+      "word": "serpenti",
+      "frequency": 1
+    },
+    {
+      "rank": 1446,
+      "word": "fermo",
+      "frequency": 1
+    },
+    {
+      "rank": 1447,
+      "word": "le spire",
+      "frequency": 1
+    },
+    {
+      "rank": 1448,
+      "word": "ascoltato",
+      "frequency": 1
+    },
+    {
+      "rank": 1449,
+      "word": "bastardi",
+      "frequency": 1
+    },
+    {
+      "rank": 1450,
+      "word": "il loro",
+      "frequency": 1
+    },
+    {
+      "rank": 1451,
+      "word": "maledire",
+      "frequency": 1
+    },
+    {
+      "rank": 1452,
+      "word": "convinto",
+      "frequency": 1
+    },
+    {
+      "rank": 1453,
+      "word": "un viaggio",
+      "frequency": 1
+    },
+    {
+      "rank": 1454,
+      "word": "d'ora",
+      "frequency": 1
+    },
+    {
+      "rank": 1455,
+      "word": "alice",
+      "frequency": 1
+    },
+    {
+      "rank": 1456,
+      "word": "meraviglie",
+      "frequency": 1
+    },
+    {
+      "rank": 1457,
+      "word": "il cappellaio",
+      "frequency": 1
+    },
+    {
+      "rank": 1458,
+      "word": "matto",
+      "frequency": 1
+    },
+    {
+      "rank": 1459,
+      "word": "cammineremo",
+      "frequency": 1
+    },
+    {
+      "rank": 1460,
+      "word": "fino",
+      "frequency": 1
+    },
+    {
+      "rank": 1461,
+      "word": "porterà",
+      "frequency": 1
+    },
+    {
+      "rank": 1462,
+      "word": "sui tuoi",
+      "frequency": 1
+    },
+    {
+      "rank": 1463,
+      "word": "il bianco",
+      "frequency": 1
+    },
+    {
+      "rank": 1464,
+      "word": "restiamo",
+      "frequency": 1
+    },
+    {
+      "rank": 1465,
+      "word": "fretta",
+      "frequency": 1
+    },
+    {
+      "rank": 1466,
+      "word": "una frase",
+      "frequency": 1
+    },
+    {
+      "rank": 1467,
+      "word": "scritta",
+      "frequency": 1
+    },
+    {
+      "rank": 1468,
+      "word": "detta",
+      "frequency": 1
+    },
+    {
+      "rank": 1469,
+      "word": "perfetta",
+      "frequency": 1
+    },
+    {
+      "rank": 1470,
+      "word": "trasparente",
+      "frequency": 1
+    },
+    {
+      "rank": 1471,
+      "word": "illumina",
+      "frequency": 1
+    },
+    {
+      "rank": 1472,
+      "word": "le debolezze",
+      "frequency": 1
+    },
+    {
+      "rank": 1473,
+      "word": "della gente",
+      "frequency": 1
+    },
+    {
+      "rank": 1474,
+      "word": "una lacrima",
+      "frequency": 1
+    },
+    {
+      "rank": 1475,
+      "word": "salata",
+      "frequency": 1
+    },
+    {
+      "rank": 1476,
+      "word": "bagna",
+      "frequency": 1
+    },
+    {
+      "rank": 1477,
+      "word": "guancia",
+      "frequency": 1
+    },
+    {
+      "rank": 1478,
+      "word": "accarezza",
+      "frequency": 1
+    },
+    {
+      "rank": 1479,
+      "word": "sangue",
+      "frequency": 1
+    },
+    {
+      "rank": 1480,
+      "word": "sulle mani",
+      "frequency": 1
+    },
+    {
+      "rank": 1481,
+      "word": "scalerò",
+      "frequency": 1
+    },
+    {
+      "rank": 1482,
+      "word": "le vette",
+      "frequency": 1
+    },
+    {
+      "rank": 1483,
+      "word": "arrivare",
+      "frequency": 1
+    },
+    {
+      "rank": 1484,
+      "word": "l'occhio",
+      "frequency": 1
+    },
+    {
+      "rank": 1485,
+      "word": "umano",
+      "frequency": 1
+    },
+    {
+      "rank": 1486,
+      "word": "interrompe",
+      "frequency": 1
+    },
+    {
+      "rank": 1487,
+      "word": "imparare",
+      "frequency": 1
+    },
+    {
+      "rank": 1488,
+      "word": "perdonare",
+      "frequency": 1
+    },
+    {
+      "rank": 1489,
+      "word": "le mie",
+      "frequency": 1
+    },
+    {
+      "rank": 1490,
+      "word": "colpe",
+      "frequency": 1
+    },
+    {
+      "rank": 1491,
+      "word": "gli angeli",
+      "frequency": 1
+    },
+    {
+      "rank": 1492,
+      "word": "han",
+      "frequency": 1
+    },
+    {
+      "rank": 1493,
+      "word": "della morte",
+      "frequency": 1
+    },
+    {
+      "rank": 1494,
+      "word": "corriamo",
+      "frequency": 1
+    },
+    {
+      "rank": 1495,
+      "word": "c'ha",
+      "frequency": 1
+    },
+    {
+      "rank": 1496,
+      "word": "sete",
+      "frequency": 1
+    },
+    {
+      "rank": 1497,
+      "word": "vendetta",
+      "frequency": 1
+    },
+    {
+      "rank": 1498,
+      "word": "ormai",
+      "frequency": 1
+    },
+    {
+      "rank": 1499,
+      "word": "la sento",
+      "frequency": 1
+    },
+    {
+      "rank": 1500,
+      "word": "stretta",
+      "frequency": 1
+    },
+    {
+      "rank": 1501,
+      "word": "quiete",
+      "frequency": 1
+    },
+    {
+      "rank": 1502,
+      "word": "la tempesta",
+      "frequency": 1
+    },
+    {
+      "rank": 1503,
+      "word": "un pazzo",
+      "frequency": 1
+    },
+    {
+      "rank": 1504,
+      "word": "lascia",
+      "frequency": 1
+    },
+    {
+      "rank": 1505,
+      "word": "racconti",
+      "frequency": 1
+    },
+    {
+      "rank": 1506,
+      "word": "sgualcita",
+      "frequency": 1
+    },
+    {
+      "rank": 1507,
+      "word": "portavo",
+      "frequency": 1
+    },
+    {
+      "rank": 1508,
+      "word": "tagli",
+      "frequency": 1
+    },
+    {
+      "rank": 1509,
+      "word": "sui polsi",
+      "frequency": 1
+    },
+    {
+      "rank": 1510,
+      "word": "benedetto",
+      "frequency": 1
+    },
+    {
+      "rank": 1511,
+      "word": "trovo",
+      "frequency": 1
+    },
+    {
+      "rank": 1512,
+      "word": "aggiungere",
+      "frequency": 1
+    },
+    {
+      "rank": 1513,
+      "word": "affaccia",
+      "frequency": 1
+    },
+    {
+      "rank": 1514,
+      "word": "vedrà",
+      "frequency": 1
+    },
+    {
+      "rank": 1515,
+      "word": "giungere",
+      "frequency": 1
+    },
+    {
+      "rank": 1516,
+      "word": "bilico",
+      "frequency": 1
+    },
+    {
+      "rank": 1517,
+      "word": "l'essere",
+      "frequency": 1
+    },
+    {
+      "rank": 1518,
+      "word": "vittima",
+      "frequency": 1
+    },
+    {
+      "rank": 1519,
+      "word": "giudice",
+      "frequency": 1
+    },
+    {
+      "rank": 1520,
+      "word": "un brivido",
+      "frequency": 1
+    },
+    {
+      "rank": 1521,
+      "word": "le tenebre",
+      "frequency": 1
+    },
+    {
+      "rank": 1522,
+      "word": "libera",
+      "frequency": 1
+    },
+    {
+      "rank": 1523,
+      "word": "queste",
+      "frequency": 1
+    },
+    {
+      "rank": 1524,
+      "word": "catene",
+      "frequency": 1
+    },
+    {
+      "rank": 1525,
+      "word": "splendenti",
+      "frequency": 1
+    },
+    {
+      "rank": 1526,
+      "word": "lucide",
+      "frequency": 1
+    },
+    {
+      "rank": 1527,
+      "word": "fossero",
+      "frequency": 1
+    },
+    {
+      "rank": 1528,
+      "word": "morti",
+      "frequency": 1
+    },
+    {
+      "rank": 1529,
+      "word": "rinasci",
+      "frequency": 1
+    }
+  ]
+}
