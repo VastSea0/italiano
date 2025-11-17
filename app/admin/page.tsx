@@ -135,6 +135,10 @@ export default function AdminDashboard() {
       translationPage * translationPageSize,
     )
   }, [translationTasks, translationPage, translationPageSize])
+  const [wordsPage, setWordsPage] = useState(1)
+  const wordsPageSize = 20
+  const [totalWordsPages, setTotalWordsPages] = useState(1)
+  const [paginatedWords, setPaginatedWords] = useState<WordRecord[]>([])
   const syncStructuredEntry = (entry: GenericEntry | null) => {
     setStructuredEntry(entry)
     if (entry) {
@@ -337,6 +341,13 @@ export default function AdminDashboard() {
       return haystack.includes(term)
     })
   }, [words, searchTerm, categoryFilter])
+
+  useEffect(() => {
+    const startIndex = (wordsPage - 1) * wordsPageSize
+    const endIndex = startIndex + wordsPageSize
+    setPaginatedWords(filteredWords.slice(startIndex, endIndex))
+    setTotalWordsPages(Math.ceil(filteredWords.length / wordsPageSize))
+  }, [filteredWords, wordsPage, wordsPageSize])
 
   const dataset: VocabularyData = useMemo(() => {
     const empty = createEmptyVocabulary()
@@ -806,7 +817,7 @@ export default function AdminDashboard() {
                       </tr>
                     )}
 
-                    {filteredWords.map((record) => (
+                    {paginatedWords.map((record) => (
                       <tr
                         key={record.slug}
                         className="border-t border-gray-100 hover:bg-gray-50 cursor-pointer"
@@ -821,6 +832,14 @@ export default function AdminDashboard() {
                   </tbody>
                 </table>
               </div>
+
+              {totalWordsPages > 1 && (
+                <div className="mt-6 flex justify-center gap-2">
+                  <button onClick={() => setWordsPage(Math.max(1, wordsPage - 1))} disabled={wordsPage === 1} className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 disabled:opacity-50">Önceki</button>
+                  <span className="px-4 py-2 text-gray-700">{wordsPage} / {totalWordsPages}</span>
+                  <button onClick={() => setWordsPage(Math.min(totalWordsPages, wordsPage + 1))} disabled={wordsPage === totalWordsPages} className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 disabled:opacity-50">Sonraki</button>
+                </div>
+              )}
 
               {wordsError && <p className="mt-4 text-sm text-red-600">{wordsError}</p>}
             </section>
