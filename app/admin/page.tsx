@@ -421,8 +421,13 @@ export default function AdminDashboard() {
         throw new Error('Çeviri başarısız')
       }
       const data = await response.json()
-      syncStructuredEntry(data)
-      setSaveStatus('Çeviri uygulandı')
+      if (data.text) {
+        syncStructuredEntry({ english: data.text })
+        setSaveStatus('Çeviri uygulandı (text)')
+      } else {
+        syncStructuredEntry(data)
+        setSaveStatus('Çeviri uygulandı')
+      }
     } catch (err: unknown) {
       console.error('Translation failed', err)
       setSaveStatus(err instanceof Error ? err.message : 'Çeviri hatası')
@@ -1339,26 +1344,29 @@ function StructuredForm({ category, entry, onChange, onReset, onTranslate }: Str
       <div className="mt-3 grid gap-3">
         {visibleFields.map((field) => {
           const value = getFieldDisplayValue(entry, field.key, field.type)
-          const commonProps = {
-            key: field.key,
-            value,
-            placeholder: field.placeholder,
-            onChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-              onChange(field.key, event.target.value, field.type),
-          }
 
           return (
             <div key={field.key}>
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/50">{field.label}</p>
               {field.type === 'text' ? (
                 <input
-                  {...commonProps}
+                  key={field.key}
+                  value={value}
+                  placeholder={field.placeholder}
+                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                    onChange(field.key, event.target.value, field.type)
+                  }
                   type="text"
                   className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-2 text-white"
                 />
               ) : (
                 <textarea
-                  {...commonProps}
+                  key={field.key}
+                  value={value}
+                  placeholder={field.placeholder}
+                  onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
+                    onChange(field.key, event.target.value, field.type)
+                  }
                   className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-2 text-white"
                   rows={field.type === 'array' ? 3 : 4}
                 />
