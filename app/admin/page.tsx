@@ -466,7 +466,7 @@ export default function AdminDashboard() {
     setSelectedWord(null)
     setFormCategory(inferredCategory)
     syncStructuredEntry(buildEntryFromTask(task, inferredCategory))
-    setFormSlug(task.slug)
+    setFormSlug(task.word)
     setSaveStatus(`"${task.displayWord}" için yeni kayıt oluşturun.`)
   }
 
@@ -1069,8 +1069,8 @@ function deriveSlug(payload: Record<string, unknown>): string {
   if (!primary || typeof primary !== 'string') {
     return ''
   }
-  // Return the word as slugified
-  return slugify(primary)
+  // Return the word as-is, normalized to lowercase
+  return primary.toLowerCase().trim()
 }
 
 async function persistWordWithHistory({
