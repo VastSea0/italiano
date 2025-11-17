@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
 
     const model = 'gemini-2.0-flash'
 
-    const prompt = `Translate the Italian word "${word}" to English and provide the complete vocabulary entry in JSON format for a language learning app. Determine if it's a verb or noun. If it's a verb, return JSON with: infinitive, english, present (array of conjugations), past (array), presentContinuous (array), examples (array). If it's a noun, return JSON with: italian, english, forms (array), gender, plural, type, examples (array). Normalize articles if present.`
+    const prompt = `Translate the Italian word "${word}" to English and provide the complete vocabulary entry in JSON format for a language learning app. Determine if it's a verb, noun, adjective, adverb, pronoun, preposition, conjunction, or time expression. Return JSON with: category (one of: verbs, commonNouns, adjectives, adverbs, pronouns, prepositions, conjunctions, timeExpressions), and then the appropriate fields. For verbs: infinitive, english, present (array), past (array), presentContinuous (array), examples (array). For other categories: italian, english, forms (array), gender, plural, type, examples (array). Normalize articles if present.`
 
     const contents = [
       {

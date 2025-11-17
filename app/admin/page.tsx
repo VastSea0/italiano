@@ -436,6 +436,14 @@ export default function AdminDashboard() {
         syncStructuredEntry({ english: data.text })
         setSaveStatus('Çeviri uygulandı (text)')
       } else {
+        // Set category if provided by AI
+        if (data.category && VOCABULARY_DATA_OPTIONS.some(opt => opt.key === data.category)) {
+          setFormCategory(data.category)
+        }
+        // Set slug to the word if not already set
+        if (!formSlug.trim()) {
+          setFormSlug(word)
+        }
         syncStructuredEntry(data)
         setSaveStatus('Çeviri uygulandı')
       }
@@ -1061,10 +1069,8 @@ function deriveSlug(payload: Record<string, unknown>): string {
   if (!primary || typeof primary !== 'string') {
     return ''
   }
-  // Remove articles
-  let normalized = primary.toLowerCase()
-  normalized = normalized.replace(/^(il |la |l'|i |gli |le |lo |un |una |uno |un')/, '')
-  return slugify(normalized.trim())
+  // Return the word as-is, normalized to lowercase
+  return primary.toLowerCase().trim()
 }
 
 async function persistWordWithHistory({
