@@ -627,375 +627,374 @@ export default function AdminDashboard() {
   }
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-10 lg:py-16">
-      <header className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div className="min-h-screen bg-gray-50 text-gray-900">
+      <header className="bg-white border-b border-gray-200 px-6 py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.5em] text-brand-200">Admin Console</p>
-            <h1 className="mt-1 text-3xl font-semibold text-white">Vocabulary Control Center</h1>
-            <p className="mt-1 text-sm text-white/70">
+            <h1 className="text-2xl font-bold text-gray-900">Vocabulary Control Center</h1>
+            <p className="text-sm text-gray-600 mt-1">
               {words.length} kayıt izleniyor · Son güncelleme{' '}
               {words[0]?.updatedAt ? formatDate(words[0].updatedAt) : 'bilinmiyor'}
             </p>
           </div>
-          <div className="flex flex-col items-start gap-2 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/80 sm:items-end">
-            <div>{user.email}</div>
-            <div className="text-white/60">UID: {user.uid}</div>
+          <div className="flex items-center gap-4">
+            <div className="text-sm text-gray-600">
+              <div>{user.email}</div>
+              <div className="text-xs">UID: {user.uid}</div>
+            </div>
             <button
-              className="rounded-full border border-white/20 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-white/80"
+              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200"
               onClick={handleSignOut}
             >
               Çıkış yap
             </button>
           </div>
         </div>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard label="Toplam Kayıt" value={words.length} accent="from-brand-500/30" />
-          <StatCard label="Verbs" value={dataset.verbs.length} accent="from-emerald-500/30" />
-          <StatCard label="Nouns" value={dataset.commonNouns.length} accent="from-amber-500/30" />
-          <StatCard label="Pronouns" value={dataset.pronouns.length} accent="from-sky-500/30" />
+        <div className="max-w-7xl mx-auto mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+          <StatCard label="Toplam Kayıt" value={words.length} />
+          <StatCard label="Verbs" value={dataset.verbs.length} />
+          <StatCard label="Nouns" value={dataset.commonNouns.length} />
+          <StatCard label="Pronouns" value={dataset.pronouns.length} />
         </div>
       </header>
 
-      <section className="mt-10 rounded-3xl border border-amber-300/30 bg-amber-200/10 p-6 shadow-2xl backdrop-blur">
-        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.5em] text-amber-200">Çeviri Kuyruğu</p>
-            <h2 className="text-2xl font-semibold text-white">🚨 Öncelikli Kelimeler</h2>
-            <p className="text-sm text-white/70">Story bölümünden gelen ve henüz sözlükte olmayan kelimeler.</p>
-          </div>
-          <div className="flex gap-2">
-            <span className="rounded-full border border-amber-200/50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-amber-100">
-              Bekleyen: {pendingTranslationTasks.length}
-            </span>
-            <span className="rounded-full border border-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-white/60">
-              Tamamlanan: {translationTasks.length - pendingTranslationTasks.length}
-            </span>
-          </div>
-        </div>
-
-        <div className="mt-6 space-y-4">
-          {translationLoading && <p className="text-sm text-white/60">Kuyruk yükleniyor…</p>}
-          {translationError && <p className="text-sm text-red-300">{translationError}</p>}
-          {!translationLoading && !translationError && pendingTranslationTasks.length === 0 && (
-            <p className="text-sm text-white/60">Şu anda bekleyen çeviri isteği yok. Harika!</p>
-          )}
-          {paginatedTranslationTasks.map((task) => (
-            <div key={task.id} className="rounded-2xl border border-white/10 bg-slate-950/40 p-4 text-white/80">
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+      <main className="max-w-7xl mx-auto px-6 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2 space-y-8">
+            <section className="bg-white rounded-lg border border-gray-200 p-6">
+              <div className="flex items-center justify-between mb-4">
                 <div>
-                  <p className="text-lg font-semibold text-white">{task.displayWord}</p>
-                  <p className="text-xs text-white/50">Slug: {task.slug}</p>
-                  {task.storyTitle && <p className="text-xs text-white/60">Hikâye: {task.storyTitle}</p>}
+                  <h2 className="text-xl font-semibold text-gray-900">🚨 Öncelikli Kelimeler</h2>
+                  <p className="text-sm text-gray-600">Story bölümünden gelen ve henüz sözlükte olmayan kelimeler.</p>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    type="button"
-                    onClick={() => handleAdoptTranslationTask(task)}
-                    className="rounded-full border border-brand-300/40 bg-brand-400/20 px-4 py-2 text-xs font-semibold text-brand-50"
-                  >
-                    Formda aç
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleResolveTranslationTask(task.slug)}
-                    disabled={resolvingTaskId === task.slug}
-                    className="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold text-white/80 disabled:opacity-60"
-                  >
-                    {resolvingTaskId === task.slug ? 'Kapanıyor…' : 'Tamamlandı'}
-                  </button>
+                <div className="flex gap-2">
+                  <span className="px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-sm">
+                    Bekleyen: {pendingTranslationTasks.length}
+                  </span>
+                  <span className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">
+                    Tamamlanan: {translationTasks.length - pendingTranslationTasks.length}
+                  </span>
                 </div>
               </div>
-              {task.context && <p className="mt-3 text-xs text-white/60">{task.context}</p>}
-            </div>
-          ))}
-        </div>
 
-        {totalTranslationPages > 1 && (
-          <div className="mt-6 flex justify-center gap-2">
-            <button onClick={() => setTranslationPage(Math.max(1, translationPage - 1))} disabled={translationPage === 1} className="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold text-white/80 disabled:opacity-60">Önceki</button>
-            <span className="text-sm text-white/60">{translationPage} / {totalTranslationPages}</span>
-            <button onClick={() => setTranslationPage(Math.min(totalTranslationPages, translationPage + 1))} disabled={translationPage === totalTranslationPages} className="rounded-full border border-white/20 px-4 py-2 text-xs font-semibold text-white/80 disabled:opacity-60">Sonraki</button>
-          </div>
-        )}
-
-        {recentResolvedTasks.length > 0 && (
-          <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4 text-xs text-white/60">
-            <p className="text-white/80">Son tamamlananlar:</p>
-            <ul className="mt-2 space-y-1">
-              {recentResolvedTasks.map((task) => (
-                <li key={`resolved-${task.id}`}>{task.displayWord}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </section>
-
-      <section className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <div>
-              <h2 className="text-2xl font-semibold text-white">Kelime Kayıtları</h2>
-              <p className="text-sm text-white/60">Firestore içeriğini canlı olarak izleyin</p>
-            </div>
-            <div className="flex gap-2">
-              <button
-                className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white/80 hover:bg-white/20"
-                onClick={handleNewWord}
-              >
-                + Yeni kayıt
-              </button>
-              <button
-                className="rounded-full border border-brand-300/50 bg-brand-400/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-brand-50 disabled:opacity-50"
-                onClick={handleSeedFromLocal}
-                disabled={seedInProgress || saving}
-              >
-                {seedInProgress ? 'İçe aktarılıyor...' : 'words.json içe aktar'}
-              </button>
-            </div>
-          </div>
-
-          <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-            <input
-              type="text"
-              className="w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-2 text-white placeholder:text-white/40"
-              placeholder="Kelime veya slug ara..."
-              value={searchTerm}
-              onChange={(event) => setSearchTerm(event.target.value)}
-            />
-            <select
-              className="rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-2 text-white"
-              value={categoryFilter}
-              onChange={(event) => setCategoryFilter(event.target.value as VocabularyDataKey | 'all')}
-            >
-              <option value="all">Tüm kategoriler</option>
-              {VOCABULARY_DATA_OPTIONS.map((option) => (
-                <option key={option.key} value={option.key}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="mt-4 max-h-[520px] overflow-y-auto rounded-2xl border border-white/5 bg-slate-900/40">
-            <table className="w-full text-left text-sm text-white/80">
-              <thead className="sticky top-0 bg-slate-950/70 text-xs uppercase tracking-[0.3em] text-white/40">
-                <tr>
-                  <th className="px-4 py-3">Slug</th>
-                  <th className="px-4 py-3">Kategori</th>
-                  <th className="px-4 py-3">Son Güncelleme</th>
-                  <th className="px-4 py-3">Güncelleyen</th>
-                </tr>
-              </thead>
-              <tbody>
-                {loadingWords && (
-                  <tr>
-                    <td colSpan={4} className="px-4 py-6 text-center text-white/60">
-                      Firestore verisi yükleniyor...
-                    </td>
-                  </tr>
+              <div className="space-y-4">
+                {translationLoading && <p className="text-sm text-gray-600">Kuyruk yükleniyor…</p>}
+                {translationError && <p className="text-sm text-red-600">{translationError}</p>}
+                {!translationLoading && !translationError && pendingTranslationTasks.length === 0 && (
+                  <p className="text-sm text-gray-600">Şu anda bekleyen çeviri isteği yok. Harika!</p>
                 )}
-
-                {!loadingWords && filteredWords.length === 0 && (
-                  <tr>
-                    <td colSpan={4} className="px-4 py-6 text-center text-white/60">
-                      Kayıt bulunamadı.
-                    </td>
-                  </tr>
-                )}
-
-                {filteredWords.map((record) => (
-                  <tr
-                    key={record.slug}
-                    className={`cursor-pointer border-t border-white/5 transition hover:bg-white/5 ${
-                      selectedWord?.slug === record.slug ? 'bg-white/10' : ''
-                    }`}
-                    onClick={() => handleSelectWord(record)}
-                  >
-                    <td className="px-4 py-3 font-semibold text-white">{record.slug}</td>
-                    <td className="px-4 py-3 text-white/70">{KEY_TO_CATEGORY_NAME[record.categoryKey]}</td>
-                    <td className="px-4 py-3 text-white/60">{record.updatedAt ? formatDate(record.updatedAt) : '—'}</td>
-                    <td className="px-4 py-3 text-white/60">{record.updatedBy || '---'}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          {wordsError && <p className="mt-4 text-sm text-red-300">{wordsError}</p>}
-        </div>
-
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur">
-          <h2 className="text-2xl font-semibold text-white">
-            {editorMode === 'create' ? 'Yeni Kelime' : `Düzenle: ${selectedWord?.slug || ''}`}
-          </h2>
-          <p className="text-sm text-white/70">words.json şemasına birebir uyan JSON verisi kullanın.</p>
-
-          <form className="mt-4 space-y-4" onSubmit={(event) => event.preventDefault()}>
-            <div>
-              <label className="text-xs font-semibold uppercase tracking-[0.4em] text-white/50">Slug (zorunlu)</label>
-              <input
-                type="text"
-                className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-2 text-white"
-                placeholder="örn. essere"
-                value={formSlug}
-                onChange={(event) => setFormSlug(event.target.value)}
-              />
-              <p className="mt-1 text-xs text-white/50">Boş bırakırsanız infinitive/italian alanından otomatik üretilir.</p>
-            </div>
-
-            <div>
-              <label className="text-xs font-semibold uppercase tracking-[0.4em] text-white/50">Kategori</label>
-              <select
-                className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-2 text-white"
-                value={formCategory}
-                onChange={(event) => handleCategorySelect(event.target.value as VocabularyDataKey)}
-              >
-                {VOCABULARY_DATA_OPTIONS.map((option) => (
-                  <option key={option.key} value={option.key}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <StructuredForm
-              category={formCategory}
-              entry={structuredEntry}
-              onChange={handleStructuredFieldChange}
-              onReset={() => syncStructuredEntry(createDefaultEntry(formCategory))}
-              onTranslate={handleTranslate}
-            />
-
-            <div>
-              <label className="text-xs font-semibold uppercase tracking-[0.4em] text-white/50">JSON İçeriği</label>
-              <textarea
-                className="mt-2 min-h-[260px] w-full rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 font-mono text-sm text-emerald-50"
-                placeholder={`{\n  "infinitive": "essere",\n  "english": "to be"\n}`}
-                value={formJson}
-                onChange={(event) => handleJsonChange(event.target.value)}
-              />
-              {jsonError && <p className="mt-2 text-xs text-red-300">{jsonError}</p>}
-              {!jsonError && (
-                <p className="mt-2 text-xs text-white/50">Form alanlarını kullanarak yaptığınız değişiklikler otomatik olarak JSON'a işlenir.</p>
-              )}
-            </div>
-
-            {saveStatus && <p className="text-sm text-white/80">{saveStatus}</p>}
-
-            <div className="flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={handleSaveWord}
-                disabled={saving}
-                className="inline-flex flex-1 items-center justify-center rounded-2xl bg-brand-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-900/40 disabled:opacity-60"
-              >
-                {saving ? 'Kaydediliyor…' : 'Kaydet'}
-              </button>
-              <button
-                type="button"
-                onClick={resetEditor}
-                className="inline-flex flex-1 items-center justify-center rounded-2xl border border-white/20 bg-white/5 px-4 py-3 text-sm font-semibold text-white/80"
-              >
-                Temizle
-              </button>
-              {editorMode === 'edit' && (
-                <button
-                  type="button"
-                  onClick={handleDeleteWord}
-                  className="inline-flex flex-1 items-center justify-center rounded-2xl border border-red-400/50 bg-red-500/10 px-4 py-3 text-sm font-semibold text-red-100"
-                >
-                  Sil
-                </button>
-              )}
-            </div>
-          </form>
-        </div>
-      </section>
-
-      <section className="mt-10 grid gap-6 lg:grid-cols-2">
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur">
-          <h3 className="text-2xl font-semibold text-white">words.json Snapshot</h3>
-          <p className="text-sm text-white/70">Tek tuşla indirip dışa aktarabilirsiniz.</p>
-          <div className="mt-4 flex gap-3">
-            <button
-              className="rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm font-semibold text-white hover:bg-white/20"
-              onClick={handleDownloadJson}
-            >
-              📦 JSON indir
-            </button>
-            <Link
-              href="/"
-              className="rounded-full border border-white/20 bg-white/5 px-5 py-2 text-sm font-semibold text-white/80 hover:text-white"
-            >
-              🎯 Ana siteyi aç
-            </Link>
-          </div>
-          <pre className="mt-4 max-h-[360px] overflow-y-auto rounded-2xl border border-white/5 bg-slate-950/60 p-4 text-xs text-emerald-50">
-            {wordsJsonString}
-          </pre>
-        </div>
-
-        <div className="rounded-3xl border border-dashed border-white/20 bg-white/0 p-6">
-          <h3 className="text-2xl font-semibold text-white">📜 Değişiklik Geçmişi</h3>
-          {!selectedWord && (
-            <p className="mt-2 text-sm text-white/70">Geçmişi incelemek için tablodan bir kelime seçin.</p>
-          )}
-
-          {selectedWord && (
-            <>
-              <p className="mt-1 text-sm text-white/60">
-                {selectedWord.slug} için son {historyEntries.length} değişiklik · kategori {KEY_TO_CATEGORY_NAME[selectedWord.categoryKey]}
-              </p>
-
-              {historyLoading && <p className="mt-4 text-sm text-white/60">Geçmiş yükleniyor…</p>}
-              {historyError && <p className="mt-4 text-sm text-red-300">{historyError}</p>}
-              {!historyLoading && !historyError && historyEntries.length === 0 && (
-                <p className="mt-4 text-sm text-white/60">Henüz geçmiş kaydı bulunmuyor.</p>
-              )}
-
-              <ul className="mt-4 space-y-4">
-                {historyEntries.map((entry) => (
-                  <li key={entry.id} className="rounded-2xl border border-white/10 bg-slate-950/40 p-4 text-white/80">
-                    <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                {paginatedTranslationTasks.map((task) => (
+                  <div key={task.id} className="border border-gray-200 rounded-lg p-4 bg-white">
+                    <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm font-semibold text-white">
-                          {HISTORY_LABELS[entry.action]}{' '}
-                          <span className="text-xs font-normal text-white/50">· {entry.actor || 'Bilinmiyor'}</span>
-                        </p>
-                        <p className="text-xs uppercase tracking-[0.3em] text-white/40">
-                          {entry.timestamp ? formatDate(entry.timestamp) : 'Bekleniyor'}
-                        </p>
+                        <p className="font-semibold text-gray-900">{task.displayWord}</p>
+                        <p className="text-sm text-gray-500">Slug: {task.slug}</p>
+                        {task.storyTitle && <p className="text-sm text-gray-600">Hikâye: {task.storyTitle}</p>}
                       </div>
                       <div className="flex gap-2">
-                        {entry.restoredFromId && (
-                          <span className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/70">
-                            ← {entry.restoredFromId}
-                          </span>
-                        )}
                         <button
-                          className="rounded-full border border-white/20 px-3 py-1 text-xs font-semibold text-white/80 disabled:opacity-40"
-                          disabled={!entry.payload || restoringVersionId === entry.id}
-                          onClick={() => handleRestoreVersion(entry)}
+                          type="button"
+                          onClick={() => handleAdoptTranslationTask(task)}
+                          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
                         >
-                          {restoringVersionId === entry.id ? 'Yükleniyor...' : 'Versiyona dön'}
+                          Formda aç
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleResolveTranslationTask(task.slug)}
+                          disabled={resolvingTaskId === task.slug}
+                          className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 disabled:opacity-50"
+                        >
+                          {resolvingTaskId === task.slug ? 'Kapanıyor…' : 'Tamamlandı'}
                         </button>
                       </div>
                     </div>
-                    {entry.message && <p className="mt-2 text-xs text-white/60">{entry.message}</p>}
-                    {entry.payload && (
-                      <pre className="mt-3 max-h-48 overflow-y-auto rounded-xl border border-white/5 bg-slate-900/60 p-3 text-xs text-emerald-50">
-                        {JSON.stringify(entry.payload, null, 2)}
-                      </pre>
-                    )}
-                  </li>
+                    {task.context && <p className="mt-3 text-sm text-gray-700">{task.context}</p>}
+                  </div>
                 ))}
-              </ul>
-            </>
-          )}
+              </div>
+
+              {totalTranslationPages > 1 && (
+                <div className="mt-6 flex justify-center gap-2">
+                  <button onClick={() => setTranslationPage(Math.max(1, translationPage - 1))} disabled={translationPage === 1} className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 disabled:opacity-50">Önceki</button>
+                  <span className="px-4 py-2 text-gray-700">{translationPage} / {totalTranslationPages}</span>
+                  <button onClick={() => setTranslationPage(Math.min(totalTranslationPages, translationPage + 1))} disabled={translationPage === totalTranslationPages} className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 disabled:opacity-50">Sonraki</button>
+                </div>
+              )}
+
+              {recentResolvedTasks.length > 0 && (
+                <div className="mt-6 border-t border-gray-200 pt-4">
+                  <p className="text-sm text-gray-700">Son tamamlananlar:</p>
+                  <ul className="mt-2 space-y-1">
+                    {recentResolvedTasks.map((task) => (
+                      <li key={`resolved-${task.id}`} className="text-sm text-gray-600">{task.displayWord}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </section>
+
+            <section className="bg-white rounded-lg border border-gray-200 p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h2 className="text-xl font-semibold text-gray-900">Kelime Kayıtları</h2>
+                  <p className="text-sm text-gray-600">Firestore içeriğini canlı olarak izleyin</p>
+                </div>
+                <div className="flex gap-2">
+                  <button
+                    className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+                    onClick={handleNewWord}
+                  >
+                    + Yeni kayıt
+                  </button>
+                  <button
+                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+                    onClick={handleSeedFromLocal}
+                    disabled={seedInProgress || saving}
+                  >
+                    {seedInProgress ? 'İçe aktarılıyor...' : 'words.json içe aktar'}
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 mb-4">
+                <input
+                  type="text"
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-md"
+                  placeholder="Kelime veya slug ara..."
+                  value={searchTerm}
+                  onChange={(event) => setSearchTerm(event.target.value)}
+                />
+                <select
+                  className="px-4 py-2 border border-gray-300 rounded-md"
+                  value={categoryFilter}
+                  onChange={(event) => setCategoryFilter(event.target.value as VocabularyDataKey | 'all')}
+                >
+                  <option value="all">Tüm kategoriler</option>
+                  {VOCABULARY_DATA_OPTIONS.map((option) => (
+                    <option key={option.key} value={option.key}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="border border-gray-200 rounded-lg overflow-hidden">
+                <table className="w-full text-left text-sm">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-4 py-3 text-gray-700">Slug</th>
+                      <th className="px-4 py-3 text-gray-700">Kategori</th>
+                      <th className="px-4 py-3 text-gray-700">Son Güncelleme</th>
+                      <th className="px-4 py-3 text-gray-700">Güncelleyen</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {loadingWords && (
+                      <tr>
+                        <td colSpan={4} className="px-4 py-6 text-center text-gray-600">
+                          Firestore verisi yükleniyor...
+                        </td>
+                      </tr>
+                    )}
+
+                    {!loadingWords && filteredWords.length === 0 && (
+                      <tr>
+                        <td colSpan={4} className="px-4 py-6 text-center text-gray-600">
+                          Kayıt bulunamadı.
+                        </td>
+                      </tr>
+                    )}
+
+                    {filteredWords.map((record) => (
+                      <tr
+                        key={record.slug}
+                        className="border-t border-gray-100 hover:bg-gray-50 cursor-pointer"
+                        onClick={() => handleSelectWord(record)}
+                      >
+                        <td className="px-4 py-3 font-semibold text-gray-900">{record.slug}</td>
+                        <td className="px-4 py-3 text-gray-700">{KEY_TO_CATEGORY_NAME[record.categoryKey]}</td>
+                        <td className="px-4 py-3 text-gray-600">{record.updatedAt ? formatDate(record.updatedAt) : '—'}</td>
+                        <td className="px-4 py-3 text-gray-600">{record.updatedBy || '---'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {wordsError && <p className="mt-4 text-sm text-red-600">{wordsError}</p>}
+            </section>
+          </div>
+
+          <div className="space-y-8">
+            <section className="bg-white rounded-lg border border-gray-200 p-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">
+                {editorMode === 'create' ? 'Yeni Kelime' : `Düzenle: ${selectedWord?.slug || ''}`}
+              </h2>
+              <p className="text-sm text-gray-600 mb-4">words.json şemasına birebir uyan JSON verisi kullanın.</p>
+
+              <form className="space-y-4" onSubmit={(event) => event.preventDefault()}>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Slug (zorunlu)</label>
+                  <input
+                    type="text"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                    placeholder="örn. essere"
+                    value={formSlug}
+                    onChange={(event) => setFormSlug(event.target.value)}
+                  />
+                  <p className="mt-1 text-xs text-gray-500">Boş bırakırsanız infinitive/italian alanından otomatik üretilir.</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
+                  <select
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                    value={formCategory}
+                    onChange={(event) => handleCategorySelect(event.target.value as VocabularyDataKey)}
+                  >
+                    {VOCABULARY_DATA_OPTIONS.map((option) => (
+                      <option key={option.key} value={option.key}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <StructuredForm
+                  category={formCategory}
+                  entry={structuredEntry}
+                  onChange={handleStructuredFieldChange}
+                  onReset={() => syncStructuredEntry(createDefaultEntry(formCategory))}
+                  onTranslate={handleTranslate}
+                />
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">JSON İçeriği</label>
+                  <textarea
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md font-mono text-sm"
+                    rows={10}
+                    placeholder={`{\n  "infinitive": "essere",\n  "english": "to be"\n}`}
+                    value={formJson}
+                    onChange={(event) => handleJsonChange(event.target.value)}
+                  />
+                  {jsonError && <p className="mt-2 text-xs text-red-600">{jsonError}</p>}
+                  {!jsonError && (
+                    <p className="mt-2 text-xs text-gray-500">Form alanlarını kullanarak yaptığınız değişiklikler otomatik olarak JSON'a işlenir.</p>
+                  )}
+                </div>
+
+                {saveStatus && <p className="text-sm text-gray-700">{saveStatus}</p>}
+
+                <div className="flex flex-wrap gap-3">
+                  <button
+                    type="button"
+                    onClick={handleSaveWord}
+                    disabled={saving}
+                    className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+                  >
+                    {saving ? 'Kaydediliyor…' : 'Kaydet'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={resetEditor}
+                    className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200"
+                  >
+                    Temizle
+                  </button>
+                  {editorMode === 'edit' && (
+                    <button
+                      type="button"
+                      onClick={handleDeleteWord}
+                      className="flex-1 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+                    >
+                      Sil
+                    </button>
+                  )}
+                </div>
+              </form>
+            </section>
+
+            <section className="bg-white rounded-lg border border-gray-200 p-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">words.json Snapshot</h3>
+              <p className="text-sm text-gray-600 mb-4">Tek tuşla indirip dışa aktarabilirsiniz.</p>
+              <div className="flex gap-3 mb-4">
+                <button
+                  className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+                  onClick={handleDownloadJson}
+                >
+                  📦 JSON indir
+                </button>
+                <Link
+                  href="/"
+                  className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200"
+                >
+                  🎯 Ana siteyi aç
+                </Link>
+              </div>
+              <pre className="border border-gray-200 rounded-lg p-4 text-sm text-gray-800 overflow-auto max-h-64">{wordsJsonString}</pre>
+            </section>
+
+            <section className="bg-white rounded-lg border border-gray-200 p-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">📜 Değişiklik Geçmişi</h3>
+              {!selectedWord && (
+                <p className="text-sm text-gray-600">Geçmişi incelemek için tablodan bir kelime seçin.</p>
+              )}
+
+              {selectedWord && (
+                <>
+                  <p className="text-sm text-gray-600 mb-4">
+                    {selectedWord.slug} için son {historyEntries.length} değişiklik · kategori {KEY_TO_CATEGORY_NAME[selectedWord.categoryKey]}
+                  </p>
+
+                  {historyLoading && <p className="text-sm text-gray-600">Geçmiş yükleniyor…</p>}
+                  {historyError && <p className="text-sm text-red-600">{historyError}</p>}
+                  {!historyLoading && !historyError && historyEntries.length === 0 && (
+                    <p className="text-sm text-gray-600">Henüz geçmiş kaydı bulunmuyor.</p>
+                  )}
+
+                  <ul className="space-y-4">
+                    {historyEntries.map((entry) => (
+                      <li key={entry.id} className="border border-gray-200 rounded-lg p-4">
+                        <div className="flex items-center justify-between mb-2">
+                          <div>
+                            <p className="text-sm font-semibold text-gray-900">
+                              {HISTORY_LABELS[entry.action]}{' '}
+                              <span className="text-sm font-normal text-gray-600">· {entry.actor || 'Bilinmiyor'}</span>
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              {entry.timestamp ? formatDate(entry.timestamp) : 'Bekleniyor'}
+                            </p>
+                          </div>
+                          <div className="flex gap-2">
+                            {entry.restoredFromId && (
+                              <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs">
+                                ← {entry.restoredFromId}
+                              </span>
+                            )}
+                            <button
+                              className="px-3 py-1 bg-blue-600 text-white rounded text-xs hover:bg-blue-700 disabled:opacity-50"
+                              disabled={!entry.payload || restoringVersionId === entry.id}
+                              onClick={() => handleRestoreVersion(entry)}
+                            >
+                              {restoringVersionId === entry.id ? 'Yükleniyor...' : 'Versiyona dön'}
+                            </button>
+                          </div>
+                        </div>
+                        {entry.message && <p className="text-sm text-gray-700 mb-2">{entry.message}</p>}
+                        {entry.payload && (
+                          <pre className="border border-gray-200 rounded p-3 text-xs text-gray-800 overflow-auto max-h-32">{JSON.stringify(entry.payload, null, 2)}</pre>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </section>
+          </div>
         </div>
-      </section>
-    </main>
+      </main>
+    </div>
   )
 }
 
@@ -1165,8 +1164,8 @@ function formatDate(date: Date) {
 
 function LoadingState({ message }: { message: string }) {
   return (
-    <div className="flex h-screen flex-col items-center justify-center gap-4 bg-slate-950 text-white/80">
-      <div className="h-10 w-10 animate-spin rounded-full border-4 border-white/20 border-t-brand-400" />
+    <div className="flex h-screen flex-col items-center justify-center gap-4 bg-gray-50 text-gray-900">
+      <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600" />
       <p>{message}</p>
     </div>
   )
@@ -1174,16 +1173,16 @@ function LoadingState({ message }: { message: string }) {
 
 function SignInHero({ onSignIn }: { onSignIn: () => void }) {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-6 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 px-4 text-center text-white">
-      <p className="text-xs font-semibold uppercase tracking-[0.5em] text-brand-200">Admin Access</p>
+    <main className="flex min-h-screen flex-col items-center justify-center gap-6 bg-gray-50 px-4 text-center text-gray-900">
+      <p className="text-sm font-medium text-gray-600">Admin Access</p>
       <h1 className="text-4xl font-semibold">Google hesabınızla giriş yapın</h1>
-      <p className="max-w-xl text-white/70">
+      <p className="max-w-xl text-gray-700">
         Kelime veri kümesini güncellemek için yalnızca yetkili Google hesapları erişebilir. Giriş yaptıktan sonra Firestore ile senkron çalışan
         yönetim paneline yönlendirileceksiniz.
       </p>
       <button
         onClick={onSignIn}
-        className="rounded-full bg-white/90 px-6 py-3 text-sm font-semibold text-slate-900 shadow-lg shadow-brand-900/30"
+        className="rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg hover:bg-blue-700"
       >
         🔐 Google ile giriş yap
       </button>
@@ -1193,14 +1192,14 @@ function SignInHero({ onSignIn }: { onSignIn: () => void }) {
 
 function UnauthorizedState({ user, onSignOut }: { user: User; onSignOut: () => void }) {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-4 bg-slate-950 px-4 text-center text-white">
+    <main className="flex min-h-screen flex-col items-center justify-center gap-4 bg-gray-50 px-4 text-center text-gray-900">
       <h1 className="text-3xl font-semibold">Erişim izni yok</h1>
-      <p className="max-w-lg text-white/70">
+      <p className="max-w-lg text-gray-700">
         {user.email} hesabı admin listesinde yer almıyor. Lütfen proje sahibinden erişim izni isteyin veya farklı bir hesapla giriş yapın.
       </p>
       <button
         onClick={onSignOut}
-        className="rounded-full border border-white/20 bg-white/5 px-6 py-2 text-sm font-semibold text-white/80"
+        className="rounded-lg border border-gray-300 bg-white px-6 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
       >
         Hesaptan çık
       </button>
@@ -1210,12 +1209,12 @@ function UnauthorizedState({ user, onSignOut }: { user: User; onSignOut: () => v
 
 function ErrorState({ message, onRetry }: { message: string; onRetry: () => void }) {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-4 bg-slate-950 px-4 text-center text-white">
+    <main className="flex min-h-screen flex-col items-center justify-center gap-4 bg-gray-50 px-4 text-center text-gray-900">
       <h1 className="text-3xl font-semibold">Bir hata oluştu</h1>
-      <p className="text-white/70">{message}</p>
+      <p className="text-gray-700">{message}</p>
       <button
         onClick={onRetry}
-        className="rounded-full border border-white/20 bg-white/5 px-6 py-2 text-sm font-semibold text-white/80"
+        className="rounded-lg border border-gray-300 bg-white px-6 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
       >
         Tekrar dene
       </button>
@@ -1223,11 +1222,11 @@ function ErrorState({ message, onRetry }: { message: string; onRetry: () => void
   )
 }
 
-function StatCard({ label, value, accent }: { label: string; value: number; accent: string }) {
+function StatCard({ label, value }: { label: string; value: number }) {
   return (
-    <div className={`rounded-2xl border border-white/5 bg-gradient-to-br ${accent} via-white/5 to-transparent p-4 text-white`}>
-      <div className="text-3xl font-semibold">{value}</div>
-      <p className="text-xs uppercase tracking-[0.4em] text-white/50">{label}</p>
+    <div className="bg-white border border-gray-200 rounded-lg p-4">
+      <div className="text-3xl font-semibold text-gray-900">{value}</div>
+      <p className="text-xs uppercase tracking-[0.4em] text-gray-500">{label}</p>
     </div>
   )
 }
@@ -1313,15 +1312,15 @@ function StructuredForm({ category, entry, onChange, onReset, onTranslate }: Str
   })
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-slate-950/30 p-4">
+    <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
       <div className="flex items-center justify-between">
-        <label className="text-xs font-semibold uppercase tracking-[0.4em] text-white/50">Basit Form</label>
+        <label className="text-sm font-medium text-gray-700">Basit Form</label>
         <div className="flex gap-2">
           {onTranslate && (
             <button
               type="button"
               onClick={onTranslate}
-              className="text-xs font-semibold text-white/60 hover:text-white"
+              className="text-sm text-gray-600 hover:text-gray-900"
               title="Yapay zeka ile çevir"
             >
               ✨
@@ -1330,7 +1329,7 @@ function StructuredForm({ category, entry, onChange, onReset, onTranslate }: Str
           <button
             type="button"
             onClick={onReset}
-            className="text-xs font-semibold text-white/60 hover:text-white"
+            className="text-sm text-gray-600 hover:text-gray-900"
           >
             Alanları sıfırla
           </button>
@@ -1342,7 +1341,7 @@ function StructuredForm({ category, entry, onChange, onReset, onTranslate }: Str
 
           return (
             <div key={field.key}>
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/50">{field.label}</p>
+              <p className="text-sm font-medium text-gray-700">{field.label}</p>
               {field.type === 'text' ? (
                 <input
                   key={field.key}
@@ -1352,7 +1351,7 @@ function StructuredForm({ category, entry, onChange, onReset, onTranslate }: Str
                     onChange(field.key, event.target.value, field.type)
                   }
                   type="text"
-                  className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-2 text-white"
+                  className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
                 />
               ) : (
                 <textarea
@@ -1362,11 +1361,11 @@ function StructuredForm({ category, entry, onChange, onReset, onTranslate }: Str
                   onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
                     onChange(field.key, event.target.value, field.type)
                   }
-                  className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-2 text-white"
+                  className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md text-gray-900"
                   rows={field.type === 'array' ? 3 : 4}
                 />
               )}
-              {field.helperText && <p className="mt-1 text-xs text-white/40">{field.helperText}</p>}
+              {field.helperText && <p className="mt-1 text-xs text-gray-500">{field.helperText}</p>}
             </div>
           )
         })}
