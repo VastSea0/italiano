@@ -33,10 +33,10 @@ import {
 } from '@/lib/flashcards'
 
 const QUALITY_OPTIONS: { value: number; label: string; description: string; color: string }[] = [
-  { value: 1, label: 'Again', description: 'Tekrarla', color: 'border-red-400/40 bg-red-500/10 text-red-100' },
-  { value: 3, label: 'Hard', description: 'Zor', color: 'border-amber-400/40 bg-amber-500/10 text-amber-100' },
-  { value: 4, label: 'Good', description: 'İyi', color: 'border-emerald-400/40 bg-emerald-500/10 text-emerald-100' },
-  { value: 5, label: 'Easy', description: 'Kolay', color: 'border-sky-400/40 bg-sky-500/10 text-sky-100' },
+  { value: 1, label: 'Again', description: 'Tekrarla', color: 'border-red-300 bg-red-50 text-red-800' },
+  { value: 3, label: 'Hard', description: 'Zor', color: 'border-yellow-300 bg-yellow-50 text-yellow-800' },
+  { value: 4, label: 'Good', description: 'İyi', color: 'border-green-300 bg-green-50 text-green-800' },
+  { value: 5, label: 'Easy', description: 'Kolay', color: 'border-blue-300 bg-blue-50 text-blue-800' },
 ]
 
 const CARD_SWAP_DELAY_MS = 220
@@ -155,9 +155,10 @@ export default function FlashcardsPage() {
   }, [user])
 
   const deck = useMemo(() => {
-    if (!vocabulary || !Array.isArray(vocabulary)) return []
-    const filtered = vocabulary.filter(word => selectedCategories.has('all') || selectedCategories.has(word.category))
-    return buildFlashcardDeck(filtered)
+    if (!vocabulary) return []
+    const fullDeck = buildFlashcardDeck(vocabulary)
+    const filtered = selectedCategories.has('all') ? fullDeck : fullDeck.filter(card => selectedCategories.has(card.categoryKey))
+    return filtered
   }, [vocabulary, selectedCategories])
   const nextCardCandidate = useMemo(() => selectNextCard(deck, progressMap), [deck, progressMap, cardSeed])
 
@@ -297,18 +298,18 @@ export default function FlashcardsPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10 lg:py-16">
-      <header className="rounded-3xl border border-white/10 bg-gradient-to-br from-brand-500/20 via-slate-900/60 to-slate-950/80 p-8 text-white shadow-2xl backdrop-blur">
-        <p className="text-xs font-semibold uppercase tracking-[0.5em] text-brand-200">Spaced Repetition</p>
-        <h1 className="mt-3 text-4xl font-semibold">Anki tarzı flashcard stüdyosu</h1>
-        <p className="mt-3 max-w-2xl text-sm text-white/80">
+      <header className="rounded-3xl border border-gray-200 bg-white p-8 text-black shadow-2xl">
+        <p className="text-xs font-semibold uppercase tracking-[0.5em] text-gray-600">Spaced Repetition</p>
+        <h1 className="mt-3 text-4xl font-semibold text-black">Anki tarzı flashcard stüdyosu</h1>
+        <p className="mt-3 max-w-2xl text-sm text-gray-700">
           SM-2 algoritmasıyla çalışan bu sayfa, her kelimeyi Anki'deki gibi aralıklı tekrar mantığıyla sıraya koyar. Yanıtladığınız her kart ve
           oturum Firestore'a kaydedilir, böylece serilerinizi ve gelişiminizi takip edebilirsiniz.
         </p>
         <div className="mt-6">
-          <label className="block text-sm font-medium text-white mb-2">Select Categories</label>
+          <label className="block text-sm font-medium text-black mb-2">Select Categories</label>
           <div className="flex flex-wrap gap-2">
-            {(['all', 'verb', 'noun', 'adjective', 'adverb', 'preposition', 'conjunction', 'interjection', 'phrase', 'other'] as const).map(cat => (
-              <label key={cat} className="flex items-center text-white">
+            {(['all', 'verbs', 'commonNouns', 'adjectives', 'adverbs', 'pronouns', 'prepositions', 'conjunctions', 'timeExpressions'] as const).map(cat => (
+              <label key={cat} className="flex items-center text-black">
                 <input
                   type="checkbox"
                   checked={selectedCategories.has(cat)}
@@ -330,7 +331,7 @@ export default function FlashcardsPage() {
                   }}
                   className="mr-2"
                 />
-                {cat}
+                {cat === 'all' ? 'All' : cat === 'verbs' ? 'Verbs' : cat === 'commonNouns' ? 'Nouns' : cat === 'adjectives' ? 'Adjectives' : cat === 'adverbs' ? 'Adverbs' : cat === 'pronouns' ? 'Pronouns' : cat === 'prepositions' ? 'Prepositions' : cat === 'conjunctions' ? 'Conjunctions' : 'Time Expressions'}
               </label>
             ))}
           </div>
@@ -339,45 +340,45 @@ export default function FlashcardsPage() {
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
             href="/"
-            className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white/80 transition hover:bg-white/20"
+            className="rounded-full border border-gray-300 bg-gray-100 px-4 py-2 text-sm font-semibold text-gray-900 transition hover:bg-gray-200"
           >
             ← Vocabulary Hub
           </Link>
           <Link
             href="/frequency"
-            className="rounded-full border border-white/10 bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-md"
+            className="rounded-full border border-gray-300 bg-gray-900 px-4 py-2 text-sm font-semibold text-white shadow-md"
           >
             📊 Frequency Analyzer
           </Link>
           {user ? (
             <button
               onClick={handleSignOut}
-              className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white/80 transition hover:bg-white/20"
+              className="rounded-full border border-gray-300 bg-gray-100 px-4 py-2 text-sm font-semibold text-gray-900 transition hover:bg-gray-200"
             >
               Çıkış yap ({user.email})
             </button>
           ) : (
             <button
               onClick={handleSignIn}
-              className="rounded-full border border-white bg-white px-5 py-2 text-sm font-semibold text-slate-900 shadow-lg shadow-brand-900/30"
+              className="rounded-full border border-gray-300 bg-gray-900 px-5 py-2 text-sm font-semibold text-white shadow-lg"
             >
               🔐 Google ile giriş yap
             </button>
           )}
         </div>
         <div className="mt-6 grid gap-4 sm:grid-cols-3">
-          <StatPill label="Toplam kart" value={deck.length} accent="from-brand-500/30" />
-          <StatPill label="Bekleyen" value={dueCount} accent="from-amber-500/30" />
-          <StatPill label="Yeni kart" value={newCount} accent="from-emerald-500/30" />
+          <StatPill label="Toplam kart" value={deck.length} accent="from-gray-100 to-gray-200" />
+          <StatPill label="Bekleyen" value={dueCount} accent="from-yellow-100 to-yellow-200" />
+          <StatPill label="Yeni kart" value={newCount} accent="from-green-100 to-green-200" />
         </div>
       </header>
 
       {needsAuth && (
-        <section className="mt-10 rounded-3xl border border-white/10 bg-white/5 p-6 text-white">
+        <section className="mt-10 rounded-3xl border border-gray-200 bg-gray-50 p-6 text-gray-900">
           <p className="text-lg font-semibold">Giriş yapmanız gerekiyor</p>
-          <p className="mt-2 text-sm text-white/70">Serilerinizi kaydedebilmek için Google hesabınızla giriş yapın.</p>
+          <p className="mt-2 text-sm text-gray-700">Serilerinizi kaydedebilmek için Google hesabınızla giriş yapın.</p>
           <button
-            className="mt-4 inline-flex items-center rounded-full bg-white px-5 py-2 text-sm font-semibold text-slate-900"
+            className="mt-4 inline-flex items-center rounded-full bg-gray-900 px-5 py-2 text-sm font-semibold text-white"
             onClick={handleSignIn}
           >
             Google ile giriş yap
@@ -387,11 +388,11 @@ export default function FlashcardsPage() {
 
       {!needsAuth && (
         <section className="mt-10 space-y-6">
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 text-white shadow-2xl backdrop-blur">
+          <div className="rounded-3xl border border-gray-200 bg-white p-6 text-gray-900 shadow-2xl">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <h2 className="text-2xl font-semibold">🎯 Aktif kart</h2>
-                <p className="text-sm text-white/60">Anki SM-2 algoritmasıyla belirlendi.</p>
+                <p className="text-sm text-gray-600">Anki SM-2 algoritmasıyla belirlendi.</p>
               </div>
               <button
                 type="button"
@@ -400,34 +401,34 @@ export default function FlashcardsPage() {
                   setCardSeed((prev) => prev + 1)
                   setSessionMessage(null)
                 }}
-                className="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white/70"
+                className="rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700"
                 disabled={!deckReady}
               >
                 Başka kart getir
               </button>
             </div>
 
-            <div className="mt-6 min-h-[70vh] rounded-3xl border border-white/10 bg-slate-950/40 p-6">
+            <div className="mt-6 min-h-[70vh] rounded-3xl border border-gray-200 bg-gray-50 p-6">
               {!deckReady && (
-                <div className="flex h-full items-center justify-center text-sm text-white/60">
+                <div className="flex h-full items-center justify-center text-sm text-gray-600">
                   {dataLoading ? 'Kart verileri yükleniyor...' : vocabularyError || 'Gösterilecek kart bulunamadı. Kategori seçiminizi kontrol edin.'}
                 </div>
               )}
 
               {deckReady && activeCard && (
                 <div className={`flex h-full flex-col transition-opacity duration-200 ${cardTransitioning ? 'opacity-0' : 'opacity-100'}`}>
-                  <p className="text-xs uppercase tracking-[0.3em] text-white/40">{activeCard.categoryLabel}</p>
-                  <div className="mt-3 text-4xl font-semibold text-white">
+                  <p className="text-xs uppercase tracking-[0.3em] text-gray-500">{activeCard.categoryLabel}</p>
+                  <div className="mt-3 text-4xl font-semibold text-gray-900">
                     {activeCard.prompt}
                   </div>
-                  {activeCard.extra && <p className="mt-2 text-sm text-white/60">{activeCard.extra}</p>}
+                  {activeCard.extra && <p className="mt-2 text-sm text-gray-600">{activeCard.extra}</p>}
 
                   {!cardTransitioning && showAnswer ? (
-                    <div className="mt-6 flex-1 rounded-2xl border border-emerald-400/30 bg-emerald-500/10 p-4">
-                      <p className="text-sm uppercase tracking-[0.3em] text-emerald-200">Cevap</p>
-                      <p className="mt-2 text-2xl font-semibold text-white">{activeCard.answer}</p>
+                    <div className="mt-6 flex-1 rounded-2xl border border-green-300 bg-green-50 p-4">
+                      <p className="text-sm uppercase tracking-[0.3em] text-green-700">Cevap</p>
+                      <p className="mt-2 text-2xl font-semibold text-gray-900">{activeCard.answer}</p>
                       {activeCard.examples && activeCard.examples.length > 0 && (
-                        <ul className="mt-3 space-y-1 text-sm text-white/70">
+                        <ul className="mt-3 space-y-1 text-sm text-gray-700">
                           {activeCard.examples.slice(0, 2).map((example) => (
                             <li key={example}>• {example}</li>
                           ))}
@@ -435,9 +436,9 @@ export default function FlashcardsPage() {
                       )}
                     </div>
                   ) : !cardTransitioning ? (
-                    <div className="mt-6 flex flex-1 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+                    <div className="mt-6 flex flex-1 items-center justify-center rounded-2xl border border-gray-200 bg-white">
                       <button
-                        className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-lg disabled:opacity-50"
+                        className="rounded-full bg-gray-900 px-6 py-3 text-sm font-semibold text-white shadow-lg disabled:opacity-50"
                         onClick={handleReveal}
                         disabled={cardTransitioning}
                       >
@@ -448,7 +449,7 @@ export default function FlashcardsPage() {
                     <div className="mt-6 flex-1" />
                   )}
 
-                  {sessionMessage && <p className="mt-4 text-sm text-amber-200">{sessionMessage}</p>}
+                  {sessionMessage && <p className="mt-4 text-sm text-orange-600">{sessionMessage}</p>}
 
                   {!cardTransitioning && showAnswer && (
                     <div className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -462,9 +463,9 @@ export default function FlashcardsPage() {
                           <div className="flex items-center justify-between">
                             <span>
                               {option.label}
-                              <span className="ml-2 text-xs font-normal text-white/60">{option.description}</span>
+                              <span className="ml-2 text-xs font-normal text-gray-600">{option.description}</span>
                             </span>
-                            <span className="text-xs text-white/60">{formatIntervalPreview(intervalPreview[option.value])}</span>
+                            <span className="text-xs text-gray-600">{formatIntervalPreview(intervalPreview[option.value])}</span>
                           </div>
                         </button>
                       ))}
@@ -476,29 +477,29 @@ export default function FlashcardsPage() {
           </div>
 
           <div className="space-y-6">
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6 text-white shadow-2xl">
+            <div className="rounded-3xl border border-gray-200 bg-white p-6 text-gray-900 shadow-2xl">
               <h3 className="text-xl font-semibold">⏱️ Oturum durumu</h3>
-              <p className="mt-1 text-sm text-white/70">
+              <p className="mt-1 text-sm text-gray-700">
                 {sessionStats.responses > 0
                   ? `${sessionStats.responses} kart yanıtladınız · doğruluk ${formatPercent((sessionStats.good + sessionStats.easy) / sessionStats.responses)}`
                   : 'Hemen başlayın, verdiğiniz cevaplar burada toplanacak.'}
               </p>
               <dl className="mt-4 grid grid-cols-2 gap-4 text-sm">
                 <div>
-                  <dt className="text-white/50">Tekrar</dt>
-                  <dd className="text-2xl font-semibold text-white">{sessionStats.again}</dd>
+                  <dt className="text-gray-500">Tekrar</dt>
+                  <dd className="text-2xl font-semibold text-gray-900">{sessionStats.again}</dd>
                 </div>
                 <div>
-                  <dt className="text-white/50">Zor</dt>
-                  <dd className="text-2xl font-semibold text-white">{sessionStats.hard}</dd>
+                  <dt className="text-gray-500">Zor</dt>
+                  <dd className="text-2xl font-semibold text-gray-900">{sessionStats.hard}</dd>
                 </div>
                 <div>
-                  <dt className="text-white/50">İyi</dt>
-                  <dd className="text-2xl font-semibold text-white">{sessionStats.good}</dd>
+                  <dt className="text-gray-500">İyi</dt>
+                  <dd className="text-2xl font-semibold text-gray-900">{sessionStats.good}</dd>
                 </div>
                 <div>
-                  <dt className="text-white/50">Kolay</dt>
-                  <dd className="text-2xl font-semibold text-white">{sessionStats.easy}</dd>
+                  <dt className="text-gray-500">Kolay</dt>
+                  <dd className="text-2xl font-semibold text-gray-900">{sessionStats.easy}</dd>
                 </div>
               </dl>
               <h4 className="text-md font-semibold mt-4">Word Heat Map</h4>
@@ -510,45 +511,45 @@ export default function FlashcardsPage() {
                 ))}
               </div>
               <button
-                className="mt-5 w-full rounded-2xl bg-brand-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-900/40"
+                className="mt-5 w-full rounded-2xl bg-gray-900 px-4 py-3 text-sm font-semibold text-white shadow-lg"
                 onClick={handleEndSession}
                 disabled={savingSession}
               >
                 {savingSession ? 'Kaydediliyor…' : 'Oturumu kaydet'}
               </button>
               <button
-                className="mt-3 w-full rounded-2xl border border-white/20 px-4 py-2 text-sm font-semibold text-white/80"
+                className="mt-3 w-full rounded-2xl border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700"
                 onClick={() => setSessionStats(createInitialSession())}
               >
                 İstatistikleri sıfırla
               </button>
             </div>
 
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6 text-white shadow-2xl">
+            <div className="rounded-3xl border border-gray-200 bg-white p-6 text-gray-900 shadow-2xl">
               <div className="flex items-center justify-between">
                 <h3 className="text-xl font-semibold">🧭 Son oturumlar</h3>
                 <button
-                  className="text-xs font-semibold uppercase tracking-[0.3em] text-white/50"
+                  className="text-xs font-semibold uppercase tracking-[0.3em] text-gray-500"
                   onClick={() => reload()}
                 >
                   Yenile
                 </button>
               </div>
               {sessionHistory.length === 0 ? (
-                <p className="mt-3 text-sm text-white/60">Henüz kaydedilmiş bir oturum yok.</p>
+                <p className="mt-3 text-sm text-gray-600">Henüz kaydedilmiş bir oturum yok.</p>
               ) : (
-                <ul className="mt-4 space-y-3 text-sm text-white/80">
+                <ul className="mt-4 space-y-3 text-sm text-gray-800">
                   {sessionHistory.map((session) => (
-                    <li key={session.id} className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+                    <li key={session.id} className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
                       <div className="flex flex-col gap-2">
-                        <div className="flex items-center justify-between text-xs uppercase tracking-[0.3em] text-white/40">
+                        <div className="flex items-center justify-between text-xs uppercase tracking-[0.3em] text-gray-500">
                           <span>{formatDate(session.startedAt)}</span>
                           <span>Seri: {session.streakAfter ?? 1}</span>
                         </div>
-                        <div className="text-lg font-semibold text-white">
+                        <div className="text-lg font-semibold text-gray-900">
                           {session.reviews} kart · {formatPercent(session.accuracy)} doğruluk
                         </div>
-                        <div className="text-xs text-white/60">
+                        <div className="text-xs text-gray-600">
                           {session.durationMinutes} dk · {session.uniqueCards} benzersiz kelime
                         </div>
                       </div>
@@ -566,8 +567,8 @@ export default function FlashcardsPage() {
 
 function StatPill({ label, value, accent }: { label: string; value: number; accent: string }) {
   return (
-    <div className={`rounded-2xl border border-white/5 bg-gradient-to-br ${accent} via-white/5 to-transparent p-4 text-white`}>
-      <p className="text-xs font-semibold uppercase tracking-[0.4em] text-white/50">{label}</p>
+    <div className={`rounded-2xl border border-gray-200 bg-gradient-to-br ${accent} p-4 text-gray-900`}>
+      <p className="text-xs font-semibold uppercase tracking-[0.4em] text-gray-600">{label}</p>
       <div className="mt-2 text-3xl font-semibold">{value.toLocaleString()}</div>
     </div>
   )
