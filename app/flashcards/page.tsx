@@ -64,8 +64,15 @@ export default function FlashcardsPage() {
   const [grading, setGrading] = useState(false)
   const [sessionMessage, setSessionMessage] = useState<string | null>(null)
   const [savingSession, setSavingSession] = useState(false)
+  const [selectedCategories, setSelectedCategories] = useState<Set<string>>(new Set(['all']))
   const [activeCard, setActiveCard] = useState<Flashcard | null>(null)
-  const [cardTransitioning, setCardTransitioning] = useState(false)
+  const [showStats, setShowStats] = useState(false)
+
+  const getHeatColor = (ease: number) => {
+    if (ease < 1.5) return 'bg-red-200 text-red-800'
+    if (ease < 2.0) return 'bg-yellow-200 text-yellow-800'
+    return 'bg-green-200 text-green-800'
+  }
 
   useEffect(() => {
     if (!user) {
@@ -147,7 +154,11 @@ export default function FlashcardsPage() {
     ensureUserDocument(user).catch((err: unknown) => console.error('Failed to upsert user profile', err))
   }, [user])
 
-  const deck = useMemo(() => buildFlashcardDeck(vocabulary), [vocabulary])
+  const deck = useMemo(() => {
+    if (!vocabulary || !Array.isArray(vocabulary)) return []
+    const filtered = vocabulary.filter(word => selectedCategories.has('all') || selectedCategories.has(word.category))
+    return buildFlashcardDeck(filtered)
+  }, [vocabulary, selectedCategories])
   const nextCardCandidate = useMemo(() => selectNextCard(deck, progressMap), [deck, progressMap, cardSeed])
 
   useEffect(() => {
@@ -293,6 +304,37 @@ export default function FlashcardsPage() {
           SM-2 algoritmasıyla çalışan bu sayfa, her kelimeyi Anki'deki gibi aralıklı tekrar mantığıyla sıraya koyar. Yanıtladığınız her kart ve
           oturum Firestore'a kaydedilir, böylece serilerinizi ve gelişiminizi takip edebilirsiniz.
         </p>
+        <div className="mt-6">
+          <label className="block text-sm font-medium text-white mb-2">Select Categories</label>
+          <div className="flex flex-wrap gap-2">
+            {(['all', 'verb', 'noun', 'adjective', 'adverb', 'preposition', 'conjunction', 'interjection', 'phrase', 'other'] as const).map(cat => (
+              <label key={cat} className="flex items-center text-white">
+                <input
+                  type="checkbox"
+                  checked={selectedCategories.has(cat)}
+                  onChange={(e) => {
+                    const newSet = new Set(selectedCategories)
+                    if (e.target.checked) {
+                      newSet.add(cat)
+                      if (cat === 'all') {
+                        newSet.clear()
+                        newSet.add('all')
+                      } else {
+                        newSet.delete('all')
+                      }
+                    } else {
+                      newSet.delete(cat)
+                      if (newSet.size === 0) newSet.add('all')
+                    }
+                    setSelectedCategories(newSet)
+                  }}
+                  className="mr-2"
+                />
+                {cat}
+              </label>
+            ))}
+          </div>
+        </div>
         {authError && <p className="mt-2 text-sm text-red-300">{authError}</p>}
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
@@ -344,7 +386,7 @@ export default function FlashcardsPage() {
       )}
 
       {!needsAuth && (
-        <section className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <section className="mt-10 space-y-6">
           <div className="rounded-3xl border border-white/10 bg-white/5 p-6 text-white shadow-2xl backdrop-blur">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <div>
@@ -365,10 +407,10 @@ export default function FlashcardsPage() {
               </button>
             </div>
 
-            <div className="mt-6 min-h-[280px] rounded-3xl border border-white/10 bg-slate-950/40 p-6">
+            <div className="mt-6 min-h-[70vh] rounded-3xl border border-white/10 bg-slate-950/40 p-6">
               {!deckReady && (
                 <div className="flex h-full items-center justify-center text-sm text-white/60">
-                  {dataLoading ? 'Kart verileri yükleniyor...' : vocabularyError || 'Gösterilecek kart bulunamadı.'}
+                  {dataLoading ? 'Kart verileri yükleniyor...' : vocabularyError || 'Gösterilecek kart bulunamadı. Kategori seçiminizi kontrol edin.'}
                 </div>
               )}
 
@@ -459,6 +501,14 @@ export default function FlashcardsPage() {
                   <dd className="text-2xl font-semibold text-white">{sessionStats.easy}</dd>
                 </div>
               </dl>
+              <h4 className="text-md font-semibold mt-4">Word Heat Map</h4>
+              <div className="grid grid-cols-5 gap-2 max-h-64 overflow-y-auto">
+                {deck.map(card => (
+                  <div key={card.slug} className={`p-2 rounded text-xs text-center ${getHeatColor(progressMap[card.slug]?.easeFactor ?? 2.5)}`} title={`Ease: ${(progressMap[card.slug]?.easeFactor ?? 2.5).toFixed(2)}`}>
+                    {card.prompt}
+                  </div>
+                ))}
+              </div>
               <button
                 className="mt-5 w-full rounded-2xl bg-brand-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-900/40"
                 onClick={handleEndSession}
